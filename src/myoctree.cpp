@@ -67,11 +67,8 @@ void refine_nodes() {
 
 }
 
-}
 
-using namespace myOctree;
-
-int main(int argc, char **argv) {
+int OctreeGrid() {
 
 	Octree root1(0.0,1.0,0.0,1.0,0.0,1.0,0);
 	Octree root2(1.0,2.0,0.0,1.0,0.0,1.0,0);
@@ -93,3 +90,4 @@ int main(int argc, char **argv) {
 
 }
 
+}

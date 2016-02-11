@@ -63,6 +63,19 @@ Field::Field(const Field &obj) {
 //	delete [] val;
 }
 
+//member function
+void Field::set_field(double value) {
+
+	for(int i=0;i<this->Nx;i++) {
+		for(int j=0;j<this->Ny;j++) {
+			for(int k=0;k<this->Nz;k++) {
+				val[i][j][k] = value;	 
+			}
+		}
+	}
+}
+
+
 //parametrized constructor with initialization fields
 Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2) {
 

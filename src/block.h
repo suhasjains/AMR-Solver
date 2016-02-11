@@ -40,6 +40,9 @@ class Field {
         //Destructor
         ~Field();
 
+	//sets field with the input value
+	void set_field(double);
+
 
         private:
         protected:

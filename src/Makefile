@@ -2,9 +2,9 @@ NAME 	:= myoctree
 OBDIR	:= ../OBJ/
 RUNDIR	:= ../RUN/
 
-OBJECTS =   $(OBDIR)myoctree.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o 
+OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)myoctree.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o 
 
-HEADER 	:= octree.h block.h output.h 
+HEADER 	:= myoctree.h octree.h block.h output.h 
 
 .DEFAULT:
 
@@ -29,6 +29,10 @@ $(NAME): $(OBJECTS) $(RUNDIR)
 
 $(RUNDIR): 
 	@test -d $(RUNDIR) || mkdir $(RUNDIR)
+
+$(OBDIR)amrsolver.o: amrsolver.cpp $(HEADER)
+	@test -d $(OBDIR) || mkdir $(OBDIR)        
+	$(CXX) -c $(FLAGS) -o $(OBDIR)amrsolver.o amrsolver.cpp
 
 $(OBDIR)myoctree.o: myoctree.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
