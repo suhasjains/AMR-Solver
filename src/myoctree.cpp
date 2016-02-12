@@ -67,13 +67,40 @@ void refine_nodes() {
 
 }
 
+void set_field() {
 
-int OctreeGrid() {
+        create_list_of_leaf_nodes();
 
-	Octree root1(0.0,1.0,0.0,1.0,0.0,1.0,0);
-	Octree root2(1.0,2.0,0.0,1.0,0.0,1.0,0);
-	Octree root3(1.0,2.0,1.0,2.0,0.0,1.0,0);
+        for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
 
+                Field* mesh = (*i)->get_block_data()->mesh;
+                int level = (*i)->get_level();
+
+                printf("level = %d\n",level);
+                mesh->set_field((double)level);
+
+        }
+
+}
+
+void OctreeGrid() {
+
+	Octree* root1 = new Octree;
+	Octree* root2 = new Octree;
+	Octree* root3 = new Octree;
+
+	Octree r1(0.0,1.0,0.0,1.0,0.0,1.0,0);
+	nodes.pop_back();
+
+	Octree r2(1.0,2.0,0.0,1.0,0.0,1.0,0);
+	nodes.pop_back();
+
+	Octree r3(1.0,2.0,1.0,2.0,0.0,1.0,0);
+	nodes.pop_back();
+	
+	*root1 = r1;
+	*root2 = r2;
+	*root3 = r3;
 
 	for(int i=0;i<=10;i++) {
 
@@ -82,11 +109,13 @@ int OctreeGrid() {
 		refine_nodes();
 		
 	}
-	
-	create_list_of_leaf_nodes();
-	create_list_of_root_nodes();
 
-	write_vtk(leaf_nodes);
+	//set_field();	
+	
+	//create_list_of_leaf_nodes();
+	//create_list_of_root_nodes();
+
+	//write_vtk(leaf_nodes);
 
 }
 

@@ -77,12 +77,12 @@ void write_vtk(std::list<Octree*>& nodes) {
 
 					point[0] = node_count*Npx*Npy*Npz + get_point(i,j,k,Npx,Npy);
 					point[1] = node_count*Npx*Npy*Npz + get_point(i+1,j,k,Npx,Npy);
-					point[2] = node_count*Npx*Npy*Npz + get_point(i,j+1,k,Npx,Npy);
-					point[3] = node_count*Npx*Npy*Npz + get_point(i+1,j+1,k,Npx,Npy);
+					point[2] = node_count*Npx*Npy*Npz + get_point(i+1,j+1,k,Npx,Npy);
+					point[3] = node_count*Npx*Npy*Npz + get_point(i,j+1,k,Npx,Npy);
 					point[4] = node_count*Npx*Npy*Npz + get_point(i,j,k+1,Npx,Npy);
 					point[5] = node_count*Npx*Npy*Npz + get_point(i+1,j,k+1,Npx,Npy);
-					point[6] = node_count*Npx*Npy*Npz + get_point(i,j+1,k+1,Npx,Npy);
-					point[7] = node_count*Npx*Npy*Npz + get_point(i+1,j+1,k+1,Npx,Npy);
+					point[6] = node_count*Npx*Npy*Npz + get_point(i+1,j+1,k+1,Npx,Npy);
+					point[7] = node_count*Npx*Npy*Npz + get_point(i,j+1,k+1,Npx,Npy);
 	
                                         fprintf(fp,"8 %ld %ld %ld %ld %ld %ld %ld %ld \n",point[0], point[1], point[2], point[3], point[4], point[5], point[6], point[7]);
                                 }
@@ -98,11 +98,11 @@ void write_vtk(std::list<Octree*>& nodes) {
 
         for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
 
-                for(int k = 0; k<Npz; k++) {
-                        for(int j = 0; j<Npy; j++) {
-                                for(int i = 0; i<Npx ; i++) {
+                for(int k = 0; k<NZ_BLOCK; k++) {
+                        for(int j = 0; j<NY_BLOCK; j++) {
+                                for(int i = 0; i<NX_BLOCK; i++) {
 
-                                        fprintf(fp,"11\n");
+                                        fprintf(fp,"12\n");
                                 }
                         }
                 }
@@ -110,7 +110,27 @@ void write_vtk(std::list<Octree*>& nodes) {
 
         }	
 
+	fprintf(fp,"\n\nCELL_DATA %ld\n", nCells);
+	fprintf(fp,"SCALARS level_data double 1\n");
+	fprintf(fp,"LOOKUP_TABLE default\n");
 
+        for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
+
+
+		Block* block_data = (*iterator)->get_block_data();
+	
+
+                for(int k = PAD; k<(NZ_BLOCK+PAD); k++) {
+                        for(int j = PAD; j<(NY_BLOCK+PAD); j++) {
+                                for(int i = PAD; i<(NX_BLOCK+PAD); i++) {
+	
+                                        fprintf(fp,"%lf \n",block_data->mesh->val[i][j][k]);
+                                }
+                        }
+                }
+
+        }
+	
 
 }
 

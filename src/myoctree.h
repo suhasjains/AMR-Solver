@@ -9,7 +9,7 @@ void create_list_of_leaf_nodes();
 void create_list_of_root_nodes();
 void set_refine_criteria();
 void refine_nodes();
-int OctreeGrid();
+void OctreeGrid();
 
 extern std::list<Octree*> nodes;
 extern std::list<Octree*> leaf_nodes;
