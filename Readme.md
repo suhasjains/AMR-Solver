@@ -1,4 +1,4 @@
-# Myoctree - Mesh generator for AMR grids
+# AMRsolver - General advection solver on AMR grids
 
 
  * Octree data structure 
@@ -10,6 +10,7 @@
 
  * Add neighbors
  * boundary flags
+ * Make neighbors vary in refinement by 2 at the max.
 
 ## Sample mesh output
 <p align="left">

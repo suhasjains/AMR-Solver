@@ -44,7 +44,13 @@ void set_refine_criteria() {
 		if((*iterator)->get_level() >= MAX_LEVEL)
 			continue;
 
-        	if((*iterator)->contains(1.2,0.8,0.99))
+        	if((*iterator)->contains(1.1,0.9,0.99))
+ 			(*iterator)->setToRefine = true;
+		if((*iterator)->contains(0.9,1.1,0.99))
+ 			(*iterator)->setToRefine = true;
+        	if((*iterator)->contains(1.1,1.1,0.99))
+ 			(*iterator)->setToRefine = true;
+        	if((*iterator)->contains(0.9,0.9,0.99))
  			(*iterator)->setToRefine = true;
 	
 	}
@@ -83,39 +89,28 @@ void set_field() {
 
 }
 
+void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level) {
+
+	Octree* root = new Octree;
+	Octree r(xmin,xmax,ymin,ymax,zmin,zmax,level);
+	nodes.pop_back();
+	*root = r;
+
+}	
+
 void OctreeGrid() {
 
-	Octree* root1 = new Octree;
-	Octree* root2 = new Octree;
-	Octree* root3 = new Octree;
 
-	Octree r1(0.0,1.0,0.0,1.0,0.0,1.0,0);
-	nodes.pop_back();
-
-	Octree r2(1.0,2.0,0.0,1.0,0.0,1.0,0);
-	nodes.pop_back();
-
-	Octree r3(1.0,2.0,1.0,2.0,0.0,1.0,0);
-	nodes.pop_back();
-	
-	*root1 = r1;
-	*root2 = r2;
-	*root3 = r3;
+	create_node(0.0,1.0,0.0,1.0,0.0,1.0,0);
+	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0);
+	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0);
+	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0);
 
 	for(int i=0;i<=10;i++) {
 
 		set_refine_criteria();
-
 		refine_nodes();
-		
 	}
-
-	//set_field();	
-	
-	//create_list_of_leaf_nodes();
-	//create_list_of_root_nodes();
-
-	//write_vtk(leaf_nodes);
 
 }
 
