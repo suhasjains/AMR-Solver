@@ -95,7 +95,7 @@ void Octree::refine() {
                 }
                 
                 //creating new memory locations to children
-                children[i][j][k] = new Octree;
+                this->children[i][j][k] = new Octree;
                 
                 //creating new child object
                 Octree child(xmin, xmax, ymin, ymax, zmin, zmax, lev);
@@ -108,6 +108,8 @@ void Octree::refine() {
                 
                 //invoking copy constructor
                 *(this->children[i][j][k]) = child;
+
+
             }
         }
     }
@@ -124,6 +126,40 @@ void Octree::refine() {
     //	}
     //
     //
+
+	//setting neighbours to children
+    	for(k=0; k<2; k++) {
+        	for(j=0; j<2; j++) {
+            		for(i=0; i<2; i++) {
+
+				if(i==0) {
+					this->children[i][j][k]->east = this->children[i+1][j][k];
+					if(this->west != NULL) 	this->children[i][j][k]->west = this->west->children[i+1][j][k];
+				}	
+				if(j==0) {
+					this->children[i][j][k]->north = this->children[i][j+1][k];
+					if(this->south != NULL)	this->children[i][j][k]->south = this->south->children[i][j+1][k];
+				}	
+				if(k==0) {
+					this->children[i][j][k]->top = this->children[i][j][k+1];
+					if(this->bottom != NULL)	this->children[i][j][k]->bottom = this->bottom->children[i][j][k+1];
+				}	
+				if(i==1) {
+					this->children[i][j][k]->west = this->children[i-1][j][k];
+					if(this->east != NULL)	this->children[i][j][k]->east = this->east->children[i-1][j][k];
+				}	
+				if(j==1) {
+					this->children[i][j][k]->south = this->children[i][j-1][k];
+					if(this->north != NULL)	this->children[i][j][k]->north = this->north->children[i][j-1][k];
+				}	
+				if(k==1) {
+					this->children[i][j][k]->bottom = this->children[i][j][k-1];
+					if(this->top != NULL)	this->children[i][j][k]->top = this->top->children[i][j][k-1];
+				}	
+			}
+		}	
+	}		
+
 }
 
 Octree::~Octree() {
@@ -164,7 +200,16 @@ Octree::Octree(const Octree &obj) {
     parent = obj.parent;
     block_data = obj.block_data;
 	setToRefine = obj.setToRefine;
-	setToCoarsen = obj.setToCoarsen;   
+	setToCoarsen = obj.setToCoarsen;
+
+	//neighbors
+	east = obj.east;
+	west = obj.west;
+	north = obj.north;
+	south = obj.south;
+	top = obj.top;
+	bottom = obj.bottom; 
+	   
  
     memcpy(children,obj.children,sizeof(Octree***)*2);
     for(int i=0;i<2;i++) {
@@ -187,6 +232,14 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 	parent = NULL;
    	setToRefine = false;
 	setToCoarsen = false; 
+	
+	//neighbors
+	east = NULL;
+	west = NULL;
+	north = NULL;
+	south = NULL;
+	top = NULL;
+	bottom = NULL; 
     
     x_centre = (x_min + x_max ) / 2.0;
     y_centre = (y_min + y_max ) / 2.0;
@@ -218,7 +271,15 @@ Octree::Octree() {
     
  	parent = NULL;
 	setToRefine = false;
-	setToCoarsen = false;    
+	setToCoarsen = false;   
+
+	//neighbors
+	east = NULL;
+	west = NULL;
+	north = NULL;
+	south = NULL;
+	top = NULL;
+	bottom = NULL; 
 
     //creating block to assign it to the data
     block_data = new Block;

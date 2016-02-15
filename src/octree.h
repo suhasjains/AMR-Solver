@@ -63,6 +63,21 @@ class Octree {
 	//variable to know whether to coarsen the node or not
 	bool setToCoarsen;
 	
+	//neighbors
+	Octree *east;
+	Octree *west;
+	Octree *north;
+	Octree *south;
+	Octree *top;
+	Octree *bottom;
+
+	//node's block dimensions
+	double x_centre, y_centre, z_centre;
+	double x_min, x_max;
+	double y_min, y_max;
+	double z_min, z_max;
+
+	
 	private:
 	//each node has upto 8 children (2^3 for 3 dimensions) 
 	Octree *children[2][2][2];
@@ -81,12 +96,6 @@ class Octree {
 
 	//siblings
 	//Octree *siblings[7];
-
-	//node's block dimensions
-	double x_centre, y_centre, z_centre;
-	double x_min, x_max;
-	double y_min, y_max;
-	double z_min, z_max;
 
 	
 	protected:	

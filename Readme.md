@@ -8,9 +8,10 @@
 
 ## Things to add
 
- * Add neighbors
+ * Add neighbors - done
  * boundary flags
  * Make neighbors vary in refinement by 2 at the max.
+ * Add linked list for every level.
 
 ## Sample mesh output
 <p align="left">

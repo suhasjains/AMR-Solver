@@ -89,6 +89,7 @@ void set_field() {
 
 }
 
+//creates an octree node
 void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level) {
 
 	Octree* root = new Octree;
@@ -96,7 +97,67 @@ void create_node(double xmin, double xmax, double ymin, double ymax, double zmin
 	nodes.pop_back();
 	*root = r;
 
+}
+
+void set_root_neighbours() {
+
+	create_list_of_root_nodes();
+
+	for (std::list<Octree*>::iterator i = root_nodes.begin(), end = root_nodes.end(); i != end; ++i) {
+
+		double xmax = (*i)->x_max;			
+		double ymax = (*i)->y_max;			
+		double zmax = (*i)->z_max;			
+		double xmin = (*i)->x_min;			
+		double ymin = (*i)->y_min;			
+		double zmin = (*i)->z_min;
+
+		for (std::list<Octree*>::iterator j = root_nodes.begin(), end = root_nodes.end(); j != end; ++j) {
+
+			double x_max = (*j)->x_max;			
+			double y_max = (*j)->y_max;			
+			double z_max = (*j)->z_max;			
+			double x_min = (*j)->x_min;			
+			double y_min = (*j)->y_min;			
+			double z_min = (*j)->z_min;
+	
+			if(xmax==x_min&&ymax==y_max&&zmax==z_max)
+				(*i)->east = (*j);	
+
+			if(xmin==x_max&&ymax==y_max&&zmax==z_max)
+				(*i)->west = (*j);	
+			
+			if(xmax==x_max&&ymax==y_min&&zmax==z_max)
+				(*i)->north = (*j);	
+				
+			if(xmax==x_max&&ymin==y_max&&zmax==z_max)
+				(*i)->south = (*j);	
+			
+			if(xmax==x_max&&ymax==y_max&&zmax==z_min)
+				(*i)->top = (*j);	
+			
+			if(xmax==x_max&&ymax==y_max&&zmin==z_max)
+				(*i)->bottom = (*j);	
+				
+		}			
+	}
 }	
+
+void print_neighbour_information(std::list<Octree*>& nodes) {
+
+	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
+	
+		printf("I am at %g %g %g\n",(*i)->x_centre,(*i)->y_centre,(*i)->z_centre);
+		if((*i)->east!=NULL)	printf("East neighbour at %g %g %g\n",(*i)->east->x_centre,(*i)->east->y_centre,(*i)->east->z_centre);		
+		if((*i)->west!=NULL)	printf("West neighbour at %g %g %g\n",(*i)->west->x_centre,(*i)->west->y_centre,(*i)->west->z_centre);		
+		if((*i)->north!=NULL)	printf("North neighbour at %g %g %g\n",(*i)->north->x_centre,(*i)->north->y_centre,(*i)->north->z_centre);		
+		if((*i)->south!=NULL)	printf("South neighbour at %g %g %g\n",(*i)->south->x_centre,(*i)->south->y_centre,(*i)->south->z_centre);		
+		if((*i)->top!=NULL)	printf("Top neighbour at %g %g %g\n",(*i)->top->x_centre,(*i)->top->y_centre,(*i)->top->z_centre);		
+		if((*i)->bottom!=NULL)	printf("Bottom neighbour at %g %g %g\n",(*i)->bottom->x_centre,(*i)->bottom->y_centre,(*i)->bottom->z_centre);		
+
+	}
+
+}
 
 void OctreeGrid() {
 
@@ -106,11 +167,18 @@ void OctreeGrid() {
 	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0);
 	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0);
 
+	set_root_neighbours();
+
+	
 	for(int i=0;i<=10;i++) {
 
 		set_refine_criteria();
 		refine_nodes();
 	}
+
+	create_list_of_leaf_nodes();
+	//print_neighbour_information(nodes);
+	
 
 }
 
