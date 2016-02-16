@@ -2,6 +2,7 @@
 #define MYOCTREE_OCTREE_H_
 #include <stdio.h>
 #include <list>
+#include <vector>
 #include "block.h"
 
 namespace myOctree {

@@ -6,6 +6,7 @@ namespace myOctree {
 std::list<Octree*> nodes;
 std::list<Octree*> leaf_nodes;
 std::list<Octree*> root_nodes;
+std::vector<std::list<Octree*> > level_nodes;
 int Block::iNx = NX_BLOCK;
 int Block::iNy = NY_BLOCK;
 int Block::iNz = NZ_BLOCK;
@@ -32,6 +33,14 @@ void create_list_of_root_nodes() {
 		if((*iterator)->isRootNode()) 
 			root_nodes.push_back(*iterator);
 	}
+}
+
+//creates a vector of lists of nodes on each level
+void create_lists_of_level_nodes() {
+
+	
+	
+
 }
 
 //sets refine criterion for all the leaf nodes
@@ -99,6 +108,7 @@ void create_node(double xmin, double xmax, double ymin, double ymax, double zmin
 
 }
 
+//sets neighours to root nodes
 void set_root_neighbours() {
 
 	create_list_of_root_nodes();
@@ -176,7 +186,7 @@ void OctreeGrid() {
 		refine_nodes();
 	}
 
-	create_list_of_leaf_nodes();
+	//create_list_of_leaf_nodes();
 	//print_neighbour_information(nodes);
 	
 
