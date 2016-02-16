@@ -55,40 +55,80 @@ void create_lists_of_level_nodes() {
 }
 
 //sets refine criterion for all the leaf nodes
-void set_refine_criteria() {
+void set_refinement_criteria() {
 
 	create_list_of_leaf_nodes();
 
-	for (std::list<Octree*>::iterator iterator = leaf_nodes.begin(), end = leaf_nodes.end(); iterator != end; ++iterator) {
+	for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
 		
-		if((*iterator)->get_level() >= MAX_LEVEL)
+		if((*i)->get_level() >= MAX_LEVEL)
 			continue;
 
-        	if((*iterator)->contains(1.1,0.9,0.99))
- 			(*iterator)->setToRefine = true;
-		if((*iterator)->contains(0.9,1.1,0.99))
- 			(*iterator)->setToRefine = true;
-        	if((*iterator)->contains(1.1,1.1,0.99))
- 			(*iterator)->setToRefine = true;
-        	if((*iterator)->contains(0.9,0.9,0.99))
- 			(*iterator)->setToRefine = true;
+        	if((*i)->contains(1.1,0.9,0.99))
+ 			(*i)->setToRefine = true;
+		if((*i)->contains(0.9,1.1,0.99))
+ 			(*i)->setToRefine = true;
+        	if((*i)->contains(1.1,1.1,0.99))
+ 			(*i)->setToRefine = true;
+        	if((*i)->contains(0.9,0.9,0.99))
+ 			(*i)->setToRefine = true;
 	
 	}
 }
 
-//refines all the leaf nodes
+//refines the leaf nodes based on the criteria
 void refine_nodes() {
 
 	create_list_of_leaf_nodes();
 
-	for (std::list<Octree*>::iterator iterator = leaf_nodes.begin(), end = leaf_nodes.end(); iterator != end; ++iterator) {
+	for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
        
-		if((*iterator)->get_level() >= MAX_LEVEL)
+		if((*i)->get_level() >= MAX_LEVEL)
 			continue;
  
-        	if((*iterator)->setToRefine)
-            		(*iterator)->refine();
+        	if((*i)->setToRefine)
+            		(*i)->refine();
     
+	}
+
+}
+
+//sets coarse criterion for all the leaf nodes
+void set_coarse_criteria() {
+
+	create_list_of_leaf_nodes();
+
+	for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
+		
+        	if((*i)->contains(1.1,0.9,0.99))
+ 			(*i)->setToCoarsen = true;
+		if((*i)->contains(0.9,1.1,0.99))
+ 			(*i)->setToCoarsen = true;
+        	if((*i)->contains(1.1,1.1,0.99))
+ 			(*i)->setToCoarsen = true;
+        	if((*i)->contains(0.9,0.9,0.99))
+ 			(*i)->setToCoarsen = true;
+	
+	}
+}
+
+//refines the leaf nodes based on the criteria
+void coarsen_nodes() {
+
+	create_list_of_leaf_nodes();
+
+	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end;) {
+       
+        	if((*i)->setToCoarsen && !((*i)->isRootNode()) && ((*i)->isLeafNode())) {
+		
+		//	delete *i;
+            		nodes.erase(i);	
+		}
+		else { 
+			++i;
+		}   
+			//(*i)->coarsen();
+ 
 	}
 
 }
@@ -233,19 +273,26 @@ void OctreeGrid() {
 
 	set_root_neighbours();
 
-	
-	for(int i=0;i<=10;i++) {
+	//refinement	
+	for(int i=0;i<=MAX_LEVEL;i++) {
 
-		set_refine_criteria();
+		set_refinement_criteria();
 		refine_nodes();
+	}
+	
+	//coarsening
+	for(int i=0;i<=MAX_LEVEL;i++) {
+
+		set_coarse_criteria();
+		coarsen_nodes();
 	}
 
 	//do this after refinement or coarsening
 	create_lists_of_level_nodes();
 	reassign_neighbours();
 
-	//create_list_of_leaf_nodes();
-	print_neighbour_information(nodes);
+	//prints neighbours information
+	//print_neighbour_information(nodes);
 	
 
 }

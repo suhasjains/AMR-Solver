@@ -41,12 +41,12 @@ Octree* Octree::get_child_at(int i, int j, int k) {
 void Octree::coarsen() {
     
     
-    if(this->isLeafNode()&&!(this->isRootNode()))  {
         
         //delete this;
-        nodes.remove(this);
-        
-    }
+   //     nodes.erase(this);
+    
+	delete this;
+    
     //        moving to its parent
     //        this->current = this->parent;
     //
