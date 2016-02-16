@@ -99,15 +99,55 @@ void set_coarse_criteria() {
 	create_list_of_leaf_nodes();
 
 	for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
-		
-        	if((*i)->contains(1.1,0.9,0.99))
- 			(*i)->setToCoarsen = true;
-		if((*i)->contains(0.9,1.1,0.99))
- 			(*i)->setToCoarsen = true;
-        	if((*i)->contains(1.1,1.1,0.99))
- 			(*i)->setToCoarsen = true;
-        	if((*i)->contains(0.9,0.9,0.99))
- 			(*i)->setToCoarsen = true;
+	
+		if(!((*i)->isRootNode())) {
+
+		//setting coarsening criteria to siblings	
+        		if((*i)->contains(1.1,0.9,0.99)) {
+				//setting criteria to siblings
+				for(int n=0; n<2; n++) {
+					for(int m=0; m<2; m++) {
+				        	for(int l=0; l<2; l++) {
+							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
+						}
+					}
+				}
+			}
+
+			if((*i)->contains(0.9,1.1,0.99)) {
+				//setting criteria to siblings
+				for(int n=0; n<2; n++) {
+					for(int m=0; m<2; m++) {
+				        	for(int l=0; l<2; l++) {
+							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
+						}
+					}
+				}
+			}
+
+        		if((*i)->contains(1.1,1.1,0.99)) {
+				//setting criteria to siblings
+				for(int n=0; n<2; n++) {
+					for(int m=0; m<2; m++) {
+				        	for(int l=0; l<2; l++) {
+							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
+						}
+					}
+				}
+			}
+
+        		if((*i)->contains(0.9,0.9,0.99)) {
+				//setting criteria to siblings
+				for(int n=0; n<2; n++) {
+					for(int m=0; m<2; m++) {
+				        	for(int l=0; l<2; l++) {
+							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
+						}
+					}
+				}
+			}
+
+		}
 	
 	}
 }
@@ -120,17 +160,23 @@ void coarsen_nodes() {
 	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end;) {
        
         	if((*i)->setToCoarsen && !((*i)->isRootNode()) && ((*i)->isLeafNode())) {
-		
-		//	delete *i;
-            		nodes.erase(i);	
+	
+			//printf("deleting\n");
+			//setting the children of its parent to NULL
+			for(int n=0; n<2; n++) {
+				for(int m=0; m<2; m++) {
+			        	for(int l=0; l<2; l++) {
+						(*i)->get_parent()->set_child_null_at(l, m, n);
+					}
+				}
+			}
+
+            		i = nodes.erase(i);	
 		}
 		else { 
 			++i;
 		}   
-			//(*i)->coarsen();
- 
 	}
-
 }
 
 void set_field() {
@@ -283,6 +329,7 @@ void OctreeGrid() {
 	//coarsening
 	for(int i=0;i<=MAX_LEVEL;i++) {
 
+		//printf("coarsening\n");
 		set_coarse_criteria();
 		coarsen_nodes();
 	}

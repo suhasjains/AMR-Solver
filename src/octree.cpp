@@ -38,6 +38,18 @@ Octree* Octree::get_child_at(int i, int j, int k) {
 
 }
 
+void Octree::set_child_null_at(int i, int j, int k) {
+
+	this->children[i][j][k] = NULL;
+
+}
+
+Octree* Octree::get_parent() {
+
+	return this->parent;
+
+}	
+
 void Octree::coarsen() {
     
     
