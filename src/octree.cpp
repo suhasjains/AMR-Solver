@@ -32,6 +32,12 @@ int Octree::get_level() {
 
 }
 
+Octree* Octree::get_child_at(int i, int j, int k) {
+
+	return this->children[i][j][k];	
+
+}
+
 void Octree::coarsen() {
     
     

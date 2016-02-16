@@ -15,6 +15,7 @@ void OctreeGrid();
 extern std::list<Octree*> nodes;
 extern std::list<Octree*> leaf_nodes;
 extern std::list<Octree*> root_nodes;
+extern std::list<Octree*> level_nodes[];
 
 
 }

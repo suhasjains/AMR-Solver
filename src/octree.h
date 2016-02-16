@@ -54,6 +54,9 @@ class Octree {
 
 	//gets level of the node
 	int get_level();	
+
+	//gets child pointer at (relative indices)
+	Octree* get_child_at(int, int, int);
 		
 	//function to access block_data
 	Block* get_block_data();

@@ -3,24 +3,26 @@
 
 namespace myOctree {
 
+
+#define MAX_LEVEL 4
+
 std::list<Octree*> nodes;
 std::list<Octree*> leaf_nodes;
 std::list<Octree*> root_nodes;
-std::vector<std::list<Octree*> > level_nodes;
+std::list<Octree*> level_nodes[MAX_LEVEL + 1];
 int Block::iNx = NX_BLOCK;
 int Block::iNy = NY_BLOCK;
 int Block::iNz = NZ_BLOCK;
 
-#define MAX_LEVEL 4
 
 //creates a new list of leaf nodes 
 void create_list_of_leaf_nodes() {
 
 	leaf_nodes.clear();
 
-	for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
-		if((*iterator)->isLeafNode()) 
-			leaf_nodes.push_back(*iterator);
+	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
+		if((*i)->isLeafNode()) 
+			leaf_nodes.push_back(*i);
 	}
 }
 
@@ -29,17 +31,26 @@ void create_list_of_root_nodes() {
 
 	root_nodes.clear();
 
-	for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
-		if((*iterator)->isRootNode()) 
-			root_nodes.push_back(*iterator);
+	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
+		if((*i)->isRootNode()) 
+			root_nodes.push_back(*i);
 	}
 }
 
 //creates a vector of lists of nodes on each level
 void create_lists_of_level_nodes() {
 
+	//clearing all lists
+	for (unsigned level=0; level <= MAX_LEVEL; level++) {
 	
-	
+		level_nodes[level].clear();
+	}
+
+	//pushing nodes to respective lists	
+	for (std::list<Octree*>::iterator j = nodes.begin(), end = nodes.end(); j != end; ++j) {
+                int level = (*j)->get_level();
+		level_nodes[level].push_back(*j);
+	}
 
 }
 
@@ -106,6 +117,49 @@ void create_node(double xmin, double xmax, double ymin, double ymax, double zmin
 	nodes.pop_back();
 	*root = r;
 
+}
+
+//reassign neighbours after coarsening or refining the grid and after creating lists of level_nodes
+//this is done coz, while assigning neighbours during refinement, neighbours might not have been created and a NULL would be assigned in these situations
+//So this is done to ensure that neighbours are assigned after all refinement or coarsening is done for this time step 
+void reassign_neighbours() {
+
+	for (unsigned level=0; level <= MAX_LEVEL; level++) {
+
+
+		for (std::list<Octree*>::iterator iter = level_nodes[level].begin(), end = level_nodes[level].end(); iter != end; ++iter) { 
+			//if it is not leaf node	
+			if(!((*iter)->isLeafNode())) {
+	
+				//setting neighbours to children
+			        for(int k=0; k<2; k++) {
+			                for(int j=0; j<2; j++) {
+			                        for(int i=0; i<2; i++) {
+			
+			                                if(i==0) {
+			                                        if((*iter)->west != NULL)  (*iter)->get_child_at(i, j, k)->west = (*iter)->west->get_child_at(i+1, j, k);
+			                                }
+			                                if(j==0) {
+			                                        if((*iter)->south != NULL) (*iter)->get_child_at(i, j, k)->south = (*iter)->south->get_child_at(i, j+1, k);
+			                                }
+			                                if(k==0) {
+			                                        if((*iter)->bottom != NULL)	(*iter)->get_child_at(i, j, k)->bottom = (*iter)->bottom->get_child_at(i, j, k+1);
+			                                }
+			                                if(i==1) {
+			                                        if((*iter)->east != NULL)  (*iter)->get_child_at(i, j, k)->east = (*iter)->east->get_child_at(i-1, j, k);
+			                                }
+			                                if(j==1) {
+			                                        if((*iter)->north != NULL) (*iter)->get_child_at(i, j, k)->north = (*iter)->north->get_child_at(i, j-1, k);
+			                                }
+			                                if(k==1) {
+			                                        if((*iter)->top != NULL)   (*iter)->get_child_at(i, j, k)->top = (*iter)->top->get_child_at(i, j, k-1);
+			                                }
+			                        }
+			                }
+			        }
+			}
+		}
+	}
 }
 
 //sets neighours to root nodes
@@ -186,8 +240,12 @@ void OctreeGrid() {
 		refine_nodes();
 	}
 
+	//do this after refinement or coarsening
+	create_lists_of_level_nodes();
+	reassign_neighbours();
+
 	//create_list_of_leaf_nodes();
-	//print_neighbour_information(nodes);
+	print_neighbour_information(nodes);
 	
 
 }

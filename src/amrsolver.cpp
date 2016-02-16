@@ -38,6 +38,6 @@ int main(int argc, char **argv) {
 
 	myOctree::create_list_of_leaf_nodes();
 
-	myOctree::write_vtk(myOctree::leaf_nodes);
+	myOctree::write_vtk(myOctree::level_nodes[3]);
 
 }
