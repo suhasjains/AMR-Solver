@@ -4,7 +4,7 @@ RUNDIR	:= ../RUN/
 
 OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)myoctree.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o 
 
-HEADER 	:= myoctree.h octree.h block.h output.h 
+HEADER 	:= myoctree.h octree.h block.h output.h boundary.h 
 
 .DEFAULT:
 

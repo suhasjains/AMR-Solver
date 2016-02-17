@@ -1,5 +1,6 @@
 #include "octree.h"
 #include "output.h"
+#include "boundary.h"
 
 namespace myOctree {
 
@@ -196,13 +197,22 @@ void set_field() {
 }
 
 //creates an octree node
-void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level) {
+void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, BC east_bc, BC west_bc, BC north_bc, BC south_bc, BC top_bc, BC bottom_bc) {
 
+	//memory allocation to new node
 	Octree* root = new Octree;
 	Octree r(xmin,xmax,ymin,ymax,zmin,zmax,level);
 	nodes.pop_back();
 	*root = r;
 
+	//boundaries are assigned to this root node
+	root->east_bc = east_bc;
+	root->west_bc = west_bc;
+	root->north_bc = north_bc;
+	root->south_bc = south_bc;
+	root->top_bc = top_bc;
+	root->bottom_bc = bottom_bc;
+		
 }
 
 //reassign neighbours after coarsening or refining the grid and after creating lists of level_nodes
@@ -312,10 +322,10 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 void OctreeGrid() {
 
 
-	create_node(0.0,1.0,0.0,1.0,0.0,1.0,0);
-	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0);
-	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0);
-	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0);
+	create_node(0.0,1.0,0.0,1.0,0.0,1.0,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
 
 	set_root_neighbours();
 
@@ -330,8 +340,8 @@ void OctreeGrid() {
 	for(int i=0;i<=MAX_LEVEL;i++) {
 
 		//printf("coarsening\n");
-		set_coarse_criteria();
-		coarsen_nodes();
+		//set_coarse_criteria();
+		//coarsen_nodes();
 	}
 
 	//do this after refinement or coarsening

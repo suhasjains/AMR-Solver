@@ -4,6 +4,7 @@
 #include <list>
 #include <vector>
 #include "block.h"
+#include "boundary.h"
 
 namespace myOctree {
 
@@ -80,6 +81,15 @@ class Octree {
 	Octree *south;
 	Octree *top;
 	Octree *bottom;
+
+	//boundary conditions
+	BC east_bc;
+	BC west_bc;
+	BC north_bc;
+	BC south_bc;
+	BC top_bc;
+	BC bottom_bc;
+	
 
 	//node's block dimensions
 	double x_centre, y_centre, z_centre;

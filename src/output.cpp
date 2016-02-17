@@ -55,6 +55,12 @@ void write_vtk(std::list<Octree*>& nodes) {
 		double z_min = block_data->z_min;		
 
 		printf("dx=%g dy=%g, dz=%g N =%d\n", dx, dy, dz, N);
+		printf("east bc = %d\n",(*iterator)->east_bc);
+		printf("west bc = %d\n",(*iterator)->west_bc);
+		printf("north bc = %d\n",(*iterator)->north_bc);
+		printf("south bc = %d\n",(*iterator)->south_bc);
+		printf("top bc = %d\n",(*iterator)->top_bc);
+		printf("bottom bc = %d\n",(*iterator)->bottom_bc);
 
 	        for(int k = 0; k<Npz; k++) {
 	                for(int j = 0; j<Npy; j++) {

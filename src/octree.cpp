@@ -178,6 +178,40 @@ void Octree::refine() {
 		}	
 	}		
 
+	//setting boundaries to children
+    	for(k=0; k<2; k++) {
+        	for(j=0; j<2; j++) {
+            		for(i=0; i<2; i++) {
+
+				if(i==0) {
+					this->children[i][j][k]->east_bc = NONE;
+					this->children[i][j][k]->west_bc = this->west_bc;
+				}	
+				if(j==0) {
+					this->children[i][j][k]->north_bc = NONE;
+					this->children[i][j][k]->south_bc = this->south_bc;
+				}	
+				if(k==0) {
+					this->children[i][j][k]->top_bc = NONE;
+					this->children[i][j][k]->bottom_bc = this->bottom_bc;
+				}	
+				if(i==1) {
+					this->children[i][j][k]->west_bc = NONE;
+					this->children[i][j][k]->east_bc = this->east_bc;
+				}	
+				if(j==1) {
+					this->children[i][j][k]->south_bc = NONE;
+					this->children[i][j][k]->north_bc = this->north_bc;
+				}	
+				if(k==1) {
+					this->children[i][j][k]->bottom_bc = NONE;
+					this->children[i][j][k]->top_bc = this->top_bc;
+				}	
+			}
+		}	
+	}		
+		
+
 }
 
 Octree::~Octree() {
@@ -227,7 +261,14 @@ Octree::Octree(const Octree &obj) {
 	south = obj.south;
 	top = obj.top;
 	bottom = obj.bottom; 
-	   
+	
+	//boundary conditions
+	east_bc = obj.east_bc;	   
+	west_bc = obj.west_bc;	   
+	north_bc = obj.north_bc;	   
+	south_bc = obj.south_bc;	   
+	top_bc = obj.top_bc;	   
+	bottom_bc = obj.bottom_bc;	   
  
     memcpy(children,obj.children,sizeof(Octree***)*2);
     for(int i=0;i<2;i++) {
@@ -258,7 +299,16 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 	south = NULL;
 	top = NULL;
 	bottom = NULL; 
-    
+   
+	//boundary conditions
+	east_bc = NONE;
+	west_bc = NONE;
+	north_bc = NONE;
+	south_bc = NONE;
+	top_bc = NONE;
+	bottom_bc = NONE; 
+
+ 
     x_centre = (x_min + x_max ) / 2.0;
     y_centre = (y_min + y_max ) / 2.0;
     z_centre = (z_min + z_max ) / 2.0;
@@ -298,6 +348,14 @@ Octree::Octree() {
 	south = NULL;
 	top = NULL;
 	bottom = NULL; 
+	
+	//boundary conditions
+	east_bc = NONE;
+	west_bc = NONE;
+	north_bc = NONE;
+	south_bc = NONE;
+	top_bc = NONE;
+	bottom_bc = NONE; 
 
     //creating block to assign it to the data
     block_data = new Block;
