@@ -48,7 +48,117 @@ Octree* Octree::get_parent() {
 
 	return this->parent;
 
+}
+
+void Octree::set_to_refine_with_nesting() {
+
+	//set refinement criteria
+	this->setToRefine = true;
+	
+	//check nesting
+	if(!(this->isRootNode())) {
+
+	
+		if(this->east==NULL && this->east_bc==NONE) {
+
+			if(!(this->parent->east->setToRefine==true)) { 
+				this->parent->east->set_to_refine_with_nesting();	
+			}
+
+		}
+
+		if(this->west==NULL && this->west_bc==NONE) {
+			
+			if(!(this->parent->west->setToRefine==true)) { 
+				this->parent->west->set_to_refine_with_nesting();	
+			}
+
+		}
+
+		if(this->north==NULL && this->north_bc==NONE) {
+			
+			if(!(this->parent->north->setToRefine==true)) { 
+				this->parent->north->set_to_refine_with_nesting();	
+			}
+
+		}
+
+		if(this->south==NULL && this->south_bc==NONE) {
+			
+			if(!(this->parent->south->setToRefine==true)) { 
+				this->parent->south->set_to_refine_with_nesting();	
+			}
+
+		}
+		
+		if(this->top==NULL && this->top_bc==NONE) {
+			
+			if(!(this->parent->top->setToRefine==true)) { 
+				this->parent->top->set_to_refine_with_nesting();	
+			}
+
+		}
+		
+		if(this->bottom==NULL && this->bottom_bc==NONE) {
+			
+			if(!(this->parent->bottom->setToRefine==true)) { 
+				this->parent->bottom->set_to_refine_with_nesting();	
+			}
+
+		}
+
+	}
 }	
+
+
+void Octree::set_to_coarsen_with_nesting() {
+	
+	bool criteria;	
+	criteria = true;
+
+	if(this->east) {
+		if(!(this->east->isLeafNode())) {
+			criteria = false;
+		}
+	}		
+	if(this->west!=NULL) {
+		if(!(this->west->isLeafNode())) {
+			criteria = false;
+		}
+	}		
+	if(this->north!=NULL) {
+		if(!(this->north->isLeafNode())) {
+			criteria = false;
+		}
+	}		
+	if(this->south!=NULL) {
+		if(!(this->south->isLeafNode())) {
+			criteria = false;
+		}
+	}		
+	if(this->top!=NULL) {
+		if(!(this->top->isLeafNode())) {
+			criteria = false;
+		}
+	}		
+	if(this->bottom!=NULL) {
+		if(!(this->bottom->isLeafNode())) {
+			criteria = false;
+		}
+	}
+
+	//setting criteria to siblings
+      	for(int n=0; n<2; n++) {
+           	for(int m=0; m<2; m++) {
+                    	for(int l=0; l<2; l++) {
+                             	this->get_parent()->get_child_at(l, m, n)->setToCoarsen = criteria;
+                 	}
+         	}
+ 	}	
+
+	
+}
+
 
 void Octree::coarsen() {
     

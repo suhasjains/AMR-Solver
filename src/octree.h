@@ -68,6 +68,12 @@ class Octree {
 	//function to access block_data
 	Block* get_block_data();
 
+	//set to refine considering nesting
+	void set_to_refine_with_nesting(); 
+	
+	//set to coarsen considering nesting
+	void set_to_coarsen_with_nesting(); 
+
 	//variable to know whether to refine the node or not
 	bool setToRefine;
 

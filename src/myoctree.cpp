@@ -66,13 +66,13 @@ void set_refinement_criteria() {
 			continue;
 
         	if((*i)->contains(1.1,0.9,0.99))
- 			(*i)->setToRefine = true;
+ 			(*i)->set_to_refine_with_nesting();
 		if((*i)->contains(0.9,1.1,0.99))
- 			(*i)->setToRefine = true;
+ 			(*i)->set_to_refine_with_nesting();
         	if((*i)->contains(1.1,1.1,0.99))
- 			(*i)->setToRefine = true;
-        	if((*i)->contains(0.9,0.9,0.99))
- 			(*i)->setToRefine = true;
+ 			(*i)->set_to_refine_with_nesting();
+        	//if((*i)->contains(0.9,0.9,0.99))
+ 		//	(*i)->set_to_refine_with_nesting();
 	
 	}
 }
@@ -103,50 +103,18 @@ void set_coarse_criteria() {
 	
 		if(!((*i)->isRootNode())) {
 
-		//setting coarsening criteria to siblings	
-        		if((*i)->contains(1.1,0.9,0.99)) {
-				//setting criteria to siblings
-				for(int n=0; n<2; n++) {
-					for(int m=0; m<2; m++) {
-				        	for(int l=0; l<2; l++) {
-							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
-						}
-					}
-				}
-			}
-
-			if((*i)->contains(0.9,1.1,0.99)) {
-				//setting criteria to siblings
-				for(int n=0; n<2; n++) {
-					for(int m=0; m<2; m++) {
-				        	for(int l=0; l<2; l++) {
-							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
-						}
-					}
-				}
-			}
-
-        		if((*i)->contains(1.1,1.1,0.99)) {
-				//setting criteria to siblings
-				for(int n=0; n<2; n++) {
-					for(int m=0; m<2; m++) {
-				        	for(int l=0; l<2; l++) {
-							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
-						}
-					}
-				}
-			}
-
-        		if((*i)->contains(0.9,0.9,0.99)) {
-				//setting criteria to siblings
-				for(int n=0; n<2; n++) {
-					for(int m=0; m<2; m++) {
-				        	for(int l=0; l<2; l++) {
-							(*i)->get_parent()->get_child_at(l, m, n)->setToCoarsen = true;
-						}
-					}
-				}
-			}
+			//setting coarsening criteria to siblings	
+        		if((*i)->contains(1.1,0.9,0.99)) 
+				(*i)->set_to_coarsen_with_nesting();	
+			
+			if((*i)->contains(0.9,1.1,0.99))
+				(*i)->set_to_coarsen_with_nesting();	
+			
+        		if((*i)->contains(1.1,1.1,0.99))
+				(*i)->set_to_coarsen_with_nesting();	
+        		
+			if((*i)->contains(0.9,0.9,0.99))
+				(*i)->set_to_coarsen_with_nesting();	
 
 		}
 	
@@ -334,17 +302,25 @@ void OctreeGrid() {
 
 		set_refinement_criteria();
 		refine_nodes();
+
+		//reassigning neighbours after every level of refine call
+		create_lists_of_level_nodes();
+		reassign_neighbours();
 	}
 	
 	//coarsening
 	for(int i=0;i<=MAX_LEVEL;i++) {
 
 		//printf("coarsening\n");
-		//set_coarse_criteria();
-		//coarsen_nodes();
+		set_coarse_criteria();
+		coarsen_nodes();
+		
+		//reassigning neighbours after every level of coarsen call
+		create_lists_of_level_nodes();
+		reassign_neighbours();
 	}
 
-	//do this after refinement or coarsening
+	//do this after every level of refinement or coarsening
 	create_lists_of_level_nodes();
 	reassign_neighbours();
 
