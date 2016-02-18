@@ -65,14 +65,14 @@ void set_refinement_criteria() {
 		if((*i)->get_level() >= MAX_LEVEL)
 			continue;
 
-        	if((*i)->contains(1.1,0.9,0.99))
+        	if((*i)->contains(2.1,0.9,0.99))
  			(*i)->set_to_refine_with_nesting();
-		if((*i)->contains(0.9,1.1,0.99))
+		if((*i)->contains(5.9,0.1,0.99))
  			(*i)->set_to_refine_with_nesting();
-        	if((*i)->contains(1.1,1.1,0.99))
+        	if((*i)->contains(12.123,1.789,0.99))
  			(*i)->set_to_refine_with_nesting();
-        	//if((*i)->contains(0.9,0.9,0.99))
- 		//	(*i)->set_to_refine_with_nesting();
+        	if((*i)->contains(18.9,2.9,0.99))
+ 			(*i)->set_to_refine_with_nesting();
 	
 	}
 }
@@ -146,6 +146,7 @@ void coarsen_nodes() {
 			++i;
 		}   
 	}
+
 }
 
 void set_field() {
@@ -287,13 +288,94 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 
 }
 
+
+void reset_refine_flags() {
+
+	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
+
+		(*i)->setToRefine = false;
+	}
+
+}
+
+void reset_coarsen_flags() {
+
+	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
+
+		(*i)->setToCoarsen = false;
+	}
+}
+	
 void OctreeGrid() {
 
+	//4 boxes
+	//create_node(0.0,1.0,0.0,1.0,0.0,1.0,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	//create_node(1.0,2.0,0.0,1.0,0.0,1.0,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	//create_node(1.0,2.0,1.0,2.0,0.0,1.0,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	//create_node(0.0,1.0,1.0,2.0,0.0,1.0,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
 
+
+	//pipe of 3*20 boxes
 	create_node(0.0,1.0,0.0,1.0,0.0,1.0,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(2.0,3.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(3.0,4.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(4.0,5.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(5.0,6.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(6.0,7.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(7.0,8.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(8.0,9.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(9.0,10.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(10.0,11.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(11.0,12.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(12.0,13.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(13.0,14.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(14.0,15.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(15.0,16.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(16.0,17.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(17.0,18.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(18.0,19.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(19.0,20.0,0.0,1.0,0.0,1.0,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0,NONE,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(2.0,3.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(3.0,4.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(4.0,5.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(5.0,6.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(6.0,7.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(7.0,8.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(8.0,9.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(9.0,10.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(10.0,11.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(11.0,12.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(12.0,13.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(13.0,14.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(14.0,15.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(15.0,16.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(16.0,17.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(17.0,18.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(18.0,19.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(19.0,20.0,1.0,2.0,0.0,1.0,0,DIRICHLET,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
+	create_node(0.0,1.0,2.0,3.0,0.0,1.0,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(2.0,3.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(3.0,4.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(4.0,5.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(5.0,6.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(6.0,7.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(7.0,8.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(8.0,9.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(9.0,10.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(10.0,11.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(11.0,12.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(12.0,13.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(13.0,14.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(14.0,15.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(15.0,16.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(16.0,17.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(17.0,18.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(18.0,19.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(19.0,20.0,2.0,3.0,0.0,1.0,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
 
 	set_root_neighbours();
 
@@ -307,22 +389,22 @@ void OctreeGrid() {
 		create_lists_of_level_nodes();
 		reassign_neighbours();
 	}
+
+	reset_refine_flags();
 	
 	//coarsening
 	for(int i=0;i<=MAX_LEVEL;i++) {
 
 		//printf("coarsening\n");
-		set_coarse_criteria();
-		coarsen_nodes();
+		//set_coarse_criteria();
+		//coarsen_nodes();
 		
 		//reassigning neighbours after every level of coarsen call
-		create_lists_of_level_nodes();
-		reassign_neighbours();
+		//create_lists_of_level_nodes();
+		//reassign_neighbours();
 	}
 
-	//do this after every level of refinement or coarsening
-	create_lists_of_level_nodes();
-	reassign_neighbours();
+	//reset_coarsen_flags();
 
 	//prints neighbours information
 	//print_neighbour_information(nodes);
