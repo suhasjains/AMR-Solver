@@ -130,7 +130,7 @@ void write_vtk(std::list<Octree*>& nodes) {
                         for(int j = PAD; j<(NY_BLOCK+PAD); j++) {
                                 for(int i = PAD; i<(NX_BLOCK+PAD); i++) {
 	
-                                        fprintf(fp,"%lf \n",block_data->mesh->val[i][j][k]);
+                                        fprintf(fp,"%lf \n",block_data->field->val[i][j][k]);
                                 }
                         }
                 }

@@ -22,6 +22,7 @@ Block* Octree::get_block_data() {
 
 bool Octree::contains(double x, double y, double z) {
 
+	/*change it to (x-x_min)*(x-x_max)<=....*/
 	return x<=x_max && x>=x_min && y<=y_max && y>=y_min && z<=z_max && z>=z_min;
 
 }
@@ -146,7 +147,7 @@ void Octree::set_to_coarsen_with_nesting() {
 			criteria = false;
 		}
 	}
-
+	/*change loop indices*/
 	//setting criteria to siblings
       	for(int n=0; n<2; n++) {
            	for(int m=0; m<2; m++) {
@@ -159,7 +160,7 @@ void Octree::set_to_coarsen_with_nesting() {
 	
 }
 
-
+/*comment*/
 void Octree::coarsen() {
     
     
@@ -324,6 +325,7 @@ void Octree::refine() {
 
 }
 
+/*check what is happening - destroy is necessary*/
 Octree::~Octree() {
     
     //	for(int i=0; i<2; i++) {

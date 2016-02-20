@@ -1,10 +1,10 @@
-NAME 	:= myoctree
+NAME 	:= amrsolver
 OBDIR	:= ../OBJ/
 RUNDIR	:= ../RUN/
 
-OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)myoctree.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o 
+OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o 
 
-HEADER 	:= myoctree.h octree.h block.h output.h boundary.h 
+HEADER 	:= octreegrid.h adapt.h octree.h block.h output.h boundary.h 
 
 .DEFAULT:
 
@@ -34,9 +34,13 @@ $(OBDIR)amrsolver.o: amrsolver.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
 	$(CXX) -c $(FLAGS) -o $(OBDIR)amrsolver.o amrsolver.cpp
 
-$(OBDIR)myoctree.o: myoctree.cpp $(HEADER)
+$(OBDIR)octreegrid.o: octreegrid.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
-	$(CXX) -c $(FLAGS) -o $(OBDIR)myoctree.o myoctree.cpp
+	$(CXX) -c $(FLAGS) -o $(OBDIR)octreegrid.o octreegrid.cpp
+
+$(OBDIR)adapt.o: adapt.cpp $(HEADER)
+	@test -d $(OBDIR) || mkdir $(OBDIR)        
+	$(CXX) -c $(FLAGS) -o $(OBDIR)adapt.o adapt.cpp
 
 $(OBDIR)octree.o: octree.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        

@@ -51,6 +51,7 @@ class Octree {
 	bool isRootNode();
 
 	//function to test if the point lies inside the block
+	/*change it to containsPoint*/
 	bool contains(double x, double y, double z);
 
 	//gets level of the node
@@ -74,13 +75,14 @@ class Octree {
 	//set to coarsen considering nesting
 	void set_to_coarsen_with_nesting(); 
 
-	//variable to know whether to refine the node or not
+	//flag to know whether to refine the node or not
 	bool setToRefine;
 
-	//variable to know whether to coarsen the node or not
+	//flag to know whether to coarsen the node or not
 	bool setToCoarsen;
 	
 	//neighbors
+	/*change this to neighbour[direction][position]*/
 	Octree *east;
 	Octree *west;
 	Octree *north;
@@ -89,6 +91,7 @@ class Octree {
 	Octree *bottom;
 
 	//boundary conditions
+	/*same as above */
 	BC east_bc;
 	BC west_bc;
 	BC north_bc;

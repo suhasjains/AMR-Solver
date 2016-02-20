@@ -6,7 +6,7 @@ enum boundary_flags {
 	NONE,
 	DIRICHLET,
 	NEUMANN,
-	PROC_BOUNDARY
+	MPI_BOUNDARY
 };
 
 typedef boundary_flags BC;

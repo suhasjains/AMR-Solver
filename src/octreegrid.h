@@ -7,10 +7,10 @@ namespace myOctree {
 
 void create_list_of_leaf_nodes();
 void create_list_of_root_nodes();
-void set_refine_criteria();
-void refine_nodes();
+void create_lists_of_level_nodes();
 void create_node(double, double, double, double, double, double, int);
 void OctreeGrid();
+void reassign_neighbours();
 
 extern std::list<Octree*> nodes;
 extern std::list<Octree*> leaf_nodes;

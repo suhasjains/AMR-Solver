@@ -7,7 +7,6 @@ namespace myOctree {
 Field::Field( int N_x, int N_y, int N_z ) : Nx(N_x), Ny(N_y), Nz(N_z) {
 
         N = Nx*Ny*Nz;
-        //val = new double [10][10][10];
         val = new double** [Nx];
         for(int i=0;i<Nx;i++) {
                 val[i] = new double* [Ny];
@@ -69,12 +68,102 @@ void Field::set_field(double value) {
 	for(int i=0;i<this->Nx;i++) {
 		for(int j=0;j<this->Ny;j++) {
 			for(int k=0;k<this->Nz;k++) {
-				val[i][j][k] = value;	 
+				this->val[i][j][k] = value;	 
 			}
 		}
 	}
 }
 
+//parametrized constructor with initialization fields
+VecField::VecField( int N_x, int N_y, int N_z ) : Nx(N_x), Ny(N_y), Nz(N_z) {
+
+        N = Nx*Ny*Nz;
+        x = new double** [Nx];
+        y = new double** [Nx];
+        z = new double** [Nx];
+        for(int i=0;i<Nx;i++) {
+                x[i] = new double* [Ny];
+                y[i] = new double* [Ny];
+                z[i] = new double* [Ny];
+                for(int j=0;j<Ny;j++) {
+                        x[i][j] = new double [Nz];
+                        y[i][j] = new double [Nz];
+                        z[i][j] = new double [Nz];
+                }
+        }
+}
+
+//default constructor
+VecField::VecField() {
+
+        Nx = 0;
+        Ny = 0;
+        Nz = 0;
+        N = Nx*Ny*Nz;
+        x = new double** [Nx];
+        y = new double** [Nx];
+        z = new double** [Nx];
+        for(int i=0;i<Nx;i++) {
+                x[i] = new double* [Ny];
+                y[i] = new double* [Ny];
+                z[i] = new double* [Ny];
+                for(int j=0;j<Ny;j++) {
+                        x[i][j] = new double [Nz];
+                        y[i][j] = new double [Nz];
+                        z[i][j] = new double [Nz];
+                }
+        }
+}
+
+//Copy constructor
+VecField::VecField(const VecField &obj) {
+
+
+        Nx = obj.Nx;
+        Ny = obj.Ny;
+        Nz = obj.Nz;
+        N = obj.N;
+        memcpy(x,obj.x,sizeof(double**)*Nx);
+        memcpy(y,obj.y,sizeof(double**)*Nx);
+        memcpy(z,obj.z,sizeof(double**)*Nx);
+        for(int i=0;i<Nx;i++) {
+                memcpy(x[i],obj.x[i],sizeof(double*)*Ny);
+                memcpy(y[i],obj.y[i],sizeof(double*)*Ny);
+                memcpy(z[i],obj.z[i],sizeof(double*)*Ny);
+                for(int j=0;j<Ny;j++) {
+                        memcpy(x[i][j],obj.x[i][j],sizeof(double)*Nz);
+                        memcpy(y[i][j],obj.y[i][j],sizeof(double)*Nz);
+                        memcpy(z[i][j],obj.z[i][j],sizeof(double)*Nz);
+                }
+        }
+}
+
+//Destructor
+ VecField::~VecField() {
+
+//	for (int i = 0; i < Nx; ++i) {
+//	        for (int j = 0; j < Ny; ++j)
+//	        delete [] val[i][j];
+//	
+//	        delete [] val[i];
+//	        }
+//	
+//	delete [] val;
+}
+
+//member function
+void VecField::set_field(double value) {
+
+	for(int i=0;i<this->Nx;i++) {
+		for(int j=0;j<this->Ny;j++) {
+			for(int k=0;k<this->Nz;k++) {
+				this->x[i][j][k] = value;	 
+				this->y[i][j][k] = value;	 
+				this->z[i][j][k] = value;	 
+			}
+		}
+	}
+}
 
 //parametrized constructor with initialization fields
 Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2) {
@@ -89,10 +178,31 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
         y_centre = (y_min + y_max ) / 2.0;
         z_centre = (z_min + z_max ) / 2.0;
 
-        //dynamical allocation of the object
-        mesh = new Field;
-        Field mesh_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        //dynamical allocation of the objects
+        mesh = new VecField;
+        VecField mesh_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
         *mesh = mesh_field;
+        
+	field = new Field;
+        Field field_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        *field = field_field;
+       
+	/*no ghost cells for this*/ 
+	gradient = new VecField;
+        VecField gradient_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        *gradient = gradient_field;
+
+	//storing cell centre locations in mesh vector field
+	for(int i=0;i<mesh->Nx;i++) {
+		for(int j=0;j<mesh->Ny;j++) {
+			for(int k=0;k<mesh->Nz;k++) {
+				mesh->x[i][j][k] = x_min + dx * (i + 0.5);	 
+				mesh->y[i][j][k] = y_min + dy * (j + 0.5);	 
+				mesh->z[i][j][k] = z_min + dz * (k + 0.5);	 
+			}
+		}
+	}
+	
 
         //printf("N=%d\n",mesh->N);
 
@@ -101,9 +211,18 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 //default constructor
 Block::Block() {
 
-        mesh = new Field;
-        Field mesh_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        mesh = new VecField;
+        VecField mesh_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
         *mesh = mesh_field;
+	
+	field = new Field;
+        Field field_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        *field = field_field;
+	
+	/*no ghost cells for this*/ 
+	gradient = new VecField;
+        VecField gradient_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        *gradient = gradient_field;
 }
 
 //Copy constructor
@@ -125,7 +244,9 @@ Block::Block(const Block &obj) {
         iNy = obj.iNy;
         iNz = obj.iNz;
         mesh = obj.mesh;
-
+        field = obj.field;
+	gradient = obj.gradient;
+	max_gradient = obj.max_gradient;
 }
 
 //Destructor
