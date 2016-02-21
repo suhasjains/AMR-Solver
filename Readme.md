@@ -12,6 +12,7 @@
  * boundary flags - done
  * Make neighbors vary in refinement by 2 at the max - done
  * Add linked list for every level - done
+ * Gradient based refinement - done
  * Input file
  * Output file
  * Multigrid implementation
@@ -27,7 +28,7 @@
   <figcaption>2D view.</figcaption>
 </p>
 <p align="center">
-  <img src="images/view.svg"/>
-  <figcaption>Block nesting.</figcaption>
+  <img src="images/gradientadapt.png"/>
+  <figcaption>Gradient based refinement with block nesting.</figcaption>
 </p>
 

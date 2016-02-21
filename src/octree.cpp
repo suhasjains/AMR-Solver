@@ -111,7 +111,7 @@ void Octree::set_to_refine_with_nesting() {
 	}
 }	
 
-
+//checks if all of its neighbours are leaf nodes before setting the criteria
 void Octree::set_to_coarsen_with_nesting() {
 	
 	bool criteria;	
@@ -122,42 +122,43 @@ void Octree::set_to_coarsen_with_nesting() {
 			criteria = false;
 		}
 	}		
-	if(this->west!=NULL) {
+	if(this->west) {
 		if(!(this->west->isLeafNode())) {
 			criteria = false;
 		}
 	}		
-	if(this->north!=NULL) {
+	if(this->north) {
 		if(!(this->north->isLeafNode())) {
 			criteria = false;
 		}
 	}		
-	if(this->south!=NULL) {
+	if(this->south) {
 		if(!(this->south->isLeafNode())) {
 			criteria = false;
 		}
 	}		
-	if(this->top!=NULL) {
+	if(this->top) {
 		if(!(this->top->isLeafNode())) {
 			criteria = false;
 		}
 	}		
-	if(this->bottom!=NULL) {
+	if(this->bottom) {
 		if(!(this->bottom->isLeafNode())) {
 			criteria = false;
 		}
 	}
 	/*change loop indices*/
 	//setting criteria to siblings
-      	for(int n=0; n<2; n++) {
-           	for(int m=0; m<2; m++) {
-                    	for(int l=0; l<2; l++) {
-                             	this->get_parent()->get_child_at(l, m, n)->setToCoarsen = criteria;
-                 	}
-         	}
- 	}	
+//      	for(int n=0; n<2; n++) {
+//           	for(int m=0; m<2; m++) {
+//                    	for(int l=0; l<2; l++) {
+//                             	this->get_parent()->get_child_at(l, m, n)->setToCoarsen = criteria;
+//                 	}
+//         	}
+// 	}	
 
-	
+	this->setToCoarsen = criteria;
+
 }
 
 /*comment*/

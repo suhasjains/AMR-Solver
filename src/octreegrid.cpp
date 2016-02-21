@@ -4,12 +4,12 @@
 
 namespace myOctree {
 
-#define MAX_LEVEL 4
+extern int max_level;
 
 std::list<Octree*> nodes;
 std::list<Octree*> leaf_nodes;
 std::list<Octree*> root_nodes;
-std::list<Octree*> level_nodes[MAX_LEVEL + 1];
+std::list<Octree*> level_nodes[20];
 int Block::iNx = NX_BLOCK;
 int Block::iNy = NY_BLOCK;
 int Block::iNz = NZ_BLOCK;
@@ -41,7 +41,7 @@ void create_list_of_root_nodes() {
 void create_lists_of_level_nodes() {
 
 	//clearing all lists
-	for (unsigned level=0; level <= MAX_LEVEL; level++) {
+	for (unsigned level=0; level <= max_level; level++) {
 	
 		level_nodes[level].clear();
 	}
@@ -78,7 +78,7 @@ void create_node(double xmin, double xmax, double ymin, double ymax, double zmin
 //So this is done to ensure that neighbours are assigned after all refinement or coarsening is done for this time step 
 void reassign_neighbours() {
 
-	for (unsigned level=0; level <= MAX_LEVEL; level++) {
+	for (unsigned level=0; level <= max_level; level++) {
 
 
 		for (std::list<Octree*>::iterator iter = level_nodes[level].begin(), end = level_nodes[level].end(); iter != end; ++iter) { 
@@ -182,10 +182,10 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 void OctreeGrid() {
 
 	//4 boxes
-	create_node(0.0,1.0,0.0,1.0,0.0,1.0,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(0.0,1.0,0.0,1.0,0.0,0.1,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,0.0,1.0,0.0,0.1,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	create_node(1.0,2.0,1.0,2.0,0.0,0.1,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	create_node(0.0,1.0,1.0,2.0,0.0,0.1,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
 
 
 	//pipe of 3*20 boxes
@@ -253,7 +253,7 @@ void OctreeGrid() {
 	set_root_neighbours();
 
 //	//refinement	
-//	for(int i=0;i<=MAX_LEVEL;i++) {
+//	for(int i=0;i<=max_level;i++) {
 //
 //		set_refinement_criteria();
 //		refine_nodes();
@@ -266,7 +266,7 @@ void OctreeGrid() {
 //	reset_refine_flags();
 //	
 //	//coarsening
-//	for(int i=0;i<=MAX_LEVEL;i++) {
+//	for(int i=0;i<=max_level;i++) {
 //
 //		//printf("coarsening\n");
 //		//set_coarse_criteria();

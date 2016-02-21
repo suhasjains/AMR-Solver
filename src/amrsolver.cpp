@@ -27,7 +27,8 @@ void set_initial_field() {
 					double y = location->y[i][j][k];
 					double z = location->z[i][j][k];
  					
-					(x*x + y*y >= 2.25)?(field->val[i][j][k] = 100.0):(field->val[i][j][k] = 1.0);		
+					(x*x + y*y >= 1.0)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
+					if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
                         	}
                 	}
         	}
@@ -40,7 +41,7 @@ void adapt_gradient() {
 
     	//refinement
 	/*change number to a variable*/    
-    	for(int i=0;i<5;i++) {
+    	for(int i=0;i<=myOctree::max_level;i++) {
 
 
 		set_initial_field();
@@ -51,6 +52,23 @@ void adapt_gradient() {
             	myOctree::create_lists_of_level_nodes();
             	myOctree::reassign_neighbours();
     		myOctree::reset_refine_flags();	
+//    	}
+
+    	
+	//coaresning
+	/*change number to a variable*/    
+  //  	for(int i=0;i<5;i++) {
+
+
+		set_initial_field();
+      		myOctree::set_coarsen_flag_based_on_gradient();
+		myOctree::recheck_siblings_coarsen_flags();
+		myOctree::coarsen_nodes();
+
+            	//reassigning neighbours after every level of refine call
+            	myOctree::create_lists_of_level_nodes();
+            	myOctree::reassign_neighbours();
+    		myOctree::reset_coarsen_flags();	
     	}
 
 	amrsolver::set_initial_field();
