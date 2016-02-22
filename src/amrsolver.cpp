@@ -1,6 +1,7 @@
 #include "octreegrid.h"
 #include "adapt.h"
 #include "output.h"
+#include "input.h"
 using myOctree::Octree;
 using myOctree::Field;
 using myOctree::VecField;
@@ -27,8 +28,8 @@ void set_initial_field() {
 					double y = location->y[i][j][k];
 					double z = location->z[i][j][k];
  					
-					(x*x + y*y >= 1.0)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
-					if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
+					((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) >= 0.5625)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
+					//if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
                         	}
                 	}
         	}
@@ -82,6 +83,8 @@ using namespace std;
 
 
 int main(int argc, char **argv) {
+
+	read_input_file();
 
 	myOctree::OctreeGrid();
 

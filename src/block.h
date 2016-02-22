@@ -2,12 +2,7 @@
 
 namespace myOctree {
 
-#define PAD 2
-#define NX_BLOCK 10
-#define NY_BLOCK 10
-#define NZ_BLOCK 1
-
-
+extern int pad;
 
 //FIELD CLASS
 //This is a template class for any scalar field variable in the domain.

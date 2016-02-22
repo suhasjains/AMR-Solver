@@ -10,9 +10,6 @@ std::list<Octree*> nodes;
 std::list<Octree*> leaf_nodes;
 std::list<Octree*> root_nodes;
 std::list<Octree*> level_nodes[20];
-int Block::iNx = NX_BLOCK;
-int Block::iNy = NY_BLOCK;
-int Block::iNz = NZ_BLOCK;
 
 
 //creates a new list of leaf nodes 

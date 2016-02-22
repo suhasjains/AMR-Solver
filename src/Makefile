@@ -1,8 +1,8 @@
 NAME 	:= amrsolver
 OBDIR	:= ../OBJ/
-RUNDIR	:= ../RUN/
+RUNDIR	:= ../OUTPUT/
 
-OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o 
+OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o $(OBDIR)input.o 
 
 HEADER 	:= octreegrid.h adapt.h octree.h block.h output.h boundary.h 
 
@@ -49,6 +49,10 @@ $(OBDIR)octree.o: octree.cpp $(HEADER)
 $(OBDIR)block.o: block.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
 	$(CXX) -c $(FLAGS) -o $(OBDIR)block.o block.cpp
+
+$(OBDIR)input.o: input.cpp $(HEADER)
+	@test -d $(OBDIR) || mkdir $(OBDIR)        
+	$(CXX) -c $(FLAGS) -o $(OBDIR)input.o input.cpp
 
 $(OBDIR)output.o: output.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        

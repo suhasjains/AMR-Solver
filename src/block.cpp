@@ -3,6 +3,8 @@
 
 namespace myOctree {
 
+int pad = 2;
+
 //parametrized constructor with initialization fields
 Field::Field( int N_x, int N_y, int N_z ) : Nx(N_x), Ny(N_y), Nz(N_z) {
 
@@ -180,16 +182,16 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 
         //dynamical allocation of the objects
         mesh = new VecField;
-        VecField mesh_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
         *mesh = mesh_field;
         
 	field = new Field;
-        Field field_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
         *field = field_field;
        
 	/*no ghost cells for this*/ 
 	gradient = new VecField;
-        VecField gradient_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        VecField gradient_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
         *gradient = gradient_field;
 
 	//storing cell centre locations in mesh vector field
@@ -212,16 +214,16 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 Block::Block() {
 
         mesh = new VecField;
-        VecField mesh_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
         *mesh = mesh_field;
 	
 	field = new Field;
-        Field field_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
         *field = field_field;
 	
 	/*no ghost cells for this*/ 
 	gradient = new VecField;
-        VecField gradient_field(iNx+2*PAD,iNy+2*PAD,iNz+2*PAD);
+        VecField gradient_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
         *gradient = gradient_field;
 }
 

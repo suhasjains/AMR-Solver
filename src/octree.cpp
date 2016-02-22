@@ -4,6 +4,17 @@
 namespace myOctree {
 
 
+int nx_block = 10;
+int ny_block = 10;
+int nz_block = 1;
+int Block::iNx = nx_block;
+int Block::iNy = ny_block;
+int Block::iNz = nz_block;
+
+
+
+
+
 //Member functions
 bool Octree::isLeafNode() {
     

@@ -155,9 +155,9 @@ void set_refine_flag_based_on_gradient() {
 
                 mg = 0.0;
 
-                for(int i=PAD;i<(f->Nx-PAD);i++) {
-                        for(int j=PAD;j<(f->Ny-PAD);j++) {
-                                for(int k=PAD;k<(f->Nz-PAD);k++) {
+                for(int i=pad;i<(f->Nx-pad);i++) {
+                        for(int j=pad;j<(f->Ny-pad);j++) {
+                                for(int k=pad;k<(f->Nz-pad);k++) {
 
                                         //central difference gradient calculation 
                                         x_grad = (f->val[i+1][j][k] - f->val[i-1][j][k]) / (2.0*dx);
@@ -211,9 +211,9 @@ void set_coarsen_flag_based_on_gradient() {
 
                 mg = 0.0;
 
-                for(int i=PAD;i<(f->Nx-PAD);i++) {
-                        for(int j=PAD;j<(f->Ny-PAD);j++) {
-                                for(int k=PAD;k<(f->Nz-PAD);k++) {
+                for(int i=pad;i<(f->Nx-pad);i++) {
+                        for(int j=pad;j<(f->Ny-pad);j++) {
+                                for(int k=pad;k<(f->Nz-pad);k++) {
 
                                         //central difference gradient calculation 
                                         x_grad = (f->val[i+1][j][k] - f->val[i-1][j][k]) / (2.0*dx);

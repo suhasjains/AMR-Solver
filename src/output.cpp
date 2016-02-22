@@ -22,9 +22,9 @@ void write_vtk(std::list<Octree*>& nodes) {
 
 
 
-	int Npx = NX_BLOCK + 1;
-	int Npy = NY_BLOCK + 1;
-	int Npz = NZ_BLOCK + 1;
+	int Npx = nx_block + 1;
+	int Npy = ny_block + 1;
+	int Npz = nz_block + 1;
 	
 
 	char filename[30];
@@ -36,7 +36,7 @@ void write_vtk(std::list<Octree*>& nodes) {
         fprintf(fp,"ASCII\n");
         fprintf(fp,"DATASET UNSTRUCTURED_GRID\n");
 	long int nPoints = Npx * Npy * Npz * nodes.size();
-	long int nCells = NX_BLOCK * NY_BLOCK * NZ_BLOCK * nodes.size();
+	long int nCells = nx_block * ny_block * nz_block * nodes.size();
        	long int point[8]; 
 	int node_count = 0;
 
@@ -77,9 +77,9 @@ void write_vtk(std::list<Octree*>& nodes) {
 
         for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
 
-                for(int k = 0; k<NZ_BLOCK; k++) {
-                        for(int j = 0; j<NY_BLOCK; j++) {
-                                for(int i = 0; i<NX_BLOCK ; i++) {
+                for(int k = 0; k<nz_block; k++) {
+                        for(int j = 0; j<ny_block; j++) {
+                                for(int i = 0; i<nx_block ; i++) {
 
 					point[0] = node_count*Npx*Npy*Npz + get_point(i,j,k,Npx,Npy);
 					point[1] = node_count*Npx*Npy*Npz + get_point(i+1,j,k,Npx,Npy);
@@ -104,9 +104,9 @@ void write_vtk(std::list<Octree*>& nodes) {
 
         for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
 
-                for(int k = 0; k<NZ_BLOCK; k++) {
-                        for(int j = 0; j<NY_BLOCK; j++) {
-                                for(int i = 0; i<NX_BLOCK; i++) {
+                for(int k = 0; k<nz_block; k++) {
+                        for(int j = 0; j<ny_block; j++) {
+                                for(int i = 0; i<nx_block; i++) {
 
                                         fprintf(fp,"12\n");
                                 }
@@ -126,9 +126,9 @@ void write_vtk(std::list<Octree*>& nodes) {
 		Block* block_data = (*iterator)->get_block_data();
 	
 
-                for(int k = PAD; k<(NZ_BLOCK+PAD); k++) {
-                        for(int j = PAD; j<(NY_BLOCK+PAD); j++) {
-                                for(int i = PAD; i<(NX_BLOCK+PAD); i++) {
+                for(int k = pad; k<(nz_block+pad); k++) {
+                        for(int j = pad; j<(ny_block+pad); j++) {
+                                for(int i = pad; i<(nx_block+pad); i++) {
 	
                                         fprintf(fp,"%lf \n",block_data->field->val[i][j][k]);
                                 }
