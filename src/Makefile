@@ -1,10 +1,10 @@
 NAME 	:= amrsolver
-OBDIR	:= ../OBJ/
-RUNDIR	:= ../OUTPUT/
+OBDIR	:= ../obj/
+RUNDIR	:= ../output/
 
-OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)output.o $(OBDIR)input.o 
+OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o 
 
-HEADER 	:= octreegrid.h adapt.h octree.h block.h output.h boundary.h 
+HEADER 	:= octreegrid.h adapt.h octree.h block.h vtk.h output.h boundary.h 
 
 .DEFAULT:
 
@@ -15,7 +15,7 @@ LIBPATH	= 	-L ~/
 LIBS	=	-lm  
 
 CXX	:=	mpic++
-CXXFLAGS:= 	-g  $(INCPATH) -Wall -O3
+CXXFLAGS:= 	-g  -std=c++11 $(INCPATH) -Wall -O3
 #FLAGS	:=	-g -pg $(INCPATH) -Wall -fopenmp -O3
 #LFLAGS	:=	$(LIBPATH) $(LIBS) -lm -lgsl -lblas
 LFLAGS	:=	$(LIBPATH) $(LIBS) 
@@ -53,6 +53,10 @@ $(OBDIR)block.o: block.cpp $(HEADER)
 $(OBDIR)input.o: input.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
 	$(CXX) -c $(FLAGS) -o $(OBDIR)input.o input.cpp
+
+$(OBDIR)vtk.o: vtk.cpp $(HEADER)
+	@test -d $(OBDIR) || mkdir $(OBDIR)        
+	$(CXX) -c $(FLAGS) -o $(OBDIR)vtk.o vtk.cpp
 
 $(OBDIR)output.o: output.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        

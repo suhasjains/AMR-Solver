@@ -5,5 +5,5 @@ clean:
 	cd src; make clean
 
 cleanall: 
-	rm -rf OUTPUT/
-	rm -rf OBJ/
+	rm -rf output/
+	rm -rf obj/

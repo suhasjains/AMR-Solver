@@ -1,9 +1,6 @@
-#ifndef MYOCTREE_OUTPUT_H
-#define MYOCTREE_OUTPUT_H
+namespace std {
 
-namespace myOctree {
+void write_output_file();
 
-void write_vtk(std::list<Octree*>&);
 
 }
-#endif

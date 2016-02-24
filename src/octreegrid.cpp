@@ -1,5 +1,5 @@
 #include "octree.h"
-#include "output.h"
+#include "vtk.h"
 #include "boundary.h"
 
 namespace myOctree {
@@ -179,10 +179,10 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 void OctreeGrid() {
 
 	//4 boxes
-	create_node(0.0,1.0,0.0,1.0,0.0,0.1,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	create_node(1.0,2.0,0.0,1.0,0.0,0.1,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	create_node(1.0,2.0,1.0,2.0,0.0,0.1,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-	create_node(0.0,1.0,1.0,2.0,0.0,0.1,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	//create_node(0.0,1.0,0.0,1.0,0.0,0.1,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	//create_node(1.0,2.0,0.0,1.0,0.0,0.1,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
+	//create_node(1.0,2.0,1.0,2.0,0.0,0.1,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	//create_node(0.0,1.0,1.0,2.0,0.0,0.1,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
 
 
 	//pipe of 3*20 boxes

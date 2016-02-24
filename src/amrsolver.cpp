@@ -1,7 +1,8 @@
 #include "octreegrid.h"
 #include "adapt.h"
-#include "output.h"
+#include "vtk.h"
 #include "input.h"
+#include "output.h"
 using myOctree::Octree;
 using myOctree::Field;
 using myOctree::VecField;
@@ -87,12 +88,14 @@ int main(int argc, char **argv) {
 	read_input_file();
 
 	myOctree::OctreeGrid();
-
+//
 	amrsolver::adapt_gradient();
-	
-
+//	
+//
 	myOctree::create_list_of_leaf_nodes();
-
+//
 	myOctree::write_vtk(myOctree::leaf_nodes);
+	
+	write_output_file();
 
 }
