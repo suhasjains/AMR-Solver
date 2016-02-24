@@ -1,8 +1,13 @@
 #include <string.h>
+#include <string>
+#include <list>
+#include <vector>
 
 namespace myOctree {
 
 extern int pad;
+extern std::vector<std::string> scalar_fields;
+extern std::vector<std::string> vector_fields;
 
 //FIELD CLASS
 //This is a template class for any scalar field variable in the domain.
@@ -21,10 +26,11 @@ class Field {
         int Nx,Ny,Nz;              //size
         int N;                  //size
         double*** val;            //values
+	std::string name;
 
         //Constructors
         //allocates memory to the field variables equal to the number of cells in the domain
-        Field( int N_x, int N_y, int N_z );
+        Field( int N_x, int N_y, int N_z, std::string info );
 
 	//default constructor
         Field();
@@ -63,10 +69,11 @@ class VecField {
         double*** x;            //values
         double*** y;            //values
         double*** z;            //values
+	std::string name;
 
         //Constructors
         //allocates memory to the field variables equal to the number of cells in the domain
-        VecField( int N_x, int N_y, int N_z );
+        VecField( int N_x, int N_y, int N_z, std::string info );
 
 	//default constructor
         VecField();
@@ -101,7 +108,11 @@ class Block {
 	
 	VecField *mesh;
 	Field *field;
-	VecField *gradient;
+
+	/*complete this*/	
+	std::list<Field*> fields;
+	
+	//VecField *gradient;
 	double max_gradient;
 	double x_centre, y_centre, z_centre;	
 	double x_min, x_max;
@@ -124,12 +135,6 @@ class Block {
 	//Destructor
 	~Block();
 
-	/*remove these*/		
-	//member function
-	void calculate_grid_size();
-
-	//member function
-	void calculate_centre();
 };
 
 

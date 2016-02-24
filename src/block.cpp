@@ -4,9 +4,11 @@
 namespace myOctree {
 
 int pad = 2;
+std::vector<std::string> scalar_fields;
+std::vector<std::string> vector_fields;	
 
 //parametrized constructor with initialization fields
-Field::Field( int N_x, int N_y, int N_z ) : Nx(N_x), Ny(N_y), Nz(N_z) {
+Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info)  {
 
         N = Nx*Ny*Nz;
         val = new double** [Nx];
@@ -42,6 +44,7 @@ Field::Field(const Field &obj) {
         Ny = obj.Ny;
         Nz = obj.Nz;
         N = obj.N;
+	name = obj.name;
         memcpy(val,obj.val,sizeof(double**)*Nx);
         for(int i=0;i<Nx;i++) {
                 memcpy(val[i],obj.val[i],sizeof(double*)*Ny);
@@ -77,7 +80,7 @@ void Field::set_field(double value) {
 }
 
 //parametrized constructor with initialization fields
-VecField::VecField( int N_x, int N_y, int N_z ) : Nx(N_x), Ny(N_y), Nz(N_z) {
+VecField::VecField( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info) {
 
         N = Nx*Ny*Nz;
         x = new double** [Nx];
@@ -125,6 +128,7 @@ VecField::VecField(const VecField &obj) {
         Ny = obj.Ny;
         Nz = obj.Nz;
         N = obj.N;
+	name = obj.name;
         memcpy(x,obj.x,sizeof(double**)*Nx);
         memcpy(y,obj.y,sizeof(double**)*Nx);
         memcpy(z,obj.z,sizeof(double**)*Nx);
@@ -182,17 +186,12 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 
         //dynamical allocation of the objects
         mesh = new VecField;
-        VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
+        VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "mesh");
         *mesh = mesh_field;
         
 	field = new Field;
-        Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
+        Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
         *field = field_field;
-       
-	/*no ghost cells for this*/ 
-	gradient = new VecField;
-        VecField gradient_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
-        *gradient = gradient_field;
 
 	//storing cell centre locations in mesh vector field
 	for(int i=0;i<mesh->Nx;i++) {
@@ -214,17 +213,13 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 Block::Block() {
 
         mesh = new VecField;
-        VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
+        VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "mesh");
         *mesh = mesh_field;
 	
 	field = new Field;
-        Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
+        Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
         *field = field_field;
 	
-	/*no ghost cells for this*/ 
-	gradient = new VecField;
-        VecField gradient_field(iNx+2*pad,iNy+2*pad,iNz+2*pad);
-        *gradient = gradient_field;
 }
 
 //Copy constructor
@@ -247,7 +242,6 @@ Block::Block(const Block &obj) {
         iNz = obj.iNz;
         mesh = obj.mesh;
         field = obj.field;
-	gradient = obj.gradient;
 	max_gradient = obj.max_gradient;
 }
 
@@ -256,21 +250,6 @@ Block::~Block() {
 
 //        delete mesh;
 
-}
-
-//member function
-void Block::calculate_grid_size() {
-
-        this->dx = ( this->x_max - this->x_min ) / this->iNx;
-        this->dy = ( this->y_max - this->y_min ) / this->iNy;
-        this->dz = ( this->z_max - this->z_min ) / this->iNz;
-}
-
-//member function
-void Block::calculate_centre() {
-        this->x_centre = (this->x_min + this->x_max ) / 2.0;
-        this->y_centre = (this->y_min + this->y_max ) / 2.0;
-        this->z_centre = (this->z_min + this->z_max ) / 2.0;
 }
 
 
