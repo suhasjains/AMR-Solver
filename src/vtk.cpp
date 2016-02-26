@@ -117,7 +117,7 @@ void write_vtk(std::list<Octree*>& nodes) {
         }	
 
 	fprintf(fp,"\n\nCELL_DATA %ld\n", nCells);
-	fprintf(fp,"SCALARS level_data double 1\n");
+	fprintf(fp,"SCALARS input_field_data double 1\n");
 	fprintf(fp,"LOOKUP_TABLE default\n");
 
         for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
@@ -136,7 +136,71 @@ void write_vtk(std::list<Octree*>& nodes) {
                 }
 
         }
+
+
+	for (int f = 0 ; f < scalar_fields.size() ; f++) {
+		fprintf(fp,"\nSCALARS %s double 1\n",scalar_fields[f].c_str());
+		fprintf(fp,"LOOKUP_TABLE default\n");
 	
+	        for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
+	
+	
+			Block* block_data = (*iterator)->get_block_data();
+		
+	
+	                for(int k = pad; k<(nz_block+pad); k++) {
+	                        for(int j = pad; j<(ny_block+pad); j++) {
+	                                for(int i = pad; i<(nx_block+pad); i++) {
+		
+	                                        fprintf(fp,"%lf \n",block_data->scalarfields[f]->val[i][j][k]);
+	                                }
+	                        }
+	                }
+	
+	        }
+	}
+	
+	fprintf(fp,"\nVECTORS location_data double\n");
+	//fprintf(fp,"LOOKUP_TABLE default\n");
+
+        for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
+
+
+		Block* block_data = (*iterator)->get_block_data();
+	
+
+                for(int k = pad; k<(nz_block+pad); k++) {
+                        for(int j = pad; j<(ny_block+pad); j++) {
+                                for(int i = pad; i<(nx_block+pad); i++) {
+	
+                                        fprintf(fp,"%lf %lf %lf\n",block_data->mesh->x[i][j][k], block_data->mesh->y[i][j][k], block_data->mesh->z[i][j][k]);
+                                }
+                        }
+                }
+
+        }
+	
+	for (int f = 0 ; f < vector_fields.size() ; f++) {
+		fprintf(fp,"\nVECTORS %s double\n",vector_fields[f].c_str());
+		//fprintf(fp,"LOOKUP_TABLE default\n");
+	
+	        for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
+	
+	
+			Block* block_data = (*iterator)->get_block_data();
+		
+	
+	                for(int k = pad; k<(nz_block+pad); k++) {
+	                        for(int j = pad; j<(ny_block+pad); j++) {
+	                                for(int i = pad; i<(nx_block+pad); i++) {
+		
+	                                        fprintf(fp,"%lf %lf %lf\n",block_data->vectorfields[f]->x[i][j][k], block_data->vectorfields[f]->y[i][j][k], block_data->vectorfields[f]->z[i][j][k]);
+	                                }
+	                        }
+	                }
+	
+	        }
+	}
 
 }
 

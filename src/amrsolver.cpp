@@ -18,9 +18,34 @@ void set_initial_field() {
 
    		Field* field = (*i)->get_block_data()->field;
    		VecField* location = (*i)->get_block_data()->mesh;
-		//int level = (*i)->get_level();
 	
-		//field->set_field((double)level);	
+		for(int i=0;i<field->Nx;i++) {
+                	for(int j=0;j<field->Ny;j++) {
+                        	for(int k=0;k<field->Nz;k++) {
+                                	
+					double x = location->x[i][j][k];
+					double y = location->y[i][j][k];
+					double z = location->z[i][j][k];
+ 					
+					((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) + (z-1.0)*(z-1.0) >= 0.421875)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
+					//if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
+                        	}
+                	}
+        	}
+
+    	}
+
+}
+
+void set_field() {
+
+	myOctree::create_list_of_leaf_nodes();
+
+    	for (std::list<Octree*>::iterator i = myOctree::leaf_nodes.begin(), end = myOctree::leaf_nodes.end(); i != end; ++i) {
+
+   		Field* field = (*i)->get_block_data()->scalarfields[0];
+   		VecField* location = (*i)->get_block_data()->mesh;
+	
 		for(int i=0;i<field->Nx;i++) {
                 	for(int j=0;j<field->Ny;j++) {
                         	for(int k=0;k<field->Nz;k++) {
@@ -38,6 +63,7 @@ void set_initial_field() {
     	}
 
 }
+
 
 void adapt_gradient() {
 
@@ -88,12 +114,13 @@ int main(int argc, char **argv) {
 	read_input_file();
 
 	myOctree::OctreeGrid();
-//
+
 	amrsolver::adapt_gradient();
-//	
-//
+	
+//	amrsolver::set_field();
+	
 	myOctree::create_list_of_leaf_nodes();
-//
+
 	myOctree::write_vtk(myOctree::leaf_nodes);
 	
 	write_output_file();

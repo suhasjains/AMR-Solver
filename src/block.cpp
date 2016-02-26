@@ -193,6 +193,20 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
         Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
         *field = field_field;
 
+	scalarfields = new Field* [scalar_fields.size()];
+	for(int i = 0; i<scalar_fields.size() ; i++) {
+	       	scalarfields[i] = new Field;	
+        	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
+		*scalarfields[i] = field_field;		
+	}       
+
+	vectorfields = new VecField* [vector_fields.size()];
+	for(int i = 0; i<vector_fields.size() ; i++) {
+	       	vectorfields[i] = new VecField;	
+        	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
+		*vectorfields[i] = vec_field;		
+	}       
+	
 	//storing cell centre locations in mesh vector field
 	for(int i=0;i<mesh->Nx;i++) {
 		for(int j=0;j<mesh->Ny;j++) {
@@ -220,6 +234,20 @@ Block::Block() {
         Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
         *field = field_field;
 	
+	scalarfields = new Field* [scalar_fields.size()];
+	for(int i = 0; i<scalar_fields.size() ; i++) {
+	       	scalarfields[i] = new Field;	
+        	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
+		*scalarfields[i] = field_field;		
+	}       
+	
+	vectorfields = new VecField* [vector_fields.size()];
+	for(int i = 0; i<vector_fields.size() ; i++) {
+	       	vectorfields[i] = new VecField;	
+        	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
+		*vectorfields[i] = vec_field;		
+	}       
+	
 }
 
 //Copy constructor
@@ -230,7 +258,7 @@ Block::Block(const Block &obj) {
         z_centre = obj.z_centre;
         x_min = obj.x_min;
         y_min = obj.y_min;
-        x_min = obj.x_min;
+        z_min = obj.z_min;
         x_max = obj.x_max;
         y_max = obj.y_max;
         z_max = obj.z_max;
@@ -243,6 +271,16 @@ Block::Block(const Block &obj) {
         mesh = obj.mesh;
         field = obj.field;
 	max_gradient = obj.max_gradient;
+
+        memcpy(scalarfields,obj.scalarfields,sizeof(Field*)*scalar_fields.size());
+	for(int i = 0; i<scalar_fields.size() ; i++) {
+		scalarfields[i] = obj.scalarfields[i];
+	}
+        
+	memcpy(vectorfields,obj.vectorfields,sizeof(VecField*)*vector_fields.size());
+	for(int i = 0; i<vector_fields.size() ; i++) {
+		vectorfields[i] = obj.vectorfields[i];
+	}
 }
 
 //Destructor

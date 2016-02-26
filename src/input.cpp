@@ -49,7 +49,13 @@ void read_input_file() {
 
 	else {
 
+		//skips line if line is empty
 		getline(file,line);
+		while(line.empty()) {
+			getline(file, line);
+		}
+
+
 		if(line=="blocks") {
 
 
@@ -82,24 +88,54 @@ void read_input_file() {
 			}
 
 		}
+		
+		//Skips if a line is empty		
+		getline(file, line);
+		while(line.empty()) {
+			getline(file, line);
+		}
 
-		getline(file,line);
 		if(line=="scalar_fields") {
 
 			file >> str;
-                        if(str != "{") {
-                                cerr << "Expected an opening bracket" <<endl;
-                                exit(1);
-                        }
+        	        if(str != "{") {
+        	                cerr << "Expected an opening bracket" <<endl;
+        	                exit(1);
+        	        }
+			
+			cerr << "\nUser defined scalar Fields" << endl;
 
 			while(file) { 
-	
+		
 			
 				if(file >> str && str == "}") break;
-                                else    blocknumber = atoi(str.c_str());
+        	                else    myOctree::scalar_fields.push_back(str);
+				cerr << str << endl;	
+			}	
+		}
+		
+		//Skips if a line is empty		
+		getline(file, line);
+		while(line.empty()) {
+			getline(file, line);
+		}
 
+		if(line=="vector_fields") {
 
-	
+			file >> str;
+        	        if(str != "{") {
+        	                cerr << "Expected an opening bracket" <<endl;
+        	                exit(1);
+        	        }
+			
+			cerr << "\nUser defined vector Fields" << endl;
+
+			while(file) { 
+		
+			
+				if(file >> str && str == "}") break;
+        	                else    myOctree::vector_fields.push_back(str);
+				cerr << str << endl;	
 			}	
 		}
 	}

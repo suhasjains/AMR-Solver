@@ -110,8 +110,9 @@ class Block {
 	Field *field;
 
 	/*complete this*/	
-	std::list<Field*> fields;
-	
+	Field **scalarfields;
+	VecField **vectorfields;
+
 	//VecField *gradient;
 	double max_gradient;
 	double x_centre, y_centre, z_centre;	
