@@ -29,7 +29,8 @@ BC string_to_BC(string bc) {
 void read_input_file() {
 
 
-	string line;
+	string line, str;
+	char c;
 	int blocknumber, level;
 	double xmin, xmax, ymin, ymax, zmin, zmax;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
@@ -50,9 +51,20 @@ void read_input_file() {
 
 		getline(file,line);
 		if(line=="blocks") {
-	
+
+
+			file >> str;
+			if(str != "{") {
+				cerr << "Expected an opening bracket" <<endl;				
+				exit(1);	
+			}
+			
 			while(file) {
-				file >> blocknumber >> xmin >> xmax >> ymin >> ymax >> zmin >> zmax;
+				if(file >> str && str == "}") break;
+				else	blocknumber = atoi(str.c_str());
+ 	
+				//file >> blocknumber;
+				file >> xmin >> xmax >> ymin >> ymax >> zmin >> zmax;
 				file >> level;
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 							
@@ -62,15 +74,34 @@ void read_input_file() {
 				south_bc = string_to_BC(southbc);		
 				top_bc = string_to_BC(topbc);		
 				bottom_bc = string_to_BC(bottombc);		
-				
-				if(file.eof() ) break;	
-				
+
+				//cerr << blocknumber << xmin << xmax << ymin << ymax << zmin << zmax << endl;
+
 				myOctree::create_node(xmin, xmax, ymin, ymax, zmin, zmax, level, east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc);
 
 			}
 
 		}
 
+		getline(file,line);
+		if(line=="scalar_fields") {
+
+			file >> str;
+                        if(str != "{") {
+                                cerr << "Expected an opening bracket" <<endl;
+                                exit(1);
+                        }
+
+			while(file) { 
+	
+			
+				if(file >> str && str == "}") break;
+                                else    blocknumber = atoi(str.c_str());
+
+
+	
+			}	
+		}
 	}
 	file.close();
 }
