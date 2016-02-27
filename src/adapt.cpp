@@ -5,7 +5,7 @@
 
 namespace myOctree {
 
-int  max_level=4;
+int  max_level;
 
 
 //sets refine criterion for all the leaf nodes

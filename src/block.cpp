@@ -1,11 +1,18 @@
 #include "block.h"
 #include <stdio.h>
+#include <iostream>
 
 namespace myOctree {
 
 int pad = 2;
 std::vector<std::string> scalar_fields;
 std::vector<std::string> vector_fields;	
+int nx_block = 10;
+int ny_block = 10;
+int nz_block = 10;
+int Block::iNx = nx_block;
+int Block::iNy = ny_block;
+int Block::iNz = nz_block;
 
 //parametrized constructor with initialization fields
 Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info)  {

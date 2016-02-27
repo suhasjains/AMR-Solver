@@ -1,5 +1,6 @@
 #include "octree.h"
 #include <stdio.h>
+#include <iostream>
 
 namespace myOctree {
 
@@ -19,7 +20,6 @@ long int get_point(int i, int j, int k, int Npx, int Npy) {
 
 
 void write_vtk(std::list<Octree*>& nodes) {
-
 
 
 	int Npx = nx_block + 1;

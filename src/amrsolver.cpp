@@ -3,6 +3,8 @@
 #include "vtk.h"
 #include "input.h"
 #include "output.h"
+#include <iostream>
+
 using myOctree::Octree;
 using myOctree::Field;
 using myOctree::VecField;
@@ -28,6 +30,8 @@ void set_initial_field() {
 					double z = location->z[i][j][k];
  					
 					((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) + (z-1.0)*(z-1.0) >= 0.421875)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
+					//((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) >= 0.5625)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
+					//(x*x + y*y >= 1.0)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
 					//if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
                         	}
                 	}

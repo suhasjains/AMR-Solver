@@ -8,6 +8,9 @@ namespace myOctree {
 extern int pad;
 extern std::vector<std::string> scalar_fields;
 extern std::vector<std::string> vector_fields;
+extern int nx_block;
+extern int ny_block;
+extern int nz_block;
 
 //FIELD CLASS
 //This is a template class for any scalar field variable in the domain.

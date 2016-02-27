@@ -4,6 +4,7 @@
 #include <string>
 #include "boundary.h"
 #include "octreegrid.h"
+#include "adapt.h"
 
 namespace std {
 
@@ -138,6 +139,19 @@ void read_input_file() {
 				cerr << str << endl;	
 			}	
 		}
+
+		//Skips if a line is empty		
+		getline(file, line);
+		while(line.empty()) {
+			getline(file, line);
+		}
+	
+		if(line=="max_level") {
+
+			file >> myOctree::max_level;
+		
+		}
+	
 	}
 	file.close();
 }

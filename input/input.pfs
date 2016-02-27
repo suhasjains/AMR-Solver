@@ -11,3 +11,7 @@ scalar_fields
 
 vector_fields
 { psi }
+
+max_level
+3
+

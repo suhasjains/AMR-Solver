@@ -12,9 +12,6 @@ namespace myOctree {
 //class forward declaration
 class Octree;
 extern std::list<Octree*> nodes;
-extern int nx_block;
-extern int ny_block;
-extern int nz_block;
 
 
 //OCTREE CLASS
