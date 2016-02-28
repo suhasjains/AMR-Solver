@@ -30,12 +30,14 @@ BC string_to_BC(string bc) {
 void read_input_file() {
 
 
+	double bc_value;
 	string line, str;
 	char c;
 	int blocknumber, level;
 	double xmin, xmax, ymin, ymax, zmin, zmax;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
 	BC east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
+	double eastbcval, westbcval, northbcval, southbcval, topbcval, bottombcval;
 
 	ifstream file ("../input/input.pfs"); 
 	if(file.fail()) {
@@ -70,11 +72,11 @@ void read_input_file() {
 				if(file >> str && str == "}") break;
 				else	blocknumber = atoi(str.c_str());
  	
-				//file >> blocknumber;
 				file >> xmin >> xmax >> ymin >> ymax >> zmin >> zmax;
 				file >> level;
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
-							
+				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
+				
 				east_bc = string_to_BC(eastbc);		
 				west_bc = string_to_BC(westbc);		
 				north_bc = string_to_BC(northbc);		
@@ -84,7 +86,9 @@ void read_input_file() {
 
 				//cerr << blocknumber << xmin << xmax << ymin << ymax << zmin << zmax << endl;
 
-				myOctree::create_node(xmin, xmax, ymin, ymax, zmin, zmax, level, east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc);
+				myOctree::create_node(xmin, xmax, ymin, ymax, zmin, zmax, level, \
+						east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc, \
+						eastbcval, westbcval, northbcval, southbcval, topbcval, bottombcval);
 
 			}
 
@@ -107,7 +111,6 @@ void read_input_file() {
 			cerr << "\nUser defined scalar Fields" << endl;
 
 			while(file) { 
-		
 			
 				if(file >> str && str == "}") break;
         	                else    myOctree::scalar_fields.push_back(str);

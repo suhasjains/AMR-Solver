@@ -52,7 +52,9 @@ void create_lists_of_level_nodes() {
 }
 
 //creates an octree node
-void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, BC east_bc, BC west_bc, BC north_bc, BC south_bc, BC top_bc, BC bottom_bc) {
+void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level,\
+		BC east_bc, BC west_bc, BC north_bc, BC south_bc, BC top_bc, BC bottom_bc, \
+		double east_bc_val, double west_bc_val, double north_bc_val, double south_bc_val, double top_bc_val, double bottom_bc_val) {
 
 	//memory allocation to new node
 	Octree* root = new Octree;
@@ -67,6 +69,15 @@ void create_node(double xmin, double xmax, double ymin, double ymax, double zmin
 	root->south_bc = south_bc;
 	root->top_bc = top_bc;
 	root->bottom_bc = bottom_bc;
+
+	//boundary values are assigned to this root node
+	root->east_bc_val = east_bc_val;
+	root->west_bc_val = west_bc_val;
+	root->north_bc_val = north_bc_val;
+	root->south_bc_val = south_bc_val;
+	root->top_bc_val = top_bc_val;
+	root->bottom_bc_val = bottom_bc_val;
+	
 		
 }
 

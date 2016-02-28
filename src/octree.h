@@ -99,6 +99,14 @@ class Octree {
 	BC top_bc;
 	BC bottom_bc;
 	
+	//boundary values
+	/*same as above */
+	double east_bc_val;
+	double west_bc_val;
+	double north_bc_val;
+	double south_bc_val;
+	double top_bc_val;
+	double bottom_bc_val;
 
 	//node's block dimensions
 	double x_centre, y_centre, z_centre;
@@ -106,7 +114,6 @@ class Octree {
 	double y_min, y_max;
 	double z_min, z_max;
 
-	
 	private:
 	//each node has upto 8 children (2^3 for 3 dimensions) 
 	Octree *children[2][2][2];

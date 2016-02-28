@@ -11,5 +11,15 @@ enum boundary_flags {
 
 typedef boundary_flags BC;
 
+class BoundVal {
+
+	double east_bc_value;
+	double west_bc_value; 
+	double north_bc_value; 
+	double south_bc_value; 
+	double top_bc_value; 
+	double bottom_bc_value;
+
+};
 
 #endif

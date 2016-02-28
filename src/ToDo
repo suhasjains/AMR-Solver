@@ -1,0 +1,4 @@
+* boundary condition values not added to refine funciton yet.
+* boundary condition not assigned to field ghost cells yet. 
+* boundary conditions and boundary values are supposed to be applied to each field right now it is only applied to each node.
+
