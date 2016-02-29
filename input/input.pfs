@@ -7,11 +7,17 @@ blocks
 }
 
 scalar_fields
-{ alpha }
+{ 
+alpha
+1 N D N D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+2 D N N D D D 1.0 0.0 0.0 1.0 1.0 1.0
+3 N D D N D D 0.0 1.0 1.0 0.0 1.0 1.0
+4 D N D N D D 1.0 0.0 1.0 0.0 1.0 1.0
+}
 
 vector_fields
 { psi }
 
 max_level
-4
+2
 

@@ -106,6 +106,8 @@ class Octree {
 	double y_min, y_max;
 	double z_min, z_max;
 
+	int number;
+
 	
 	private:
 	//each node has upto 8 children (2^3 for 3 dimensions) 

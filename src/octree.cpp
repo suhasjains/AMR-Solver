@@ -368,6 +368,8 @@ Octree::Octree(const Octree &obj) {
 	setToRefine = obj.setToRefine;
 	setToCoarsen = obj.setToCoarsen;
 
+	number = obj.number;
+
 	//neighbors
 	east = obj.east;
 	west = obj.west;
@@ -422,6 +424,7 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 	top_bc = NONE;
 	bottom_bc = NONE; 
 
+	number = 0;
  
     x_centre = (x_min + x_max ) / 2.0;
     y_centre = (y_min + y_max ) / 2.0;
@@ -470,6 +473,8 @@ Octree::Octree() {
 	south_bc = NONE;
 	top_bc = NONE;
 	bottom_bc = NONE; 
+
+	number = 0;
 
     //creating block to assign it to the data
     block_data = new Block;

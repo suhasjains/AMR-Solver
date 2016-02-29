@@ -29,6 +29,7 @@ string NodeBc_to_string(myOctree::NodeBc bcc) {
 void write_output_file() {
 
 	int count = 0;
+	int blocknumber;
 	double xmin, xmax, ymin, ymax, zmin, zmax;
 	int level;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
@@ -61,7 +62,7 @@ void write_output_file() {
 	top_bc = (*it)->top_bc;
 	bottom_bc = (*it)->bottom_bc;
 	
-
+	blocknumber = (*it)->number;
 
 	eastbc = NodeBc_to_string(east_bc);
 	westbc = NodeBc_to_string(west_bc);
@@ -70,7 +71,7 @@ void write_output_file() {
 	topbc = NodeBc_to_string(top_bc);
 	bottombc = NodeBc_to_string(bottom_bc);
 
-	file << count << " " << xmin << " " << xmax << " " << ymin << " " << ymax << " " << zmin << " " << zmax << " " << level<< " " ;			 
+	file << blocknumber << " " << xmin << " " << xmax << " " << ymin << " " << ymax << " " << zmin << " " << zmax << " " << level<< " " ;			 
 	file << eastbc << " " << westbc << " " << northbc << " " << southbc << " " << topbc << " " << bottombc << endl;
 		
 	}

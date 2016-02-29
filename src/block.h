@@ -30,8 +30,8 @@ class Field {
         int Nx,Ny,Nz;              //size
         int N;                  //size
         double*** val;            //values
-	std::string name;
-	FieldBc bc[3][2];	
+	std::string name;	//field name
+	FieldBc bc[3][2];	//boundary conditions
 
         //Constructors
         //allocates memory to the field variables equal to the number of cells in the domain

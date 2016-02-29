@@ -52,7 +52,7 @@ void create_lists_of_level_nodes() {
 }
 
 //creates an octree node
-void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, NodeBc east_bc, NodeBc west_bc, NodeBc north_bc, NodeBc south_bc, NodeBc top_bc, NodeBc bottom_bc) {
+void create_node(int blocknumber, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, NodeBc east_bc, NodeBc west_bc, NodeBc north_bc, NodeBc south_bc, NodeBc top_bc, NodeBc bottom_bc) {
 
 	//memory allocation to new node
 	Octree* root = new Octree;
@@ -67,6 +67,8 @@ void create_node(double xmin, double xmax, double ymin, double ymax, double zmin
 	root->south_bc = south_bc;
 	root->top_bc = top_bc;
 	root->bottom_bc = bottom_bc;
+
+	root->number = blocknumber;
 		
 }
 
@@ -178,11 +180,6 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 	
 void OctreeGrid() {
 
-	//4 boxes
-	//create_node(0.0,1.0,0.0,1.0,0.0,0.1,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	//create_node(1.0,2.0,0.0,1.0,0.0,0.1,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-	//create_node(1.0,2.0,1.0,2.0,0.0,0.1,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-	//create_node(0.0,1.0,1.0,2.0,0.0,0.1,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
 
 
 	//pipe of 3*20 boxes
@@ -249,32 +246,6 @@ void OctreeGrid() {
 
 	set_root_neighbours();
 
-//	//refinement	
-//	for(int i=0;i<=max_level;i++) {
-//
-//		set_refinement_criteria();
-//		refine_nodes();
-//
-//		//reassigning neighbours after every level of refine call
-//		create_lists_of_level_nodes();
-//		reassign_neighbours();
-//	}
-//
-//	reset_refine_flags();
-//	
-//	//coarsening
-//	for(int i=0;i<=max_level;i++) {
-//
-//		//printf("coarsening\n");
-//		//set_coarse_criteria();
-//		//coarsen_nodes();
-//		
-//		//reassigning neighbours after every level of coarsen call
-//		//create_lists_of_level_nodes();
-//		//reassign_neighbours();
-//	}
-//
-//	//reset_coarsen_flags();
 
 	//prints neighbours information
 	//print_neighbour_information(nodes);

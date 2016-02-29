@@ -15,7 +15,7 @@ LIBPATH	= 	-L ~/
 LIBS	=	-lm  
 
 CXX	:=	mpic++
-CXXFLAGS:= 	-g  -std=c++11 -std=c++0x -Wall -O3
+CXXFLAGS:= 	-g  -Wall -O3
 #FLAGS	:=	-g -pg $(INCPATH) -Wall -fopenmp -O3
 #LFLAGS	:=	$(LIBPATH) $(LIBS) -lm -lgsl -lblas
 LFLAGS	:=	$(LIBPATH) $(LIBS) 
