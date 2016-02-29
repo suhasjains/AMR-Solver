@@ -92,12 +92,12 @@ class Octree {
 
 	//boundary conditions
 	/*same as above */
-	BC east_bc;
-	BC west_bc;
-	BC north_bc;
-	BC south_bc;
-	BC top_bc;
-	BC bottom_bc;
+	NodeBc east_bc;
+	NodeBc west_bc;
+	NodeBc north_bc;
+	NodeBc south_bc;
+	NodeBc top_bc;
+	NodeBc bottom_bc;
 	
 
 	//node's block dimensions

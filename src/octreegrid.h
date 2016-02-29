@@ -8,7 +8,7 @@ namespace myOctree {
 void create_list_of_leaf_nodes();
 void create_list_of_root_nodes();
 void create_lists_of_level_nodes();
-void create_node(double, double, double, double, double, double, int, BC, BC, BC, BC, BC, BC);
+void create_node(double, double, double, double, double, double, int, NodeBc, NodeBc, NodeBc, NodeBc, NodeBc, NodeBc);
 void OctreeGrid();
 void reassign_neighbours();
 

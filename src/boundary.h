@@ -1,15 +1,27 @@
 #ifndef AMRSOLVER_BOUNDARY_H
 #define AMRSOLVER_BOUNDARY_H
 
-enum boundary_flags {
+namespace myOctree {
+
+enum node_boundary_flags {
 
 	NONE,
-	DIRICHLET,
-	NEUMANN,
+	BOUNDARY,
 	MPI_BOUNDARY
 };
 
-typedef boundary_flags BC;
+typedef node_boundary_flags NodeBc;
 
+enum field_boundary_flags {
 
+	none,
+	dirichlet,
+	neumann,
+	mpi_boundary,
+
+};
+
+typedef field_boundary_flags FieldBc;
+
+}
 #endif

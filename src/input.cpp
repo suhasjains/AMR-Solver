@@ -8,21 +8,18 @@
 
 namespace std {
 
-BC string_to_BC(string bc) {
+myOctree::NodeBc string_to_NodeBc(string bc) {
 
-	BC bcc;
+	myOctree::NodeBc bcc;
 
-	if(bc=="NONE")
-		bcc = NONE;
+	if(bc=="N")
+		bcc = myOctree::NONE;
 
-	if(bc=="DIRICHLET")
-		bcc = DIRICHLET;
-
-	if(bc=="NEUMANN")
-		bcc = NEUMANN;
+	if(bc=="B")
+		bcc = myOctree::BOUNDARY;
 
 	if(bc=="MPI_BOUNDARY")
-		bcc = MPI_BOUNDARY;
+		bcc = myOctree::MPI_BOUNDARY;
 		
 	return bcc;
 }
@@ -35,7 +32,7 @@ void read_input_file() {
 	int blocknumber, level;
 	double xmin, xmax, ymin, ymax, zmin, zmax;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
-	BC east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
+	myOctree::NodeBc east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
 
 	ifstream file ("../input/input.pfs"); 
 	if(file.fail()) {
@@ -75,12 +72,12 @@ void read_input_file() {
 				file >> level;
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 							
-				east_bc = string_to_BC(eastbc);		
-				west_bc = string_to_BC(westbc);		
-				north_bc = string_to_BC(northbc);		
-				south_bc = string_to_BC(southbc);		
-				top_bc = string_to_BC(topbc);		
-				bottom_bc = string_to_BC(bottombc);		
+				east_bc = string_to_NodeBc(eastbc);		
+				west_bc = string_to_NodeBc(westbc);		
+				north_bc = string_to_NodeBc(northbc);		
+				south_bc = string_to_NodeBc(southbc);		
+				top_bc = string_to_NodeBc(topbc);		
+				bottom_bc = string_to_NodeBc(bottombc);		
 
 				//cerr << blocknumber << xmin << xmax << ymin << ymax << zmin << zmax << endl;
 

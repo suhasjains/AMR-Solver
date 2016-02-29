@@ -8,21 +8,18 @@ using myOctree::nodes;
 
 namespace std {
 
-string BC_to_string(BC bcc) {
+string NodeBc_to_string(myOctree::NodeBc bcc) {
 
 	string bc;
 
-	if(bcc==NONE) 
-		bc = "NONE";
+	if(bcc==myOctree::NONE) 
+		bc = "N";
 
-	if(bcc==DIRICHLET) 
-		bc = "DIRICHLET";
+	if(bcc==myOctree::BOUNDARY) 
+		bc = "B";
 
-	if(bcc==NEUMANN) 
-		bc = "NEUMANN";
-
-	if(bcc==MPI_BOUNDARY) 
-		bc = "MPI_BOUNDARY";
+	if(bcc==myOctree::MPI_BOUNDARY) 
+		bc = "MB";
 
 
 	return bc;
@@ -35,7 +32,7 @@ void write_output_file() {
 	double xmin, xmax, ymin, ymax, zmin, zmax;
 	int level;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
-        BC east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
+        myOctree::NodeBc east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
 
 
 
@@ -66,12 +63,12 @@ void write_output_file() {
 	
 
 
-	eastbc = BC_to_string(east_bc);
-	westbc = BC_to_string(west_bc);
-	northbc = BC_to_string(north_bc);
-	southbc = BC_to_string(south_bc);
-	topbc = BC_to_string(top_bc);
-	bottombc = BC_to_string(bottom_bc);
+	eastbc = NodeBc_to_string(east_bc);
+	westbc = NodeBc_to_string(west_bc);
+	northbc = NodeBc_to_string(north_bc);
+	southbc = NodeBc_to_string(south_bc);
+	topbc = NodeBc_to_string(top_bc);
+	bottombc = NodeBc_to_string(bottom_bc);
 
 	file << count << " " << xmin << " " << xmax << " " << ymin << " " << ymax << " " << zmin << " " << zmax << " " << level<< " " ;			 
 	file << eastbc << " " << westbc << " " << northbc << " " << southbc << " " << topbc << " " << bottombc << endl;
