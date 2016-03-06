@@ -6,6 +6,12 @@ blocks
 4 1.0 2.0 1.0 2.0 0.0 1.0 0 B N B N B B
 }
 
+boundary_conditions
+{ 1 }
+{ 2 }  
+{ 3 }
+{ 4 }
+
 scalar_fields
 { 
 alpha

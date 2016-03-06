@@ -1,163 +1,196 @@
-AMRSOLVER_BOUNDARY_H	boundary.h	2
-AMRSOLVER_INPUT_H	input.h	2
-BC	boundary.h	12
-Block	block.h	108
-Block::Block	block.cpp	/^Block::Block( double x1, double x2, double y1, dou/
-Block::Block	block.cpp	/^Block::Block() {$/
-Block::Block	block.cpp	/^Block::Block(const Block &obj) {$/
-Block::dx	block.h	128
-Block::dy	block.h	128
-Block::dz	block.h	128
-Block::field	block.h	113
-Block::iNx	block.h	125
-Block::iNy	block.h	126
-Block::iNz	block.h	127
-Block::max_gradient	block.h	120
-Block::mesh	block.h	112
-Block::scalarfields	block.h	116
-Block::vectorfields	block.h	117
-Block::x_centre	block.h	121
-Block::x_max	block.h	122
-Block::x_min	block.h	122
-Block::y_centre	block.h	121
-Block::y_max	block.h	123
-Block::y_min	block.h	123
-Block::z_centre	block.h	121
-Block::z_max	block.h	124
-Block::z_min	block.h	124
-Block::~Block	block.cpp	/^Block::~Block() {$/
-DIRICHLET	boundary.h	7
-Field	block.h	25
-Field::Field	block.cpp	/^Field::Field() {$/
-Field::Field	block.cpp	/^Field::Field(const Field &obj) {$/
-Field::N	block.h	30
-Field::Nx	block.h	29
-Field::Ny	block.h	29
-Field::Nz	block.h	29
-Field::name	block.h	32
-Field::set_field	block.cpp	/^void Field::set_field(double value) {$/
-Field::val	block.h	31
-Field::~Field	block.cpp	/^ Field::~Field() {$/
-MPI_BOUNDARY	boundary.h	9
-MYOCTREE_ADAPT_H	adapt.h	2
-MYOCTREE_MYOCTREE_H	octreegrid.h	2
-MYOCTREE_OCTREE_H_	octree.h	2
-MYOCTREE_OUTPUT_H	vtk.h	2
-Mamrsolver.cpp	amrsolver.cpp	/^int main(int argc, char **argv) {$/
-NEUMANN	boundary.h	8
-NONE	boundary.h	6
-Octree	octree.h	26
-Octree::Octree	octree.cpp	/^Octree::Octree(const Octree &obj) {$/
-Octree::Octree	octree.cpp	/^Octree::Octree( double x1, double x2, double y1, d/
-Octree::Octree	octree.cpp	/^Octree::Octree() {$/
-Octree::block_data	octree.h	115
-Octree::bottom	octree.h	91
-Octree::bottom_bc	octree.h	100
-Octree::children	octree.h	112
-Octree::coarsen	octree.cpp	/^void Octree::coarsen() {$/
-Octree::contains	octree.cpp	/^bool Octree::contains(double x, double y, double z/
-Octree::east	octree.h	86
-Octree::east_bc	octree.h	95
-Octree::get_block_data	octree.cpp	/^Block* Octree::get_block_data() {$/
-Octree::get_child_at	octree.cpp	/^Octree* Octree::get_child_at(int i, int j, int k) /
-Octree::get_level	octree.cpp	/^int Octree::get_level() {$/
-Octree::get_parent	octree.cpp	/^Octree* Octree::get_parent() {$/
-Octree::isRootNode	octree.cpp	/^bool Octree::isRootNode() {$/
-Octree::level	octree.h	124
-Octree::north	octree.h	88
-Octree::north_bc	octree.h	97
-Octree::parent	octree.h	118
-Octree::refine	octree.cpp	/^void Octree::refine() {$/
-Octree::setToCoarsen	octree.h	82
-Octree::setToRefine	octree.h	79
-Octree::set_child_null_at	octree.cpp	/^void Octree::set_child_null_at(int i, int j, int k/
-Octree::set_to_coarsen_with_nesting	octree.cpp	/^void Octree::set_to_coarsen_with_nesting() {$/
-Octree::set_to_refine_with_nesting	octree.cpp	/^void Octree::set_to_refine_with_nesting() {$/
-Octree::south	octree.h	89
-Octree::south_bc	octree.h	98
-Octree::top	octree.h	90
-Octree::top_bc	octree.h	99
-Octree::west	octree.h	87
-Octree::west_bc	octree.h	96
-Octree::x_centre	octree.h	104
-Octree::x_max	octree.h	105
-Octree::x_min	octree.h	105
-Octree::y_centre	octree.h	104
-Octree::y_max	octree.h	106
-Octree::y_min	octree.h	106
-Octree::z_centre	octree.h	104
-Octree::z_max	octree.h	107
-Octree::z_min	octree.h	107
-Octree::~Octree	octree.cpp	/^Octree::~Octree() {$/
-OctreeGrid	octreegrid.cpp	/^void OctreeGrid() {$/
-VecField	block.h	66
-VecField::N	block.h	71
-VecField::Nx	block.h	70
-VecField::Ny	block.h	70
-VecField::Nz	block.h	70
-VecField::VecField	block.cpp	/^VecField::VecField( int N_x, int N_y, int N_z, std/
-VecField::VecField	block.cpp	/^VecField::VecField() {$/
-VecField::VecField	block.cpp	/^VecField::VecField(const VecField &obj) {$/
-VecField::name	block.h	75
-VecField::protected	block.h	95
-VecField::set_field	block.cpp	/^void VecField::set_field(double value) {$/
-VecField::x	block.h	72
-VecField::y	block.h	73
-VecField::z	block.h	74
-VecField::~VecField	block.cpp	/^ VecField::~VecField() {$/
-adapt_gradient	amrsolver.cpp	/^void adapt_gradient() {$/
-amrsolver	amrsolver.cpp	12
-amrsolver::set_initial_field	amrsolver.cpp	/^void set_initial_field() {$/
-boundary_flags	boundary.h	4
-coarsen_nodes	adapt.cpp	/^void coarsen_nodes() {$/
-create_list_of_root_nodes	octreegrid.cpp	/^void create_list_of_root_nodes() {$/
-create_lists_of_level_nodes	octreegrid.cpp	/^void create_lists_of_level_nodes() {$/
-create_node	octreegrid.cpp	/^void create_node(double xmin, double xmax, double /
-myOctree	adapt.cpp	6
-myOctree	block.cpp	5
-myOctree	octree.cpp	4
-myOctree	octreegrid.cpp	5
-myOctree	vtk.cpp	5
-myOctree::Block::iNx	block.cpp	13
-myOctree::Block::iNy	block.cpp	14
-myOctree::Block::iNz	block.cpp	15
-myOctree::Field	amrsolver.cpp	9
-myOctree::Field::Field	block.cpp	/^Field::Field( int N_x, int N_y, int N_z, std::stri/
-myOctree::Octree	amrsolver.cpp	8
-myOctree::Octree	output.cpp	6
-myOctree::Octree::isLeafNode	octree.cpp	/^bool Octree::isLeafNode() {$/
-myOctree::VecField	amrsolver.cpp	10
-myOctree::create_list_of_leaf_nodes	octreegrid.cpp	/^void create_list_of_leaf_nodes() {$/
-myOctree::get_point	vtk.cpp	/^long int get_point(int i, int j, int k, int Npx, i/
-myOctree::leaf_nodes	octreegrid.cpp	10
-myOctree::level_nodes	octreegrid.cpp	12
-myOctree::max_level	adapt.cpp	8
-myOctree::max_level	octreegrid.cpp	7
-myOctree::nodes	octreegrid.cpp	9
-myOctree::nodes	output.cpp	7
-myOctree::nx_block	block.cpp	10
-myOctree::ny_block	block.cpp	11
-myOctree::nz_block	block.cpp	12
-myOctree::pad	block.cpp	7
-myOctree::root_nodes	octreegrid.cpp	11
-myOctree::scalar_fields	block.cpp	8
-myOctree::set_refinement_criteria	adapt.cpp	/^void set_refinement_criteria() {$/
-myOctree::vector_fields	block.cpp	9
-print_neighbour_information	octreegrid.cpp	/^void print_neighbour_information(std::list<Octree*/
-read_input_file	input.cpp	/^void read_input_file() {$/
-reassign_neighbours	octreegrid.cpp	/^void reassign_neighbours() {$/
-recheck_siblings_coarsen_flags	adapt.cpp	/^void recheck_siblings_coarsen_flags() {$/
-refine_nodes	adapt.cpp	/^void refine_nodes() {$/
-reset_coarsen_flags	adapt.cpp	/^void reset_coarsen_flags() {$/
-reset_refine_flags	adapt.cpp	/^void reset_refine_flags() {$/
-set_coarse_criteria	adapt.cpp	/^void set_coarse_criteria() {$/
-set_coarsen_flag_based_on_gradient	adapt.cpp	/^void set_coarsen_flag_based_on_gradient() {$/
-set_field	amrsolver.cpp	/^void set_field() {$/
-set_refine_flag_based_on_gradient	adapt.cpp	/^void set_refine_flag_based_on_gradient() {$/
-set_root_neighbours	octreegrid.cpp	/^void set_root_neighbours() {$/
-std	input.cpp	9
-std	output.cpp	9
-std::BC_to_string	output.cpp	/^string BC_to_string(BC bcc) {$/
-std::string_to_BC	input.cpp	/^BC string_to_BC(string bc) {$/
-write_output_file	output.cpp	/^void write_output_file() {$/
-write_vtk	vtk.cpp	/^void write_vtk(std::list<Octree*>& nodes) {$/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AMRSOLVER_BOUNDARY_H	boundary.h	/^#define AMRSOLVER_BOUNDARY_H$/;"	d
+AMRSOLVER_INPUT_H	input.h	/^#define AMRSOLVER_INPUT_H$/;"	d
+BC	boundary.h	/^typedef boundary_flags BC;$/;"	t
+BC_to_string	output.cpp	/^string BC_to_string(BC bcc) {$/;"	f	namespace:std
+Block	block.cpp	/^Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2) {$/;"	f	class:myOctree::Block
+Block	block.cpp	/^Block::Block() {$/;"	f	class:myOctree::Block
+Block	block.cpp	/^Block::Block(const Block &obj) {$/;"	f	class:myOctree::Block
+Block	block.h	/^class Block {$/;"	c	namespace:myOctree
+BoundVal	boundary.h	/^class BoundVal {$/;"	c
+CXX	Makefile	/^CXX	:=	mpic++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS:= 	-g  -std=c++11 -std=c++0x -Wall -O3$/;"	m
+DIRICHLET	boundary.h	/^	DIRICHLET,$/;"	e	enum:boundary_flags
+Field	block.cpp	/^Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info)  {$/;"	f	class:myOctree::Field
+Field	block.cpp	/^Field::Field() {$/;"	f	class:myOctree::Field
+Field	block.cpp	/^Field::Field(const Field &obj) {$/;"	f	class:myOctree::Field
+Field	block.h	/^class Field {$/;"	c	namespace:myOctree
+HEADER	Makefile	/^HEADER 	:= octreegrid.h adapt.h octree.h block.h vtk.h output.h boundary.h $/;"	m
+INCPATH	Makefile	/^INCPATH	=	-I ~\/ $/;"	m
+LFLAGS	Makefile	/^LFLAGS	:=	$(LIBPATH) $(LIBS) $/;"	m
+LIBPATH	Makefile	/^LIBPATH	= 	-L ~\/$/;"	m
+LIBS	Makefile	/^LIBS	=	-lm  $/;"	m
+MPI_BOUNDARY	boundary.h	/^	MPI_BOUNDARY$/;"	e	enum:boundary_flags
+MYOCTREE_ADAPT_H	adapt.h	/^#define MYOCTREE_ADAPT_H$/;"	d
+MYOCTREE_MYOCTREE_H	octreegrid.h	/^#define MYOCTREE_MYOCTREE_H$/;"	d
+MYOCTREE_OCTREE_H_	octree.h	/^#define MYOCTREE_OCTREE_H_$/;"	d
+MYOCTREE_OUTPUT_H	vtk.h	/^#define MYOCTREE_OUTPUT_H$/;"	d
+N	block.h	/^        int N;                  \/\/size$/;"	m	class:myOctree::Field
+N	block.h	/^        int N;                  \/\/size$/;"	m	class:myOctree::VecField
+NAME	Makefile	/^NAME 	:= amrsolver$/;"	m
+NEUMANN	boundary.h	/^	NEUMANN,$/;"	e	enum:boundary_flags
+NONE	boundary.h	/^	NONE,$/;"	e	enum:boundary_flags
+Nx	block.h	/^        int Nx,Ny,Nz;              \/\/size$/;"	m	class:myOctree::Field
+Nx	block.h	/^        int Nx,Ny,Nz;              \/\/size$/;"	m	class:myOctree::VecField
+Ny	block.h	/^        int Nx,Ny,Nz;              \/\/size$/;"	m	class:myOctree::Field
+Ny	block.h	/^        int Nx,Ny,Nz;              \/\/size$/;"	m	class:myOctree::VecField
+Nz	block.h	/^        int Nx,Ny,Nz;              \/\/size$/;"	m	class:myOctree::Field
+Nz	block.h	/^        int Nx,Ny,Nz;              \/\/size$/;"	m	class:myOctree::VecField
+OBDIR	Makefile	/^OBDIR	:= ..\/obj\/$/;"	m
+OBJECTS	Makefile	/^OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)boundary.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o $/;"	m
+Octree	octree.cpp	/^Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2, int l ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2), level(l)   {$/;"	f	class:myOctree::Octree
+Octree	octree.cpp	/^Octree::Octree() {$/;"	f	class:myOctree::Octree
+Octree	octree.cpp	/^Octree::Octree(const Octree &obj) {$/;"	f	class:myOctree::Octree
+Octree	octree.h	/^class Octree {$/;"	c	namespace:myOctree
+OctreeGrid	octreegrid.cpp	/^void OctreeGrid() {$/;"	f	namespace:myOctree
+RUNDIR	Makefile	/^RUNDIR	:= ..\/output\/$/;"	m
+VecField	block.cpp	/^VecField::VecField( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info) {$/;"	f	class:myOctree::VecField
+VecField	block.cpp	/^VecField::VecField() {$/;"	f	class:myOctree::VecField
+VecField	block.cpp	/^VecField::VecField(const VecField &obj) {$/;"	f	class:myOctree::VecField
+VecField	block.h	/^class VecField {$/;"	c	namespace:myOctree
+adapt_gradient	amrsolver.cpp	/^void adapt_gradient() {$/;"	f	namespace:amrsolver
+amrsolver	amrsolver.cpp	/^namespace amrsolver {$/;"	n	file:
+block_data	octree.h	/^	Block *block_data;$/;"	m	class:myOctree::Octree
+bottom	octree.h	/^	Octree *bottom;$/;"	m	class:myOctree::Octree
+bottom_bc	octree.h	/^	BC bottom_bc;$/;"	m	class:myOctree::Octree
+bottom_bc_val	octree.h	/^	double bottom_bc_val;$/;"	m	class:myOctree::Octree
+bottom_bc_value	boundary.h	/^	double bottom_bc_value;$/;"	m	class:BoundVal
+boundary_flags	boundary.h	/^enum boundary_flags {$/;"	g
+boundary_values	boundary.cpp	/^std::list<BoundVal> boundary_values; $/;"	m	namespace:std	file:
+children	octree.h	/^	Octree *children[2][2][2];$/;"	m	class:myOctree::Octree
+coarsen	octree.cpp	/^void Octree::coarsen() {$/;"	f	class:myOctree::Octree
+coarsen_nodes	adapt.cpp	/^void coarsen_nodes() {$/;"	f	namespace:myOctree
+contains	octree.cpp	/^bool Octree::contains(double x, double y, double z) {$/;"	f	class:myOctree::Octree
+create_list_of_leaf_nodes	octreegrid.cpp	/^void create_list_of_leaf_nodes() {$/;"	f	namespace:myOctree
+create_list_of_root_nodes	octreegrid.cpp	/^void create_list_of_root_nodes() {$/;"	f	namespace:myOctree
+create_lists_of_level_nodes	octreegrid.cpp	/^void create_lists_of_level_nodes() {$/;"	f	namespace:myOctree
+create_node	octreegrid.cpp	/^void create_node(double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level,\\$/;"	f	namespace:myOctree
+dx	block.h	/^	double dx, dy, dz;$/;"	m	class:myOctree::Block
+dy	block.h	/^	double dx, dy, dz;$/;"	m	class:myOctree::Block
+dz	block.h	/^	double dx, dy, dz;$/;"	m	class:myOctree::Block
+east	octree.h	/^	Octree *east;$/;"	m	class:myOctree::Octree
+east_bc	octree.h	/^	BC east_bc;$/;"	m	class:myOctree::Octree
+east_bc_val	octree.h	/^	double east_bc_val;$/;"	m	class:myOctree::Octree
+east_bc_value	boundary.h	/^	double east_bc_value;$/;"	m	class:BoundVal
+field	block.h	/^	Field *field;$/;"	m	class:myOctree::Block
+get_block_data	octree.cpp	/^Block* Octree::get_block_data() {$/;"	f	class:myOctree::Octree
+get_child_at	octree.cpp	/^Octree* Octree::get_child_at(int i, int j, int k) {$/;"	f	class:myOctree::Octree
+get_level	octree.cpp	/^int Octree::get_level() {$/;"	f	class:myOctree::Octree
+get_parent	octree.cpp	/^Octree* Octree::get_parent() {$/;"	f	class:myOctree::Octree
+get_point	vtk.cpp	/^long int get_point(int i, int j, int k, int Npx, int Npy) {$/;"	f	namespace:myOctree
+iNx	block.cpp	/^int Block::iNx = nx_block;$/;"	m	class:myOctree::Block	file:
+iNx	block.h	/^	static int iNx;$/;"	m	class:myOctree::Block
+iNy	block.cpp	/^int Block::iNy = ny_block;$/;"	m	class:myOctree::Block	file:
+iNy	block.h	/^	static int iNy;$/;"	m	class:myOctree::Block
+iNz	block.cpp	/^int Block::iNz = nz_block;$/;"	m	class:myOctree::Block	file:
+iNz	block.h	/^	static int iNz;$/;"	m	class:myOctree::Block
+isLeafNode	octree.cpp	/^bool Octree::isLeafNode() {$/;"	f	class:myOctree::Octree
+isRootNode	octree.cpp	/^bool Octree::isRootNode() {$/;"	f	class:myOctree::Octree
+leaf_nodes	octreegrid.cpp	/^std::list<Octree*> leaf_nodes;$/;"	m	namespace:myOctree	file:
+level	octree.h	/^	int level;$/;"	m	class:myOctree::Octree
+level_nodes	octreegrid.cpp	/^std::list<Octree*> level_nodes[20];$/;"	m	namespace:myOctree	file:
+main	amrsolver.cpp	/^int main(int argc, char **argv) {$/;"	f
+max_gradient	block.h	/^	double max_gradient;$/;"	m	class:myOctree::Block
+max_level	adapt.cpp	/^int  max_level;$/;"	m	namespace:myOctree	file:
+mesh	block.h	/^	VecField *mesh;$/;"	m	class:myOctree::Block
+myOctree	adapt.cpp	/^namespace myOctree {$/;"	n	file:
+myOctree	adapt.h	/^namespace myOctree {$/;"	n
+myOctree	block.cpp	/^namespace myOctree {$/;"	n	file:
+myOctree	block.h	/^namespace myOctree {$/;"	n
+myOctree	octree.cpp	/^namespace myOctree {$/;"	n	file:
+myOctree	octree.h	/^namespace myOctree {$/;"	n
+myOctree	octreegrid.cpp	/^namespace myOctree {$/;"	n	file:
+myOctree	octreegrid.h	/^namespace myOctree {$/;"	n
+myOctree	vtk.cpp	/^namespace myOctree {$/;"	n	file:
+myOctree	vtk.h	/^namespace myOctree {$/;"	n
+name	block.h	/^	std::string name;$/;"	m	class:myOctree::Field
+name	block.h	/^	std::string name;$/;"	m	class:myOctree::VecField
+nodes	octreegrid.cpp	/^std::list<Octree*> nodes;$/;"	m	namespace:myOctree	file:
+north	octree.h	/^	Octree *north;$/;"	m	class:myOctree::Octree
+north_bc	octree.h	/^	BC north_bc;$/;"	m	class:myOctree::Octree
+north_bc_val	octree.h	/^	double north_bc_val;$/;"	m	class:myOctree::Octree
+north_bc_value	boundary.h	/^	double north_bc_value; $/;"	m	class:BoundVal
+nx_block	block.cpp	/^int nx_block = 10;$/;"	m	namespace:myOctree	file:
+ny_block	block.cpp	/^int ny_block = 10;$/;"	m	namespace:myOctree	file:
+nz_block	block.cpp	/^int nz_block = 10;$/;"	m	namespace:myOctree	file:
+pad	block.cpp	/^int pad = 2;$/;"	m	namespace:myOctree	file:
+parent	octree.h	/^	Octree *parent;$/;"	m	class:myOctree::Octree
+print_neighbour_information	octreegrid.cpp	/^void print_neighbour_information(std::list<Octree*>& nodes) {$/;"	f	namespace:myOctree
+read_input_file	input.cpp	/^void read_input_file() {$/;"	f	namespace:std
+reassign_neighbours	octreegrid.cpp	/^void reassign_neighbours() {$/;"	f	namespace:myOctree
+recheck_siblings_coarsen_flags	adapt.cpp	/^void recheck_siblings_coarsen_flags() {$/;"	f	namespace:myOctree
+refine	octree.cpp	/^void Octree::refine() {$/;"	f	class:myOctree::Octree
+refine_nodes	adapt.cpp	/^void refine_nodes() {$/;"	f	namespace:myOctree
+reset_coarsen_flags	adapt.cpp	/^void reset_coarsen_flags() {$/;"	f	namespace:myOctree
+reset_refine_flags	adapt.cpp	/^void reset_refine_flags() {$/;"	f	namespace:myOctree
+root_nodes	octreegrid.cpp	/^std::list<Octree*> root_nodes;$/;"	m	namespace:myOctree	file:
+scalar_fields	block.cpp	/^std::vector<std::string> scalar_fields;$/;"	m	namespace:myOctree	file:
+scalarfields	block.h	/^	Field **scalarfields;$/;"	m	class:myOctree::Block
+setToCoarsen	octree.h	/^	bool setToCoarsen;$/;"	m	class:myOctree::Octree
+setToRefine	octree.h	/^	bool setToRefine;$/;"	m	class:myOctree::Octree
+set_child_null_at	octree.cpp	/^void Octree::set_child_null_at(int i, int j, int k) {$/;"	f	class:myOctree::Octree
+set_coarse_criteria	adapt.cpp	/^void set_coarse_criteria() {$/;"	f	namespace:myOctree
+set_coarsen_flag_based_on_gradient	adapt.cpp	/^void set_coarsen_flag_based_on_gradient() {$/;"	f	namespace:myOctree
+set_field	amrsolver.cpp	/^void set_field() {$/;"	f	namespace:amrsolver
+set_field	block.cpp	/^void Field::set_field(double value) {$/;"	f	class:myOctree::Field
+set_field	block.cpp	/^void VecField::set_field(double value) {$/;"	f	class:myOctree::VecField
+set_initial_field	amrsolver.cpp	/^void set_initial_field() {$/;"	f	namespace:amrsolver
+set_refine_flag_based_on_gradient	adapt.cpp	/^void set_refine_flag_based_on_gradient() {$/;"	f	namespace:myOctree
+set_refinement_criteria	adapt.cpp	/^void set_refinement_criteria() {$/;"	f	namespace:myOctree
+set_root_boundary_values	boundary.cpp	/^void set_root_boundary_values() {$/;"	f	namespace:std
+set_root_neighbours	octreegrid.cpp	/^void set_root_neighbours() {$/;"	f	namespace:myOctree
+set_to_coarsen_with_nesting	octree.cpp	/^void Octree::set_to_coarsen_with_nesting() {$/;"	f	class:myOctree::Octree
+set_to_refine_with_nesting	octree.cpp	/^void Octree::set_to_refine_with_nesting() {$/;"	f	class:myOctree::Octree
+south	octree.h	/^	Octree *south;$/;"	m	class:myOctree::Octree
+south_bc	octree.h	/^	BC south_bc;$/;"	m	class:myOctree::Octree
+south_bc_val	octree.h	/^	double south_bc_val;$/;"	m	class:myOctree::Octree
+south_bc_value	boundary.h	/^	double south_bc_value; $/;"	m	class:BoundVal
+std	boundary.cpp	/^namespace std {$/;"	n	file:
+std	input.cpp	/^namespace std {$/;"	n	file:
+std	input.h	/^namespace std {$/;"	n
+std	output.cpp	/^namespace std {$/;"	n	file:
+std	output.h	/^namespace std {$/;"	n
+string_to_BC	input.cpp	/^BC string_to_BC(string bc) {$/;"	f	namespace:std
+top	octree.h	/^	Octree *top;$/;"	m	class:myOctree::Octree
+top_bc	octree.h	/^	BC top_bc;$/;"	m	class:myOctree::Octree
+top_bc_val	octree.h	/^	double top_bc_val;$/;"	m	class:myOctree::Octree
+top_bc_value	boundary.h	/^	double top_bc_value; $/;"	m	class:BoundVal
+val	block.h	/^        double*** val;            \/\/values$/;"	m	class:myOctree::Field
+vector_fields	block.cpp	/^std::vector<std::string> vector_fields;	$/;"	m	namespace:myOctree	file:
+vectorfields	block.h	/^	VecField **vectorfields;$/;"	m	class:myOctree::Block
+west	octree.h	/^	Octree *west;$/;"	m	class:myOctree::Octree
+west_bc	octree.h	/^	BC west_bc;$/;"	m	class:myOctree::Octree
+west_bc_val	octree.h	/^	double west_bc_val;$/;"	m	class:myOctree::Octree
+west_bc_value	boundary.h	/^	double west_bc_value; $/;"	m	class:BoundVal
+write_output_file	output.cpp	/^void write_output_file() {$/;"	f	namespace:std
+write_vtk	vtk.cpp	/^void write_vtk(std::list<Octree*>& nodes) {$/;"	f	namespace:myOctree
+x	block.h	/^        double*** x;            \/\/values$/;"	m	class:myOctree::VecField
+x_centre	block.h	/^	double x_centre, y_centre, z_centre;	$/;"	m	class:myOctree::Block
+x_centre	octree.h	/^	double x_centre, y_centre, z_centre;$/;"	m	class:myOctree::Octree
+x_max	block.h	/^	double x_min, x_max;$/;"	m	class:myOctree::Block
+x_max	octree.h	/^	double x_min, x_max;$/;"	m	class:myOctree::Octree
+x_min	block.h	/^	double x_min, x_max;$/;"	m	class:myOctree::Block
+x_min	octree.h	/^	double x_min, x_max;$/;"	m	class:myOctree::Octree
+y	block.h	/^        double*** y;            \/\/values$/;"	m	class:myOctree::VecField
+y_centre	block.h	/^	double x_centre, y_centre, z_centre;	$/;"	m	class:myOctree::Block
+y_centre	octree.h	/^	double x_centre, y_centre, z_centre;$/;"	m	class:myOctree::Octree
+y_max	block.h	/^	double y_min, y_max;$/;"	m	class:myOctree::Block
+y_max	octree.h	/^	double y_min, y_max;$/;"	m	class:myOctree::Octree
+y_min	block.h	/^	double y_min, y_max;$/;"	m	class:myOctree::Block
+y_min	octree.h	/^	double y_min, y_max;$/;"	m	class:myOctree::Octree
+z	block.h	/^        double*** z;            \/\/values$/;"	m	class:myOctree::VecField
+z_centre	block.h	/^	double x_centre, y_centre, z_centre;	$/;"	m	class:myOctree::Block
+z_centre	octree.h	/^	double x_centre, y_centre, z_centre;$/;"	m	class:myOctree::Octree
+z_max	block.h	/^	double z_min, z_max;$/;"	m	class:myOctree::Block
+z_max	octree.h	/^	double z_min, z_max;$/;"	m	class:myOctree::Octree
+z_min	block.h	/^	double z_min, z_max;$/;"	m	class:myOctree::Block
+z_min	octree.h	/^	double z_min, z_max;$/;"	m	class:myOctree::Octree
+~Block	block.cpp	/^Block::~Block() {$/;"	f	class:myOctree::Block
+~Field	block.cpp	/^ Field::~Field() {$/;"	f	class:myOctree::Field
+~Octree	octree.cpp	/^Octree::~Octree() {$/;"	f	class:myOctree::Octree
+~VecField	block.cpp	/^ VecField::~VecField() {$/;"	f	class:myOctree::VecField

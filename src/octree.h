@@ -99,6 +99,14 @@ class Octree {
 	NodeBc top_bc;
 	NodeBc bottom_bc;
 	
+	//boundary values
+	/*same as above */
+	double east_bc_val;
+	double west_bc_val;
+	double north_bc_val;
+	double south_bc_val;
+	double top_bc_val;
+	double bottom_bc_val;
 
 	//node's block dimensions
 	double x_centre, y_centre, z_centre;

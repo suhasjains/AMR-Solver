@@ -245,19 +245,6 @@ void Octree::refine() {
         }
     }
     
-    //	//assigning each child its siblings
-    //	int local_sibling_count;
-    //	for(i=0; i<8; i++) {
-    //		local_sibling_count = 0;
-    //		for(j=0; j<8; j++) {
-    //			if(i==j) continue;
-    //			node[i].siblings[local_sibling_count] = &node[j];
-    //			local_sibling_count++;
-    //		}
-    //	}
-    //
-    //
-
 	//setting neighbours to children
     	for(k=0; k<2; k++) {
         	for(j=0; j<2; j++) {
@@ -385,6 +372,14 @@ Octree::Octree(const Octree &obj) {
 	south_bc = obj.south_bc;	   
 	top_bc = obj.top_bc;	   
 	bottom_bc = obj.bottom_bc;	   
+	
+	//boundary values
+	east_bc_val = obj.east_bc_val;	   
+	west_bc_val = obj.west_bc_val;	   
+	north_bc_val = obj.north_bc_val;	   
+	south_bc_val = obj.south_bc_val;	   
+	top_bc_val = obj.top_bc_val;	   
+	bottom_bc_val = obj.bottom_bc_val;	   
  
     memcpy(children,obj.children,sizeof(Octree***)*2);
     for(int i=0;i<2;i++) {
@@ -466,6 +461,15 @@ Octree::Octree() {
 	top = NULL;
 	bottom = NULL; 
 	
+	//boundary conditions
+	east_bc_val = 1.0;
+	west_bc_val = 1.0;
+	north_bc_val = 1.0;
+	south_bc_val = 1.0;
+	top_bc_val = 1.0;
+	bottom_bc_val = 1.0; 
+
+
 	//boundary conditions
 	east_bc = NONE;
 	west_bc = NONE;
