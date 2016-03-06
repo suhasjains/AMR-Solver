@@ -5,6 +5,7 @@
 #include "boundary.h"
 #include "octreegrid.h"
 #include "adapt.h"
+#include "direction.h"
 
 namespace std {
 
@@ -41,6 +42,69 @@ myOctree::FieldBc string_to_FieldBc(string bc) {
 		bcc = myOctree::mpi_boundary;
 		
 	return bcc;
+}
+
+void read_scalar_fields(ifstream& file) {
+
+	string line, str;
+
+	//Skips if a line is empty		
+	getline(file, line);
+	while(line.empty()) {
+		getline(file, line);
+	}
+
+	if(line=="scalar_fields") {
+
+		file >> str;
+                if(str != "{") {
+                        cerr << "Expected an opening bracket" <<endl;
+                        exit(1);
+                }
+		
+		cerr << "\nUser defined scalar fields" << endl;
+
+		while(file) { 
+	
+		
+			if(file >> str && str == "}") break;
+                        else    myOctree::scalar_fields.push_back(str);
+			cerr << str << endl;
+
+		}	
+	}
+}
+
+
+void read_vector_fields(ifstream& file) {
+
+	string line, str;
+	
+	//Skips if a line is empty		
+	getline(file, line);
+	while(line.empty()) {
+		getline(file, line);
+	}
+
+	if(line=="vector_fields") {
+
+		file >> str;
+	        if(str != "{") {
+	                cerr << "Expected an opening bracket" <<endl;
+	                exit(1);
+	        }
+		
+		cerr << "\nUser defined vector Fields" << endl;
+
+		while(file) { 
+	
+		
+			if(file >> str && str == "}") break;
+	                else    myOctree::vector_fields.push_back(str);
+			cerr << str << endl;	
+		}	
+	}
+
 }
 
 int read_blocks(ifstream& file) {
@@ -86,7 +150,8 @@ int read_blocks(ifstream& file) {
 
 			//cerr << blocknumber << xmin << xmax << ymin << ymax << zmin << zmax << endl;
 
-			myOctree::create_node(blocknumber, xmin, xmax, ymin, ymax, zmin, zmax, level, east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc);
+			myOctree::create_node(blocknumber, xmin, xmax, ymin, ymax, zmin, zmax, level,\
+				       	east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc);
 
 		}
 
@@ -95,12 +160,18 @@ int read_blocks(ifstream& file) {
 	return blocknumber;
 }
 
-void read_scalar_fields(ifstream& file, int number) {
+void read_scalar_field_Bc(ifstream& file, int number) {
 
 
 	int blocknumber;	
 	string line, str;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
+	
+	myOctree::FieldBc **bc;
+	bc = new myOctree::FieldBc* [3];
+	for(int i = 0; i < 3; i++)
+     		bc[i] = new myOctree::FieldBc [2];	
+	
 	myOctree::FieldBc east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
 	double eastbcval, westbcval, northbcval, southbcval, topbcval, bottombcval;
 
@@ -110,7 +181,7 @@ void read_scalar_fields(ifstream& file, int number) {
 		getline(file, line);
 	}
 
-	if(line=="scalar_fields") {
+	if(line=="scalar_field_boundary_conditions") {
 
 		file >> str;
                 if(str != "{") {
@@ -118,13 +189,13 @@ void read_scalar_fields(ifstream& file, int number) {
                         exit(1);
                 }
 		
-		cerr << "\nUser defined scalar fields" << endl;
+		cerr << "\nSetting scalar field boundary conditions" << endl;
 
 		while(file) { 
 	
 		
 			if(file >> str && str == "}") break;
-                        else    myOctree::scalar_fields.push_back(str);
+                        //else    myOctree::scalar_fields.push_back(str);
 			cerr << str << endl;
 
 			for(int i = 0; i < number ; ++i) {
@@ -133,23 +204,24 @@ void read_scalar_fields(ifstream& file, int number) {
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
 				
-				east_bc = string_to_FieldBc(eastbc);		
-				west_bc = string_to_FieldBc(westbc);		
-				north_bc = string_to_FieldBc(northbc);		
-				south_bc = string_to_FieldBc(southbc);		
-				top_bc = string_to_FieldBc(topbc);		
-				bottom_bc = string_to_FieldBc(bottombc);		
+				bc[myOctree::X_DIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
+				bc[myOctree::X_DIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
+				bc[myOctree::Y_DIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
+				bc[myOctree::Y_DIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
+				bc[myOctree::Z_DIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
+				bc[myOctree::Z_DIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
 
 				cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 
 				/*add a function here which sets boundary condition and boundary values*/
+				myOctree::set_FieldBc_FieldBcVal(blocknumber, str, bc);
 			}
 		}	
 	}
 }
 
 
-void read_vector_fields(ifstream& file) {
+void read_vector_field_Bc(ifstream& file) {
 
 	string line, str;
 	
@@ -159,7 +231,7 @@ void read_vector_fields(ifstream& file) {
 		getline(file, line);
 	}
 
-	if(line=="vector_fields") {
+	if(line=="vector_field_boundary_conditions") {
 
 		file >> str;
 	        if(str != "{") {
@@ -167,13 +239,13 @@ void read_vector_fields(ifstream& file) {
 	                exit(1);
 	        }
 		
-		cerr << "\nUser defined vector Fields" << endl;
+		cerr << "\nSetting vector field boundary conditions " << endl;
 
 		while(file) { 
 	
 		
 			if(file >> str && str == "}") break;
-	                else    myOctree::vector_fields.push_back(str);
+	                //else    myOctree::vector_fields.push_back(str);
 			cerr << str << endl;	
 		}	
 	}
@@ -217,12 +289,17 @@ void read_input_file() {
 
 	else {
 
+		cerr << "\nReading input files" << endl;
+
+		read_scalar_fields(file);
+
+		read_vector_fields(file);
 	
 		blocknumber = read_blocks(file);
 
-		read_scalar_fields(file, blocknumber);
+		read_scalar_field_Bc(file, blocknumber);
 
-		read_vector_fields(file);
+		read_vector_field_Bc(file);
 
 		read_max_level(file);
 

@@ -4,7 +4,7 @@ RUNDIR	:= ../output/
 
 OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)boundary.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o 
 
-HEADER 	:= octreegrid.h adapt.h octree.h block.h vtk.h output.h boundary.h 
+HEADER 	:= octreegrid.h adapt.h octree.h block.h vtk.h output.h boundary.h direction.h 
 
 .DEFAULT:
 
@@ -15,7 +15,7 @@ LIBPATH	= 	-L ~/
 LIBS	=	-lm  
 
 CXX	:=	mpic++
-CXXFLAGS:= 	-g  -Wall -O3
+CXXFLAGS:= 	-g  -Wall -O3 -fno-elide-constructors
 #FLAGS	:=	-g -pg $(INCPATH) -Wall -fopenmp -O3
 #LFLAGS	:=	$(LIBPATH) $(LIBS) -lm -lgsl -lblas
 LFLAGS	:=	$(LIBPATH) $(LIBS) 

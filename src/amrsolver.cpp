@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
 
 	amrsolver::adapt_gradient();
 	
-//	amrsolver::set_field();
+	amrsolver::set_field();
 	
 	myOctree::create_list_of_leaf_nodes();
 

@@ -16,6 +16,7 @@ int Block::iNz = nz_block;
 
 //parametrized constructor with initialization fields
 Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info)  {
+  		//std::cerr << "working" << std::endl;
 
         N = Nx*Ny*Nz;
         val = new double** [Nx];
@@ -30,6 +31,7 @@ Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), 
 //default constructor
 Field::Field() {
 
+  		//std::cerr << "working" << std::endl;
         Nx = 0;
         Ny = 0;
         Nz = 0;
@@ -46,6 +48,7 @@ Field::Field() {
 //Copy constructor
 Field::Field(const Field &obj) {
 
+  		std::cerr << "working" << std::endl;
 
         Nx = obj.Nx;
         Ny = obj.Ny;
@@ -60,7 +63,8 @@ Field::Field(const Field &obj) {
                 }
         }
 	for(int i = 0; i < 3; ++ i) {
-  		memcpy(&(bc[i][0]), &(obj.bc[i][0]), 2 * sizeof(FieldBc));
+  		std::cerr << "working" << std::endl;
+		memcpy(&(bc[i][0]), &(obj.bc[i][0]), 2 * sizeof(FieldBc));
 	}
 
 }
@@ -249,7 +253,9 @@ Block::Block() {
 	for(int i = 0; i<scalar_fields.size() ; i++) {
 	       	scalarfields[i] = new Field;	
         	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
-		*scalarfields[i] = field_field;		
+  		std::cerr << "hi" << std::endl;
+		*(scalarfields[i]) = field_field;		
+  		std::cerr << "bye" << std::endl;
 	}       
 	
 	vectorfields = new VecField* [vector_fields.size()];
@@ -263,6 +269,7 @@ Block::Block() {
 
 //Copy constructor
 Block::Block(const Block &obj) {
+  		//std::cerr << "working" << std::endl;
 
         x_centre = obj.x_centre;
         y_centre = obj.y_centre;

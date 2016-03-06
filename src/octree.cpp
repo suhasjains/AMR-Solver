@@ -1,5 +1,5 @@
 #include "octree.h"
-
+#include <iostream>
 
 namespace myOctree {
 
@@ -337,9 +337,11 @@ Octree::~Octree() {
     //        delete [] siblings;
 }
 
+/*copy constructor not working*/
 Octree::Octree(const Octree &obj) {
     
-    
+	std::cerr << " copy constructor not working " << std::endl;
+
     x_min = obj.x_min;
     y_min = obj.y_min;
     z_min = obj.z_min;

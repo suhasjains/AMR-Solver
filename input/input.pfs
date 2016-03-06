@@ -1,3 +1,13 @@
+scalar_fields
+{
+alpha beta
+}
+
+vector_fields
+{
+psi
+}
+
 blocks
 {
 1 0.0 1.0 0.0 1.0 0.0 1.0 0 N B N B B B
@@ -6,24 +16,26 @@ blocks
 4 1.0 2.0 1.0 2.0 0.0 1.0 0 B N B N B B
 }
 
-boundary_conditions
-{ 1 }
-{ 2 }  
-{ 3 }
-{ 4 }
-
-scalar_fields
+scalar_field_boundary_conditions
 { 
+
 alpha
 1 N D N D D D 0.0 1.0 0.0 1.0 1.0 1.0 
 2 D N N D D D 1.0 0.0 0.0 1.0 1.0 1.0
 3 N D D N D D 0.0 1.0 1.0 0.0 1.0 1.0
 4 D N D N D D 1.0 0.0 1.0 0.0 1.0 1.0
+
+beta
+1 N D N D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+2 D N N D D D 1.0 0.0 0.0 1.0 1.0 1.0
+3 N D D N D D 0.0 1.0 1.0 0.0 1.0 1.0
+4 D N D N D D 1.0 0.0 1.0 0.0 1.0 1.0
+
 }
 
-vector_fields
+vector_field_boundary_conditions
 { psi }
 
 max_level
-2
+0
 
