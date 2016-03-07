@@ -16,7 +16,6 @@ int Block::iNz = nz_block;
 
 //parametrized constructor with initialization fields
 Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info)  {
-  		//std::cerr << "working" << std::endl;
 
         N = Nx*Ny*Nz;
         val = new double** [Nx];
@@ -31,7 +30,6 @@ Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), 
 //default constructor
 Field::Field() {
 
-  		//std::cerr << "working" << std::endl;
         Nx = 0;
         Ny = 0;
         Nz = 0;
@@ -48,22 +46,32 @@ Field::Field() {
 //Copy constructor
 Field::Field(const Field &obj) {
 
-  		std::cerr << "working" << std::endl;
+  		std::cerr << "copy constructor of field is working" << std::endl;
 
         Nx = obj.Nx;
         Ny = obj.Ny;
         Nz = obj.Nz;
         N = obj.N;
 	name = obj.name;
-        memcpy(val,obj.val,sizeof(double**)*Nx);
+  	//	std::cerr << "field is" << name <<  std::endl;
+//        memcpy(val,obj.val,Nx*sizeof(double**));
+//        for(int i=0;i<Nx;i++) {
+//                memcpy(val[i],obj.val[i],sizeof(double*)*Ny);
+//                for(int j=0;j<Ny;j++) {
+//                        memcpy(val[i][j],obj.val[i][j],sizeof(double)*Nz);
+//                }
+//        }
+
+        val = new double** [Nx];
         for(int i=0;i<Nx;i++) {
-                memcpy(val[i],obj.val[i],sizeof(double*)*Ny);
+                val[i] = new double* [Ny];
                 for(int j=0;j<Ny;j++) {
+                        val[i][j] = new double [Nz];
                         memcpy(val[i][j],obj.val[i][j],sizeof(double)*Nz);
                 }
         }
+
 	for(int i = 0; i < 3; ++ i) {
-  		std::cerr << "working" << std::endl;
 		memcpy(&(bc[i][0]), &(obj.bc[i][0]), 2 * sizeof(FieldBc));
 	}
 
@@ -138,20 +146,38 @@ VecField::VecField() {
 //Copy constructor
 VecField::VecField(const VecField &obj) {
 
+  		std::cerr << "copy constructor of vecfield is working" << std::endl;
 
         Nx = obj.Nx;
         Ny = obj.Ny;
         Nz = obj.Nz;
         N = obj.N;
 	name = obj.name;
-        memcpy(x,obj.x,sizeof(double**)*Nx);
-        memcpy(y,obj.y,sizeof(double**)*Nx);
-        memcpy(z,obj.z,sizeof(double**)*Nx);
+//        memcpy(x,obj.x,sizeof(double**)*Nx);
+//        memcpy(y,obj.y,sizeof(double**)*Nx);
+//        memcpy(z,obj.z,sizeof(double**)*Nx);
+//        for(int i=0;i<Nx;i++) {
+//                memcpy(x[i],obj.x[i],sizeof(double*)*Ny);
+//                memcpy(y[i],obj.y[i],sizeof(double*)*Ny);
+//                memcpy(z[i],obj.z[i],sizeof(double*)*Ny);
+//                for(int j=0;j<Ny;j++) {
+//                        memcpy(x[i][j],obj.x[i][j],sizeof(double)*Nz);
+//                        memcpy(y[i][j],obj.y[i][j],sizeof(double)*Nz);
+//                        memcpy(z[i][j],obj.z[i][j],sizeof(double)*Nz);
+//                }
+//        }
+        
+	x = new double** [Nx];
+        y = new double** [Nx];
+        z = new double** [Nx];
         for(int i=0;i<Nx;i++) {
-                memcpy(x[i],obj.x[i],sizeof(double*)*Ny);
-                memcpy(y[i],obj.y[i],sizeof(double*)*Ny);
-                memcpy(z[i],obj.z[i],sizeof(double*)*Ny);
+                x[i] = new double* [Ny];
+                y[i] = new double* [Ny];
+                z[i] = new double* [Ny];
                 for(int j=0;j<Ny;j++) {
+                        x[i][j] = new double [Nz];
+                        y[i][j] = new double [Nz];
+                        z[i][j] = new double [Nz];
                         memcpy(x[i][j],obj.x[i][j],sizeof(double)*Nz);
                         memcpy(y[i][j],obj.y[i][j],sizeof(double)*Nz);
                         memcpy(z[i][j],obj.z[i][j],sizeof(double)*Nz);
@@ -200,26 +226,26 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
         z_centre = (z_min + z_max ) / 2.0;
 
         //dynamical allocation of the objects
-        mesh = new VecField;
         VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "mesh");
-        *mesh = mesh_field;
+        mesh = new VecField(mesh_field);
+        //*mesh = mesh_field;
         
-	field = new Field;
         Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
-        *field = field_field;
+	field = new Field(field_field);
+        //*field = field_field;
 
 	scalarfields = new Field* [scalar_fields.size()];
 	for(int i = 0; i<scalar_fields.size() ; i++) {
-	       	scalarfields[i] = new Field;	
         	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
-		*scalarfields[i] = field_field;		
+	       	scalarfields[i] = new Field(field_field);	
+		//*scalarfields[i] = field_field;		
 	}       
 
 	vectorfields = new VecField* [vector_fields.size()];
 	for(int i = 0; i<vector_fields.size() ; i++) {
-	       	vectorfields[i] = new VecField;	
         	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
-		*vectorfields[i] = vec_field;		
+	       	vectorfields[i] = new VecField(vec_field);	
+		//*vectorfields[i] = vec_field;		
 	}       
 	
 	//storing cell centre locations in mesh vector field
@@ -241,21 +267,17 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 //default constructor
 Block::Block() {
 
-        mesh = new VecField;
         VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "mesh");
-        *mesh = mesh_field;
+        mesh = new VecField(mesh_field);
 	
-	field = new Field;
         Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
-        *field = field_field;
+	field = new Field(field_field);
 	
 	scalarfields = new Field* [scalar_fields.size()];
 	for(int i = 0; i<scalar_fields.size() ; i++) {
 	       	scalarfields[i] = new Field;	
         	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
-  		std::cerr << "hi" << std::endl;
 		*(scalarfields[i]) = field_field;		
-  		std::cerr << "bye" << std::endl;
 	}       
 	
 	vectorfields = new VecField* [vector_fields.size()];
@@ -269,7 +291,7 @@ Block::Block() {
 
 //Copy constructor
 Block::Block(const Block &obj) {
-  		//std::cerr << "working" << std::endl;
+  		std::cerr << "Copy constructor of block is working" << std::endl;
 
         x_centre = obj.x_centre;
         y_centre = obj.y_centre;

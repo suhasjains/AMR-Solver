@@ -340,7 +340,7 @@ Octree::~Octree() {
 /*copy constructor not working*/
 Octree::Octree(const Octree &obj) {
     
-	std::cerr << " copy constructor not working " << std::endl;
+	std::cerr << " copy constructor of octree is working " << std::endl;
 
     x_min = obj.x_min;
     y_min = obj.y_min;
