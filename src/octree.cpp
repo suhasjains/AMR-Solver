@@ -429,9 +429,9 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
     
     
     //creating block to assign it to the data
-    block_data = new Block;
     Block new_block(x_min, x_max, y_min, y_max, z_min, z_max);
-    *block_data = new_block;
+    block_data = new Block(new_block);
+    //*block_data = new_block;
     
     //printf("dx=%g, dy=%g, dz=%g \n", block_data->dx, block_data->dy, block_data->dz);
     
@@ -483,9 +483,9 @@ Octree::Octree() {
 	number = 0;
 
     //creating block to assign it to the data
-    block_data = new Block;
     Block new_block;
-    *block_data = new_block;
+    block_data = new Block(new_block);
+    //*block_data = new_block;
     
     //make current pointer point to the current object
     //      current = this;
