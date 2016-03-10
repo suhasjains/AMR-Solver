@@ -15,217 +15,6 @@ int Block::iNy = ny_block;
 int Block::iNz = nz_block;
 
 //parametrized constructor with initialization fields
-Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info)  {
-  	//	std::cerr << "parametrized constructor of field is working" << std::endl;
-
-        N = Nx*Ny*Nz;
-        val = new double** [Nx];
-        for(int i=0;i<Nx;i++) {
-                val[i] = new double* [Ny];
-                for(int j=0;j<Ny;j++) {
-                        val[i][j] = new double [Nz];
-                }
-        }
-}
-
-//default constructor
-Field::Field() {
-  	//	std::cerr << "default constructor of field is working" << std::endl;
-
-        Nx = 0;
-        Ny = 0;
-        Nz = 0;
-        N = Nx*Ny*Nz;
-        val = new double** [Nx];
-        for(int i=0;i<Nx;i++) {
-                val[i] = new double* [Ny];
-                for(int j=0;j<Ny;j++) {
-                        val[i][j] = new double [Nz];
-                }
-        }
-}
-
-//Copy constructor
-Field::Field(const Field &obj) {
-
-  	//	std::cerr << "copy constructor of field is working" << std::endl;
-
-        Nx = obj.Nx;
-        Ny = obj.Ny;
-        Nz = obj.Nz;
-        N = obj.N;
-	name = obj.name;
-  	//	std::cerr << "field is" << name <<  std::endl;
-//        memcpy(val,obj.val,Nx*sizeof(double**));
-//        for(int i=0;i<Nx;i++) {
-//                memcpy(val[i],obj.val[i],sizeof(double*)*Ny);
-//                for(int j=0;j<Ny;j++) {
-//                        memcpy(val[i][j],obj.val[i][j],sizeof(double)*Nz);
-//                }
-//        }
-
-        val = new double** [Nx];
-        for(int i=0;i<Nx;i++) {
-                val[i] = new double* [Ny];
-                for(int j=0;j<Ny;j++) {
-                        val[i][j] = new double [Nz];
-                        memcpy(val[i][j],obj.val[i][j],sizeof(double)*Nz);
-                }
-        }
-
-	for(int i = 0; i < 3; ++ i) {
-		memcpy(&(bc[i][0]), &(obj.bc[i][0]), 2 * sizeof(FieldBc));
-	}
-
-}
-
-//Destructor
- Field::~Field() {
-  	//	std::cerr << "delete constructor of field is working" << std::endl;
-
-	for (int i = 0; i < Nx; ++i) {
-	        for (int j = 0; j < Ny; ++j)
-	        	delete [] val[i][j];
-	
-	        delete [] val[i];
-	        }
-	
-	delete [] val;
-
-}
-
-//member function
-void Field::set_field(double value) {
-
-	for(int i=0;i<this->Nx;i++) {
-		for(int j=0;j<this->Ny;j++) {
-			for(int k=0;k<this->Nz;k++) {
-				this->val[i][j][k] = value;	 
-			}
-		}
-	}
-}
-
-//parametrized constructor with initialization fields
-VecField::VecField( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), Nz(N_z), name(info) {
-  		//std::cerr << "parametrized constructor of vecfield is working" << std::endl;
-
-        N = Nx*Ny*Nz;
-        x = new double** [Nx];
-        y = new double** [Nx];
-        z = new double** [Nx];
-        for(int i=0;i<Nx;i++) {
-                x[i] = new double* [Ny];
-                y[i] = new double* [Ny];
-                z[i] = new double* [Ny];
-                for(int j=0;j<Ny;j++) {
-                        x[i][j] = new double [Nz];
-                        y[i][j] = new double [Nz];
-                        z[i][j] = new double [Nz];
-                }
-        }
-}
-
-//default constructor
-VecField::VecField() {
- // 		std::cerr << "default constructor of vecfield is working" << std::endl;
-
-        Nx = 0;
-        Ny = 0;
-        Nz = 0;
-        N = Nx*Ny*Nz;
-        x = new double** [Nx];
-        y = new double** [Nx];
-        z = new double** [Nx];
-        for(int i=0;i<Nx;i++) {
-                x[i] = new double* [Ny];
-                y[i] = new double* [Ny];
-                z[i] = new double* [Ny];
-                for(int j=0;j<Ny;j++) {
-                        x[i][j] = new double [Nz];
-                        y[i][j] = new double [Nz];
-                        z[i][j] = new double [Nz];
-                }
-        }
-}
-
-//Copy constructor
-VecField::VecField(const VecField &obj) {
-
-//  		std::cerr << "copy constructor of vecfield is working" << std::endl;
-
-        Nx = obj.Nx;
-        Ny = obj.Ny;
-        Nz = obj.Nz;
-        N = obj.N;
-	name = obj.name;
-//        memcpy(x,obj.x,sizeof(double**)*Nx);
-//        memcpy(y,obj.y,sizeof(double**)*Nx);
-//        memcpy(z,obj.z,sizeof(double**)*Nx);
-//        for(int i=0;i<Nx;i++) {
-//                memcpy(x[i],obj.x[i],sizeof(double*)*Ny);
-//                memcpy(y[i],obj.y[i],sizeof(double*)*Ny);
-//                memcpy(z[i],obj.z[i],sizeof(double*)*Ny);
-//                for(int j=0;j<Ny;j++) {
-//                        memcpy(x[i][j],obj.x[i][j],sizeof(double)*Nz);
-//                        memcpy(y[i][j],obj.y[i][j],sizeof(double)*Nz);
-//                        memcpy(z[i][j],obj.z[i][j],sizeof(double)*Nz);
-//                }
-//        }
-        
-	x = new double** [Nx];
-        y = new double** [Nx];
-        z = new double** [Nx];
-        for(int i=0;i<Nx;i++) {
-                x[i] = new double* [Ny];
-                y[i] = new double* [Ny];
-                z[i] = new double* [Ny];
-                for(int j=0;j<Ny;j++) {
-                        x[i][j] = new double [Nz];
-                        y[i][j] = new double [Nz];
-                        z[i][j] = new double [Nz];
-                        memcpy(x[i][j],obj.x[i][j],sizeof(double)*Nz);
-                        memcpy(y[i][j],obj.y[i][j],sizeof(double)*Nz);
-                        memcpy(z[i][j],obj.z[i][j],sizeof(double)*Nz);
-                }
-        }
-}
-
-//Destructor
- VecField::~VecField() {
-  		//std::cerr << "destructor of vecfield is working" << std::endl;
-
-	for (int i = 0; i < Nx; ++i) {
-	        for (int j = 0; j < Ny; ++j) {
-	        	delete [] x[i][j];
-	        	delete [] y[i][j];
-	        	delete [] z[i][j];
-		}
-	        delete [] x[i];
-	        delete [] y[i];
-	        delete [] z[i];
-	}
-	
-	delete [] x;
-	delete [] y;
-	delete [] z;
-}
-
-//member function
-void VecField::set_field(double value) {
-
-	for(int i=0;i<this->Nx;i++) {
-		for(int j=0;j<this->Ny;j++) {
-			for(int k=0;k<this->Nz;k++) {
-				this->x[i][j][k] = value;	 
-				this->y[i][j][k] = value;	 
-				this->z[i][j][k] = value;	 
-			}
-		}
-	}
-}
-
-//parametrized constructor with initialization fields
 Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2) {
   		std::cerr << "Parametrized constructor of block is working" << std::endl;
 
@@ -244,24 +33,20 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
         //dynamical allocation of the objects
         VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "mesh");
         mesh = new VecField(mesh_field);
-        //*mesh = mesh_field;
         
         Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "field");
 	field = new Field(field_field);
-        //*field = field_field;
 
 	scalarfields = new Field* [scalar_fields.size()];
 	for(int i = 0; i<scalar_fields.size() ; i++) {
         	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
 	       	scalarfields[i] = new Field(field_field);	
-		//*scalarfields[i] = field_field;		
 	}       
 
 	vectorfields = new VecField* [vector_fields.size()];
 	for(int i = 0; i<vector_fields.size() ; i++) {
         	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
 	       	vectorfields[i] = new VecField(vec_field);	
-		//*vectorfields[i] = vec_field;		
 	}       
 	
 	//storing cell centre locations in mesh vector field
@@ -274,7 +59,6 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 			}
 		}
 	}
-        //printf("N=%d\n",mesh->N);
 
 }
 
@@ -292,14 +76,12 @@ Block::Block() {
 	for(int i = 0; i<scalar_fields.size() ; i++) {
         	Field field_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, scalar_fields[i]);
 	       	scalarfields[i] = new Field(field_field);	
-		//*(scalarfields[i]) = field_field;		
 	}       
 	
 	vectorfields = new VecField* [vector_fields.size()];
 	for(int i = 0; i<vector_fields.size() ; i++) {
         	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
 	       	vectorfields[i] = new VecField(vec_field);	
-		//*vectorfields[i] = vec_field;		
 	}       
 }
 
@@ -322,27 +104,38 @@ Block::Block(const Block &obj) {
         iNx = obj.iNx;
         iNy = obj.iNy;
         iNz = obj.iNz;
-        mesh = obj.mesh;
-        field = obj.field;
+	mesh = new VecField(*(obj.mesh));
+        field = new Field(*(obj.field));
 	max_gradient = obj.max_gradient;
 
-        memcpy(scalarfields,obj.scalarfields,sizeof(Field*)*scalar_fields.size());
-	for(int i = 0; i<scalar_fields.size() ; i++) {
-		scalarfields[i] = obj.scalarfields[i];
-	}
-        
-	memcpy(vectorfields,obj.vectorfields,sizeof(VecField*)*vector_fields.size());
-	for(int i = 0; i<vector_fields.size() ; i++) {
-		vectorfields[i] = obj.vectorfields[i];
-	}
-  		std::cerr << "Working here" << std::endl;
+	scalarfields = new Field* [scalar_fields.size()];
+        for(int i = 0; i<scalar_fields.size() ; i++) {
+                scalarfields[i] = new Field(*((obj.scalarfields)[i]));
+        }
+
+        vectorfields = new VecField* [vector_fields.size()];
+        for(int i = 0; i<vector_fields.size() ; i++) {
+                vectorfields[i] = new VecField(*((obj.vectorfields)[i]));
+        }
+
 }
 
 //Destructor
 Block::~Block() {
   		std::cerr << "destructor of block is working" << std::endl;
 
-//        delete mesh;
+        delete mesh;
+	delete field;
+
+	for (int i = 0; i < scalar_fields.size(); ++i)
+                        delete scalarfields[i];
+
+   	delete scalarfields;
+
+	for (int i = 0; i < vector_fields.size(); ++i)
+                        delete vectorfields[i];
+
+   	delete vectorfields;
 
 }
 

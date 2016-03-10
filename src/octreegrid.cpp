@@ -55,12 +55,9 @@ void create_lists_of_level_nodes() {
 void create_node(int blocknumber, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, NodeBc east_bc, NodeBc west_bc, NodeBc north_bc, NodeBc south_bc, NodeBc top_bc, NodeBc bottom_bc) {
 
 	//memory allocation to new node
-	//Octree* root = new Octree;
 	Octree r(xmin,xmax,ymin,ymax,zmin,zmax,level);
 	nodes.pop_back();
-	Octree* root = new Octree;
-	*root = r;
-	//(*root)(r);
+	Octree* root = new Octree(r);
 
 	//boundaries are assigned to this root node
 	root->east_bc = east_bc;

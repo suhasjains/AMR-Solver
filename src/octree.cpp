@@ -148,44 +148,11 @@ void Octree::set_to_coarsen_with_nesting() {
 			criteria = false;
 		}
 	}
-	/*change loop indices*/
-	//setting criteria to siblings
-//      	for(int n=0; n<2; n++) {
-//           	for(int m=0; m<2; m++) {
-//                    	for(int l=0; l<2; l++) {
-//                             	this->get_parent()->get_child_at(l, m, n)->setToCoarsen = criteria;
-//                 	}
-//         	}
-// 	}	
 
 	this->setToCoarsen = criteria;
 
 }
 
-/*comment*/
-void Octree::coarsen() {
-    
-    
-        
-        //delete this;
-   //     nodes.erase(this);
-    
-	delete this;
-    
-    //        moving to its parent
-    //        this->current = this->parent;
-    //
-    //        deleting all children
-    //        for(int i=0; i<2; i++) {
-    //                for(int j=0; j<2; j++) {
-    //                        for(int k=0; k<2; k++)
-    //                                this->current->children[i][j][k] = NULL;
-    //                }
-    //        }
-    //
-    //        delete this;
-    
-}
 
 void Octree::refine() {
     
@@ -316,25 +283,9 @@ void Octree::refine() {
 
 /*check what is happening - destroy is necessary*/
 Octree::~Octree() {
+	std::cerr << " destructor of octree is working " << std::endl;
     
-    //	for(int i=0; i<2; i++) {
-    //                for(int j=0; j<2; j++) {
-    //                        for(int k=0; k<2; k++)
-    //                                delete children[i][j][k];
-    //                }
-    //        }
-    //
-    //
-    //
-    //        delete [] children;
-    //
-    //        delete block_data;
-    //
-    //        delete parent;
-    //
-    //        delete current;
-    //
-    //        delete [] siblings;
+            delete block_data;
 }
 
 /*copy constructor not working*/
@@ -342,18 +293,26 @@ Octree::Octree(const Octree &obj) {
     
 	std::cerr << " copy constructor of octree is working " << std::endl;
 
-    x_min = obj.x_min;
-    y_min = obj.y_min;
-    z_min = obj.z_min;
-    x_max = obj.x_max;
-    y_max = obj.y_max;
-    z_max = obj.z_max;
-    x_centre = obj.x_centre;
-    y_centre = obj.y_centre;
-    z_centre = obj.z_centre;
-    level = obj.level;
-    parent = obj.parent;
-    block_data = obj.block_data;
+  	x_min = obj.x_min;
+    	y_min = obj.y_min;
+    	z_min = obj.z_min;
+    	x_max = obj.x_max;
+    	y_max = obj.y_max;
+    	z_max = obj.z_max;
+    	x_centre = obj.x_centre;
+    	y_centre = obj.y_centre;
+    	z_centre = obj.z_centre;
+    	level = obj.level;
+
+    	for(int i=0; i<2; i++) {
+        	for(int j=0; j<2; j++) {
+            		for(int k=0; k<2; k++)
+                		children[i][j][k] = obj.children[i][j][k];
+        	}
+    	}
+
+    	parent = obj.parent;
+    	block_data = new Block(*(obj.block_data));
 	setToRefine = obj.setToRefine;
 	setToCoarsen = obj.setToCoarsen;
 
@@ -374,32 +333,29 @@ Octree::Octree(const Octree &obj) {
 	south_bc = obj.south_bc;	   
 	top_bc = obj.top_bc;	   
 	bottom_bc = obj.bottom_bc;	   
+    	
+
+	nodes.push_back(this);
 	
 	//boundary values
-	east_bc_val = obj.east_bc_val;	   
-	west_bc_val = obj.west_bc_val;	   
-	north_bc_val = obj.north_bc_val;	   
-	south_bc_val = obj.south_bc_val;	   
-	top_bc_val = obj.top_bc_val;	   
-	bottom_bc_val = obj.bottom_bc_val;	   
+//	east_bc_val = obj.east_bc_val;	   
+//	west_bc_val = obj.west_bc_val;	   
+//	north_bc_val = obj.north_bc_val;	   
+//	south_bc_val = obj.south_bc_val;	   
+//	top_bc_val = obj.top_bc_val;	   
+//	bottom_bc_val = obj.bottom_bc_val;	   
  
-    memcpy(children,obj.children,sizeof(Octree***)*2);
-    for(int i=0;i<2;i++) {
-        memcpy(children[i],obj.children[i],sizeof(Octree**)*2);
-        for(int j=0;j<2;j++) {
-            memcpy(children[i][j],obj.children[i][j],sizeof(Octree*)*2);
-        }
-    }
 }
 
 Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2, int l ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2), level(l)   {
+	std::cerr << " parametrized constructor of octree is working " << std::endl;
     
-    for(int i=0; i<2; i++) {
-        for(int j=0; j<2; j++) {
-            for(int k=0; k<2; k++)
-                children[i][j][k] = NULL;
-        }
-    }
+    	for(int i=0; i<2; i++) {
+        	for(int j=0; j<2; j++) {
+            		for(int k=0; k<2; k++)
+                		children[i][j][k] = NULL;
+        	}
+    	}
     
 	parent = NULL;
    	setToRefine = false;
@@ -423,26 +379,22 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 
 	number = 0;
  
-    x_centre = (x_min + x_max ) / 2.0;
-    y_centre = (y_min + y_max ) / 2.0;
-    z_centre = (z_min + z_max ) / 2.0;
+    	x_centre = (x_min + x_max ) / 2.0;
+    	y_centre = (y_min + y_max ) / 2.0;
+    	z_centre = (z_min + z_max ) / 2.0;
     
     
-    //creating block to assign it to the data
-    Block new_block(x_min, x_max, y_min, y_max, z_min, z_max);
-    block_data = new Block(new_block);
-    //*block_data = new_block;
+    	//creating block to assign it to the data
+    	Block new_block(x_min, x_max, y_min, y_max, z_min, z_max);
+    	block_data = new Block(new_block);
     
-    //printf("dx=%g, dy=%g, dz=%g \n", block_data->dx, block_data->dy, block_data->dz);
     
-    //make current pointer point to the current object
-    //      current = this;
-    
-    nodes.push_back(this);
+    	nodes.push_back(this);
     
 }
 
 Octree::Octree() {
+	std::cerr << " default constructor of octree is working " << std::endl;
     
     for(int i=0; i<2; i++) {
         for(int j=0; j<2; j++) {
@@ -464,13 +416,25 @@ Octree::Octree() {
 	bottom = NULL; 
 	
 	//boundary conditions
-	east_bc_val = 1.0;
-	west_bc_val = 1.0;
-	north_bc_val = 1.0;
-	south_bc_val = 1.0;
-	top_bc_val = 1.0;
-	bottom_bc_val = 1.0; 
+//	east_bc_val = 1.0;
+//	west_bc_val = 1.0;
+//	north_bc_val = 1.0;
+//	south_bc_val = 1.0;
+//	top_bc_val = 1.0;
+//	bottom_bc_val = 1.0; 
 
+
+	x_centre = 0.0;
+	y_centre = 0.0;
+	z_centre = 0.0;
+	x_min = 0.0;
+	y_min = 0.0;
+	z_min = 0.0;
+	x_max = 0.0;
+	y_max = 0.0;
+	z_max = 0.0;
+
+	level = 0;
 
 	//boundary conditions
 	east_bc = NONE;
@@ -485,10 +449,7 @@ Octree::Octree() {
     //creating block to assign it to the data
     Block new_block;
     block_data = new Block(new_block);
-    //*block_data = new_block;
     
-    //make current pointer point to the current object
-    //      current = this;
     nodes.push_back(this);
 }
 

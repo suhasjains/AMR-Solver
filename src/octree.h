@@ -41,9 +41,6 @@ class Octree {
 	//adds 8 children 
 	void refine();
 
-	//removes the object 
-	void coarsen(); 
-
 	//function to test if leaf node
 	bool isLeafNode();
 
@@ -101,12 +98,12 @@ class Octree {
 	
 	//boundary values
 	/*same as above */
-	double east_bc_val;
-	double west_bc_val;
-	double north_bc_val;
-	double south_bc_val;
-	double top_bc_val;
-	double bottom_bc_val;
+//	double east_bc_val;
+//	double west_bc_val;
+//	double north_bc_val;
+//	double south_bc_val;
+//	double top_bc_val;
+//	double bottom_bc_val;
 
 	//node's block dimensions
 	double x_centre, y_centre, z_centre;
@@ -127,23 +124,14 @@ class Octree {
 	//pointer to the parent
 	Octree *parent;
 
-	//pointer to the current node
-//	Octree *current;
-
 	//level in the tree
 	int level;
-
-	//siblings
-	//Octree *siblings[7];
 
 	
 	protected:	
 
 };
 
-
-//function declarations
-//void write_vtk(std::list<Octree*>&);
 
 }
 #endif
