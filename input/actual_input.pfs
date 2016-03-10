@@ -37,5 +37,5 @@ vector_field_boundary_conditions
 { psi }
 
 max_level
-0
+1
 

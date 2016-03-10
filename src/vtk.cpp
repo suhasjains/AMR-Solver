@@ -25,7 +25,8 @@ void write_vtk(std::list<Octree*>& nodes) {
 	int Npx = nx_block + 1;
 	int Npy = ny_block + 1;
 	int Npz = nz_block + 1;
-	
+
+	std::cerr << "\n" << "Writing VTK" << std::endl;	
 
 	char filename[30];
         sprintf(filename, "output.vtk");

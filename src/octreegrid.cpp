@@ -1,6 +1,7 @@
 #include "octree.h"
 #include "vtk.h"
 #include "boundary.h"
+#include <iostream>
 
 namespace myOctree {
 
@@ -37,17 +38,24 @@ void create_list_of_root_nodes() {
 //creates a vector of lists of nodes on each level
 void create_lists_of_level_nodes() {
 
+	std::cerr << "Hi" << std::endl;
+	
+
 	//clearing all lists
 	for (unsigned level=0; level <= max_level; level++) {
 	
+	
 		level_nodes[level].clear();
 	}
+	
+	std::cerr << "Hi" << std::endl;
 
 	//pushing nodes to respective lists	
 	for (std::list<Octree*>::iterator j = nodes.begin(), end = nodes.end(); j != end; ++j) {
                 int level = (*j)->get_level();
 		level_nodes[level].push_back(*j);
 	}
+	std::cerr << "Bye" << std::endl;
 
 }
 
@@ -179,76 +187,12 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 	
 void OctreeGrid() {
 
-
-
-	//pipe of 3*20 boxes
-//	create_node(0.0,1.0,0.0,1.0,0.0,1.0,0,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(1.0,2.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(2.0,3.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(3.0,4.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(4.0,5.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(5.0,6.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(6.0,7.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(7.0,8.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(8.0,9.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(9.0,10.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(10.0,11.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(11.0,12.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(12.0,13.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(13.0,14.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(14.0,15.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(15.0,16.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(16.0,17.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(17.0,18.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(18.0,19.0,0.0,1.0,0.0,1.0,0,NONE,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(19.0,20.0,0.0,1.0,0.0,1.0,0,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET,DIRICHLET);
-//	create_node(0.0,1.0,1.0,2.0,0.0,1.0,0,NONE,DIRICHLET,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(1.0,2.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(2.0,3.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(3.0,4.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(4.0,5.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(5.0,6.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(6.0,7.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(7.0,8.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(8.0,9.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(9.0,10.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(10.0,11.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(11.0,12.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(12.0,13.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(13.0,14.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(14.0,15.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(15.0,16.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(16.0,17.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(17.0,18.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(18.0,19.0,1.0,2.0,0.0,1.0,0,NONE,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(19.0,20.0,1.0,2.0,0.0,1.0,0,DIRICHLET,NONE,NONE,NONE,DIRICHLET,DIRICHLET);
-//	create_node(0.0,1.0,2.0,3.0,0.0,1.0,0,NONE,DIRICHLET,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(1.0,2.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(2.0,3.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(3.0,4.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(4.0,5.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(5.0,6.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(6.0,7.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(7.0,8.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(8.0,9.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(9.0,10.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(10.0,11.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(11.0,12.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(12.0,13.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(13.0,14.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(14.0,15.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(15.0,16.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(16.0,17.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(17.0,18.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(18.0,19.0,2.0,3.0,0.0,1.0,0,NONE,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
-//	create_node(19.0,20.0,2.0,3.0,0.0,1.0,0,DIRICHLET,NONE,DIRICHLET,NONE,DIRICHLET,DIRICHLET);
+	std::cerr << "\n"  <<"Setting up grid" << std::endl;
 
 	set_root_neighbours();
 
-
 	//prints neighbours information
 	//print_neighbour_information(nodes);
-	
 
 }
 

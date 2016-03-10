@@ -16,7 +16,7 @@ int Block::iNz = nz_block;
 
 //parametrized constructor with initialization fields
 Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2) {
-  		std::cerr << "Parametrized constructor of block is working" << std::endl;
+//  		std::cerr << "Parametrized constructor of block is working" << std::endl;
 
 	max_gradient = 0.0;
 
@@ -64,7 +64,7 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 
 //default constructor
 Block::Block() {
-  		std::cerr << "default constructor of block is working" << std::endl;
+  //		std::cerr << "default constructor of block is working" << std::endl;
 
         VecField mesh_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, "mesh");
         mesh = new VecField(mesh_field);
@@ -87,7 +87,7 @@ Block::Block() {
 
 //Copy constructor
 Block::Block(const Block &obj) {
-  		std::cerr << "copy constructor of block is working" << std::endl;
+  //		std::cerr << "copy constructor of block is working" << std::endl;
 
         x_centre = obj.x_centre;
         y_centre = obj.y_centre;
@@ -122,7 +122,7 @@ Block::Block(const Block &obj) {
 
 //Destructor
 Block::~Block() {
-  		std::cerr << "destructor of block is working" << std::endl;
+  //		std::cerr << "destructor of block is working" << std::endl;
 
         delete mesh;
 	delete field;

@@ -80,6 +80,8 @@ void adapt_gradient() {
       		myOctree::set_refine_flag_based_on_gradient();
 		myOctree::refine_nodes();
 
+		std::cerr << "refine done" << std::endl;
+
             	//reassigning neighbours after every level of refine call
             	myOctree::create_lists_of_level_nodes();
             	myOctree::reassign_neighbours();
@@ -96,11 +98,14 @@ void adapt_gradient() {
       		myOctree::set_coarsen_flag_based_on_gradient();
 		myOctree::recheck_siblings_coarsen_flags();
 		myOctree::coarsen_nodes();
+		std::cerr << "coarsening done" << std::endl;
 
             	//reassigning neighbours after every level of refine call
             	myOctree::create_lists_of_level_nodes();
+		std::cerr << "creating list" << std::endl;
             	myOctree::reassign_neighbours();
     		myOctree::reset_coarsen_flags();	
+		std::cerr << "coarsening done" << std::endl;
     	}
 
 	amrsolver::set_initial_field();
@@ -119,7 +124,10 @@ int main(int argc, char **argv) {
 
 	myOctree::OctreeGrid();
 
+	cerr << "\n" << "adapting" << endl;
+
 	amrsolver::adapt_gradient();
+	cerr << "\n" << "setting field" << endl;
 	
 	amrsolver::set_field();
 	
@@ -129,4 +137,5 @@ int main(int argc, char **argv) {
 	
 	write_output_file();
 
+	cerr << "\n" << "Finishing" << endl;
 }

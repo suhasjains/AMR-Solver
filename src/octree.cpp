@@ -283,7 +283,7 @@ void Octree::refine() {
 
 /*check what is happening - destroy is necessary*/
 Octree::~Octree() {
-	std::cerr << " destructor of octree is working " << std::endl;
+//	std::cerr << " destructor of octree is working " << std::endl;
     
             delete block_data;
 }
@@ -291,7 +291,7 @@ Octree::~Octree() {
 /*copy constructor not working*/
 Octree::Octree(const Octree &obj) {
     
-	std::cerr << " copy constructor of octree is working " << std::endl;
+//	std::cerr << " copy constructor of octree is working " << std::endl;
 
   	x_min = obj.x_min;
     	y_min = obj.y_min;
@@ -348,7 +348,7 @@ Octree::Octree(const Octree &obj) {
 }
 
 Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2, int l ) : x_min(x1), x_max(x2), y_min(y1), y_max(y2), z_min(z1), z_max(z2), level(l)   {
-	std::cerr << " parametrized constructor of octree is working " << std::endl;
+//	std::cerr << " parametrized constructor of octree is working " << std::endl;
     
     	for(int i=0; i<2; i++) {
         	for(int j=0; j<2; j++) {
@@ -394,7 +394,7 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 }
 
 Octree::Octree() {
-	std::cerr << " default constructor of octree is working " << std::endl;
+//	std::cerr << " default constructor of octree is working " << std::endl;
     
     for(int i=0; i<2; i++) {
         for(int j=0; j<2; j++) {
