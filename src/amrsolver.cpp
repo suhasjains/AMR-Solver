@@ -15,20 +15,25 @@ namespace amrsolver {
 void set_initial_field() {
 
 	myOctree::create_list_of_leaf_nodes();
+		std::cerr << myOctree::leaf_nodes.size()  << std::endl;
 
     	for (std::list<Octree*>::iterator i = myOctree::leaf_nodes.begin(), end = myOctree::leaf_nodes.end(); i != end; ++i) {
 
    		Field* field = (*i)->get_block_data()->field;
    		VecField* location = (*i)->get_block_data()->mesh;
+		//std::cerr << field->Nz  << std::endl;
 	
 		for(int i=0;i<field->Nx;i++) {
                 	for(int j=0;j<field->Ny;j++) {
                         	for(int k=0;k<field->Nz;k++) {
+		std::cout << "Hi here at " << i << j << k << std::endl;
                                 	
 					double x = location->x[i][j][k];
 					double y = location->y[i][j][k];
 					double z = location->z[i][j][k];
  					
+					//if(!field->val[i][j][k]) std::cout << "Not present at" << i << j << k << std::endl; 	
+
 					((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) + (z-1.0)*(z-1.0) >= 0.421875)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
 					//((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) >= 0.5625)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
 					//(x*x + y*y >= 1.0)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
@@ -36,9 +41,7 @@ void set_initial_field() {
                         	}
                 	}
         	}
-
     	}
-
 }
 
 void set_field() {
@@ -57,6 +60,7 @@ void set_field() {
 					double x = location->x[i][j][k];
 					double y = location->y[i][j][k];
 					double z = location->z[i][j][k];
+					std::cout << "Present at" << i << j << k << std::endl; 	
  					
 					((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) >= 0.5625)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
 					//if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
@@ -93,12 +97,18 @@ void adapt_gradient() {
 	/*change number to a variable*/    
   //  	for(int i=0;i<5;i++) {
 
+		std::cerr << "coarsening yet to be done" << std::endl;
 
 		set_initial_field();
+		std::cerr << "coarsening yet to be done" << std::endl;
+
       		myOctree::set_coarsen_flag_based_on_gradient();
+		std::cerr << "coarsening yet to be done" << std::endl;
+
 		myOctree::recheck_siblings_coarsen_flags();
+		std::cerr << "coarsening yet to be done" << std::endl;
+
 		myOctree::coarsen_nodes();
-		std::cerr << "coarsening done" << std::endl;
 
             	//reassigning neighbours after every level of refine call
             	myOctree::create_lists_of_level_nodes();
@@ -109,6 +119,7 @@ void adapt_gradient() {
     	}
 
 	amrsolver::set_initial_field();
+		std::cerr << "all done" << std::endl;
 	
 }
 

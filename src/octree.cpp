@@ -192,9 +192,6 @@ void Octree::refine() {
                     zmax = this->z_max;
                 }
                 
-                //creating new memory locations to children
-                this->children[i][j][k] = new Octree;
-                
                 //creating new child object
                 Octree child(xmin, xmax, ymin, ymax, zmin, zmax, lev);
                 
@@ -205,7 +202,8 @@ void Octree::refine() {
                 child.parent = this;
                 
                 //invoking copy constructor
-                *(this->children[i][j][k]) = child;
+                this->children[i][j][k] = new Octree(child);
+                //*(this->children[i][j][k]) = child;
 
 
             }
