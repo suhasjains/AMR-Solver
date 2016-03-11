@@ -57,6 +57,7 @@ void Octree::set_to_refine_with_nesting() {
 	//set refinement criteria
 	this->setToRefine = true;
 	
+	
 	//check nesting
 	if(!(this->isRootNode())) {
 
@@ -188,9 +189,12 @@ void Octree::refine() {
                     zmax = this->z_centre;
                 }
                 else {
+	//std::cerr << "Yes" << std::endl;
                     zmin = this->z_centre;
                     zmax = this->z_max;
                 }
+	//std::cerr << zmin << std::endl;
+
                 
                 //creating new child object
                 Octree child(xmin, xmax, ymin, ymax, zmin, zmax, lev);
@@ -412,6 +416,7 @@ Octree::Octree() {
 	south = NULL;
 	top = NULL;
 	bottom = NULL; 
+
 	
 	//boundary conditions
 //	east_bc_val = 1.0;

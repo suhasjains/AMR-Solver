@@ -55,6 +55,9 @@ void write_vtk(std::list<Octree*>& nodes) {
 		double y_min = block_data->y_min;		
 		double z_min = block_data->z_min;		
 
+		//std::cerr << dz  << std::endl;
+
+
 //		printf("dx=%g dy=%g, dz=%g N =%d\n", dx, dy, dz, N);
 //		printf("east bc = %d\n",(*iterator)->east_bc);
 //		printf("west bc = %d\n",(*iterator)->west_bc);
@@ -169,16 +172,15 @@ void write_vtk(std::list<Octree*>& nodes) {
 
 		Block* block_data = (*iterator)->get_block_data();
 	
+		//std::cerr << block_data->z_max << std::endl;	
 
                 for(int k = pad; k<(nz_block+pad); k++) {
                         for(int j = pad; j<(ny_block+pad); j++) {
                                 for(int i = pad; i<(nx_block+pad); i++) {
-	
                                         fprintf(fp,"%lf %lf %lf\n",block_data->mesh->x[i][j][k], block_data->mesh->y[i][j][k], block_data->mesh->z[i][j][k]);
                                 }
                         }
                 }
-
         }
 	
 	for (int f = 0 ; f < vector_fields.size() ; f++) {
@@ -187,9 +189,7 @@ void write_vtk(std::list<Octree*>& nodes) {
 	
 	        for (std::list<Octree*>::iterator iterator = nodes.begin(), end = nodes.end(); iterator != end; ++iterator) {
 	
-	
 			Block* block_data = (*iterator)->get_block_data();
-		
 	
 	                for(int k = pad; k<(nz_block+pad); k++) {
 	                        for(int j = pad; j<(ny_block+pad); j++) {

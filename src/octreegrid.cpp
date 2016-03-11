@@ -38,7 +38,6 @@ void create_list_of_root_nodes() {
 //creates a vector of lists of nodes on each level
 void create_lists_of_level_nodes() {
 
-	std::cerr << "Hi" << std::endl;
 	
 
 	//clearing all lists
@@ -48,14 +47,12 @@ void create_lists_of_level_nodes() {
 		level_nodes[level].clear();
 	}
 	
-	std::cerr << "Hi" << std::endl;
 
 	//pushing nodes to respective lists	
 	for (std::list<Octree*>::iterator j = nodes.begin(), end = nodes.end(); j != end; ++j) {
                 int level = (*j)->get_level();
 		level_nodes[level].push_back(*j);
 	}
-	std::cerr << "Bye" << std::endl;
 
 }
 

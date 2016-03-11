@@ -24,6 +24,8 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
         dy = ( y_max - y_min ) / iNy;
         dz = ( z_max - z_min ) / iNz;
 
+	//std::cerr << dz << std::endl;
+
         //printf("dx=%g, dy=%g, dz=%g \n", dx, dy, dz);
 
         x_centre = (x_min + x_max ) / 2.0;
@@ -48,14 +50,16 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
         	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
 	       	vectorfields[i] = new VecField(vec_field);	
 	}       
+
+	//std::cerr << "Hi" << z_max << std::endl;
 	
 	//storing cell centre locations in mesh vector field
 	for(int i=0;i<mesh->Nx;i++) {
 		for(int j=0;j<mesh->Ny;j++) {
 			for(int k=0;k<mesh->Nz;k++) {
-				mesh->x[i][j][k] = x_min + dx * (i + 0.5);	 
-				mesh->y[i][j][k] = y_min + dy * (j + 0.5);	 
-				mesh->z[i][j][k] = z_min + dz * (k + 0.5);	 
+				mesh->x[i][j][k] = x_min - pad*dx + dx*(i + 0.5);	 
+				mesh->y[i][j][k] = y_min - pad*dy + dy*(j + 0.5);	 
+				mesh->z[i][j][k] = z_min - pad*dz + dz*(k + 0.5);	 
 			}
 		}
 	}
@@ -100,7 +104,7 @@ Block::Block(const Block &obj) {
         z_max = obj.z_max;
         dx = obj.dx;
         dy = obj.dy;
-        dz = obj.dx;
+        dz = obj.dz;
         iNx = obj.iNx;
         iNy = obj.iNy;
         iNz = obj.iNz;

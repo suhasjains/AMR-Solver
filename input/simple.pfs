@@ -1,0 +1,29 @@
+scalar_fields
+{
+alpha 
+}
+
+vector_fields
+{
+psi
+}
+
+blocks
+{
+1 0.0 1.0 0.0 1.0 0.0 1.0 0 B B B B B B
+}
+
+scalar_field_boundary_conditions
+{ 
+
+alpha
+1 D D D D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+
+}
+
+vector_field_boundary_conditions
+{ psi }
+
+max_level
+1
+

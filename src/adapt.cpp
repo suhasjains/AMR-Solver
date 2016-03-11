@@ -1,7 +1,7 @@
 #include "octreegrid.h"
 #include "vtk.h"
 #include <complex>
-
+#include <iostream>
 
 namespace myOctree {
 
@@ -144,6 +144,7 @@ void set_refine_flag_based_on_gradient() {
 
         create_list_of_leaf_nodes();
 
+
         //calculation of max_total_gradient
         for (std::list<Octree*>::iterator it = leaf_nodes.begin(), end = leaf_nodes.end(); it != end; ++it) {
 
@@ -178,13 +179,11 @@ void set_refine_flag_based_on_gradient() {
         //setting flags
         for (std::list<Octree*>::iterator it = leaf_nodes.begin(), end = leaf_nodes.end(); it != end; ++it) {
 
-
                 if((*it)->get_block_data()->max_gradient > max_of_max_gradient*0.2) {
                         (*it)->set_to_refine_with_nesting();
 			//printf("yes refine\n");
 		}	
         }
-
 }
 
 
