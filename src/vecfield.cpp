@@ -74,6 +74,13 @@ VecField::VecField(const VecField &obj) {
                         memcpy(z[i][j],obj.z[i][j],sizeof(double)*Nz);
                 }
         }
+
+	for(int i = 0; i < 3; ++ i) {
+                 memcpy(&(xbc[i][0]), &(obj.xbc[i][0]), 2 * sizeof(FieldBc));
+                 memcpy(&(ybc[i][0]), &(obj.ybc[i][0]), 2 * sizeof(FieldBc));
+                 memcpy(&(zbc[i][0]), &(obj.zbc[i][0]), 2 * sizeof(FieldBc));
+     	}
+
 }
 
 //Destructor

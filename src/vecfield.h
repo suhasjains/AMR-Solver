@@ -20,6 +20,9 @@ class VecField {
         double*** y;            //values
         double*** z;            //values
         std::string name;
+	FieldBc xbc[3][2];       //boundary conditions
+	FieldBc ybc[3][2];       //boundary conditions
+	FieldBc zbc[3][2];       //boundary conditions
 
         //Constructors
         //allocates memory to the field variables equal to the number of cells in the domain

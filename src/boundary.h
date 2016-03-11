@@ -28,6 +28,7 @@ typedef field_boundary_flags FieldBc;
 
 
 void set_FieldBc_FieldBcVal(int, std::string, FieldBc** ); 
+void set_VecFieldBc_VecFieldBcVal(int, std::string, FieldBc**, FieldBc**, FieldBc** ); 
 
 }
 #endif
