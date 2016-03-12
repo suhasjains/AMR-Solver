@@ -204,12 +204,12 @@ void read_scalar_field_Bc(ifstream& file, int number) {
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
 				
-				bc[myOctree::X_DIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
-				bc[myOctree::X_DIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
-				bc[myOctree::Y_DIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
-				bc[myOctree::Y_DIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
-				bc[myOctree::Z_DIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
-				bc[myOctree::Z_DIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
+				bc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
+				bc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
+				bc[myOctree::YDIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
+				bc[myOctree::YDIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
+				bc[myOctree::ZDIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
+				bc[myOctree::ZDIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
 
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 

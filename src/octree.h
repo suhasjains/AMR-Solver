@@ -80,21 +80,25 @@ class Octree {
 	
 	//neighbors
 	/*change this to neighbour[direction][position]*/
-	Octree *east;
-	Octree *west;
-	Octree *north;
-	Octree *south;
-	Octree *top;
-	Octree *bottom;
+//	Octree *east;
+//	Octree *west;
+//	Octree *north;
+//	Octree *south;
+//	Octree *top;
+//	Octree *bottom;
+
+	Octree *neighbour[3][2];
 
 	//boundary conditions
 	/*same as above */
-	NodeBc east_bc;
-	NodeBc west_bc;
-	NodeBc north_bc;
-	NodeBc south_bc;
-	NodeBc top_bc;
-	NodeBc bottom_bc;
+//	NodeBc east_bc;
+//	NodeBc west_bc;
+//	NodeBc north_bc;
+//	NodeBc south_bc;
+//	NodeBc top_bc;
+//	NodeBc bottom_bc;
+
+	NodeBc bc[3][2];
 	
 	//boundary values
 	/*same as above */

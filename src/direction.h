@@ -4,9 +4,9 @@ namespace myOctree {
 
 enum direction {
 
-	X_DIR,
-	Y_DIR,
-	Z_DIR
+	XDIR,
+	YDIR,
+	ZDIR
 
 };
 
