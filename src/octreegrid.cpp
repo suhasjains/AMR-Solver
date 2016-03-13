@@ -2,6 +2,7 @@
 #include "vtk.h"
 #include "boundary.h"
 #include <iostream>
+#include "direction.h"
 
 namespace myOctree {
 
@@ -57,7 +58,7 @@ void create_lists_of_level_nodes() {
 }
 
 //creates an octree node
-void create_node(int blocknumber, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, NodeBc east_bc, NodeBc west_bc, NodeBc north_bc, NodeBc south_bc, NodeBc top_bc, NodeBc bottom_bc) {
+void create_node(int blocknumber, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, NodeBc **bc) {
 
 	//memory allocation to new node
 	Octree r(xmin,xmax,ymin,ymax,zmin,zmax,level);
@@ -65,12 +66,18 @@ void create_node(int blocknumber, double xmin, double xmax, double ymin, double 
 	Octree* root = new Octree(r);
 
 	//boundaries are assigned to this root node
-	root->east_bc = east_bc;
-	root->west_bc = west_bc;
-	root->north_bc = north_bc;
-	root->south_bc = south_bc;
-	root->top_bc = top_bc;
-	root->bottom_bc = bottom_bc;
+//	root->east_bc = east_bc;
+//	root->west_bc = west_bc;
+//	root->north_bc = north_bc;
+//	root->south_bc = south_bc;
+//	root->top_bc = top_bc;
+//	root->bottom_bc = bottom_bc;
+
+	for(int i=0;i<3;i++) {
+		for(int j=0;j<2;j++) {
+			root->bc[i][j] = bc[i][j];
+		}
+	}
 
 	root->number = blocknumber;
 		
@@ -93,23 +100,41 @@ void reassign_neighbours() {
 			                for(int j=0; j<2; j++) {
 			                        for(int i=0; i<2; i++) {
 			
+			                               // if(i==0) {
+			                               //         if((*iter)->west != NULL)  (*iter)->get_child_at(i, j, k)->west = (*iter)->west->get_child_at(i+1, j, k);
+			                               // }
+			                               // if(j==0) {
+			                               //         if((*iter)->south != NULL) (*iter)->get_child_at(i, j, k)->south = (*iter)->south->get_child_at(i, j+1, k);
+			                               // }
+			                               // if(k==0) {
+			                               //         if((*iter)->bottom != NULL)	(*iter)->get_child_at(i, j, k)->bottom = (*iter)->bottom->get_child_at(i, j, k+1);
+			                               // }
+			                               // if(i==1) {
+			                               //         if((*iter)->east != NULL)  (*iter)->get_child_at(i, j, k)->east = (*iter)->east->get_child_at(i-1, j, k);
+			                               // }
+			                               // if(j==1) {
+			                               //         if((*iter)->north != NULL) (*iter)->get_child_at(i, j, k)->north = (*iter)->north->get_child_at(i, j-1, k);
+			                               // }
+			                               // if(k==1) {
+			                               //         if((*iter)->top != NULL)   (*iter)->get_child_at(i, j, k)->top = (*iter)->top->get_child_at(i, j, k-1);
+			                               // }
 			                                if(i==0) {
-			                                        if((*iter)->west != NULL)  (*iter)->get_child_at(i, j, k)->west = (*iter)->west->get_child_at(i+1, j, k);
+			                                        if((*iter)->neighbour[XDIR][LEFT] != NULL)  (*iter)->get_child_at(i, j, k)->neighbour[XDIR][LEFT] = (*iter)->neighbour[XDIR][LEFT]->get_child_at(i+1, j, k);
 			                                }
 			                                if(j==0) {
-			                                        if((*iter)->south != NULL) (*iter)->get_child_at(i, j, k)->south = (*iter)->south->get_child_at(i, j+1, k);
+			                                        if((*iter)->neighbour[YDIR][LEFT] != NULL) (*iter)->get_child_at(i, j, k)->neighbour[YDIR][LEFT] = (*iter)->neighbour[YDIR][LEFT]->get_child_at(i, j+1, k);
 			                                }
 			                                if(k==0) {
-			                                        if((*iter)->bottom != NULL)	(*iter)->get_child_at(i, j, k)->bottom = (*iter)->bottom->get_child_at(i, j, k+1);
+			                                        if((*iter)->neighbour[ZDIR][LEFT] != NULL)	(*iter)->get_child_at(i, j, k)->neighbour[ZDIR][LEFT] = (*iter)->neighbour[ZDIR][LEFT]->get_child_at(i, j, k+1);
 			                                }
 			                                if(i==1) {
-			                                        if((*iter)->east != NULL)  (*iter)->get_child_at(i, j, k)->east = (*iter)->east->get_child_at(i-1, j, k);
+			                                        if((*iter)->neighbour[XDIR][RIGHT] != NULL)  (*iter)->get_child_at(i, j, k)->neighbour[XDIR][RIGHT] = (*iter)->neighbour[XDIR][RIGHT]->get_child_at(i-1, j, k);
 			                                }
 			                                if(j==1) {
-			                                        if((*iter)->north != NULL) (*iter)->get_child_at(i, j, k)->north = (*iter)->north->get_child_at(i, j-1, k);
+			                                        if((*iter)->neighbour[YDIR][RIGHT] != NULL) (*iter)->get_child_at(i, j, k)->neighbour[YDIR][RIGHT] = (*iter)->neighbour[YDIR][RIGHT]->get_child_at(i, j-1, k);
 			                                }
 			                                if(k==1) {
-			                                        if((*iter)->top != NULL)   (*iter)->get_child_at(i, j, k)->top = (*iter)->top->get_child_at(i, j, k-1);
+			                                        if((*iter)->neighbour[ZDIR][RIGHT] != NULL)   (*iter)->get_child_at(i, j, k)->neighbour[ZDIR][RIGHT] = (*iter)->neighbour[ZDIR][RIGHT]->get_child_at(i, j, k-1);
 			                                }
 			                        }
 			                }
@@ -142,23 +167,41 @@ void set_root_neighbours() {
 			double y_min = (*j)->y_min;			
 			double z_min = (*j)->z_min;
 	
+		//	if(xmax==x_min&&ymax==y_max&&zmax==z_max)
+		//		(*i)->east = (*j);	
+
+		//	if(xmin==x_max&&ymax==y_max&&zmax==z_max)
+		//		(*i)->west = (*j);	
+		//	
+		//	if(xmax==x_max&&ymax==y_min&&zmax==z_max)
+		//		(*i)->north = (*j);	
+		//		
+		//	if(xmax==x_max&&ymin==y_max&&zmax==z_max)
+		//		(*i)->south = (*j);	
+		//	
+		//	if(xmax==x_max&&ymax==y_max&&zmax==z_min)
+		//		(*i)->top = (*j);	
+		//	
+		//	if(xmax==x_max&&ymax==y_max&&zmin==z_max)
+		//		(*i)->bottom = (*j);	
 			if(xmax==x_min&&ymax==y_max&&zmax==z_max)
-				(*i)->east = (*j);	
+				(*i)->neighbour[XDIR][RIGHT] = (*j);	
 
 			if(xmin==x_max&&ymax==y_max&&zmax==z_max)
-				(*i)->west = (*j);	
+				(*i)->neighbour[XDIR][LEFT] = (*j);	
 			
 			if(xmax==x_max&&ymax==y_min&&zmax==z_max)
-				(*i)->north = (*j);	
+				(*i)->neighbour[YDIR][RIGHT] = (*j);	
 				
 			if(xmax==x_max&&ymin==y_max&&zmax==z_max)
-				(*i)->south = (*j);	
+				(*i)->neighbour[YDIR][LEFT] = (*j);	
 			
 			if(xmax==x_max&&ymax==y_max&&zmax==z_min)
-				(*i)->top = (*j);	
+				(*i)->neighbour[ZDIR][RIGHT] = (*j);	
 			
 			if(xmax==x_max&&ymax==y_max&&zmin==z_max)
-				(*i)->bottom = (*j);	
+				(*i)->neighbour[ZDIR][LEFT] = (*j);	
+				
 				
 		}			
 	}
@@ -169,12 +212,18 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
 	
 		printf("I am at %g %g %g\n",(*i)->x_centre,(*i)->y_centre,(*i)->z_centre);
-		if((*i)->east!=NULL)	printf("East neighbour at %g %g %g\n",(*i)->east->x_centre,(*i)->east->y_centre,(*i)->east->z_centre);		
-		if((*i)->west!=NULL)	printf("West neighbour at %g %g %g\n",(*i)->west->x_centre,(*i)->west->y_centre,(*i)->west->z_centre);		
-		if((*i)->north!=NULL)	printf("North neighbour at %g %g %g\n",(*i)->north->x_centre,(*i)->north->y_centre,(*i)->north->z_centre);		
-		if((*i)->south!=NULL)	printf("South neighbour at %g %g %g\n",(*i)->south->x_centre,(*i)->south->y_centre,(*i)->south->z_centre);		
-		if((*i)->top!=NULL)	printf("Top neighbour at %g %g %g\n",(*i)->top->x_centre,(*i)->top->y_centre,(*i)->top->z_centre);		
-		if((*i)->bottom!=NULL)	printf("Bottom neighbour at %g %g %g\n",(*i)->bottom->x_centre,(*i)->bottom->y_centre,(*i)->bottom->z_centre);		
+	//	if((*i)->east!=NULL)	printf("East neighbour at %g %g %g\n",(*i)->east->x_centre,(*i)->east->y_centre,(*i)->east->z_centre);		
+	//	if((*i)->west!=NULL)	printf("West neighbour at %g %g %g\n",(*i)->west->x_centre,(*i)->west->y_centre,(*i)->west->z_centre);		
+	//	if((*i)->north!=NULL)	printf("North neighbour at %g %g %g\n",(*i)->north->x_centre,(*i)->north->y_centre,(*i)->north->z_centre);		
+	//	if((*i)->south!=NULL)	printf("South neighbour at %g %g %g\n",(*i)->south->x_centre,(*i)->south->y_centre,(*i)->south->z_centre);		
+	//	if((*i)->top!=NULL)	printf("Top neighbour at %g %g %g\n",(*i)->top->x_centre,(*i)->top->y_centre,(*i)->top->z_centre);		
+	//	if((*i)->bottom!=NULL)	printf("Bottom neighbour at %g %g %g\n",(*i)->bottom->x_centre,(*i)->bottom->y_centre,(*i)->bottom->z_centre);		
+		if((*i)->neighbour[XDIR][RIGHT]!=NULL)	printf("East neighbour at %g %g %g\n",(*i)->neighbour[XDIR][RIGHT]->x_centre,(*i)->neighbour[XDIR][RIGHT]->y_centre,(*i)->neighbour[XDIR][RIGHT]->z_centre);		
+		if((*i)->neighbour[XDIR][LEFT]!=NULL)	printf("West neighbour at %g %g %g\n",(*i)->neighbour[XDIR][LEFT]->x_centre,(*i)->neighbour[XDIR][LEFT]->y_centre,(*i)->neighbour[XDIR][LEFT]->z_centre);		
+		if((*i)->neighbour[YDIR][RIGHT]!=NULL)	printf("North neighbour at %g %g %g\n",(*i)->neighbour[YDIR][RIGHT]->x_centre,(*i)->neighbour[YDIR][RIGHT]->y_centre,(*i)->neighbour[YDIR][RIGHT]->z_centre);		
+		if((*i)->neighbour[YDIR][LEFT]!=NULL)	printf("South neighbour at %g %g %g\n",(*i)->neighbour[YDIR][LEFT]->x_centre,(*i)->neighbour[YDIR][LEFT]->y_centre,(*i)->neighbour[YDIR][LEFT]->z_centre);		
+		if((*i)->neighbour[ZDIR][RIGHT]!=NULL)	printf("Top neighbour at %g %g %g\n",(*i)->neighbour[ZDIR][RIGHT]->x_centre,(*i)->neighbour[ZDIR][RIGHT]->y_centre,(*i)->neighbour[ZDIR][RIGHT]->z_centre);		
+		if((*i)->neighbour[ZDIR][LEFT]!=NULL)	printf("Bottom neighbour at %g %g %g\n",(*i)->neighbour[ZDIR][LEFT]->x_centre,(*i)->neighbour[ZDIR][LEFT]->y_centre,(*i)->neighbour[ZDIR][LEFT]->z_centre);		
 
 	}
 

@@ -115,6 +115,11 @@ int read_blocks(ifstream& file) {
 	double xmin, xmax, ymin, ymax, zmin, zmax;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
 	myOctree::NodeBc east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
+	
+	myOctree::NodeBc **bc;
+	bc = new myOctree::NodeBc* [3];
+	for(int i = 0; i < 3; i++)
+     		bc[i] = new myOctree::NodeBc [2];	
 
 	//skips line if line is empty
 	getline(file,line);
@@ -141,21 +146,22 @@ int read_blocks(ifstream& file) {
 			file >> level;
 			file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 						
-			east_bc = string_to_NodeBc(eastbc);		
-			west_bc = string_to_NodeBc(westbc);		
-			north_bc = string_to_NodeBc(northbc);		
-			south_bc = string_to_NodeBc(southbc);		
-			top_bc = string_to_NodeBc(topbc);		
-			bottom_bc = string_to_NodeBc(bottombc);		
+			bc[myOctree::XDIR][myOctree::RIGHT] = string_to_NodeBc(eastbc);		
+			bc[myOctree::XDIR][myOctree::LEFT] = string_to_NodeBc(westbc);		
+			bc[myOctree::YDIR][myOctree::RIGHT] = string_to_NodeBc(northbc);		
+			bc[myOctree::YDIR][myOctree::LEFT] = string_to_NodeBc(southbc);		
+			bc[myOctree::ZDIR][myOctree::RIGHT] = string_to_NodeBc(topbc);		
+			bc[myOctree::ZDIR][myOctree::LEFT] = string_to_NodeBc(bottombc);		
 
 			//cerr << blocknumber << xmin << xmax << ymin << ymax << zmin << zmax << endl;
 
-			myOctree::create_node(blocknumber, xmin, xmax, ymin, ymax, zmin, zmax, level,\
-				       	east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc);
+			myOctree::create_node(blocknumber, xmin, xmax, ymin, ymax, zmin, zmax, level, bc);
 
 		}
 
 	}
+	
+	delete [] bc;
 
 	return blocknumber;
 }
@@ -275,36 +281,36 @@ void read_vector_field_Bc(ifstream& file, int number) {
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
 				
-				xbc[myOctree::X_DIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
-				xbc[myOctree::X_DIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
-				xbc[myOctree::Y_DIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
-				xbc[myOctree::Y_DIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
-				xbc[myOctree::Z_DIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
-				xbc[myOctree::Z_DIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
+				xbc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
+				xbc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
+				xbc[myOctree::YDIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
+				xbc[myOctree::YDIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
+				xbc[myOctree::ZDIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
+				xbc[myOctree::ZDIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
 
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
 				
-				ybc[myOctree::X_DIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
-				ybc[myOctree::X_DIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
-				ybc[myOctree::Y_DIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
-				ybc[myOctree::Y_DIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
-				ybc[myOctree::Z_DIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
-				ybc[myOctree::Z_DIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
+				ybc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
+				ybc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
+				ybc[myOctree::YDIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
+				ybc[myOctree::YDIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
+				ybc[myOctree::ZDIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
+				ybc[myOctree::ZDIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
 
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
 				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
 				
-				zbc[myOctree::X_DIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
-				zbc[myOctree::X_DIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
-				zbc[myOctree::Y_DIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
-				zbc[myOctree::Y_DIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
-				zbc[myOctree::Z_DIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
-				zbc[myOctree::Z_DIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
+				zbc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
+				zbc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
+				zbc[myOctree::YDIR][myOctree::RIGHT] = string_to_FieldBc(northbc);		
+				zbc[myOctree::YDIR][myOctree::LEFT] = string_to_FieldBc(southbc);		
+				zbc[myOctree::ZDIR][myOctree::RIGHT] = string_to_FieldBc(topbc);		
+				zbc[myOctree::ZDIR][myOctree::LEFT] = string_to_FieldBc(bottombc);		
 
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 

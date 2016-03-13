@@ -1,6 +1,6 @@
 scalar_fields
 {
-alpha 
+alpha
 }
 
 vector_fields
@@ -19,11 +19,19 @@ scalar_field_boundary_conditions
 alpha
 1 D D D D D D 0.0 1.0 0.0 1.0 1.0 1.0 
 
+beta
+1 D D D D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+
 }
 
 vector_field_boundary_conditions
-{ psi }
+{
+psi 
+1 D D D D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+  D D D D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+  D D D D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+}
 
 max_level
-1
+0
 

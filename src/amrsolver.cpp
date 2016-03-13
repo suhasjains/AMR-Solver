@@ -121,6 +121,7 @@ int main(int argc, char **argv) {
 	read_input_file();
 
 	myOctree::OctreeGrid();
+	cerr << "\n" << "setting grid" << endl;
 
 	amrsolver::adapt_gradient();
 	

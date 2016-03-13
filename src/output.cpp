@@ -2,6 +2,7 @@
 #include <fstream>
 #include "octree.h"
 #include <stdlib.h>
+#include "direction.h"
 
 using myOctree::Octree;
 using myOctree::nodes;
@@ -55,12 +56,12 @@ void write_output_file() {
 	ymax = (*it)->y_max;	
 	zmax = (*it)->z_max;	
 	level = (*it)->get_level();
-	east_bc = (*it)->east_bc;
-	west_bc = (*it)->west_bc;
-	north_bc = (*it)->north_bc;
-	south_bc = (*it)->south_bc;
-	top_bc = (*it)->top_bc;
-	bottom_bc = (*it)->bottom_bc;
+	east_bc = (*it)->bc[myOctree::XDIR][myOctree::RIGHT];
+	west_bc = (*it)->bc[myOctree::XDIR][myOctree::LEFT];
+	north_bc = (*it)->bc[myOctree::YDIR][myOctree::RIGHT];
+	south_bc = (*it)->bc[myOctree::YDIR][myOctree::LEFT];
+	top_bc = (*it)->bc[myOctree::ZDIR][myOctree::RIGHT];
+	bottom_bc = (*it)->bc[myOctree::ZDIR][myOctree::LEFT];
 	
 	blocknumber = (*it)->number;
 

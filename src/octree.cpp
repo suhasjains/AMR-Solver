@@ -161,7 +161,8 @@ void Octree::set_to_coarsen_with_nesting() {
 
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
-			if(this->bc[m][n]) {
+			if(this->neighbour[m][n]) {
+		//std::cerr << "\n" << "hi" << std::endl;
               			if(!(this->neighbour[m][n]->isLeafNode())) {
                       			criteria = false;
               			}
@@ -208,11 +209,9 @@ void Octree::refine() {
                     zmax = this->z_centre;
                 }
                 else {
-	//std::cerr << "Yes" << std::endl;
                     zmin = this->z_centre;
                     zmax = this->z_max;
                 }
-	//std::cerr << zmin << std::endl;
 
                 
                 //creating new child object
@@ -356,18 +355,46 @@ void Octree::refine() {
 					for (int m=0; m<3; m++) {
 						for (int n=0; n<2; n++) {
 					
-					//		if(this->children[i][j][k]->bc[m][n] == BOUNDARY) {
-					//			this->children[i][j][k]->get_block_data()->scalarfields[l]->bc[m][n] = \
-					//			this->get_block_data()->scalarfields[l]->bc[m][n];  			
-					//		}
-					//		
-					//		if(this->children[i][j][k]->bc[m][n] == NONE) {
-					//			this->children[i][j][k]->get_block_data()->scalarfields[l]->bc[m][n] = none;
-					//		}
-					//		
-					//		if(this->children[i][j][k]->bc[m][n] == MPI_BOUNDARY) {
-					//			this->children[i][j][k]->get_block_data()->scalarfields[l]->bc[m][n] = mpi_boundary;
-					//		}
+							if(this->children[i][j][k]->bc[m][n] == BOUNDARY) {
+								this->children[i][j][k]->get_block_data()->scalarfields[l]->bc[m][n] = \
+								this->get_block_data()->scalarfields[l]->bc[m][n];  			
+							}
+							
+							if(this->children[i][j][k]->bc[m][n] == NONE) {
+								this->children[i][j][k]->get_block_data()->scalarfields[l]->bc[m][n] = none;
+							}
+							
+							if(this->children[i][j][k]->bc[m][n] == MPI_BOUNDARY) {
+								this->children[i][j][k]->get_block_data()->scalarfields[l]->bc[m][n] = mpi_boundary;
+							}
+						}	
+					}
+				}
+				
+				for(int l = 0; l<vector_fields.size() ; l++) {
+					for (int m=0; m<3; m++) {
+						for (int n=0; n<2; n++) {
+					
+							if(this->children[i][j][k]->bc[m][n] == BOUNDARY) {
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->xbc[m][n] = \
+								this->get_block_data()->vectorfields[l]->xbc[m][n];  			
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->ybc[m][n] = \
+								this->get_block_data()->vectorfields[l]->ybc[m][n];  			
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->zbc[m][n] = \
+								this->get_block_data()->vectorfields[l]->zbc[m][n];  			
+							}
+							
+							if(this->children[i][j][k]->bc[m][n] == NONE) {
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->xbc[m][n] = none;
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->ybc[m][n] = none;
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->zbc[m][n] = none;
+							}
+							
+							if(this->children[i][j][k]->bc[m][n] == MPI_BOUNDARY) {
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->xbc[m][n] = mpi_boundary;
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->ybc[m][n] = mpi_boundary;
+								this->children[i][j][k]->get_block_data()->vectorfields[l]->zbc[m][n] = mpi_boundary;
+							}
 						}	
 					}
 				}
