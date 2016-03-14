@@ -172,12 +172,17 @@ void read_scalar_field_Bc(ifstream& file, int number) {
 	int blocknumber;	
 	string line, str;
 	string eastbc, westbc, northbc, southbc, topbc, bottombc;
-	
+
+		
 	myOctree::FieldBc **bc;
+	double **bcval;
 	bc = new myOctree::FieldBc* [3];
-	for(int i = 0; i < 3; i++)
+	bcval = new double* [3];
+	for(int i = 0; i < 3; i++) {
      		bc[i] = new myOctree::FieldBc [2];	
-	
+		bcval[i] = new double [2];
+	}
+
 	myOctree::FieldBc east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
 	double eastbcval, westbcval, northbcval, southbcval, topbcval, bottombcval;
 
@@ -208,7 +213,7 @@ void read_scalar_field_Bc(ifstream& file, int number) {
 		
 				file >> blocknumber; 
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
-				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
+				file >> bcval[0][0] >> bcval[0][1] >> bcval[1][0] >> bcval[1][1] >> bcval[2][0] >> bcval[2][1];
 				
 				bc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
 				bc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
@@ -220,12 +225,13 @@ void read_scalar_field_Bc(ifstream& file, int number) {
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 
 				/*add a function here which sets boundary condition and boundary values*/
-				myOctree::set_FieldBc_FieldBcVal(blocknumber, str, bc);
+				myOctree::set_FieldBc_FieldBcVal(blocknumber, str, bc, bcval);
 			}
 		}	
 	}
 
 	delete [] bc;
+	delete [] bcval;
 }
 
 
@@ -238,13 +244,22 @@ void read_vector_field_Bc(ifstream& file, int number) {
 	myOctree::FieldBc **xbc;
 	myOctree::FieldBc **ybc;
 	myOctree::FieldBc **zbc;
+	double **xbcval;
+	double **ybcval;
+	double **zbcval;
 	xbc = new myOctree::FieldBc* [3];
 	ybc = new myOctree::FieldBc* [3];
 	zbc = new myOctree::FieldBc* [3];
+	xbcval = new double* [3];
+	ybcval = new double* [3];
+	zbcval = new double* [3];
 	for(int i = 0; i < 3; i++) {
      		xbc[i] = new myOctree::FieldBc [2];	
      		ybc[i] = new myOctree::FieldBc [2];	
      		zbc[i] = new myOctree::FieldBc [2];	
+     		xbcval[i] = new double [2];	
+     		ybcval[i] = new double [2];	
+     		zbcval[i] = new double [2];	
 	}
 
 	myOctree::FieldBc east_bc, west_bc, north_bc, south_bc, top_bc, bottom_bc;
@@ -279,7 +294,7 @@ void read_vector_field_Bc(ifstream& file, int number) {
 			
 			
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
-				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
+				file >> xbcval[0][0] >> xbcval[0][1] >> xbcval[1][0] >> xbcval[1][1] >> xbcval[2][0] >> xbcval[2][1];
 				
 				xbc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
 				xbc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
@@ -291,7 +306,7 @@ void read_vector_field_Bc(ifstream& file, int number) {
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
-				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
+				file >> ybcval[0][0] >> ybcval[0][1] >> ybcval[1][0] >> ybcval[1][1] >> ybcval[2][0] >> ybcval[2][1];
 				
 				ybc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
 				ybc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
@@ -303,7 +318,7 @@ void read_vector_field_Bc(ifstream& file, int number) {
 				//cerr << blocknumber << eastbc << westbc << northbc << southbc << topbc << bottombc << endl;
 
 				file >> eastbc >> westbc >> northbc >> southbc >> topbc >> bottombc;
-				file >> eastbcval >> westbcval >> northbcval >> southbcval >> topbcval >> bottombcval;
+				file >> zbcval[0][0] >> zbcval[0][1] >> zbcval[1][0] >> zbcval[1][1] >> zbcval[2][0] >> zbcval[2][1];
 				
 				zbc[myOctree::XDIR][myOctree::RIGHT] = string_to_FieldBc(eastbc);		
 				zbc[myOctree::XDIR][myOctree::LEFT] = string_to_FieldBc(westbc);		
@@ -316,7 +331,7 @@ void read_vector_field_Bc(ifstream& file, int number) {
 
 
 				/*add a function here which sets boundary condition and boundary values*/
-				myOctree::set_VecFieldBc_VecFieldBcVal(blocknumber, str, xbc, ybc, zbc);
+				myOctree::set_VecFieldBc_VecFieldBcVal(blocknumber, str, xbc, ybc, zbc, xbcval, ybcval, zbcval);
 			}
 		}	
 	}
@@ -324,7 +339,9 @@ void read_vector_field_Bc(ifstream& file, int number) {
 	delete 	[] xbc;
       	delete	[] ybc;
       	delete	[] zbc;
-
+	delete 	[] xbcval;
+	delete 	[] ybcval;
+	delete 	[] zbcval;
 }
 
 void read_max_level(ifstream& file) {

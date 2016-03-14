@@ -3,6 +3,7 @@
 #include "boundary.h"
 #include <iostream>
 #include "direction.h"
+#include "ghost.h"
 
 namespace myOctree {
 
@@ -230,12 +231,26 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 }
 
 
+void exchange_ghost_values_of_level(int level) {
+
+	for(int l = 0; l<scalar_fields.size() ; l++) {
+		exchange_ghost_val(level, scalar_fields[l]);
+	}
+	
+	for(int l = 0; l<vector_fields.size() ; l++) {
+		exchange_ghost_val(level, vector_fields[l]);
+	}
+
+}
 	
 void OctreeGrid() {
 
 	std::cerr << "\n"  <<"Setting up grid" << std::endl;
 
 	set_root_neighbours();
+
+	//This is to be done after neighbours are set at that particular level
+	exchange_ghost_values_of_level(0);
 
 	//prints neighbours information
 	//print_neighbour_information(nodes);

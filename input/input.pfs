@@ -1,6 +1,6 @@
 scalar_fields
 {
-alpha beta
+alpha beta gamma
 }
 
 vector_fields
@@ -10,10 +10,10 @@ psi
 
 blocks
 {
-1 0.0 1.0 0.0 1.0 0.0 1.0 0 N B N B B B
-2 1.0 2.0 0.0 1.0 0.0 1.0 0 B N N B B B
-3 0.0 1.0 1.0 2.0 0.0 1.0 0 N B B N B B
-4 1.0 2.0 1.0 2.0 0.0 1.0 0 B N B N B B
+1 0.0 1.0 0.0 1.0 0.0 0.1 0 N B N B B B
+2 1.0 2.0 0.0 1.0 0.0 0.1 0 B N N B B B
+3 0.0 1.0 1.0 2.0 0.0 0.1 0 N B B N B B
+4 1.0 2.0 1.0 2.0 0.0 0.1 0 B N B N B B
 }
 
 scalar_field_boundary_conditions
@@ -26,6 +26,12 @@ alpha
 4 D N D N D D 1.0 0.0 1.0 0.0 1.0 1.0
 
 beta
+1 N D N D D D 0.0 1.0 0.0 1.0 1.0 1.0 
+2 D N N D D D 1.0 0.0 0.0 1.0 1.0 1.0
+3 N D D N D D 0.0 1.0 1.0 0.0 1.0 1.0
+4 D N D N D D 1.0 0.0 1.0 0.0 1.0 1.0
+
+gamma
 1 N D N D D D 0.0 1.0 0.0 1.0 1.0 1.0 
 2 D N N D D D 1.0 0.0 0.0 1.0 1.0 1.0
 3 N D D N D D 0.0 1.0 1.0 0.0 1.0 1.0
@@ -51,5 +57,5 @@ psi
 }
 
 max_level
-3
+5
 

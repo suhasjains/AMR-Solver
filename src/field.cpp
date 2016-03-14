@@ -13,6 +13,8 @@ Field::Field( int N_x, int N_y, int N_z, std::string info ) : Nx(N_x), Ny(N_y), 
                         val[i][j] = new double [Nz];
                 }
         }
+	
+	set_field(0.0);
 }
 
 //default constructor

@@ -235,7 +235,9 @@ void set_coarsen_flag_based_on_gradient() {
 
 		//printf("mg mmg = %lf %lf\n",(*it)->get_block_data()->max_gradient,max_of_max_gradient);
 
-                if((*it)->get_block_data()->max_gradient < max_of_max_gradient*0.2) {
+		
+		//Not set to coarsen if it is a root node
+                if((*it)->get_block_data()->max_gradient < max_of_max_gradient*0.2 && (!(*it)->isRootNode())) {
                         (*it)->set_to_coarsen_with_nesting();
 			//printf("yes coarsen\n");
 		}	
@@ -247,6 +249,7 @@ void set_coarsen_flag_based_on_gradient() {
 void recheck_siblings_coarsen_flags() {
 
         create_list_of_leaf_nodes();
+
 
         for (std::list<Octree*>::iterator it = leaf_nodes.begin(), end = leaf_nodes.end(); it != end; ++it) {
 	
