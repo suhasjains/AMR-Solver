@@ -1,4 +1,5 @@
 #include "octreegrid.h"
+#include "poisson.h"
 #include "adapt.h"
 #include "vtk.h"
 #include "input.h"
@@ -119,18 +120,25 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
+
+	//reading input
 	read_input_file();
 
+	//setting up grid
 	myOctree::OctreeGrid();
+//	amrsolver::adapt_gradient();
 
-	amrsolver::adapt_gradient();
-	
+	//setting initial condition
 	amrsolver::set_field();
 	
+	//solving
+	amrsolver::jacobi(0, "beta");
+	
+	//writing vtk
 	myOctree::create_list_of_leaf_nodes();
-
 	myOctree::write_vtk(myOctree::leaf_nodes);
 	
+	//writing output file
 	write_output_file();
 
 	cerr << "\n" << "Finishing" << endl;

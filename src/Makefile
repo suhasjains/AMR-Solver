@@ -2,9 +2,9 @@ NAME 	:= amrsolver
 OBDIR	:= ../obj/
 RUNDIR	:= ../output/
 
-OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)vecfield.o $(OBDIR)field.o $(OBDIR)boundary.o $(OBDIR)ghost.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o 
+OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)vecfield.o $(OBDIR)field.o $(OBDIR)boundary.o $(OBDIR)ghost.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o $(OBDIR)poisson.o 
 
-HEADER 	:= octreegrid.h adapt.h octree.h block.h field.h vecfield.h vtk.h output.h boundary.h ghost.h direction.h 
+HEADER 	:= octreegrid.h adapt.h octree.h block.h field.h vecfield.h vtk.h output.h boundary.h ghost.h direction.h poisson.h 
 
 .DEFAULT:
 
@@ -77,6 +77,11 @@ $(OBDIR)vtk.o: vtk.cpp $(HEADER)
 $(OBDIR)output.o: output.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
 	$(CXX) -c $(FLAGS) -o $(OBDIR)output.o output.cpp
+
+$(OBDIR)poisson.o: poisson.cpp $(HEADER)
+	@test -d $(OBDIR) || mkdir $(OBDIR)        
+	$(CXX) -c $(FLAGS) -o $(OBDIR)poisson.o poisson.cpp
+
 copy:
 	cp -f clean $(RUNDIR)/.	
 clean: 		

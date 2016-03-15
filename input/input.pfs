@@ -10,10 +10,10 @@ psi
 
 blocks
 {
-1 0.0 1.0 0.0 1.0 0.0 0.1 0 N B N B B B
-2 1.0 2.0 0.0 1.0 0.0 0.1 0 B N N B B B
-3 0.0 1.0 1.0 2.0 0.0 0.1 0 N B B N B B
-4 1.0 2.0 1.0 2.0 0.0 0.1 0 B N B N B B
+1 0.0 1.0 0.0 1.0 0.0 0.5 0 N B N B B B
+2 1.0 2.0 0.0 1.0 0.0 0.5 0 B N N B B B
+3 0.0 1.0 1.0 2.0 0.0 0.5 0 N B B N B B
+4 1.0 2.0 1.0 2.0 0.0 0.5 0 B N B N B B
 }
 
 scalar_field_boundary_conditions
