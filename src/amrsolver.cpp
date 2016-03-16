@@ -132,7 +132,8 @@ int main(int argc, char **argv) {
 	amrsolver::set_field();
 	
 	//solving
-	amrsolver::jacobi(0, "beta");
+	//amrsolver::jacobi(0, "beta");
+	amrsolver::gauss_seidel(0, "beta");
 	
 	//writing vtk
 	myOctree::create_list_of_leaf_nodes();

@@ -4,7 +4,7 @@
 
 namespace myOctree {
 
-int pad = 1;
+int pad = 2;
 std::vector<std::string> scalar_fields;
 std::vector<std::string> vector_fields;	
 int nx_block = 40;
