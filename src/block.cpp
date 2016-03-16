@@ -4,12 +4,12 @@
 
 namespace myOctree {
 
-int pad = 2;
+int pad = 1;
 std::vector<std::string> scalar_fields;
 std::vector<std::string> vector_fields;	
-int nx_block = 10;
-int ny_block = 10;
-int nz_block = 5;
+int nx_block = 40;
+int ny_block = 40;
+int nz_block = 20;
 int Block::iNx = nx_block;
 int Block::iNy = ny_block;
 int Block::iNz = nz_block;

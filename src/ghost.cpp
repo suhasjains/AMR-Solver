@@ -28,15 +28,17 @@ void exchange_ghost_val(int level, std::string name) {
                         		for (int n=0; n<2; n++) {
 
 						if((*it)->bc[m][n] == NONE && (*it)->neighbour[m][n] != NULL) {
+				
 										
 							if(n==RIGHT && m==XDIR) {
 						
 								for(int i=nx_block+pad; i<f->Nx; i++) {
-                                                			for(int j=0; j<f->Ny; j++) {
-                                                        			for(int k=0; k<f->Nz; k++) {
+                                                			for(int j=pad; j<ny_block+pad; j++) {
+                                                        			for(int k=pad; k<nz_block+pad; k++) {
+						//std::cout << (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i-nx_block][j][k] << " " << i-nx_block     << " " << j << " " << k << std::endl;
 								
 											f->val[i][j][k] = \
-							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i-nx_block-pad][j][k]; 
+							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i-nx_block][j][k]; 
 										}
 									}
 								}
@@ -44,35 +46,38 @@ void exchange_ghost_val(int level, std::string name) {
 							if(n==LEFT && m==XDIR) {
 						
 								for(int i=0; i<pad; i++) {
-                                                			for(int j=0; j<f->Ny; j++) {
-                                                        			for(int k=0; k<f->Nz; k++) {
+                                                			for(int j=pad; j<ny_block+pad; j++) {
+                                                        			for(int k=pad; k<nz_block+pad; k++) {
 								
 											f->val[i][j][k] = \
-							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i+nx_block+pad][j][k]; 
+							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i+nx_block][j][k]; 
 										}
 									}
 								}	
 							}
 							if(n==RIGHT && m==YDIR) {
+						//std::cout << "Hi" <<  std::endl;
+						//std::cout << f->Ny <<  std::endl;
 						
-								for(int i=0; i<f->Nx; i++) {
+								for(int i=pad; i<nx_block+pad; i++) {
                                                 			for(int j=ny_block+pad; j<f->Ny; j++) {
-                                                        			for(int k=0; k<f->Nz; k++) {
+                                                        			for(int k=pad; k<nz_block+pad; k++) {
+						//std::cout << (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j-ny_block][k] << " " << i << " " << j-ny_block << " " << k <<  std::endl;
 								
 											f->val[i][j][k] = \
-							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j-ny_block-pad][k]; 
+							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j-ny_block][k]; 
 										}
 									}
 								}
 							}
 							if(n==LEFT && m==YDIR) {
 						
-								for(int i=0; i<f->Nx; i++) {
+								for(int i=pad; i<nx_block+pad; i++) {
                                                 			for(int j=0; j<pad; j++) {
-                                                        			for(int k=0; k<f->Nz; k++) {
+                                                        			for(int k=pad; k<nz_block+pad; k++) {
 								
 											f->val[i][j][k] = \
-							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j+ny_block+pad][k]; 
+							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j+ny_block][k]; 
 										}
 									}
 								}	
@@ -84,7 +89,7 @@ void exchange_ghost_val(int level, std::string name) {
                                                         			for(int k=nz_block+pad; k<f->Nz; k++) {
 								
 											f->val[i][j][k] = \
-							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j][k-nz_block-pad]; 
+							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j][k-nz_block]; 
 										}
 									}
 								}
@@ -96,7 +101,7 @@ void exchange_ghost_val(int level, std::string name) {
                                                         			for(int k=0; k<pad; k++) {
 								
 											f->val[i][j][k] = \
-							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j][k+nz_block+pad]; 
+							 (*it)->neighbour[m][n]->get_block_data()->scalarfields[l]->val[i][j][k+nz_block]; 
 										}
 									}
 								}	

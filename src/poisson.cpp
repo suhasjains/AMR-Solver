@@ -34,12 +34,15 @@ void jacobi(int level, std::string name) {
 	double dx, dy, dz;
 	double ue, uw, un, us, ut, ub, up;
 
-	double force = 0.0;
+	double force = 1.0;
+
+	long int loop = 0;
 
 	//temporary field
 	Field temp(nx_block+2*pad,ny_block+2*pad,nz_block+2*pad, "temp");
 
 	//iteration loop
+	//while(loop <250 ) {
 	while(global_res > pow(10,-7)) {
 
 		global_res = 0.0;
@@ -50,6 +53,7 @@ void jacobi(int level, std::string name) {
 			for(int l = 0; l<myOctree::scalar_fields.size() ; l++) {
 	
 				Field *f = (*it)->get_block_data()->scalarfields[l];
+							//	std::cerr << f->name << std::endl;
 	
 				if( f->name == name ) {
 					
@@ -61,7 +65,7 @@ void jacobi(int level, std::string name) {
 					dx = (*it)->get_block_data()->dx;
 					dy = (*it)->get_block_data()->dy;
 					dz = (*it)->get_block_data()->dz;
-
+				
 
 					//jocobi work - add here
 					for(int i=pad; i<nx_block+pad; i++) {
@@ -77,25 +81,27 @@ void jacobi(int level, std::string name) {
 								up = f->val[i][j][k];		
 								
 
-								if(i==pad)		temp.val[i][j][k] += (2.0*uw - up)/(dx*dx); 	
-								else			temp.val[i][j][k] += uw/(dx*dx);	
-								if(i==nx_block+pad-1)	temp.val[i][j][k] += (2.0*ue - up)/(dx*dx); 	
-								else			temp.val[i][j][k] += ue/(dx*dx);	
-								if(j==pad)		temp.val[i][j][k] += (2.0*us - up)/(dy*dy); 	
-								else			temp.val[i][j][k] += us/(dy*dy);	
-								if(j==ny_block+pad-1)	temp.val[i][j][k] += (2.0*un - up)/(dy*dy); 	
-								else			temp.val[i][j][k] += un/(dy*dy);	
-								if(k==pad)		temp.val[i][j][k] += (2.0*ub - up)/(dz*dz); 	
-								else			temp.val[i][j][k] += ub/(dz*dz);	
-								if(k==nz_block+pad-1)	temp.val[i][j][k] += (2.0*ut - up)/(dz*dz); 	
-								else			temp.val[i][j][k] += ut/(dz*dz);	
+								if(i==pad)		temp.val[i][j][k] += (2.0*uw - up)/pow(dx,2); 	
+								else			temp.val[i][j][k] += uw/pow(dx,2);	
+								if(i==nx_block+pad-1)	temp.val[i][j][k] += (2.0*ue - up)/pow(dx,2); 	
+								else			temp.val[i][j][k] += ue/pow(dx,2);	
+								if(j==pad)		temp.val[i][j][k] += (2.0*us - up)/pow(dy,2); 	
+								else			temp.val[i][j][k] += us/pow(dy,2);	
+								if(j==ny_block+pad-1)	temp.val[i][j][k] += (2.0*un - up)/pow(dy,2); 	
+								else			temp.val[i][j][k] += un/pow(dy,2);	
+								if(k==pad)		temp.val[i][j][k] += (2.0*ub - up)/pow(dz,2); 	
+								else			temp.val[i][j][k] += ub/pow(dz,2);	
+								if(k==nz_block+pad-1)	temp.val[i][j][k] += (2.0*ut - up)/pow(dz,2); 	
+								else			temp.val[i][j][k] += ut/pow(dz,2);	
 
 								temp.val[i][j][k] -= force;
-								temp.val[i][j][k] /= 2.0*(1.0/(dx*dx) + 1.0/(dy*dy) + 1.0/(dz*dz));
-
+								temp.val[i][j][k] /= 2.0;
+								temp.val[i][j][k] /= (1.0/pow(dx,2) + 1.0/pow(dy,2) + 1.0/pow(dz,2));
+					
+							//	std::cerr << temp.val[i][j][k] << std::endl;
 
 								/*magnitude to be considered*/
-								err = temp.val[i][j][k] - f->val[i][j][k];
+								err = std::abs(temp.val[i][j][k] - f->val[i][j][k]);
 								if(err>res) 	res = err;	
 
 
@@ -125,7 +131,9 @@ void jacobi(int level, std::string name) {
 		//exchange ghost values
 		myOctree::exchange_ghost_val(level, name);
 
-		std::cerr << "Hi" << global_res << std::endl;
+		std::cout << "Residual " << global_res << std::endl;
+
+		loop++;
 
 	}	
 }

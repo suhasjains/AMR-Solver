@@ -1,0 +1,43 @@
+scalar_fields
+{
+alpha beta
+}
+
+vector_fields
+{
+psi
+}
+
+blocks
+{
+1 0.0 1.0 0.0 1.0 0.0 0.5 0 B B B B N B
+2 0.0 1.0 0.0 1.0 0.5 1.0 0 B B B B B N
+}
+
+scalar_field_boundary_conditions
+{ 
+
+alpha
+1 D D D D N D 1.0 1.0 1.0 1.0 0.0 1.0 
+2 D D D D D N 1.0 1.0 1.0 1.0 1.0 0.0 
+
+beta
+1 D D D D N D 1.0 1.0 1.0 1.0 0.0 1.0 
+2 D D D D D N 1.0 1.0 1.0 1.0 1.0 0.0 
+
+}
+
+vector_field_boundary_conditions
+{
+psi 
+1 D D D D N D 1.0 1.0 1.0 1.0 0.0 1.0 
+  D D D D N D 1.0 1.0 1.0 1.0 0.0 1.0 
+  D D D D N D 1.0 1.0 1.0 1.0 0.0 1.0 
+2 D D D D D N 1.0 1.0 1.0 1.0 1.0 0.0 
+  D D D D D N 1.0 1.0 1.0 1.0 1.0 0.0 
+  D D D D D N 1.0 1.0 1.0 1.0 1.0 0.0 
+}
+
+max_level
+0
+
