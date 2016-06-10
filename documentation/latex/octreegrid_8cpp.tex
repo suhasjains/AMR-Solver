@@ -1,0 +1,43 @@
+\hypertarget{octreegrid_8cpp}{}\section{/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/octreegrid.cpp File Reference}
+\label{octreegrid_8cpp}\index{/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/octreegrid.\+cpp@{/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/octreegrid.\+cpp}}
+{\ttfamily \#include \char`\"{}octree.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}vtk.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}boundary.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}direction.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ghost.\+h\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacemy_octree}{my\+Octree}
+\begin{DoxyCompactList}\small\item\em A\+M\+R grid stuff. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespacemy_octree_a741060f7071defd75bef2cfdfa7ab034}{my\+Octree\+::create\+\_\+list\+\_\+of\+\_\+leaf\+\_\+nodes} ()
+\item 
+void \hyperlink{namespacemy_octree_aaa20834da8b824542110b0b03aa35359}{my\+Octree\+::create\+\_\+list\+\_\+of\+\_\+root\+\_\+nodes} ()
+\item 
+void \hyperlink{namespacemy_octree_a298dd53ebf92898b6507bb402b68fa07}{my\+Octree\+::create\+\_\+lists\+\_\+of\+\_\+level\+\_\+nodes} ()
+\item 
+void \hyperlink{namespacemy_octree_ad83ad922f43753112c387fea916b4576}{my\+Octree\+::create\+\_\+node} (int blocknumber, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, Node\+Bc $\ast$$\ast$bc)
+\item 
+void \hyperlink{namespacemy_octree_a2b0ced04fb2f16712e308eabc8ec0ba4}{my\+Octree\+::reassign\+\_\+neighbours} ()
+\item 
+void \hyperlink{namespacemy_octree_a136efe297bcd6329e454b688cc1de442}{my\+Octree\+::set\+\_\+root\+\_\+neighbours} ()
+\item 
+void \hyperlink{namespacemy_octree_a8766e92a2a94903f9c1ad0f7f09dbed1}{my\+Octree\+::print\+\_\+neighbour\+\_\+information} (std\+::list$<$ Octree $\ast$ $>$ \&nodes)
+\item 
+void \hyperlink{namespacemy_octree_ad0e2bc9828ff6443f10738e3fadf0bc3}{my\+Octree\+::exchange\+\_\+ghost\+\_\+values\+\_\+of\+\_\+level} (int level)
+\item 
+void \hyperlink{namespacemy_octree_a182d6571bcd6fdebcdb32e5995ee3302}{my\+Octree\+::\+Octree\+Grid} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ Octree $\ast$ $>$ \hyperlink{namespacemy_octree_ab0c724b7056ad36edd2acde8443dae7a}{my\+Octree\+::leaf\+\_\+nodes}
+\item 
+std\+::list$<$ Octree $\ast$ $>$ \hyperlink{namespacemy_octree_a6212186e66a32f5588c044d5ba02dabf}{my\+Octree\+::root\+\_\+nodes}
+\item 
+std\+::list$<$ Octree $\ast$ $>$ \hyperlink{namespacemy_octree_ab896d4170dc937b1579cab36f7aa8015}{my\+Octree\+::level\+\_\+nodes} \mbox{[}20\mbox{]}
+\end{DoxyCompactItemize}

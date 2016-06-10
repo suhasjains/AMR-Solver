@@ -8,34 +8,34 @@ namespace myOctree {
 int  max_level;
 
 
-//sets refine criterion for all the leaf nodes
-void set_refinement_criteria() {
+////sets refine criterion for all the leaf nodes
+//void set_refinement_criteria() {
+//
+//        create_list_of_leaf_nodes();
+//
+//        for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
+//
+//                if((*i)->get_level() >= max_level)
+//                        continue;
+//
+//                if((*i)->contains(0.1,0.9,0.99))
+//                        (*i)->set_to_refine_with_nesting();
+//                if((*i)->contains(1.1,1.1,0.99))
+//                        (*i)->set_to_refine_with_nesting();
+//        //      if((*i)->contains(2.1,0.9,0.99))
+//        //              (*i)->set_to_refine_with_nesting();
+//        //      if((*i)->contains(5.9,0.1,0.99))
+//        //              (*i)->set_to_refine_with_nesting();
+//        //      if((*i)->contains(12.123,1.789,0.99))
+//        //              (*i)->set_to_refine_with_nesting();
+//        //      if((*i)->contains(18.9,2.9,0.99))
+//        //              (*i)->set_to_refine_with_nesting();
+//
+//        }
+//}
 
-        create_list_of_leaf_nodes();
 
-        for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
-
-                if((*i)->get_level() >= max_level)
-                        continue;
-
-                if((*i)->contains(0.1,0.9,0.99))
-                        (*i)->set_to_refine_with_nesting();
-                if((*i)->contains(1.1,1.1,0.99))
-                        (*i)->set_to_refine_with_nesting();
-        //      if((*i)->contains(2.1,0.9,0.99))
-        //              (*i)->set_to_refine_with_nesting();
-        //      if((*i)->contains(5.9,0.1,0.99))
-        //              (*i)->set_to_refine_with_nesting();
-        //      if((*i)->contains(12.123,1.789,0.99))
-        //              (*i)->set_to_refine_with_nesting();
-        //      if((*i)->contains(18.9,2.9,0.99))
-        //              (*i)->set_to_refine_with_nesting();
-
-        }
-}
-
-
-//refines the leaf nodes based on the criteria
+/*!Refines the leaf nodes based on the refinement criteria and nesting condition.*/
 void refine_nodes() {
 
         create_list_of_leaf_nodes();
@@ -53,35 +53,35 @@ void refine_nodes() {
 }
 
 
-//sets coarse criterion for all the leaf nodes
-void set_coarse_criteria() {
+////sets coarse criterion for all the leaf nodes
+//void set_coarse_criteria() {
+//
+//        create_list_of_leaf_nodes();
+//
+//        for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
+//
+//                if(!((*i)->isRootNode())) {
+//
+//                        //setting coarsening criteria to siblings       
+//                        if((*i)->contains(1.1,0.9,0.99)) 
+//                                (*i)->set_to_coarsen_with_nesting();
+//                                
+//                        if((*i)->contains(0.9,1.1,0.99))
+//                                (*i)->set_to_coarsen_with_nesting();
+//                                
+//                        if((*i)->contains(1.1,1.1,0.99))
+//                                (*i)->set_to_coarsen_with_nesting();
+//                                
+//                        if((*i)->contains(0.9,0.9,0.99))
+//                                (*i)->set_to_coarsen_with_nesting();
+//                                
+//                }               
+//
+//        }
+//}
 
-        create_list_of_leaf_nodes();
 
-        for (std::list<Octree*>::iterator i = leaf_nodes.begin(), end = leaf_nodes.end(); i != end; ++i) {
-
-                if(!((*i)->isRootNode())) {
-
-                        //setting coarsening criteria to siblings       
-                        if((*i)->contains(1.1,0.9,0.99)) 
-                                (*i)->set_to_coarsen_with_nesting();
-                                
-                        if((*i)->contains(0.9,1.1,0.99))
-                                (*i)->set_to_coarsen_with_nesting();
-                                
-                        if((*i)->contains(1.1,1.1,0.99))
-                                (*i)->set_to_coarsen_with_nesting();
-                                
-                        if((*i)->contains(0.9,0.9,0.99))
-                                (*i)->set_to_coarsen_with_nesting();
-                                
-                }               
-
-        }
-}
-
-
-//refines the leaf nodes based on the criteria
+/*!Removes the leaf nodes based on the coarsen criteria and nesting condition.*/
 void coarsen_nodes() {
 
         create_list_of_leaf_nodes();
@@ -110,8 +110,9 @@ void coarsen_nodes() {
 }
 
 
-//resets refine flags 
-//Hence to be called after refinement
+/*!Resets all refine flags.
+ 
+This is to be called after refinement step is complete.*/
 void reset_refine_flags() {
 
         for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
@@ -121,8 +122,9 @@ void reset_refine_flags() {
 
 }
 
-//resets coarsen flags 
-//Hence to be called after coarsening
+/*!Resets all coarsen flags. 
+
+ This is to be called after coarsening step is complete.*/
 void reset_coarsen_flags() {
 
         for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
@@ -132,7 +134,7 @@ void reset_coarsen_flags() {
 }
 
 
-//adapts grid based on the field gradient
+/*!Calculates the field gradient and sets the refinement flags accordingly.*/
 void set_refine_flag_based_on_gradient() {
 
         double x_grad, y_grad, z_grad;
@@ -187,7 +189,7 @@ void set_refine_flag_based_on_gradient() {
 }
 
 
-//adapts grid based on the field gradient
+/*!Calculates the field gradient and sets the coarsening flags accordingly.*/
 void set_coarsen_flag_based_on_gradient() {
 
         double x_grad, y_grad, z_grad;
@@ -245,7 +247,9 @@ void set_coarsen_flag_based_on_gradient() {
 
 }
 
-//checks if siblings of a node are also set to coarsening. Else the flag is removed.
+/*!Checks if all the siblings of a node are set to coarsening, else the flag is removed.
+ 
+ This ensures nesting.*/
 void recheck_siblings_coarsen_flags() {
 
         create_list_of_leaf_nodes();

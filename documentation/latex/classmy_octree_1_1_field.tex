@@ -1,0 +1,176 @@
+\hypertarget{classmy_octree_1_1_field}{}\section{my\+Octree\+:\+:Field Class Reference}
+\label{classmy_octree_1_1_field}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+
+
+Template class for any scalar field variable in the domain.  
+
+
+
+
+{\ttfamily \#include $<$field.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy_octree_1_1_field_afc0d406a0b1bfdf26e5e0bed885bd9a2}{Field} (int N\+\_\+x, int N\+\_\+y, int N\+\_\+z, std\+::string info)
+\item 
+\hyperlink{classmy_octree_1_1_field_a5fc00db76c0bb245ae13fc5af2e46df1}{Field} ()
+\item 
+\hyperlink{classmy_octree_1_1_field_a7e5b5f4c2712e755142483c3a5a55d6f}{Field} (const \hyperlink{classmy_octree_1_1_field}{Field} \&obj)
+\item 
+\hyperlink{classmy_octree_1_1_field_ac2dd7e18d625830473d80910b84b1ae7}{$\sim$\+Field} ()
+\item 
+void \hyperlink{classmy_octree_1_1_field_a671f7ea09f27dfdda6fa46d39c6be232}{set\+\_\+field} (double)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$$\ast$$\ast$ \hyperlink{classmy_octree_1_1_field_a500198aed026e6892c98b3db47c78348}{val}
+\item 
+std\+::string \hyperlink{classmy_octree_1_1_field_adab09d425664457ff438fbb21d2e8758}{name}
+\item 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9}{Field\+Bc} \hyperlink{classmy_octree_1_1_field_a68d004c45354f2007a0dcae4a2a8f011}{bc} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf Size}\par
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classmy_octree_1_1_field_ae7d086291559c6c6810752e27641e95b}{Nx}
+\item 
+int \hyperlink{classmy_octree_1_1_field_a0f1efff9530dcbe0783cacb8ba72e14c}{Ny}
+\item 
+int \hyperlink{classmy_octree_1_1_field_af7697d9e2864fc45a3a9b2b71cd26c7f}{Nz}
+\item 
+int \hyperlink{classmy_octree_1_1_field_af685307c6711d0d5602b92942af6ab2b}{N}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Template class for any scalar field variable in the domain. 
+
+Usage\+: \hyperlink{classmy_octree_1_1_field}{Field} object(nx,ny,nz); Parameters are the number of cells along x, y and z (including the padding) which usually remains same for all the blocks in the mesh. Padding represents extra layer of cells at all the sides of the block, which acts as ghost cells at the block boundaries or buffer cells at the processor boundaries. New objects of this class are defined in the constructors of \hyperlink{classmy_octree_1_1_block}{Block} class and the pointers to these objects are members of the \hyperlink{classmy_octree_1_1_block}{Block} class. 
+
+Definition at line 11 of file field.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmy_octree_1_1_field_afc0d406a0b1bfdf26e5e0bed885bd9a2}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!Field@{Field}}
+\index{Field@{Field}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{Field(int N\+\_\+x, int N\+\_\+y, int N\+\_\+z, std\+::string info)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Field\+::\+Field (
+\begin{DoxyParamCaption}
+\item[{int}]{N\+\_\+x, }
+\item[{int}]{N\+\_\+y, }
+\item[{int}]{N\+\_\+z, }
+\item[{std\+::string}]{info}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_field_afc0d406a0b1bfdf26e5e0bed885bd9a2}
+Parametrized constructor with initialization fields 
+
+Definition at line 5 of file field.\+cpp.
+
+\hypertarget{classmy_octree_1_1_field_a5fc00db76c0bb245ae13fc5af2e46df1}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!Field@{Field}}
+\index{Field@{Field}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{Field()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Field\+::\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_field_a5fc00db76c0bb245ae13fc5af2e46df1}
+Default constructor 
+
+Definition at line 21 of file field.\+cpp.
+
+\hypertarget{classmy_octree_1_1_field_a7e5b5f4c2712e755142483c3a5a55d6f}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!Field@{Field}}
+\index{Field@{Field}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{Field(const Field \&obj)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Field\+::\+Field (
+\begin{DoxyParamCaption}
+\item[{const {\bf Field} \&}]{obj}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_field_a7e5b5f4c2712e755142483c3a5a55d6f}
+Copy constructor 
+
+Definition at line 38 of file field.\+cpp.
+
+\hypertarget{classmy_octree_1_1_field_ac2dd7e18d625830473d80910b84b1ae7}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!````~Field@{$\sim$\+Field}}
+\index{````~Field@{$\sim$\+Field}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{$\sim$\+Field()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Field\+::$\sim$\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_field_ac2dd7e18d625830473d80910b84b1ae7}
+Destructor 
+
+Definition at line 65 of file field.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmy_octree_1_1_field_a671f7ea09f27dfdda6fa46d39c6be232}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!set\+\_\+field@{set\+\_\+field}}
+\index{set\+\_\+field@{set\+\_\+field}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{set\+\_\+field(double)}]{\setlength{\rightskip}{0pt plus 5cm}void my\+Octree\+::\+Field\+::set\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_field_a671f7ea09f27dfdda6fa46d39c6be232}
+Function to set the given value in the field 
+
+Definition at line 80 of file field.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmy_octree_1_1_field_a68d004c45354f2007a0dcae4a2a8f011}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!bc@{bc}}
+\index{bc@{bc}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{bc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Field\+Bc} my\+Octree\+::\+Field\+::bc\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}\label{classmy_octree_1_1_field_a68d004c45354f2007a0dcae4a2a8f011}
+\hyperlink{classmy_octree_1_1_field}{Field} boundary conditions 
+
+Definition at line 22 of file field.\+h.
+
+\hypertarget{classmy_octree_1_1_field_af685307c6711d0d5602b92942af6ab2b}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!N@{N}}
+\index{N@{N}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{N}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Field\+::\+N}\label{classmy_octree_1_1_field_af685307c6711d0d5602b92942af6ab2b}
+
+
+Definition at line 18 of file field.\+h.
+
+\hypertarget{classmy_octree_1_1_field_adab09d425664457ff438fbb21d2e8758}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!name@{name}}
+\index{name@{name}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string my\+Octree\+::\+Field\+::name}\label{classmy_octree_1_1_field_adab09d425664457ff438fbb21d2e8758}
+\hyperlink{classmy_octree_1_1_field}{Field} name 
+
+Definition at line 21 of file field.\+h.
+
+\hypertarget{classmy_octree_1_1_field_ae7d086291559c6c6810752e27641e95b}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!Nx@{Nx}}
+\index{Nx@{Nx}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{Nx}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Field\+::\+Nx}\label{classmy_octree_1_1_field_ae7d086291559c6c6810752e27641e95b}
+
+
+Definition at line 17 of file field.\+h.
+
+\hypertarget{classmy_octree_1_1_field_a0f1efff9530dcbe0783cacb8ba72e14c}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!Ny@{Ny}}
+\index{Ny@{Ny}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{Ny}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Field\+::\+Ny}\label{classmy_octree_1_1_field_a0f1efff9530dcbe0783cacb8ba72e14c}
+
+
+Definition at line 17 of file field.\+h.
+
+\hypertarget{classmy_octree_1_1_field_af7697d9e2864fc45a3a9b2b71cd26c7f}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!Nz@{Nz}}
+\index{Nz@{Nz}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{Nz}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Field\+::\+Nz}\label{classmy_octree_1_1_field_af7697d9e2864fc45a3a9b2b71cd26c7f}
+
+
+Definition at line 17 of file field.\+h.
+
+\hypertarget{classmy_octree_1_1_field_a500198aed026e6892c98b3db47c78348}{}\index{my\+Octree\+::\+Field@{my\+Octree\+::\+Field}!val@{val}}
+\index{val@{val}!my\+Octree\+::\+Field@{my\+Octree\+::\+Field}}
+\subsubsection[{val}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$$\ast$ my\+Octree\+::\+Field\+::val}\label{classmy_octree_1_1_field_a500198aed026e6892c98b3db47c78348}
+3\+D array for storing field varible values at the cells 
+
+Definition at line 20 of file field.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{field_8h}{field.\+h}\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{field_8cpp}{field.\+cpp}\end{DoxyCompactItemize}

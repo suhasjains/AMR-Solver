@@ -5,11 +5,11 @@
 
 namespace myOctree {
 
-void set_refine_criteria();
+//void set_refinement_criteria();
 void refine_nodes();
 void set_refine_flag_based_on_gradient();
 void reset_refine_flags();
-void set_coarsen_criteria();
+//void set_coarsening_criteria();
 void coarsen_nodes();
 void set_coarsen_flag_based_on_gradient();
 void reset_coarsen_flags();

@@ -65,6 +65,7 @@ void jacobi(int level, std::string name) {
 	}	
 }
 
+/*!Solves poisson equation using multi-block red-black gauss-seidel procedure at the given level for the given scalar field.*/
 void gauss_seidel(int level, std::string name) {
 
 	myOctree::create_lists_of_level_nodes();
@@ -202,6 +203,7 @@ double jacobi_for_field(Octree* node, Field* f, double global_res) {
 
 }
 
+/*!Solving grid points marked red in gauss-seidel algorithm.*/
 double gauss_seidel_red(Octree* node, Field* f, double global_res) {
 
 	double res, err;
@@ -277,6 +279,7 @@ double gauss_seidel_red(Octree* node, Field* f, double global_res) {
 
 }
 
+/*!Solving grid points marked black in gauss-seidel algorithm.*/
 double gauss_seidel_black(Octree* node, Field* f, double global_res) {
 
 	double res, err;

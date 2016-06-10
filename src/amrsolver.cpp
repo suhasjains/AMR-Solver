@@ -10,6 +10,8 @@ using myOctree::Octree;
 using myOctree::Field;
 using myOctree::VecField;
 
+///Solver stuff
+/*!Namespace containing things related to solver*/
 namespace amrsolver {
 
 
@@ -70,7 +72,7 @@ void set_field() {
 
 }
 
-
+/*!Adapts grid based on the gradient*/
 void adapt_gradient() {
 
     	//refinement

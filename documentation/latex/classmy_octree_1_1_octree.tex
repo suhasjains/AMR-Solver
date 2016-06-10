@@ -1,0 +1,419 @@
+\hypertarget{classmy_octree_1_1_octree}{}\section{my\+Octree\+:\+:Octree Class Reference}
+\label{classmy_octree_1_1_octree}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+
+
+Class to store octree datastructure as nodes of the tree.  
+
+
+
+
+{\ttfamily \#include $<$octree.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy_octree_1_1_octree_a030592b9e46f016e238aedd137fd5c32}{Octree} ()
+\item 
+\hyperlink{classmy_octree_1_1_octree_a8b4ad2213a628a5f2deddbcbfa8e8920}{Octree} (double x1, double x2, double y1, double y2, double z1, double z2, int l)
+\item 
+\hyperlink{classmy_octree_1_1_octree_a6519dd2b6d012d28e81bb984baa8a54f}{Octree} (const \hyperlink{classmy_octree_1_1_octree}{Octree} \&obj)
+\item 
+\hyperlink{classmy_octree_1_1_octree_a29fe8f3281ac81a3816773b2380a6338}{$\sim$\+Octree} ()
+\item 
+void \hyperlink{classmy_octree_1_1_octree_ae8980a3e1e691b9aeabc6cc0a3783fb4}{refine} ()
+\item 
+bool \hyperlink{classmy_octree_1_1_octree_a9fc5028ff6bbef403cee64fafbd80aea}{is\+Leaf\+Node} ()
+\item 
+bool \hyperlink{classmy_octree_1_1_octree_a9811e45e1a415625fa17fb78856036e3}{is\+Root\+Node} ()
+\item 
+bool \hyperlink{classmy_octree_1_1_octree_a6435ca44d808be1f8132c647e216556c}{contains} (double x, double y, double z)
+\item 
+int \hyperlink{classmy_octree_1_1_octree_a247f0190625a53bad444f0d0bee93239}{get\+\_\+level} ()
+\item 
+\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$ \hyperlink{classmy_octree_1_1_octree_a342b6d295162f2e5441fa1009b0b2d15}{get\+\_\+child\+\_\+at} (int, int, int)
+\item 
+\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$ \hyperlink{classmy_octree_1_1_octree_a8d78bbc816d91f0c705c0e56f7459269}{get\+\_\+parent} ()
+\item 
+void \hyperlink{classmy_octree_1_1_octree_a46db2965b2ffb44a89259bc98c36f750}{set\+\_\+child\+\_\+null\+\_\+at} (int, int, int)
+\item 
+\hyperlink{classmy_octree_1_1_block}{Block} $\ast$ \hyperlink{classmy_octree_1_1_octree_a6305300a53ef94f0234f595d524d6114}{get\+\_\+block\+\_\+data} ()
+\item 
+void \hyperlink{classmy_octree_1_1_octree_a890ebf52fec4c2d881106932a5cfa4ec}{set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting} ()
+\item 
+void \hyperlink{classmy_octree_1_1_octree_a4d094c37db1ac00ca69a331f0320455b}{set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classmy_octree_1_1_octree_aad874752825bfcf0631d51abddcd6f8d}{set\+To\+Refine}
+\item 
+bool \hyperlink{classmy_octree_1_1_octree_a4fb4740c2e6cee437bd9e6c2268a0fd2}{set\+To\+Coarsen}
+\item 
+\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$ \hyperlink{classmy_octree_1_1_octree_a667ca17260eb69985476f64fe877b626}{neighbour} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\item 
+\hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017}{Node\+Bc} \hyperlink{classmy_octree_1_1_octree_a5f1bf21928a132fd13eb4aed27d927f9}{bc} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\item 
+int \hyperlink{classmy_octree_1_1_octree_a86d3fb8b805509bc5522b8b470d2c682}{number}
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf Node\textquotesingle{}s block dimensions}\par
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_afc540845d8c6d0db88f964d13126e52a}{x\+\_\+centre}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_aa771f7943a94365aadb387a596b37716}{y\+\_\+centre}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_a77e1cbfe3f0c11f2dd7bb682a1f2bc1e}{z\+\_\+centre}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_af8b1fb4444afb1efc5cbcefc47443a58}{x\+\_\+min}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_a2a3291b5250cd29845ce2b8a6a4745d7}{x\+\_\+max}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_a3a634a2744d467d6cc6393c35c34edd4}{y\+\_\+min}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_adc54149b3555e1ed3d9a94e14cfbfd4f}{y\+\_\+max}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_a8681e21690dc7dabb18c2b3541e20817}{z\+\_\+min}
+\item 
+double \hyperlink{classmy_octree_1_1_octree_a1ec71e5c3e48edf04aa20639dd055e79}{z\+\_\+max}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$ \hyperlink{classmy_octree_1_1_octree_a2600c7d4ed026f4566412ba67feba623}{children} \mbox{[}2\mbox{]}\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}
+\item 
+\hyperlink{classmy_octree_1_1_block}{Block} $\ast$ \hyperlink{classmy_octree_1_1_octree_a9fb4c2bd32aa53ede33abc49aff9884a}{block\+\_\+data}
+\item 
+\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$ \hyperlink{classmy_octree_1_1_octree_a3a3b56d332ffeb81743005d11d3a7942}{parent}
+\item 
+int \hyperlink{classmy_octree_1_1_octree_a4f032a94e51ee90c4d97a3acfea9419d}{level}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to store octree datastructure as nodes of the tree. 
+
+Objects of this class are nodes of the tree. When a new object is created, children are assigned, parent is assigned, data block is assigned and finally the pointer of the object is pushed into the \char`\"{}nodes\char`\"{} list.
+
+Usage\+: \hyperlink{classmy_octree_1_1_octree}{Octree} object\+\_\+name(x min, x max, y min, y max, z min, z max, level); This creates a node of the tree at the specified level. This object can be further refined or coarsened using member functions of this class. 
+
+Definition at line 26 of file octree.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmy_octree_1_1_octree_a030592b9e46f016e238aedd137fd5c32}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!Octree@{Octree}}
+\index{Octree@{Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{Octree()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Octree\+::\+Octree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a030592b9e46f016e238aedd137fd5c32}
+Default constructor 
+
+Definition at line 533 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a8b4ad2213a628a5f2deddbcbfa8e8920}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!Octree@{Octree}}
+\index{Octree@{Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{Octree(double x1, double x2, double y1, double y2, double z1, double z2, int l)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Octree\+::\+Octree (
+\begin{DoxyParamCaption}
+\item[{double}]{x1, }
+\item[{double}]{x2, }
+\item[{double}]{y1, }
+\item[{double}]{y2, }
+\item[{double}]{z1, }
+\item[{double}]{z2, }
+\item[{int}]{l}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a8b4ad2213a628a5f2deddbcbfa8e8920}
+Parametrized constructor with initialization fields 
+
+Definition at line 476 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a6519dd2b6d012d28e81bb984baa8a54f}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!Octree@{Octree}}
+\index{Octree@{Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{Octree(const Octree \&obj)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Octree\+::\+Octree (
+\begin{DoxyParamCaption}
+\item[{const {\bf Octree} \&}]{obj}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a6519dd2b6d012d28e81bb984baa8a54f}
+Copy constructor 
+
+Definition at line 414 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a29fe8f3281ac81a3816773b2380a6338}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!````~Octree@{$\sim$\+Octree}}
+\index{````~Octree@{$\sim$\+Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{$\sim$\+Octree()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Octree\+::$\sim$\+Octree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a29fe8f3281ac81a3816773b2380a6338}
+Destructor 
+
+Definition at line 407 of file octree.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmy_octree_1_1_octree_a6435ca44d808be1f8132c647e216556c}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!contains@{contains}}
+\index{contains@{contains}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{contains(double x, double y, double z)}]{\setlength{\rightskip}{0pt plus 5cm}bool my\+Octree\+::\+Octree\+::contains (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{double}]{y, }
+\item[{double}]{z}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a6435ca44d808be1f8132c647e216556c}
+/\+Function to test if the point lies inside the block 
+
+Definition at line 25 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a6305300a53ef94f0234f595d524d6114}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!get\+\_\+block\+\_\+data@{get\+\_\+block\+\_\+data}}
+\index{get\+\_\+block\+\_\+data@{get\+\_\+block\+\_\+data}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{get\+\_\+block\+\_\+data()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Block} $\ast$ my\+Octree\+::\+Octree\+::get\+\_\+block\+\_\+data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a6305300a53ef94f0234f595d524d6114}
+Function to access block data 
+
+Definition at line 20 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a342b6d295162f2e5441fa1009b0b2d15}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!get\+\_\+child\+\_\+at@{get\+\_\+child\+\_\+at}}
+\index{get\+\_\+child\+\_\+at@{get\+\_\+child\+\_\+at}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{get\+\_\+child\+\_\+at(int, int, int)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Octree} $\ast$ my\+Octree\+::\+Octree\+::get\+\_\+child\+\_\+at (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{int}]{k}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a342b6d295162f2e5441fa1009b0b2d15}
+Function that returns pointer to the child at indices (relative) 
+
+Definition at line 38 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a247f0190625a53bad444f0d0bee93239}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!get\+\_\+level@{get\+\_\+level}}
+\index{get\+\_\+level@{get\+\_\+level}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{get\+\_\+level()}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Octree\+::get\+\_\+level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a247f0190625a53bad444f0d0bee93239}
+Function that returns the level of the node 
+
+Definition at line 32 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a8d78bbc816d91f0c705c0e56f7459269}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!get\+\_\+parent@{get\+\_\+parent}}
+\index{get\+\_\+parent@{get\+\_\+parent}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{get\+\_\+parent()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Octree} $\ast$ my\+Octree\+::\+Octree\+::get\+\_\+parent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a8d78bbc816d91f0c705c0e56f7459269}
+Function that returns pointer to the parent 
+
+Definition at line 50 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a9fc5028ff6bbef403cee64fafbd80aea}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!is\+Leaf\+Node@{is\+Leaf\+Node}}
+\index{is\+Leaf\+Node@{is\+Leaf\+Node}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{is\+Leaf\+Node()}]{\setlength{\rightskip}{0pt plus 5cm}bool my\+Octree\+::\+Octree\+::is\+Leaf\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a9fc5028ff6bbef403cee64fafbd80aea}
+/\+Function to test if leaf node 
+
+Definition at line 10 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a9811e45e1a415625fa17fb78856036e3}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!is\+Root\+Node@{is\+Root\+Node}}
+\index{is\+Root\+Node@{is\+Root\+Node}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{is\+Root\+Node()}]{\setlength{\rightskip}{0pt plus 5cm}bool my\+Octree\+::\+Octree\+::is\+Root\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a9811e45e1a415625fa17fb78856036e3}
+Function to test if root node 
+
+Definition at line 15 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_ae8980a3e1e691b9aeabc6cc0a3783fb4}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!refine@{refine}}
+\index{refine@{refine}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{refine()}]{\setlength{\rightskip}{0pt plus 5cm}void my\+Octree\+::\+Octree\+::refine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_ae8980a3e1e691b9aeabc6cc0a3783fb4}
+Function to add 8 children 
+
+Definition at line 178 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a46db2965b2ffb44a89259bc98c36f750}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!set\+\_\+child\+\_\+null\+\_\+at@{set\+\_\+child\+\_\+null\+\_\+at}}
+\index{set\+\_\+child\+\_\+null\+\_\+at@{set\+\_\+child\+\_\+null\+\_\+at}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{set\+\_\+child\+\_\+null\+\_\+at(int, int, int)}]{\setlength{\rightskip}{0pt plus 5cm}void my\+Octree\+::\+Octree\+::set\+\_\+child\+\_\+null\+\_\+at (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{int}]{k}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a46db2965b2ffb44a89259bc98c36f750}
+Function that sets child pointer at indices (relative) to N\+U\+L\+L 
+
+Definition at line 44 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a4d094c37db1ac00ca69a331f0320455b}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting@{set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting}}
+\index{set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting@{set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting()}]{\setlength{\rightskip}{0pt plus 5cm}void my\+Octree\+::\+Octree\+::set\+\_\+to\+\_\+coarsen\+\_\+with\+\_\+nesting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a4d094c37db1ac00ca69a331f0320455b}
+Sets on coarsen flag with nesting 
+
+Definition at line 126 of file octree.\+cpp.
+
+\hypertarget{classmy_octree_1_1_octree_a890ebf52fec4c2d881106932a5cfa4ec}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting@{set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting}}
+\index{set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting@{set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting()}]{\setlength{\rightskip}{0pt plus 5cm}void my\+Octree\+::\+Octree\+::set\+\_\+to\+\_\+refine\+\_\+with\+\_\+nesting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_octree_a890ebf52fec4c2d881106932a5cfa4ec}
+Sets on refine flag with nesting 
+
+Definition at line 56 of file octree.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmy_octree_1_1_octree_a5f1bf21928a132fd13eb4aed27d927f9}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!bc@{bc}}
+\index{bc@{bc}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{bc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node\+Bc} my\+Octree\+::\+Octree\+::bc\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}\label{classmy_octree_1_1_octree_a5f1bf21928a132fd13eb4aed27d927f9}
+Node boundary conditions 
+
+Definition at line 84 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a9fb4c2bd32aa53ede33abc49aff9884a}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!block\+\_\+data@{block\+\_\+data}}
+\index{block\+\_\+data@{block\+\_\+data}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{block\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Block}$\ast$ my\+Octree\+::\+Octree\+::block\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\label{classmy_octree_1_1_octree_a9fb4c2bd32aa53ede33abc49aff9884a}
+Pointer to the block data 
+
+Definition at line 110 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a2600c7d4ed026f4566412ba67feba623}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!children@{children}}
+\index{children@{children}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{children}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Octree}$\ast$ my\+Octree\+::\+Octree\+::children\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classmy_octree_1_1_octree_a2600c7d4ed026f4566412ba67feba623}
+Each node has upto 8 children (2$^\wedge$3 for 3 dimensions) 
+
+Definition at line 108 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a4f032a94e51ee90c4d97a3acfea9419d}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!level@{level}}
+\index{level@{level}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{level}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Octree\+::level\hspace{0.3cm}{\ttfamily [private]}}\label{classmy_octree_1_1_octree_a4f032a94e51ee90c4d97a3acfea9419d}
+Level in the tree 
+
+Definition at line 114 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a667ca17260eb69985476f64fe877b626}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!neighbour@{neighbour}}
+\index{neighbour@{neighbour}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{neighbour}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Octree}$\ast$ my\+Octree\+::\+Octree\+::neighbour\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}\label{classmy_octree_1_1_octree_a667ca17260eb69985476f64fe877b626}
+
+
+Definition at line 73 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a86d3fb8b805509bc5522b8b470d2c682}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!number@{number}}
+\index{number@{number}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{number}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Octree\+::number}\label{classmy_octree_1_1_octree_a86d3fb8b805509bc5522b8b470d2c682}
+
+
+Definition at line 104 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a3a3b56d332ffeb81743005d11d3a7942}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!parent@{parent}}
+\index{parent@{parent}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{parent}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Octree}$\ast$ my\+Octree\+::\+Octree\+::parent\hspace{0.3cm}{\ttfamily [private]}}\label{classmy_octree_1_1_octree_a3a3b56d332ffeb81743005d11d3a7942}
+Pointer to the parent 
+
+Definition at line 112 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a4fb4740c2e6cee437bd9e6c2268a0fd2}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!set\+To\+Coarsen@{set\+To\+Coarsen}}
+\index{set\+To\+Coarsen@{set\+To\+Coarsen}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{set\+To\+Coarsen}]{\setlength{\rightskip}{0pt plus 5cm}bool my\+Octree\+::\+Octree\+::set\+To\+Coarsen}\label{classmy_octree_1_1_octree_a4fb4740c2e6cee437bd9e6c2268a0fd2}
+Coarsen flag 
+
+Definition at line 62 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_aad874752825bfcf0631d51abddcd6f8d}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!set\+To\+Refine@{set\+To\+Refine}}
+\index{set\+To\+Refine@{set\+To\+Refine}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{set\+To\+Refine}]{\setlength{\rightskip}{0pt plus 5cm}bool my\+Octree\+::\+Octree\+::set\+To\+Refine}\label{classmy_octree_1_1_octree_aad874752825bfcf0631d51abddcd6f8d}
+Refinement flag 
+
+Definition at line 60 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_afc540845d8c6d0db88f964d13126e52a}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!x\+\_\+centre@{x\+\_\+centre}}
+\index{x\+\_\+centre@{x\+\_\+centre}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{x\+\_\+centre}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::x\+\_\+centre}\label{classmy_octree_1_1_octree_afc540845d8c6d0db88f964d13126e52a}
+
+
+Definition at line 97 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a2a3291b5250cd29845ce2b8a6a4745d7}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!x\+\_\+max@{x\+\_\+max}}
+\index{x\+\_\+max@{x\+\_\+max}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{x\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::x\+\_\+max}\label{classmy_octree_1_1_octree_a2a3291b5250cd29845ce2b8a6a4745d7}
+
+
+Definition at line 98 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_af8b1fb4444afb1efc5cbcefc47443a58}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!x\+\_\+min@{x\+\_\+min}}
+\index{x\+\_\+min@{x\+\_\+min}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{x\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::x\+\_\+min}\label{classmy_octree_1_1_octree_af8b1fb4444afb1efc5cbcefc47443a58}
+
+
+Definition at line 98 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_aa771f7943a94365aadb387a596b37716}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!y\+\_\+centre@{y\+\_\+centre}}
+\index{y\+\_\+centre@{y\+\_\+centre}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{y\+\_\+centre}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::y\+\_\+centre}\label{classmy_octree_1_1_octree_aa771f7943a94365aadb387a596b37716}
+
+
+Definition at line 97 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_adc54149b3555e1ed3d9a94e14cfbfd4f}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!y\+\_\+max@{y\+\_\+max}}
+\index{y\+\_\+max@{y\+\_\+max}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{y\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::y\+\_\+max}\label{classmy_octree_1_1_octree_adc54149b3555e1ed3d9a94e14cfbfd4f}
+
+
+Definition at line 99 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a3a634a2744d467d6cc6393c35c34edd4}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!y\+\_\+min@{y\+\_\+min}}
+\index{y\+\_\+min@{y\+\_\+min}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{y\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::y\+\_\+min}\label{classmy_octree_1_1_octree_a3a634a2744d467d6cc6393c35c34edd4}
+
+
+Definition at line 99 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a77e1cbfe3f0c11f2dd7bb682a1f2bc1e}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!z\+\_\+centre@{z\+\_\+centre}}
+\index{z\+\_\+centre@{z\+\_\+centre}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{z\+\_\+centre}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::z\+\_\+centre}\label{classmy_octree_1_1_octree_a77e1cbfe3f0c11f2dd7bb682a1f2bc1e}
+
+
+Definition at line 97 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a1ec71e5c3e48edf04aa20639dd055e79}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!z\+\_\+max@{z\+\_\+max}}
+\index{z\+\_\+max@{z\+\_\+max}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{z\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::z\+\_\+max}\label{classmy_octree_1_1_octree_a1ec71e5c3e48edf04aa20639dd055e79}
+
+
+Definition at line 100 of file octree.\+h.
+
+\hypertarget{classmy_octree_1_1_octree_a8681e21690dc7dabb18c2b3541e20817}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!z\+\_\+min@{z\+\_\+min}}
+\index{z\+\_\+min@{z\+\_\+min}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
+\subsubsection[{z\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Octree\+::z\+\_\+min}\label{classmy_octree_1_1_octree_a8681e21690dc7dabb18c2b3541e20817}
+
+
+Definition at line 100 of file octree.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{octree_8h}{octree.\+h}\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{octree_8cpp}{octree.\+cpp}\end{DoxyCompactItemize}

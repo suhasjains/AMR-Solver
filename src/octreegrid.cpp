@@ -5,6 +5,8 @@
 #include "direction.h"
 #include "ghost.h"
 
+///AMR grid stuff
+/*!Namespace containing things related to grid*/
 namespace myOctree {
 
 extern int max_level;
@@ -15,7 +17,7 @@ std::list<Octree*> root_nodes;
 std::list<Octree*> level_nodes[20];
 
 
-//creates a new list of leaf nodes 
+/*!Creates a list of leaf nodes. Clears the old list before creating the new one.*/ 
 void create_list_of_leaf_nodes() {
 
 	leaf_nodes.clear();
@@ -26,7 +28,7 @@ void create_list_of_leaf_nodes() {
 	}
 }
 
-//creates a new list of root nodes
+/*!Creates a new list of root nodes. Clears the old list before creating the new one.*/
 void create_list_of_root_nodes() {
 
 	root_nodes.clear();
@@ -37,15 +39,11 @@ void create_list_of_root_nodes() {
 	}
 }
 
-//creates a vector of lists of nodes on each level
+/*!Creates a vector of lists of nodes on each level. Clears the old lists before creating the new one.*/
 void create_lists_of_level_nodes() {
-
-	
 
 	//clearing all lists
 	for (unsigned level=0; level <= max_level; level++) {
-	
-	
 		level_nodes[level].clear();
 	}
 	
@@ -58,7 +56,7 @@ void create_lists_of_level_nodes() {
 
 }
 
-//creates an octree node
+/*!Creates an octree node*/
 void create_node(int blocknumber, double xmin, double xmax, double ymin, double ymax, double zmin, double zmax, int level, NodeBc **bc) {
 
 	//memory allocation to new node
@@ -84,9 +82,11 @@ void create_node(int blocknumber, double xmin, double xmax, double ymin, double 
 		
 }
 
-//reassign neighbours after coarsening or refining the grid and after creating lists of level_nodes
-//this is done coz, while assigning neighbours during refinement, neighbours might not have been created and a NULL would be assigned in these situations
-//So this is done to ensure that neighbours are assigned after all refinement or coarsening is done for this time step 
+/*!Reassigns neighbours after coarsening or refining the grid and after creating lists of level_nodes. 
+  
+Neighbours are assigned during refinement but since coarsening and refinement is a sequential process, neighbours might not have been created and a NULL would have been assigned.
+
+So this function is to be called after all refinement or coarsening is complete in every time step to ensure correct assignment of neighbours.*/ 
 void reassign_neighbours() {
 
 	for (unsigned level=0; level <= max_level; level++) {
@@ -145,7 +145,7 @@ void reassign_neighbours() {
 	}
 }
 
-//sets neighours to root nodes
+/*!Assigns neighours to root nodes*/
 void set_root_neighbours() {
 
 	create_list_of_root_nodes();
@@ -208,6 +208,10 @@ void set_root_neighbours() {
 	}
 }	
 
+/*!Prints the centre coordinates of the neighbours of the given list of nodes. 
+ 
+  This can be used to test correctness in the assignment of neighbours.*/
+ 
 void print_neighbour_information(std::list<Octree*>& nodes) {
 
 	for (std::list<Octree*>::iterator i = nodes.begin(), end = nodes.end(); i != end; ++i) {
@@ -230,7 +234,7 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 
 }
 
-
+/*!Exchanges ghost values of all the user defined Scalar and Vector fields at the given level*/
 void exchange_ghost_values_of_level(int level) {
 
 	for(int l = 0; l<scalar_fields.size() ; l++) {
@@ -242,7 +246,8 @@ void exchange_ghost_values_of_level(int level) {
 	}
 
 }
-	
+
+/*!Sets up octree AMR grid*/
 void OctreeGrid() {
 
 	std::cerr << "\n"  <<"Setting up grid" << std::endl;

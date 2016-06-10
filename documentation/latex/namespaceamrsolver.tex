@@ -1,0 +1,130 @@
+\hypertarget{namespaceamrsolver}{}\section{amrsolver Namespace Reference}
+\label{namespaceamrsolver}\index{amrsolver@{amrsolver}}
+
+
+Solver stuff.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceamrsolver_a30270c7faf5dc4245839245162d2d763}{set\+\_\+initial\+\_\+field} ()
+\item 
+void \hyperlink{namespaceamrsolver_aa8ba0266fc376e4006289aa795fbe65f}{set\+\_\+field} ()
+\item 
+void \hyperlink{namespaceamrsolver_a9c93c4e4c5d010e8ac0ab4175f773053}{adapt\+\_\+gradient} ()
+\item 
+void \hyperlink{namespaceamrsolver_a0535b8cfa1042012c1c9225c3310c570}{jacobi} (int level, std\+::string name)
+\item 
+void \hyperlink{namespaceamrsolver_a54da11634e9a8621901164515143ec5b}{gauss\+\_\+seidel} (int level, std\+::string name)
+\item 
+double \hyperlink{namespaceamrsolver_a07e3068eaab7e7b70d1a22880f5e94f7}{jacobi\+\_\+for\+\_\+field} (\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$node, \hyperlink{classmy_octree_1_1_field}{Field} $\ast$f, double global\+\_\+res)
+\item 
+double \hyperlink{namespaceamrsolver_a9b68ac4fd5dffe436c5082657d70c158}{gauss\+\_\+seidel\+\_\+red} (\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$node, \hyperlink{classmy_octree_1_1_field}{Field} $\ast$f, double global\+\_\+res)
+\item 
+double \hyperlink{namespaceamrsolver_af5a5bde6823f819161702891b9b1669b}{gauss\+\_\+seidel\+\_\+black} (\hyperlink{classmy_octree_1_1_octree}{Octree} $\ast$node, \hyperlink{classmy_octree_1_1_field}{Field} $\ast$f, double global\+\_\+res)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Solver stuff. 
+
+Namespace containing things related to solver 
+
+\subsection{Function Documentation}
+\hypertarget{namespaceamrsolver_a9c93c4e4c5d010e8ac0ab4175f773053}{}\index{amrsolver@{amrsolver}!adapt\+\_\+gradient@{adapt\+\_\+gradient}}
+\index{adapt\+\_\+gradient@{adapt\+\_\+gradient}!amrsolver@{amrsolver}}
+\subsubsection[{adapt\+\_\+gradient()}]{\setlength{\rightskip}{0pt plus 5cm}void amrsolver\+::adapt\+\_\+gradient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_a9c93c4e4c5d010e8ac0ab4175f773053}
+Adapts grid based on the gradient 
+
+Definition at line 76 of file amrsolver.\+cpp.
+
+\hypertarget{namespaceamrsolver_a54da11634e9a8621901164515143ec5b}{}\index{amrsolver@{amrsolver}!gauss\+\_\+seidel@{gauss\+\_\+seidel}}
+\index{gauss\+\_\+seidel@{gauss\+\_\+seidel}!amrsolver@{amrsolver}}
+\subsubsection[{gauss\+\_\+seidel(int level, std\+::string name)}]{\setlength{\rightskip}{0pt plus 5cm}void amrsolver\+::gauss\+\_\+seidel (
+\begin{DoxyParamCaption}
+\item[{int}]{level, }
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_a54da11634e9a8621901164515143ec5b}
+Solves poisson equation using multi-\/block red-\/black gauss-\/seidel procedure at the given level for the given scalar field. 
+
+Definition at line 69 of file poisson.\+cpp.
+
+\hypertarget{namespaceamrsolver_af5a5bde6823f819161702891b9b1669b}{}\index{amrsolver@{amrsolver}!gauss\+\_\+seidel\+\_\+black@{gauss\+\_\+seidel\+\_\+black}}
+\index{gauss\+\_\+seidel\+\_\+black@{gauss\+\_\+seidel\+\_\+black}!amrsolver@{amrsolver}}
+\subsubsection[{gauss\+\_\+seidel\+\_\+black(\+Octree $\ast$node, Field $\ast$f, double global\+\_\+res)}]{\setlength{\rightskip}{0pt plus 5cm}double amrsolver\+::gauss\+\_\+seidel\+\_\+black (
+\begin{DoxyParamCaption}
+\item[{{\bf Octree} $\ast$}]{node, }
+\item[{{\bf Field} $\ast$}]{f, }
+\item[{double}]{global\+\_\+res}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_af5a5bde6823f819161702891b9b1669b}
+Solving grid points marked black in gauss-\/seidel algorithm. 
+
+Definition at line 283 of file poisson.\+cpp.
+
+\hypertarget{namespaceamrsolver_a9b68ac4fd5dffe436c5082657d70c158}{}\index{amrsolver@{amrsolver}!gauss\+\_\+seidel\+\_\+red@{gauss\+\_\+seidel\+\_\+red}}
+\index{gauss\+\_\+seidel\+\_\+red@{gauss\+\_\+seidel\+\_\+red}!amrsolver@{amrsolver}}
+\subsubsection[{gauss\+\_\+seidel\+\_\+red(\+Octree $\ast$node, Field $\ast$f, double global\+\_\+res)}]{\setlength{\rightskip}{0pt plus 5cm}double amrsolver\+::gauss\+\_\+seidel\+\_\+red (
+\begin{DoxyParamCaption}
+\item[{{\bf Octree} $\ast$}]{node, }
+\item[{{\bf Field} $\ast$}]{f, }
+\item[{double}]{global\+\_\+res}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_a9b68ac4fd5dffe436c5082657d70c158}
+Solving grid points marked red in gauss-\/seidel algorithm. 
+
+Definition at line 207 of file poisson.\+cpp.
+
+\hypertarget{namespaceamrsolver_a0535b8cfa1042012c1c9225c3310c570}{}\index{amrsolver@{amrsolver}!jacobi@{jacobi}}
+\index{jacobi@{jacobi}!amrsolver@{amrsolver}}
+\subsubsection[{jacobi(int level, std\+::string name)}]{\setlength{\rightskip}{0pt plus 5cm}void amrsolver\+::jacobi (
+\begin{DoxyParamCaption}
+\item[{int}]{level, }
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_a0535b8cfa1042012c1c9225c3310c570}
+
+
+Definition at line 23 of file poisson.\+cpp.
+
+\hypertarget{namespaceamrsolver_a07e3068eaab7e7b70d1a22880f5e94f7}{}\index{amrsolver@{amrsolver}!jacobi\+\_\+for\+\_\+field@{jacobi\+\_\+for\+\_\+field}}
+\index{jacobi\+\_\+for\+\_\+field@{jacobi\+\_\+for\+\_\+field}!amrsolver@{amrsolver}}
+\subsubsection[{jacobi\+\_\+for\+\_\+field(\+Octree $\ast$node, Field $\ast$f, double global\+\_\+res)}]{\setlength{\rightskip}{0pt plus 5cm}double amrsolver\+::jacobi\+\_\+for\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{{\bf Octree} $\ast$}]{node, }
+\item[{{\bf Field} $\ast$}]{f, }
+\item[{double}]{global\+\_\+res}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_a07e3068eaab7e7b70d1a22880f5e94f7}
+
+
+Definition at line 130 of file poisson.\+cpp.
+
+\hypertarget{namespaceamrsolver_aa8ba0266fc376e4006289aa795fbe65f}{}\index{amrsolver@{amrsolver}!set\+\_\+field@{set\+\_\+field}}
+\index{set\+\_\+field@{set\+\_\+field}!amrsolver@{amrsolver}}
+\subsubsection[{set\+\_\+field()}]{\setlength{\rightskip}{0pt plus 5cm}void amrsolver\+::set\+\_\+field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_aa8ba0266fc376e4006289aa795fbe65f}
+
+
+Definition at line 48 of file amrsolver.\+cpp.
+
+\hypertarget{namespaceamrsolver_a30270c7faf5dc4245839245162d2d763}{}\index{amrsolver@{amrsolver}!set\+\_\+initial\+\_\+field@{set\+\_\+initial\+\_\+field}}
+\index{set\+\_\+initial\+\_\+field@{set\+\_\+initial\+\_\+field}!amrsolver@{amrsolver}}
+\subsubsection[{set\+\_\+initial\+\_\+field()}]{\setlength{\rightskip}{0pt plus 5cm}void amrsolver\+::set\+\_\+initial\+\_\+field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespaceamrsolver_a30270c7faf5dc4245839245162d2d763}
+
+
+Definition at line 18 of file amrsolver.\+cpp.
+

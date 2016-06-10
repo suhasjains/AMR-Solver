@@ -9,6 +9,7 @@ using myOctree::nodes;
 
 namespace std {
 
+/*!Converts node boundary condition type to string.*/
 string NodeBc_to_string(myOctree::NodeBc bcc) {
 
 	string bc;
@@ -26,7 +27,9 @@ string NodeBc_to_string(myOctree::NodeBc bcc) {
 	return bc;
 }
 
-
+/*!Writes output file, which is useful in restarting the simulation.
+ 
+  This function is not yet complete.*/
 void write_output_file() {
 
 	int count = 0;

@@ -1,0 +1,36 @@
+\hypertarget{boundary_8h}{}\section{/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/boundary.h File Reference}
+\label{boundary_8h}\index{/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/boundary.\+h@{/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/boundary.\+h}}
+{\ttfamily \#include $<$string$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacemy_octree}{my\+Octree}
+\begin{DoxyCompactList}\small\item\em A\+M\+R grid stuff. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef node\+\_\+boundary\+\_\+flags \hyperlink{namespacemy_octree_aa311ec15135ad37690de8c062cfd8124}{my\+Octree\+::\+Node\+Bc}
+\item 
+typedef field\+\_\+boundary\+\_\+flags \hyperlink{namespacemy_octree_a7fe9f44df74345b4ab428b88ed3bba4e}{my\+Octree\+::\+Field\+Bc}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017}{my\+Octree\+::node\+\_\+boundary\+\_\+flags} \{ \hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017a2ab12960062f306ce8d67f7b24a2029a}{my\+Octree\+::\+N\+O\+N\+E}, 
+\hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017a5647179f485536892fffc4781aad276e}{my\+Octree\+::\+B\+O\+U\+N\+D\+A\+R\+Y}, 
+\hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017a4fbbf4cfb5b53df5fb4d77c4314bdae5}{my\+Octree\+::\+M\+P\+I\+\_\+\+B\+O\+U\+N\+D\+A\+R\+Y}
+ \}
+\item 
+enum \hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9}{my\+Octree\+::field\+\_\+boundary\+\_\+flags} \{ \hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9a31309aad518482587ab1dc4a74672995}{my\+Octree\+::none}, 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9a086ad09b1b078022abf1618500320e66}{my\+Octree\+::dirichlet}, 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9ac7f23f26388c52c9b70f811916f73f19}{my\+Octree\+::neumann}, 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9a34adef452be5f7f2a04bddfb741a38db}{my\+Octree\+::mpi\+\_\+boundary}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespacemy_octree_aff17e18e2993c0f76b75dc0150e628d6}{my\+Octree\+::set\+\_\+\+Field\+Bc\+\_\+\+Field\+Bc\+Val} (int number, std\+::string name, Field\+Bc $\ast$$\ast$bc, double $\ast$$\ast$bcval)
+\item 
+void \hyperlink{namespacemy_octree_ab905564565987eeb295c68781bb73ccc}{my\+Octree\+::set\+\_\+\+Vec\+Field\+Bc\+\_\+\+Vec\+Field\+Bc\+Val} (int number, std\+::string name, Field\+Bc $\ast$$\ast$xbc, Field\+Bc $\ast$$\ast$ybc, Field\+Bc $\ast$$\ast$zbc, double $\ast$$\ast$xbcval, double $\ast$$\ast$ybcval, double $\ast$$\ast$zbcval)
+\end{DoxyCompactItemize}

@@ -6,6 +6,7 @@
 
 namespace myOctree {
 
+/*!Exchanges ghost values of the given field at the given level*/	
 void exchange_ghost_val(int level, std::string name) {
 
 	create_lists_of_level_nodes();

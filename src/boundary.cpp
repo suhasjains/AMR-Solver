@@ -5,7 +5,7 @@
 
 namespace myOctree {
 
-
+/*!Sets boundary conditions to blocks and boundary condition values to ghost cells in the blocks of the given scalar field.*/
 void set_FieldBc_FieldBcVal(int number, std::string name, FieldBc **bc, double **bcval ) {
 
 	for (std::list<Octree*>::iterator it = nodes.begin(), end = nodes.end(); it != end; ++it) {	
@@ -37,12 +37,12 @@ void set_FieldBc_FieldBcVal(int number, std::string name, FieldBc **bc, double *
 					for(int i=0; i<f->Nx; i++) {
 						for(int j=0; j<f->Ny; j++) {
 							for(int k=0; k<f->Nz; k++) {
-								if(i<pad)	f->val[i][j][k] = bc[XDIR][LEFT]; 			
-								if(i>=(nx_block + pad))	f->val[i][j][k] = bc[XDIR][RIGHT]; 			
-								if(j<pad)	f->val[i][j][k] = bc[YDIR][LEFT]; 			
-								if(j>=(ny_block + pad))	f->val[i][j][k] = bc[YDIR][RIGHT]; 			
-								if(k<pad)	f->val[i][j][k] = bc[ZDIR][LEFT]; 			
-								if(k>=(nz_block + pad))	f->val[i][j][k] = bc[ZDIR][RIGHT]; 			
+								if(i<pad)	f->val[i][j][k] = bcval[XDIR][LEFT]; 			
+								if(i>=(nx_block + pad))	f->val[i][j][k] = bcval[XDIR][RIGHT]; 			
+								if(j<pad)	f->val[i][j][k] = bcval[YDIR][LEFT]; 			
+								if(j>=(ny_block + pad))	f->val[i][j][k] = bcval[YDIR][RIGHT]; 			
+								if(k<pad)	f->val[i][j][k] = bcval[ZDIR][LEFT]; 			
+								if(k>=(nz_block + pad))	f->val[i][j][k] = bcval[ZDIR][RIGHT]; 			
 									
 							}
 						}
@@ -53,6 +53,7 @@ void set_FieldBc_FieldBcVal(int number, std::string name, FieldBc **bc, double *
 	}	
 }
 
+/*!Sets boundary conditions to blocks and boundary condition values to ghost cells in the blocks of the given vector field.*/  
 void set_VecFieldBc_VecFieldBcVal(int number, std::string name, FieldBc **xbc, FieldBc **ybc, FieldBc **zbc, double** xbcval, double** ybcval, double** zbcval ) {
 
 
@@ -86,34 +87,34 @@ void set_VecFieldBc_VecFieldBcVal(int number, std::string name, FieldBc **xbc, F
                                                 for(int j=0; j<f->Ny; j++) {
                                                         for(int k=0; k<f->Nz; k++) {
                                                                 if(i<pad) {
-								       f->x[i][j][k] = xbc[XDIR][LEFT];
-								       f->y[i][j][k] = ybc[XDIR][LEFT];
-								       f->z[i][j][k] = zbc[XDIR][LEFT];
+								       f->x[i][j][k] = xbcval[XDIR][LEFT];
+								       f->y[i][j][k] = ybcval[XDIR][LEFT];
+								       f->z[i][j][k] = zbcval[XDIR][LEFT];
 								}
 								if(i>=(f->Nx + pad)) {
-								    f->x[i][j][k] = xbc[XDIR][RIGHT];
-								    f->y[i][j][k] = ybc[XDIR][RIGHT];
-								    f->z[i][j][k] = zbc[XDIR][RIGHT];
+								    f->x[i][j][k] = xbcval[XDIR][RIGHT];
+								    f->y[i][j][k] = ybcval[XDIR][RIGHT];
+								    f->z[i][j][k] = zbcval[XDIR][RIGHT];
                                                                 }
 								if(j<pad) {
-								       f->x[i][j][k] = xbc[YDIR][LEFT];
-								       f->y[i][j][k] = ybc[YDIR][LEFT];
-								       f->z[i][j][k] = zbc[YDIR][LEFT];
+								       f->x[i][j][k] = xbcval[YDIR][LEFT];
+								       f->y[i][j][k] = ybcval[YDIR][LEFT];
+								       f->z[i][j][k] = zbcval[YDIR][LEFT];
                                                                 }
 								if(j>=(f->Ny + pad)) {
-									f->x[i][j][k] = xbc[YDIR][RIGHT];
-									f->y[i][j][k] = ybc[YDIR][RIGHT];
-									f->z[i][j][k] = zbc[YDIR][RIGHT];
+									f->x[i][j][k] = xbcval[YDIR][RIGHT];
+									f->y[i][j][k] = ybcval[YDIR][RIGHT];
+									f->z[i][j][k] = zbcval[YDIR][RIGHT];
                                                                 }
 								if(k<pad) {
-								     	f->x[i][j][k] = xbc[ZDIR][LEFT];
-								     	f->y[i][j][k] = ybc[ZDIR][LEFT];
-								     	f->z[i][j][k] = zbc[ZDIR][LEFT];
+								     	f->x[i][j][k] = xbcval[ZDIR][LEFT];
+								     	f->y[i][j][k] = ybcval[ZDIR][LEFT];
+								     	f->z[i][j][k] = zbcval[ZDIR][LEFT];
                                                                 }
 								if(k>=(f->Nz + pad)) {
-									f->x[i][j][k] = xbc[ZDIR][RIGHT];
-									f->y[i][j][k] = ybc[ZDIR][RIGHT];
-									f->z[i][j][k] = zbc[ZDIR][RIGHT];
+									f->x[i][j][k] = xbcval[ZDIR][RIGHT];
+									f->y[i][j][k] = ybcval[ZDIR][RIGHT];
+									f->z[i][j][k] = zbcval[ZDIR][RIGHT];
 								}
                                                         }
                                                 }

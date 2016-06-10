@@ -4,7 +4,7 @@
 
 namespace myOctree {
 
-
+/*!Returns the sequential number of the point within the block using the coordinate locations.*/
 long int get_point(int i, int j, int k, int Npx, int Npy) {
 
 	int I = i+1;
@@ -18,7 +18,7 @@ long int get_point(int i, int j, int k, int Npx, int Npy) {
 	return n-1;
 } 
 
-
+/*!Writes vtk files for post-processing.*/
 void write_vtk(std::list<Octree*>& nodes) {
 
 

@@ -13,7 +13,7 @@
  * Make neighbors vary in refinement by 2 at the max - done
  * Add linked list for every level - done
  * Gradient based refinement - done
- * Input file
+ * Input file - done
  * Output file
  * Multigrid implementation
  * Parallel implementation

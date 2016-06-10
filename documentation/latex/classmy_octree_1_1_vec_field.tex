@@ -1,0 +1,222 @@
+\hypertarget{classmy_octree_1_1_vec_field}{}\section{my\+Octree\+:\+:Vec\+Field Class Reference}
+\label{classmy_octree_1_1_vec_field}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+
+
+Template class for any vector field variable in the domain.  
+
+
+
+
+{\ttfamily \#include $<$vecfield.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy_octree_1_1_vec_field_a5021e31d76839465f3318f3a3683b18c}{Vec\+Field} (int N\+\_\+x, int N\+\_\+y, int N\+\_\+z, std\+::string info)
+\item 
+\hyperlink{classmy_octree_1_1_vec_field_af0707293837aa0859b5db3a04fbffb05}{Vec\+Field} ()
+\item 
+\hyperlink{classmy_octree_1_1_vec_field_aeff8e646de1132faa201d47a3c642646}{Vec\+Field} (const \hyperlink{classmy_octree_1_1_vec_field}{Vec\+Field} \&obj)
+\item 
+\hyperlink{classmy_octree_1_1_vec_field_ab1e3289a3e303b2ea3e96ec7b1a14bb9}{$\sim$\+Vec\+Field} ()
+\item 
+void \hyperlink{classmy_octree_1_1_vec_field_ac781590a91fca63a6a3be0ddaf117860}{set\+\_\+field} (double)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classmy_octree_1_1_vec_field_a9722e7518ff5a06db7684bcdfada5b0e}{name}
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf Size}\par
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classmy_octree_1_1_vec_field_ae0d5070112c377b5e6ff475c04395e9c}{Nx}
+\item 
+int \hyperlink{classmy_octree_1_1_vec_field_a95aa5dbef9a5fc1bf48f40aa26e0d7fd}{Ny}
+\item 
+int \hyperlink{classmy_octree_1_1_vec_field_ac2ba7ec87e8f1bb39844cd45ab054f95}{Nz}
+\item 
+int \hyperlink{classmy_octree_1_1_vec_field_a27f8de2890d5a43e722b2284b784948e}{N}
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf 3\+D array to store x,y,z comonent of field values}\par
+\begin{DoxyCompactItemize}
+\item 
+double $\ast$$\ast$$\ast$ \hyperlink{classmy_octree_1_1_vec_field_aa2f76e1e3ee56d0a54d42cf959354bc9}{x}
+\item 
+double $\ast$$\ast$$\ast$ \hyperlink{classmy_octree_1_1_vec_field_ace7d75993bdfee30c7ced97ada5de324}{y}
+\item 
+double $\ast$$\ast$$\ast$ \hyperlink{classmy_octree_1_1_vec_field_aee1c8c4d393246a34793a5cde59071b8}{z}
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Boundary conditions}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9}{Field\+Bc} \hyperlink{classmy_octree_1_1_vec_field_a89bb31aefadf48f4c2530ec11f3d95ab}{xbc} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\item 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9}{Field\+Bc} \hyperlink{classmy_octree_1_1_vec_field_a423ac64f945635fc8e1a328f8d93a297}{ybc} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\item 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9}{Field\+Bc} \hyperlink{classmy_octree_1_1_vec_field_a8393be7c311149c9d4e449521c4f34a0}{zbc} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+Template class for any vector field variable in the domain. 
+
+x, y, z -\/ 3d arrays for storing field variable values at the cells along x, y and z directions.
+
+Usage\+: \hyperlink{classmy_octree_1_1_field}{Field} object(nx,ny,nz); Parameters are the number of cells along x, y and z (including the padding) which usually remains same for al l the blocks in the mesh. Padding represents extra layer of cells at all the sides of the block, which acts as ghost cells at the block boundaries or buffer cells at the processor boundaries. New objects of this class are defined in the constructors of \hyperlink{classmy_octree_1_1_block}{Block} class and the pointers to these objects are members of the \hyperlink{classmy_octree_1_1_block}{Block} class. 
+
+Definition at line 13 of file vecfield.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmy_octree_1_1_vec_field_a5021e31d76839465f3318f3a3683b18c}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!Vec\+Field@{Vec\+Field}}
+\index{Vec\+Field@{Vec\+Field}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{Vec\+Field(int N\+\_\+x, int N\+\_\+y, int N\+\_\+z, std\+::string info)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Vec\+Field\+::\+Vec\+Field (
+\begin{DoxyParamCaption}
+\item[{int}]{N\+\_\+x, }
+\item[{int}]{N\+\_\+y, }
+\item[{int}]{N\+\_\+z, }
+\item[{std\+::string}]{info}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_vec_field_a5021e31d76839465f3318f3a3683b18c}
+Parametrized constructor 
+
+Definition at line 5 of file vecfield.\+cpp.
+
+\hypertarget{classmy_octree_1_1_vec_field_af0707293837aa0859b5db3a04fbffb05}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!Vec\+Field@{Vec\+Field}}
+\index{Vec\+Field@{Vec\+Field}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{Vec\+Field()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Vec\+Field\+::\+Vec\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_vec_field_af0707293837aa0859b5db3a04fbffb05}
+Default constructor 
+
+Definition at line 28 of file vecfield.\+cpp.
+
+\hypertarget{classmy_octree_1_1_vec_field_aeff8e646de1132faa201d47a3c642646}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!Vec\+Field@{Vec\+Field}}
+\index{Vec\+Field@{Vec\+Field}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{Vec\+Field(const Vec\+Field \&obj)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Vec\+Field\+::\+Vec\+Field (
+\begin{DoxyParamCaption}
+\item[{const {\bf Vec\+Field} \&}]{obj}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_vec_field_aeff8e646de1132faa201d47a3c642646}
+Copy constructor 
+
+Definition at line 51 of file vecfield.\+cpp.
+
+\hypertarget{classmy_octree_1_1_vec_field_ab1e3289a3e303b2ea3e96ec7b1a14bb9}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!````~Vec\+Field@{$\sim$\+Vec\+Field}}
+\index{````~Vec\+Field@{$\sim$\+Vec\+Field}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{$\sim$\+Vec\+Field()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Vec\+Field\+::$\sim$\+Vec\+Field (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_vec_field_ab1e3289a3e303b2ea3e96ec7b1a14bb9}
+Destructor 
+
+Definition at line 87 of file vecfield.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmy_octree_1_1_vec_field_ac781590a91fca63a6a3be0ddaf117860}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!set\+\_\+field@{set\+\_\+field}}
+\index{set\+\_\+field@{set\+\_\+field}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{set\+\_\+field(double)}]{\setlength{\rightskip}{0pt plus 5cm}void my\+Octree\+::\+Vec\+Field\+::set\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_vec_field_ac781590a91fca63a6a3be0ddaf117860}
+Function to set the given value to the field 
+
+Definition at line 107 of file vecfield.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmy_octree_1_1_vec_field_a27f8de2890d5a43e722b2284b784948e}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!N@{N}}
+\index{N@{N}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{N}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Vec\+Field\+::\+N}\label{classmy_octree_1_1_vec_field_a27f8de2890d5a43e722b2284b784948e}
+
+
+Definition at line 20 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_a9722e7518ff5a06db7684bcdfada5b0e}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!name@{name}}
+\index{name@{name}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string my\+Octree\+::\+Vec\+Field\+::name}\label{classmy_octree_1_1_vec_field_a9722e7518ff5a06db7684bcdfada5b0e}
+Name of the field 
+
+Definition at line 31 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_ae0d5070112c377b5e6ff475c04395e9c}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!Nx@{Nx}}
+\index{Nx@{Nx}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{Nx}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Vec\+Field\+::\+Nx}\label{classmy_octree_1_1_vec_field_ae0d5070112c377b5e6ff475c04395e9c}
+
+
+Definition at line 19 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_a95aa5dbef9a5fc1bf48f40aa26e0d7fd}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!Ny@{Ny}}
+\index{Ny@{Ny}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{Ny}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Vec\+Field\+::\+Ny}\label{classmy_octree_1_1_vec_field_a95aa5dbef9a5fc1bf48f40aa26e0d7fd}
+
+
+Definition at line 19 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_ac2ba7ec87e8f1bb39844cd45ab054f95}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!Nz@{Nz}}
+\index{Nz@{Nz}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{Nz}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Vec\+Field\+::\+Nz}\label{classmy_octree_1_1_vec_field_ac2ba7ec87e8f1bb39844cd45ab054f95}
+
+
+Definition at line 19 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_aa2f76e1e3ee56d0a54d42cf959354bc9}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!x@{x}}
+\index{x@{x}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$$\ast$ my\+Octree\+::\+Vec\+Field\+::x}\label{classmy_octree_1_1_vec_field_aa2f76e1e3ee56d0a54d42cf959354bc9}
+
+
+Definition at line 25 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_a89bb31aefadf48f4c2530ec11f3d95ab}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!xbc@{xbc}}
+\index{xbc@{xbc}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{xbc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Field\+Bc} my\+Octree\+::\+Vec\+Field\+::xbc\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}\label{classmy_octree_1_1_vec_field_a89bb31aefadf48f4c2530ec11f3d95ab}
+
+
+Definition at line 35 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_ace7d75993bdfee30c7ced97ada5de324}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!y@{y}}
+\index{y@{y}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$$\ast$ my\+Octree\+::\+Vec\+Field\+::y}\label{classmy_octree_1_1_vec_field_ace7d75993bdfee30c7ced97ada5de324}
+
+
+Definition at line 26 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_a423ac64f945635fc8e1a328f8d93a297}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!ybc@{ybc}}
+\index{ybc@{ybc}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{ybc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Field\+Bc} my\+Octree\+::\+Vec\+Field\+::ybc\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}\label{classmy_octree_1_1_vec_field_a423ac64f945635fc8e1a328f8d93a297}
+
+
+Definition at line 36 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_aee1c8c4d393246a34793a5cde59071b8}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!z@{z}}
+\index{z@{z}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{z}]{\setlength{\rightskip}{0pt plus 5cm}double$\ast$$\ast$$\ast$ my\+Octree\+::\+Vec\+Field\+::z}\label{classmy_octree_1_1_vec_field_aee1c8c4d393246a34793a5cde59071b8}
+
+
+Definition at line 27 of file vecfield.\+h.
+
+\hypertarget{classmy_octree_1_1_vec_field_a8393be7c311149c9d4e449521c4f34a0}{}\index{my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}!zbc@{zbc}}
+\index{zbc@{zbc}!my\+Octree\+::\+Vec\+Field@{my\+Octree\+::\+Vec\+Field}}
+\subsubsection[{zbc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Field\+Bc} my\+Octree\+::\+Vec\+Field\+::zbc\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}\label{classmy_octree_1_1_vec_field_a8393be7c311149c9d4e449521c4f34a0}
+
+
+Definition at line 37 of file vecfield.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{vecfield_8h}{vecfield.\+h}\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{vecfield_8cpp}{vecfield.\+cpp}\end{DoxyCompactItemize}

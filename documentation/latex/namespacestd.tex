@@ -1,0 +1,165 @@
+\hypertarget{namespacestd}{}\section{std Namespace Reference}
+\label{namespacestd}\index{std@{std}}
+
+
+Standard input output stuff.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017}{my\+Octree\+::\+Node\+Bc} \hyperlink{namespacestd_a28f47ba2af0956e46539c75df9079bee}{string\+\_\+to\+\_\+\+Node\+Bc} (string bc)
+\item 
+\hyperlink{namespacemy_octree_a1b5634e126358fc57232cfc9e6d96ad9}{my\+Octree\+::\+Field\+Bc} \hyperlink{namespacestd_aafcff7000e33dc3da00fe6f5c22c651b}{string\+\_\+to\+\_\+\+Field\+Bc} (string bc)
+\item 
+void \hyperlink{namespacestd_aeec51f61b937e6cf3e542687f3636a4a}{read\+\_\+scalar\+\_\+fields} (ifstream \&file)
+\item 
+void \hyperlink{namespacestd_a04e2c7d1a7df837f0941672347cd9d1d}{read\+\_\+vector\+\_\+fields} (ifstream \&file)
+\item 
+int \hyperlink{namespacestd_a2b8397b2c3a0b862d83ff19fc5ca7b1e}{read\+\_\+blocks} (ifstream \&file)
+\item 
+void \hyperlink{namespacestd_acc83c5284b63a3a41319f6cd7c6795aa}{read\+\_\+scalar\+\_\+field\+\_\+\+Bc} (ifstream \&file, int number)
+\item 
+void \hyperlink{namespacestd_a87b6dd1afc7a92d8b84cf59856d73f85}{read\+\_\+vector\+\_\+field\+\_\+\+Bc} (ifstream \&file, int number)
+\item 
+void \hyperlink{namespacestd_a8f2d41a51a667541761e8ab1507b76d3}{read\+\_\+max\+\_\+level} (ifstream \&file)
+\item 
+void \hyperlink{namespacestd_aaa4c336f4a5e0573f55fcf302726c1d4}{read\+\_\+input\+\_\+file} ()
+\item 
+string \hyperlink{namespacestd_a633ac537d5b58f279220c1f47f64ab40}{Node\+Bc\+\_\+to\+\_\+string} (\hyperlink{namespacemy_octree_adc4c8dcd84e804f57592145c650dd017}{my\+Octree\+::\+Node\+Bc} bcc)
+\item 
+void \hyperlink{namespacestd_a68780ec8f77bd5ed8c056e9382a1323b}{write\+\_\+output\+\_\+file} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Standard input output stuff. 
+
+Namespace containing things related to input and output. 
+
+\subsection{Function Documentation}
+\hypertarget{namespacestd_a633ac537d5b58f279220c1f47f64ab40}{}\index{std@{std}!Node\+Bc\+\_\+to\+\_\+string@{Node\+Bc\+\_\+to\+\_\+string}}
+\index{Node\+Bc\+\_\+to\+\_\+string@{Node\+Bc\+\_\+to\+\_\+string}!std@{std}}
+\subsubsection[{Node\+Bc\+\_\+to\+\_\+string(my\+Octree\+::\+Node\+Bc bcc)}]{\setlength{\rightskip}{0pt plus 5cm}string std\+::\+Node\+Bc\+\_\+to\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{{\bf my\+Octree\+::\+Node\+Bc}}]{bcc}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a633ac537d5b58f279220c1f47f64ab40}
+Converts node boundary condition type to string. 
+
+Definition at line 13 of file output.\+cpp.
+
+\hypertarget{namespacestd_a2b8397b2c3a0b862d83ff19fc5ca7b1e}{}\index{std@{std}!read\+\_\+blocks@{read\+\_\+blocks}}
+\index{read\+\_\+blocks@{read\+\_\+blocks}!std@{std}}
+\subsubsection[{read\+\_\+blocks(ifstream \&file)}]{\setlength{\rightskip}{0pt plus 5cm}int std\+::read\+\_\+blocks (
+\begin{DoxyParamCaption}
+\item[{ifstream \&}]{file}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a2b8397b2c3a0b862d83ff19fc5ca7b1e}
+Reads the list of blocks, its dimensions and its boundary conditions from the input file and creates a root node accordingly. 
+
+Definition at line 116 of file input.\+cpp.
+
+\hypertarget{namespacestd_aaa4c336f4a5e0573f55fcf302726c1d4}{}\index{std@{std}!read\+\_\+input\+\_\+file@{read\+\_\+input\+\_\+file}}
+\index{read\+\_\+input\+\_\+file@{read\+\_\+input\+\_\+file}!std@{std}}
+\subsubsection[{read\+\_\+input\+\_\+file()}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::read\+\_\+input\+\_\+file (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespacestd_aaa4c336f4a5e0573f55fcf302726c1d4}
+Reads the input file. 
+
+Definition at line 374 of file input.\+cpp.
+
+\hypertarget{namespacestd_a8f2d41a51a667541761e8ab1507b76d3}{}\index{std@{std}!read\+\_\+max\+\_\+level@{read\+\_\+max\+\_\+level}}
+\index{read\+\_\+max\+\_\+level@{read\+\_\+max\+\_\+level}!std@{std}}
+\subsubsection[{read\+\_\+max\+\_\+level(ifstream \&file)}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::read\+\_\+max\+\_\+level (
+\begin{DoxyParamCaption}
+\item[{ifstream \&}]{file}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a8f2d41a51a667541761e8ab1507b76d3}
+Reads the maximum refinement level. 
+
+Definition at line 355 of file input.\+cpp.
+
+\hypertarget{namespacestd_acc83c5284b63a3a41319f6cd7c6795aa}{}\index{std@{std}!read\+\_\+scalar\+\_\+field\+\_\+\+Bc@{read\+\_\+scalar\+\_\+field\+\_\+\+Bc}}
+\index{read\+\_\+scalar\+\_\+field\+\_\+\+Bc@{read\+\_\+scalar\+\_\+field\+\_\+\+Bc}!std@{std}}
+\subsubsection[{read\+\_\+scalar\+\_\+field\+\_\+\+Bc(ifstream \&file, int number)}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::read\+\_\+scalar\+\_\+field\+\_\+\+Bc (
+\begin{DoxyParamCaption}
+\item[{ifstream \&}]{file, }
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}\label{namespacestd_acc83c5284b63a3a41319f6cd7c6795aa}
+Reads the boundary conditions and its values for all the scalar fields previously listed and assigns it to the corresponding blocks. 
+
+Definition at line 176 of file input.\+cpp.
+
+\hypertarget{namespacestd_aeec51f61b937e6cf3e542687f3636a4a}{}\index{std@{std}!read\+\_\+scalar\+\_\+fields@{read\+\_\+scalar\+\_\+fields}}
+\index{read\+\_\+scalar\+\_\+fields@{read\+\_\+scalar\+\_\+fields}!std@{std}}
+\subsubsection[{read\+\_\+scalar\+\_\+fields(ifstream \&file)}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::read\+\_\+scalar\+\_\+fields (
+\begin{DoxyParamCaption}
+\item[{ifstream \&}]{file}
+\end{DoxyParamCaption}
+)}\label{namespacestd_aeec51f61b937e6cf3e542687f3636a4a}
+Reads the list of scalar fields from the input file and creates a list of strings of scalar fields. 
+
+Definition at line 52 of file input.\+cpp.
+
+\hypertarget{namespacestd_a87b6dd1afc7a92d8b84cf59856d73f85}{}\index{std@{std}!read\+\_\+vector\+\_\+field\+\_\+\+Bc@{read\+\_\+vector\+\_\+field\+\_\+\+Bc}}
+\index{read\+\_\+vector\+\_\+field\+\_\+\+Bc@{read\+\_\+vector\+\_\+field\+\_\+\+Bc}!std@{std}}
+\subsubsection[{read\+\_\+vector\+\_\+field\+\_\+\+Bc(ifstream \&file, int number)}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::read\+\_\+vector\+\_\+field\+\_\+\+Bc (
+\begin{DoxyParamCaption}
+\item[{ifstream \&}]{file, }
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a87b6dd1afc7a92d8b84cf59856d73f85}
+Reads the boundary conditions and its values for all the vector fields previously listed and assigns it to the corresponding blocks. 
+
+Definition at line 245 of file input.\+cpp.
+
+\hypertarget{namespacestd_a04e2c7d1a7df837f0941672347cd9d1d}{}\index{std@{std}!read\+\_\+vector\+\_\+fields@{read\+\_\+vector\+\_\+fields}}
+\index{read\+\_\+vector\+\_\+fields@{read\+\_\+vector\+\_\+fields}!std@{std}}
+\subsubsection[{read\+\_\+vector\+\_\+fields(ifstream \&file)}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::read\+\_\+vector\+\_\+fields (
+\begin{DoxyParamCaption}
+\item[{ifstream \&}]{file}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a04e2c7d1a7df837f0941672347cd9d1d}
+Reads the list of vector fields from the file and creates a list of strings of vector fields. 
+
+Definition at line 84 of file input.\+cpp.
+
+\hypertarget{namespacestd_aafcff7000e33dc3da00fe6f5c22c651b}{}\index{std@{std}!string\+\_\+to\+\_\+\+Field\+Bc@{string\+\_\+to\+\_\+\+Field\+Bc}}
+\index{string\+\_\+to\+\_\+\+Field\+Bc@{string\+\_\+to\+\_\+\+Field\+Bc}!std@{std}}
+\subsubsection[{string\+\_\+to\+\_\+\+Field\+Bc(string bc)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf my\+Octree\+::\+Field\+Bc} std\+::string\+\_\+to\+\_\+\+Field\+Bc (
+\begin{DoxyParamCaption}
+\item[{string}]{bc}
+\end{DoxyParamCaption}
+)}\label{namespacestd_aafcff7000e33dc3da00fe6f5c22c651b}
+Converts a string to field boundary condition type. 
+
+Definition at line 32 of file input.\+cpp.
+
+\hypertarget{namespacestd_a28f47ba2af0956e46539c75df9079bee}{}\index{std@{std}!string\+\_\+to\+\_\+\+Node\+Bc@{string\+\_\+to\+\_\+\+Node\+Bc}}
+\index{string\+\_\+to\+\_\+\+Node\+Bc@{string\+\_\+to\+\_\+\+Node\+Bc}!std@{std}}
+\subsubsection[{string\+\_\+to\+\_\+\+Node\+Bc(string bc)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf my\+Octree\+::\+Node\+Bc} std\+::string\+\_\+to\+\_\+\+Node\+Bc (
+\begin{DoxyParamCaption}
+\item[{string}]{bc}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a28f47ba2af0956e46539c75df9079bee}
+Converts a string to node boundary condition type. 
+
+Definition at line 15 of file input.\+cpp.
+
+\hypertarget{namespacestd_a68780ec8f77bd5ed8c056e9382a1323b}{}\index{std@{std}!write\+\_\+output\+\_\+file@{write\+\_\+output\+\_\+file}}
+\index{write\+\_\+output\+\_\+file@{write\+\_\+output\+\_\+file}!std@{std}}
+\subsubsection[{write\+\_\+output\+\_\+file()}]{\setlength{\rightskip}{0pt plus 5cm}void std\+::write\+\_\+output\+\_\+file (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespacestd_a68780ec8f77bd5ed8c056e9382a1323b}
+Writes output file, which is useful in restarting the simulation.
+
+This function is not yet complete. 
+
+Definition at line 33 of file output.\+cpp.
+

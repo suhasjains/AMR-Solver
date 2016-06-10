@@ -13,70 +13,53 @@ namespace myOctree {
 class Octree;
 extern std::list<Octree*> nodes;
 
+///Class to store octree datastructure as nodes of the tree.
+/*!
+Objects of this class are nodes of the tree.
+When a new object is created, children are assigned, parent is assigned, data block is assigned and finally the pointer of the object is pushed into the "nodes" list.  
 
-//OCTREE CLASS
-//This class is used to create octree datastructure which stores in each of its nodes, a block of grid data in the block-based AMR mesh.
-//Objects of this class are nodes of the tree.
-//When a new object is created, children are assigned, parent is assigned, data block is assigned and finally the pointer of the object is pushed into the "nodes" list.  
-//
-//Usage:
-//Octree object(x min, x max, y min, y max, z min, z max, level); 
-//This creates a node of the tree at the specified level.
-//This object can be further refined or coarsened using member functions of this class.
+Usage:
+Octree object_name(x min, x max, y min, y max, z min, z max, level); 
+This creates a node of the tree at the specified level.
+This object can be further refined or coarsened using member functions of this class.
+*/
 class Octree {
 
 	public:
-	//default constructor
-	Octree();
+	Octree(); /*!<Default constructor*/
 	
-	//parametrized constructor with initialization fields
-	Octree( double x1, double x2, double y1, double y2, double z1, double z2, int l );
+	Octree( double x1, double x2, double y1, double y2, double z1, double z2, int l ); /*!<Parametrized constructor with initialization fields*/
 
-	//Copy constructor
-        Octree(const Octree &obj);
+        Octree(const Octree &obj); /*!<Copy constructor*/
 
-	//destructor
-	~Octree();
+	~Octree(); /*!<Destructor*/
 
-	//adds 8 children 
-	void refine();
+	void refine(); /*!<Function to add 8 children*/
 
-	//function to test if leaf node
-	bool isLeafNode();
+	bool isLeafNode(); /*!</Function to test if leaf node*/
 
-	//function to test if root node
-	bool isRootNode();
+	bool isRootNode(); /*!<Function to test if root node*/
 
-	//function to test if the point lies inside the block
 	/*change it to containsPoint*/
-	bool contains(double x, double y, double z);
+	bool contains(double x, double y, double z); /*!</Function to test if the point lies inside the block*/
 
-	//gets level of the node
-	int get_level();	
+	int get_level(); /*!<Function that returns the level of the node*/	
 
-	//gets child pointer at (relative indices)
-	Octree* get_child_at(int, int, int);
+	Octree* get_child_at(int, int, int); /*!<Function that returns pointer to the child at indices (relative)*/
 
-	//gets parent
-	Octree* get_parent();
+	Octree* get_parent(); /*!<Function that returns pointer to the parent*/
 
-	//sets child pointer at (relative indices) to NULL
-	void set_child_null_at(int, int, int);	
+	void set_child_null_at(int, int, int); /*!<Function that sets child pointer at indices (relative) to NULL*/	
 
-	//function to access block_data
-	Block* get_block_data();
+	Block* get_block_data(); /*!<Function to access block data*/
 
-	//set to refine considering nesting
-	void set_to_refine_with_nesting(); 
+	void set_to_refine_with_nesting(); /*!<Sets on refine flag with nesting*/ 
 	
-	//set to coarsen considering nesting
-	void set_to_coarsen_with_nesting(); 
+	void set_to_coarsen_with_nesting(); /*!<Sets on coarsen flag with nesting*/ 
 
-	//flag to know whether to refine the node or not
-	bool setToRefine;
+	bool setToRefine; /*!<Refinement flag*/
 
-	//flag to know whether to coarsen the node or not
-	bool setToCoarsen;
+	bool setToCoarsen; /*!<Coarsen flag*/
 	
 	//neighbors
 	/*change this to neighbour[direction][position]*/
@@ -98,7 +81,7 @@ class Octree {
 //	NodeBc top_bc;
 //	NodeBc bottom_bc;
 
-	NodeBc bc[3][2];
+	NodeBc bc[3][2]; /*!<Node boundary conditions*/
 	
 	//boundary values
 	/*same as above */
@@ -108,28 +91,27 @@ class Octree {
 //	double south_bc_val;
 //	double top_bc_val;
 //	double bottom_bc_val;
-
-	//node's block dimensions
+	
+	/*! \name Node's block dimensions*/
+	//@{
 	double x_centre, y_centre, z_centre;
 	double x_min, x_max;
 	double y_min, y_max;
 	double z_min, z_max;
+	//@}
+
 
 	int number;
 
 	
 	private:
-	//each node has upto 8 children (2^3 for 3 dimensions) 
-	Octree *children[2][2][2];
+	Octree *children[2][2][2]; /*!<Each node has upto 8 children (2^3 for 3 dimensions)*/
 	
-	//each node stores a block of grid cells
-	Block *block_data;
+	Block *block_data; /*!<Pointer to the block data*/
 
-	//pointer to the parent
-	Octree *parent;
+	Octree *parent; /*!<Pointer to the parent*/
 
-	//level in the tree
-	int level;
+	int level; /*!<Level in the tree*/
 
 	
 	protected:	

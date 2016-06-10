@@ -7,8 +7,11 @@
 #include "adapt.h"
 #include "direction.h"
 
+///Standard input output stuff
+/*!Namespace containing things related to input and output.*/
 namespace std {
 
+/*!Converts a string to node boundary condition type.*/	
 myOctree::NodeBc string_to_NodeBc(string bc) {
 
 	myOctree::NodeBc bcc;
@@ -25,6 +28,7 @@ myOctree::NodeBc string_to_NodeBc(string bc) {
 	return bcc;
 }
 
+/*!Converts a string to field boundary condition type.*/
 myOctree::FieldBc string_to_FieldBc(string bc) {
 
 	myOctree::FieldBc bcc;
@@ -44,6 +48,7 @@ myOctree::FieldBc string_to_FieldBc(string bc) {
 	return bcc;
 }
 
+/*!Reads the list of scalar fields from the input file and creates a list of strings of scalar fields.*/
 void read_scalar_fields(ifstream& file) {
 
 	string line, str;
@@ -75,7 +80,7 @@ void read_scalar_fields(ifstream& file) {
 	}
 }
 
-
+/*!Reads the list of vector fields from the file and creates a list of strings of vector fields.*/
 void read_vector_fields(ifstream& file) {
 
 	string line, str;
@@ -107,6 +112,7 @@ void read_vector_fields(ifstream& file) {
 
 }
 
+/*!Reads the list of blocks, its dimensions and its boundary conditions from the input file and creates a root node accordingly.*/
 int read_blocks(ifstream& file) {
 	
 	string line, str;
@@ -166,6 +172,7 @@ int read_blocks(ifstream& file) {
 	return blocknumber;
 }
 
+/*!Reads the boundary conditions and its values for all the scalar fields previously listed and assigns it to the corresponding blocks.*/
 void read_scalar_field_Bc(ifstream& file, int number) {
 
 
@@ -234,7 +241,7 @@ void read_scalar_field_Bc(ifstream& file, int number) {
 	delete [] bcval;
 }
 
-
+/*!Reads the boundary conditions and its values for all the vector fields previously listed and assigns it to the corresponding blocks.*/ 
 void read_vector_field_Bc(ifstream& file, int number) {
 
 	int blocknumber;	
@@ -344,6 +351,7 @@ void read_vector_field_Bc(ifstream& file, int number) {
 	delete 	[] zbcval;
 }
 
+/*!Reads the maximum refinement level.*/
 void read_max_level(ifstream& file) {
 
 	string line, str;
@@ -362,7 +370,7 @@ void read_max_level(ifstream& file) {
 
 }
 		
-
+/*!Reads the input file.*/
 void read_input_file() {
 
 	int blocknumber;

@@ -1,0 +1,290 @@
+\hypertarget{classmy_octree_1_1_block}{}\section{my\+Octree\+:\+:Block Class Reference}
+\label{classmy_octree_1_1_block}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+
+
+This class is a generic data block of a octree node in the block-\/based A\+M\+R mesh.  
+
+
+
+
+{\ttfamily \#include $<$block.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy_octree_1_1_block_a49ab6b8e1e0d705ae3ae4abcf8269efe}{Block} (double x1, double x2, double y1, double y2, double z1, double z2)
+\item 
+\hyperlink{classmy_octree_1_1_block_a02b405e5327bde2676ae6433d2f9a1d6}{Block} ()
+\item 
+\hyperlink{classmy_octree_1_1_block_a71cbba6ef0175deddfe175ceb84c5940}{Block} (const \hyperlink{classmy_octree_1_1_block}{Block} \&obj)
+\item 
+\hyperlink{classmy_octree_1_1_block_a546f0e61967e1e02367fde3285e4519e}{$\sim$\+Block} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmy_octree_1_1_vec_field}{Vec\+Field} $\ast$ \hyperlink{classmy_octree_1_1_block_aef557ded62cd3b3441861a98e0a43a9d}{mesh}
+\item 
+\hyperlink{classmy_octree_1_1_field}{Field} $\ast$ \hyperlink{classmy_octree_1_1_block_a20b33a3f7704a87de6ceec6efa98edfd}{field}
+\item 
+\hyperlink{classmy_octree_1_1_field}{Field} $\ast$$\ast$ \hyperlink{classmy_octree_1_1_block_a0bac722408089bfe10dbdf2d8f5fe7bd}{scalarfields}
+\item 
+\hyperlink{classmy_octree_1_1_vec_field}{Vec\+Field} $\ast$$\ast$ \hyperlink{classmy_octree_1_1_block_ad8c28f5d7cd66ac20dc34643d821ce3b}{vectorfields}
+\item 
+double \hyperlink{classmy_octree_1_1_block_ad2e19ba33e0303906c6edca9344224e4}{max\+\_\+gradient}
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf Dimensions of the block}\par
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a568b599d56f024effe48021075cdde64}{x\+\_\+centre}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a1bddbdf912bda6409ed258be0fccde22}{y\+\_\+centre}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a02aab304587fe213b1dd3d0a10e7ea82}{z\+\_\+centre}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a333185a8f7b5f2b4f425e08459caeca4}{x\+\_\+min}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a2d236fad939b4acef0fec4fedfcef128}{x\+\_\+max}
+\item 
+double \hyperlink{classmy_octree_1_1_block_ad06319c48ab631b16b7b4b678d7c5d0e}{y\+\_\+min}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a1e3c4b1935a5652e29c8b874c8075145}{y\+\_\+max}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a8fe6cf2861bc5b7c3235cafcb4e33f35}{z\+\_\+min}
+\item 
+double \hyperlink{classmy_octree_1_1_block_ac3a69cabd6ecedfcea7ccc5b52f32a1d}{z\+\_\+max}
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Grid size}\par
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a43d174dd0a3f418dc140e5ac72e05075}{dx}
+\item 
+double \hyperlink{classmy_octree_1_1_block_ac509a953dfc153ace7844e89b07021ab}{dy}
+\item 
+double \hyperlink{classmy_octree_1_1_block_a5fd6660ee5d77a96782a41824a5f07f7}{dz}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Static Public Attributes}
+\begin{Indent}{\bf Size of the grid in block}\par
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classmy_octree_1_1_block_a03e3db10912ce5033badcbf501554ba2}{i\+Nx} = \hyperlink{namespacemy_octree_a7f30e98430213a41919e16e40abc2078}{nx\+\_\+block}
+\item 
+static int \hyperlink{classmy_octree_1_1_block_ae0b1a7bbe71892b0b4e89cfafd4b318d}{i\+Ny} = \hyperlink{namespacemy_octree_a39784fe68930da363b3ad335a47bed19}{ny\+\_\+block}
+\item 
+static int \hyperlink{classmy_octree_1_1_block_a1cf85662b6815a2a4e6f013b15fb884a}{i\+Nz} = \hyperlink{namespacemy_octree_a2b2fa3a7759c3ff5b129847af3e09cc3}{nz\+\_\+block}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+This class is a generic data block of a octree node in the block-\/based A\+M\+R mesh. 
+
+This class contains all the fields making the domain.
+
+Usage\+: \hyperlink{classmy_octree_1_1_block}{Block} object(xmin, xmax, ymin, ymax, zmin, zmax );. Parameters are the boundaries of the block. 
+
+Definition at line 26 of file block.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmy_octree_1_1_block_a49ab6b8e1e0d705ae3ae4abcf8269efe}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!Block@{Block}}
+\index{Block@{Block}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{Block(double x1, double x2, double y1, double y2, double z1, double z2)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Block\+::\+Block (
+\begin{DoxyParamCaption}
+\item[{double}]{x1, }
+\item[{double}]{x2, }
+\item[{double}]{y1, }
+\item[{double}]{y2, }
+\item[{double}]{z1, }
+\item[{double}]{z2}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_block_a49ab6b8e1e0d705ae3ae4abcf8269efe}
+Parametrized constructor with initialization fields 
+
+Definition at line 18 of file block.\+cpp.
+
+\hypertarget{classmy_octree_1_1_block_a02b405e5327bde2676ae6433d2f9a1d6}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!Block@{Block}}
+\index{Block@{Block}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{Block()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Block\+::\+Block (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_block_a02b405e5327bde2676ae6433d2f9a1d6}
+Default constructor 
+
+Definition at line 70 of file block.\+cpp.
+
+\hypertarget{classmy_octree_1_1_block_a71cbba6ef0175deddfe175ceb84c5940}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!Block@{Block}}
+\index{Block@{Block}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{Block(const Block \&obj)}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Block\+::\+Block (
+\begin{DoxyParamCaption}
+\item[{const {\bf Block} \&}]{obj}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_block_a71cbba6ef0175deddfe175ceb84c5940}
+Copy constructor 
+
+Definition at line 93 of file block.\+cpp.
+
+\hypertarget{classmy_octree_1_1_block_a546f0e61967e1e02367fde3285e4519e}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!````~Block@{$\sim$\+Block}}
+\index{````~Block@{$\sim$\+Block}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{$\sim$\+Block()}]{\setlength{\rightskip}{0pt plus 5cm}my\+Octree\+::\+Block\+::$\sim$\+Block (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classmy_octree_1_1_block_a546f0e61967e1e02367fde3285e4519e}
+Destructor 
+
+Definition at line 128 of file block.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmy_octree_1_1_block_a43d174dd0a3f418dc140e5ac72e05075}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!dx@{dx}}
+\index{dx@{dx}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{dx}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::dx}\label{classmy_octree_1_1_block_a43d174dd0a3f418dc140e5ac72e05075}
+
+
+Definition at line 57 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_ac509a953dfc153ace7844e89b07021ab}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!dy@{dy}}
+\index{dy@{dy}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{dy}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::dy}\label{classmy_octree_1_1_block_ac509a953dfc153ace7844e89b07021ab}
+
+
+Definition at line 57 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a5fd6660ee5d77a96782a41824a5f07f7}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!dz@{dz}}
+\index{dz@{dz}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{dz}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::dz}\label{classmy_octree_1_1_block_a5fd6660ee5d77a96782a41824a5f07f7}
+
+
+Definition at line 57 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a20b33a3f7704a87de6ceec6efa98edfd}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!field@{field}}
+\index{field@{field}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{field}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Field}$\ast$ my\+Octree\+::\+Block\+::field}\label{classmy_octree_1_1_block_a20b33a3f7704a87de6ceec6efa98edfd}
+Default field for testing 
+
+Definition at line 31 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a03e3db10912ce5033badcbf501554ba2}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!i\+Nx@{i\+Nx}}
+\index{i\+Nx@{i\+Nx}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{i\+Nx}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Block\+::i\+Nx = {\bf nx\+\_\+block}\hspace{0.3cm}{\ttfamily [static]}}\label{classmy_octree_1_1_block_a03e3db10912ce5033badcbf501554ba2}
+
+
+Definition at line 50 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_ae0b1a7bbe71892b0b4e89cfafd4b318d}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!i\+Ny@{i\+Ny}}
+\index{i\+Ny@{i\+Ny}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{i\+Ny}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Block\+::i\+Ny = {\bf ny\+\_\+block}\hspace{0.3cm}{\ttfamily [static]}}\label{classmy_octree_1_1_block_ae0b1a7bbe71892b0b4e89cfafd4b318d}
+
+
+Definition at line 51 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a1cf85662b6815a2a4e6f013b15fb884a}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!i\+Nz@{i\+Nz}}
+\index{i\+Nz@{i\+Nz}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{i\+Nz}]{\setlength{\rightskip}{0pt plus 5cm}int my\+Octree\+::\+Block\+::i\+Nz = {\bf nz\+\_\+block}\hspace{0.3cm}{\ttfamily [static]}}\label{classmy_octree_1_1_block_a1cf85662b6815a2a4e6f013b15fb884a}
+
+
+Definition at line 52 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_ad2e19ba33e0303906c6edca9344224e4}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!max\+\_\+gradient@{max\+\_\+gradient}}
+\index{max\+\_\+gradient@{max\+\_\+gradient}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{max\+\_\+gradient}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::max\+\_\+gradient}\label{classmy_octree_1_1_block_ad2e19ba33e0303906c6edca9344224e4}
+
+
+Definition at line 38 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_aef557ded62cd3b3441861a98e0a43a9d}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!mesh@{mesh}}
+\index{mesh@{mesh}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{mesh}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec\+Field}$\ast$ my\+Octree\+::\+Block\+::mesh}\label{classmy_octree_1_1_block_aef557ded62cd3b3441861a98e0a43a9d}
+Vector field that stores the location 
+
+Definition at line 30 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a0bac722408089bfe10dbdf2d8f5fe7bd}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!scalarfields@{scalarfields}}
+\index{scalarfields@{scalarfields}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{scalarfields}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Field}$\ast$$\ast$ my\+Octree\+::\+Block\+::scalarfields}\label{classmy_octree_1_1_block_a0bac722408089bfe10dbdf2d8f5fe7bd}
+Pointer to array of runtime defined scalar fields 
+
+Definition at line 34 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_ad8c28f5d7cd66ac20dc34643d821ce3b}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!vectorfields@{vectorfields}}
+\index{vectorfields@{vectorfields}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{vectorfields}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vec\+Field}$\ast$$\ast$ my\+Octree\+::\+Block\+::vectorfields}\label{classmy_octree_1_1_block_ad8c28f5d7cd66ac20dc34643d821ce3b}
+Pointer to array of runtime defined vector fields 
+
+Definition at line 35 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a568b599d56f024effe48021075cdde64}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!x\+\_\+centre@{x\+\_\+centre}}
+\index{x\+\_\+centre@{x\+\_\+centre}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{x\+\_\+centre}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::x\+\_\+centre}\label{classmy_octree_1_1_block_a568b599d56f024effe48021075cdde64}
+
+
+Definition at line 42 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a2d236fad939b4acef0fec4fedfcef128}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!x\+\_\+max@{x\+\_\+max}}
+\index{x\+\_\+max@{x\+\_\+max}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{x\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::x\+\_\+max}\label{classmy_octree_1_1_block_a2d236fad939b4acef0fec4fedfcef128}
+
+
+Definition at line 43 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a333185a8f7b5f2b4f425e08459caeca4}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!x\+\_\+min@{x\+\_\+min}}
+\index{x\+\_\+min@{x\+\_\+min}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{x\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::x\+\_\+min}\label{classmy_octree_1_1_block_a333185a8f7b5f2b4f425e08459caeca4}
+
+
+Definition at line 43 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a1bddbdf912bda6409ed258be0fccde22}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!y\+\_\+centre@{y\+\_\+centre}}
+\index{y\+\_\+centre@{y\+\_\+centre}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{y\+\_\+centre}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::y\+\_\+centre}\label{classmy_octree_1_1_block_a1bddbdf912bda6409ed258be0fccde22}
+
+
+Definition at line 42 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a1e3c4b1935a5652e29c8b874c8075145}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!y\+\_\+max@{y\+\_\+max}}
+\index{y\+\_\+max@{y\+\_\+max}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{y\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::y\+\_\+max}\label{classmy_octree_1_1_block_a1e3c4b1935a5652e29c8b874c8075145}
+
+
+Definition at line 44 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_ad06319c48ab631b16b7b4b678d7c5d0e}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!y\+\_\+min@{y\+\_\+min}}
+\index{y\+\_\+min@{y\+\_\+min}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{y\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::y\+\_\+min}\label{classmy_octree_1_1_block_ad06319c48ab631b16b7b4b678d7c5d0e}
+
+
+Definition at line 44 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a02aab304587fe213b1dd3d0a10e7ea82}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!z\+\_\+centre@{z\+\_\+centre}}
+\index{z\+\_\+centre@{z\+\_\+centre}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{z\+\_\+centre}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::z\+\_\+centre}\label{classmy_octree_1_1_block_a02aab304587fe213b1dd3d0a10e7ea82}
+
+
+Definition at line 42 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_ac3a69cabd6ecedfcea7ccc5b52f32a1d}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!z\+\_\+max@{z\+\_\+max}}
+\index{z\+\_\+max@{z\+\_\+max}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{z\+\_\+max}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::z\+\_\+max}\label{classmy_octree_1_1_block_ac3a69cabd6ecedfcea7ccc5b52f32a1d}
+
+
+Definition at line 45 of file block.\+h.
+
+\hypertarget{classmy_octree_1_1_block_a8fe6cf2861bc5b7c3235cafcb4e33f35}{}\index{my\+Octree\+::\+Block@{my\+Octree\+::\+Block}!z\+\_\+min@{z\+\_\+min}}
+\index{z\+\_\+min@{z\+\_\+min}!my\+Octree\+::\+Block@{my\+Octree\+::\+Block}}
+\subsubsection[{z\+\_\+min}]{\setlength{\rightskip}{0pt plus 5cm}double my\+Octree\+::\+Block\+::z\+\_\+min}\label{classmy_octree_1_1_block_a8fe6cf2861bc5b7c3235cafcb4e33f35}
+
+
+Definition at line 45 of file block.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{block_8h}{block.\+h}\item 
+/\+Users/suhasjain/\+C\+F\+D\+\_\+\+Repos/\+A\+M\+R-\/solver/src/\hyperlink{block_8cpp}{block.\+cpp}\end{DoxyCompactItemize}
