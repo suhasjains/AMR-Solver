@@ -12,7 +12,7 @@ class Field {
 
         public:
         
-	/*! \name Size*/	
+	/*! \name Size - also contains padding*/	
 	//@{
 	int Nx,Ny,Nz;              
         int N;

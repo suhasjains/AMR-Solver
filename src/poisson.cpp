@@ -75,6 +75,8 @@ void gauss_seidel(int level, std::string name) {
 	 	exit(1);
 	}
 
+	std::cerr << "Solving" << std::endl;
+
 	double global_res = 1.0;
 
 	long int loop = 0;
@@ -119,11 +121,12 @@ void gauss_seidel(int level, std::string name) {
 			}
 		}
 
-		std::cout << "Residual " << global_res << std::endl; 
+		//std::cout << "Residual " << global_res << std::endl; 
 
 		loop++;
 
 	}	
+		std::cout << "Residual " << global_res << std::endl; 
 		std::cout << "No of loops " << loop << std::endl;
 }
 
@@ -352,5 +355,6 @@ double gauss_seidel_black(Octree* node, Field* f, double global_res) {
 	return global_res;
 
 }
+
 
 }	

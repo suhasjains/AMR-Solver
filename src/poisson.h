@@ -1,3 +1,6 @@
+#ifndef POISSON_H
+#define POISSON_H
+
 
 namespace amrsolver {
 
@@ -8,4 +11,7 @@ double gauss_seidel_red(myOctree::Octree*, myOctree::Field*, double);
 double gauss_seidel_black(myOctree::Octree*, myOctree::Field*, double);
 
 
+
 }
+
+#endif

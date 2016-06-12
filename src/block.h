@@ -3,6 +3,7 @@
 #include <list>
 #include <vector>
 #include "boundary.h"
+#include "domain.h"
 #include "field.h"
 #include "vecfield.h"
 
@@ -56,7 +57,8 @@ class Block {
 	//@{
 	double dx, dy, dz;
 	//@}
-	
+
+	Mask*** flag; /*!<Domain masking*/		
 
 	Block( double x1, double x2, double y1, double y2, double z1, double z2 ); /*!<Parametrized constructor with initialization fields*/
 		

@@ -12,7 +12,7 @@ void exchange_ghost_val(int level, std::string name) {
 	create_lists_of_level_nodes();
 
 	if(level_nodes[level].empty()) {
-		std::cerr << "No blocks in level " << level << std::endl; 
+		std::cerr << "Error!: No blocks to exchange ghost values in level " << level << std::endl; 
 		exit(1);
 	}
 

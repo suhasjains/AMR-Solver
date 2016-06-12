@@ -7,9 +7,9 @@ namespace myOctree {
 int pad = 2;
 std::vector<std::string> scalar_fields;
 std::vector<std::string> vector_fields;	
-int nx_block = 40;
-int ny_block = 40;
-int nz_block = 20;
+int nx_block = 50;
+int ny_block = 50;
+int nz_block = 10;
 int Block::iNx = nx_block;
 int Block::iNy = ny_block;
 int Block::iNz = nz_block;
@@ -64,6 +64,85 @@ Block::Block( double x1, double x2, double y1, double y2, double z1, double z2 )
 		}
 	}
 
+	//dynamic allocation of domain masking - stored here because it is common for all fields. 
+	flag = new Mask** [iNx+2*pad];
+	for(int i=0;i<(iNx+2*pad);i++) {
+		flag[i] = new Mask* [iNy+2*pad];
+ 		for(int j=0;j<(iNy+2*pad);j++) {
+                  	flag[i][j] = new Mask [iNz+2*pad];
+           	}
+        }
+
+	//Domain masking
+	for(int i=0;i<(iNx+2*pad);i++) {
+ 		for(int j=0;j<(iNy+2*pad);j++) {
+ 			for(int k=0;k<(iNz+2*pad);k++) {
+		
+				if(k<pad) {
+					if(j<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(j>=(iNy+pad)) {
+						flag[i][j][k] = CORNER;
+					}	
+					if(i<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(i>=(iNx+pad)) {
+						flag[i][j][k] = CORNER;
+					}
+					if(i>=pad && i<(iNx+pad) && j>=pad && j<(iNy+pad)) {
+						flag[i][j][k] = BOTTOM_GHOST;
+					}	
+				}
+				else if(k>=(iNz+pad)) {
+					if(j<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(j>=(iNy+pad)) {
+						flag[i][j][k] = CORNER;
+					}	
+					if(i<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(i>=(iNx+pad)) {
+						flag[i][j][k] = CORNER;
+					}	
+					if(i>=pad && i<(iNx+pad) && j>=pad && j<(iNy+pad)) {
+						flag[i][j][k] = TOP_GHOST;
+					}	
+				}
+				else if (k>=pad && k<(iNz+pad)) {
+					if(i<pad) {
+						if(j>=pad && j<(iNy+pad)) {
+							flag[i][j][k] = WEST_GHOST;	
+						}	
+					}
+					else if(i>=(iNx+pad)) {
+						if(j>=pad && j<(iNy+pad)) {
+							flag[i][j][k] = EAST_GHOST;	
+						}	
+					}
+					if(j<pad) {
+						if(i>=pad && i<(iNx+pad)) {
+							flag[i][j][k] = SOUTH_GHOST;	
+						}	
+					}
+					else if(j>=(iNy+pad)) {
+						if(i>=pad && i<(iNx+pad)) {
+							flag[i][j][k] = NORTH_GHOST;	
+						}	
+					}
+					if(i>=pad && i<(iNx+pad)) {
+						if(j>=pad && j<(iNy+pad)) {
+							flag[i][j][k] = DOMAIN;	
+						}	
+					}
+				}	
+			}
+		}
+	}	
+
 }
 
 //default constructor
@@ -87,6 +166,86 @@ Block::Block() {
         	VecField vec_field(iNx+2*pad,iNy+2*pad,iNz+2*pad, vector_fields[i]);
 	       	vectorfields[i] = new VecField(vec_field);	
 	}       
+
+	//dynamic allocation of domain masking - stored here because it is common for all fields. 
+	flag = new Mask** [iNx+2*pad];
+	for(int i=0;i<(iNx+2*pad);i++) {
+		flag[i] = new Mask* [iNy+2*pad];
+ 		for(int j=0;j<(iNy+2*pad);j++) {
+                  	flag[i][j] = new Mask [iNz+2*pad];
+           	}
+        }
+
+	//Domain masking
+	for(int i=0;i<(iNx+2*pad);i++) {
+ 		for(int j=0;j<(iNy+2*pad);j++) {
+ 			for(int k=0;k<(iNz+2*pad);k++) {
+		
+				if(k<pad) {
+					if(j<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(j>=(iNy+pad)) {
+						flag[i][j][k] = CORNER;
+					}	
+					if(i<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(i>=(iNx+pad)) {
+						flag[i][j][k] = CORNER;
+					}
+					if(i>=pad && i<(iNx+pad) && j>=pad && j<(iNy+pad)) {
+						flag[i][j][k] = BOTTOM_GHOST;
+					}	
+				}
+				else if(k>=(iNz+pad)) {
+					if(j<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(j>=(iNy+pad)) {
+						flag[i][j][k] = CORNER;
+					}	
+					if(i<pad) {
+						flag[i][j][k] = CORNER;
+					}
+					else if(i>=(iNx+pad)) {
+						flag[i][j][k] = CORNER;
+					}	
+					if(i>=pad && i<(iNx+pad) && j>=pad && j<(iNy+pad)) {
+						flag[i][j][k] = TOP_GHOST;
+					}	
+				}
+				else if (k>=pad && k<(iNz+pad)) {
+					if(i<pad) {
+						if(j>=pad && j<(iNy+pad)) {
+							flag[i][j][k] = WEST_GHOST;	
+						}	
+					}
+					else if(i>=(iNx+pad)) {
+						if(j>=pad && j<(iNy+pad)) {
+							flag[i][j][k] = EAST_GHOST;	
+						}	
+					}
+					if(j<pad) {
+						if(i>=pad && i<(iNx+pad)) {
+							flag[i][j][k] = SOUTH_GHOST;	
+						}	
+					}
+					else if(j>=(iNy+pad)) {
+						if(i>=pad && i<(iNx+pad)) {
+							flag[i][j][k] = NORTH_GHOST;	
+						}	
+					}
+					if(i>=pad && i<(iNx+pad)) {
+						if(j>=pad && j<(iNy+pad)) {
+							flag[i][j][k] = DOMAIN;	
+						}	
+					}
+				}	
+			}
+		}
+	}	
+
 }
 
 //Copy constructor
@@ -122,6 +281,15 @@ Block::Block(const Block &obj) {
                 vectorfields[i] = new VecField(*((obj.vectorfields)[i]));
         }
 
+	//dynamic allocation of domain masking - stored here because it is common for all fields. 
+	flag = new Mask** [iNx+2*pad];
+	for(int i=0;i<(iNx+2*pad);i++) {
+		flag[i] = new Mask* [iNy+2*pad];
+ 		for(int j=0;j<(iNy+2*pad);j++) {
+                  	flag[i][j] = new Mask [iNz+2*pad];
+           		memcpy(flag[i][j],obj.flag[i][j],sizeof(Mask)*(iNz+2*pad));
+		}
+        }
 }
 
 //Destructor
@@ -133,14 +301,23 @@ Block::~Block() {
 
 	for (int i = 0; i < scalar_fields.size(); ++i)
                         delete scalarfields[i];
-
-   	delete scalarfields;
+   	
+	delete scalarfields;
 
 	for (int i = 0; i < vector_fields.size(); ++i)
                         delete vectorfields[i];
+   	
+	delete vectorfields;
 
-   	delete vectorfields;
 
+	for (int i = 0; i < (iNx+2*pad); ++i) {
+		for (int j = 0; j < (iNy+2*pad); ++j)
+	      		delete [] flag[i][j];
+	 
+		delete [] flag[i];
+	}
+	
+	delete [] flag;
 }
 
 

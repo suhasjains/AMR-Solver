@@ -111,7 +111,7 @@ Definition at line 26 of file octree.\+h.
 )}\label{classmy_octree_1_1_octree_a030592b9e46f016e238aedd137fd5c32}
 Default constructor 
 
-Definition at line 533 of file octree.\+cpp.
+Definition at line 537 of file octree.\+cpp.
 
 \hypertarget{classmy_octree_1_1_octree_a8b4ad2213a628a5f2deddbcbfa8e8920}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!Octree@{Octree}}
 \index{Octree@{Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
@@ -128,7 +128,7 @@ Definition at line 533 of file octree.\+cpp.
 )}\label{classmy_octree_1_1_octree_a8b4ad2213a628a5f2deddbcbfa8e8920}
 Parametrized constructor with initialization fields 
 
-Definition at line 476 of file octree.\+cpp.
+Definition at line 480 of file octree.\+cpp.
 
 \hypertarget{classmy_octree_1_1_octree_a6519dd2b6d012d28e81bb984baa8a54f}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!Octree@{Octree}}
 \index{Octree@{Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
@@ -139,7 +139,7 @@ Definition at line 476 of file octree.\+cpp.
 )}\label{classmy_octree_1_1_octree_a6519dd2b6d012d28e81bb984baa8a54f}
 Copy constructor 
 
-Definition at line 414 of file octree.\+cpp.
+Definition at line 418 of file octree.\+cpp.
 
 \hypertarget{classmy_octree_1_1_octree_a29fe8f3281ac81a3816773b2380a6338}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!````~Octree@{$\sim$\+Octree}}
 \index{````~Octree@{$\sim$\+Octree}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}
@@ -150,7 +150,7 @@ Definition at line 414 of file octree.\+cpp.
 )}\label{classmy_octree_1_1_octree_a29fe8f3281ac81a3816773b2380a6338}
 Destructor 
 
-Definition at line 407 of file octree.\+cpp.
+Definition at line 411 of file octree.\+cpp.
 
 
 
@@ -243,9 +243,17 @@ Definition at line 15 of file octree.\+cpp.
 {}
 \end{DoxyParamCaption}
 )}\label{classmy_octree_1_1_octree_ae8980a3e1e691b9aeabc6cc0a3783fb4}
-Function to add 8 children 
+Function to add 8 children
 
-Definition at line 178 of file octree.\+cpp.
+
+\begin{DoxyItemize}
+\item Creates children nodes,
+\item Sets neighbours to children nodes,
+\item Sets boundaries to children nodes,
+\item Sets boundary conditions to children fields 
+\end{DoxyItemize}
+
+Definition at line 182 of file octree.\+cpp.
 
 \hypertarget{classmy_octree_1_1_octree_a46db2965b2ffb44a89259bc98c36f750}{}\index{my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}!set\+\_\+child\+\_\+null\+\_\+at@{set\+\_\+child\+\_\+null\+\_\+at}}
 \index{set\+\_\+child\+\_\+null\+\_\+at@{set\+\_\+child\+\_\+null\+\_\+at}!my\+Octree\+::\+Octree@{my\+Octree\+::\+Octree}}

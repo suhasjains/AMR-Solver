@@ -1,5 +1,6 @@
 #include "octreegrid.h"
 #include "poisson.h"
+#include "multigrid.h"
 #include "adapt.h"
 #include "vtk.h"
 #include "input.h"
@@ -128,15 +129,18 @@ int main(int argc, char **argv) {
 
 	//setting up grid
 	myOctree::OctreeGrid();
-//	amrsolver::adapt_gradient();
+	amrsolver::adapt_gradient();
 
 	//setting initial condition
-	amrsolver::set_field();
+	//amrsolver::set_field();
 	
 	//solving
 	//amrsolver::jacobi(0, "beta");
-	amrsolver::gauss_seidel(0, "beta");
-	
+	amrsolver::gauss_seidel(0, "alpha");
+	//amrsolver::gauss_seidel(0, "beta");
+	amrsolver::prolongate_ghost_val_to(1,"alpha");
+
+
 	//writing vtk
 	myOctree::create_list_of_leaf_nodes();
 	myOctree::write_vtk(myOctree::leaf_nodes);

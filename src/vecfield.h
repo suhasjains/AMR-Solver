@@ -20,7 +20,7 @@ class VecField {
         int N;                  
         //@}
 	
-	/*!\name 3D array to store x,y,z comonent of field values*/
+	/*!\name 3D array to store x,y,z component of field values*/
 	//@{
 	double*** x;             
         double*** y;             
@@ -36,6 +36,7 @@ class VecField {
 	FieldBc ybc[3][2];       
 	FieldBc zbc[3][2];       
 	//@}
+
 
         VecField( int N_x, int N_y, int N_z, std::string info ); /*!<Parametrized constructor*/ 
 

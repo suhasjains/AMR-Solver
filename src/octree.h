@@ -47,6 +47,8 @@ class Octree {
 
 	Octree* get_child_at(int, int, int); /*!<Function that returns pointer to the child at indices (relative)*/
 
+	void get_relative_location(int*, int*, int*); /*!Returns relative location w.r.t siblings*/
+
 	Octree* get_parent(); /*!<Function that returns pointer to the parent*/
 
 	void set_child_null_at(int, int, int); /*!<Function that sets child pointer at indices (relative) to NULL*/	

@@ -2,9 +2,9 @@ NAME 	:= amrsolver
 OBDIR	:= ../obj/
 RUNDIR	:= ../output/
 
-OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)vecfield.o $(OBDIR)field.o $(OBDIR)boundary.o $(OBDIR)ghost.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o $(OBDIR)poisson.o 
+OBJECTS =   $(OBDIR)amrsolver.o $(OBDIR)octreegrid.o $(OBDIR)adapt.o $(OBDIR)octree.o $(OBDIR)block.o $(OBDIR)vecfield.o $(OBDIR)field.o $(OBDIR)boundary.o $(OBDIR)ghost.o $(OBDIR)vtk.o $(OBDIR)output.o $(OBDIR)input.o $(OBDIR)poisson.o $(OBDIR)multigrid.o 
 
-HEADER 	:= octreegrid.h adapt.h octree.h block.h field.h vecfield.h vtk.h output.h boundary.h ghost.h direction.h poisson.h 
+HEADER 	:= octreegrid.h adapt.h octree.h block.h field.h vecfield.h vtk.h output.h boundary.h ghost.h direction.h poisson.h domain.h multigrid.h 
 
 .DEFAULT:
 
@@ -82,6 +82,9 @@ $(OBDIR)poisson.o: poisson.cpp $(HEADER)
 	@test -d $(OBDIR) || mkdir $(OBDIR)        
 	$(CXX) -c $(FLAGS) -o $(OBDIR)poisson.o poisson.cpp
 
+$(OBDIR)multigrid.o: multigrid.cpp $(HEADER)
+	@test -d $(OBDIR) || mkdir $(OBDIR)        
+	$(CXX) -c $(FLAGS) -o $(OBDIR)multigrid.o multigrid.cpp
 copy:
 	cp -f clean $(RUNDIR)/.	
 clean: 		

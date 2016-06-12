@@ -53,6 +53,28 @@ Octree* Octree::get_parent() {
 
 }
 
+void Octree::get_relative_location(int* i, int* j, int* k) {
+
+	if(this->isRootNode()) {
+             	std::cerr << "Error!: This is root node, no siblings at root node. " << std::endl;
+              	exit(1);
+       	}
+
+	for(int n=0; n<2; n++) {
+		for(int m=0; m<2; m++) {
+     			for(int l=0; l<2; l++) {
+                      		if(this->get_parent()->get_child_at(l,m,n) == this) {
+                              		*i = l;
+					*j = m;
+					*k = n;
+				}
+                        }
+            	}
+       	}	
+
+}
+
+
 void Octree::set_to_refine_with_nesting() {
 
 	//set refinement criteria
@@ -60,55 +82,6 @@ void Octree::set_to_refine_with_nesting() {
 	
 	//check nesting
 	if(!(this->isRootNode())) {
-
-	
-	//	if(this->east==NULL && this->east_bc==NONE) {
-
-	//		if(!(this->parent->east->setToRefine==true)) { 
-	//			this->parent->east->set_to_refine_with_nesting();	
-	//		}
-
-	//	}
-
-	//	if(this->west==NULL && this->west_bc==NONE) {
-	//		
-	//		if(!(this->parent->west->setToRefine==true)) { 
-	//			this->parent->west->set_to_refine_with_nesting();	
-	//		}
-
-	//	}
-
-	//	if(this->north==NULL && this->north_bc==NONE) {
-	//		
-	//		if(!(this->parent->north->setToRefine==true)) { 
-	//			this->parent->north->set_to_refine_with_nesting();	
-	//		}
-
-	//	}
-
-	//	if(this->south==NULL && this->south_bc==NONE) {
-	//		
-	//		if(!(this->parent->south->setToRefine==true)) { 
-	//			this->parent->south->set_to_refine_with_nesting();	
-	//		}
-
-	//	}
-	//	
-	//	if(this->top==NULL && this->top_bc==NONE) {
-	//		
-	//		if(!(this->parent->top->setToRefine==true)) { 
-	//			this->parent->top->set_to_refine_with_nesting();	
-	//		}
-
-	//	}
-	//	
-	//	if(this->bottom==NULL && this->bottom_bc==NONE) {
-	//		
-	//		if(!(this->parent->bottom->setToRefine==true)) { 
-	//			this->parent->bottom->set_to_refine_with_nesting();	
-	//		}
-
-	//	}
 
 		for(int m=0;m<3;m++) {
                 	for(int n=0;n<2;n++) {	
@@ -122,42 +95,11 @@ void Octree::set_to_refine_with_nesting() {
 	}
 }	
 
-//checks if all of its neighbours are leaf nodes before setting the criteria
+/*!Checks if all of its neighbours are leaf nodes before setting the criteria.*/
 void Octree::set_to_coarsen_with_nesting() {
 	
 	bool criteria;	
 	criteria = true;
-
-//	if(this->east) {
-//		if(!(this->east->isLeafNode())) {
-//			criteria = false;
-//		}
-//	}		
-//	if(this->west) {
-//		if(!(this->west->isLeafNode())) {
-//			criteria = false;
-//		}
-//	}		
-//	if(this->north) {
-//		if(!(this->north->isLeafNode())) {
-//			criteria = false;
-//		}
-//	}		
-//	if(this->south) {
-//		if(!(this->south->isLeafNode())) {
-//			criteria = false;
-//		}
-//	}		
-//	if(this->top) {
-//		if(!(this->top->isLeafNode())) {
-//			criteria = false;
-//		}
-//	}		
-//	if(this->bottom) {
-//		if(!(this->bottom->isLeafNode())) {
-//			criteria = false;
-//		}
-//	}
 
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
@@ -174,7 +116,14 @@ void Octree::set_to_coarsen_with_nesting() {
 
 }
 
-
+/*!
+ - Creates children nodes,
+ - Sets neighbours to children nodes,
+ - Sets boundaries to children nodes,
+ - Sets boundary conditions to children fields
+ 
+ Refinement should be followed by reassignment of neighbours.
+ */
 void Octree::refine() {
     
     int i, j, k;
@@ -232,35 +181,11 @@ void Octree::refine() {
         }
     }
     
-	//setting neighbours to children
+	//setting neighbours to children - this could be redundant - yet to test
     	for(k=0; k<2; k++) {
         	for(j=0; j<2; j++) {
             		for(i=0; i<2; i++) {
 
-			//	if(i==0) {
-			//		this->children[i][j][k]->east = this->children[i+1][j][k];
-			//		if(this->west != NULL) 	this->children[i][j][k]->west = this->west->children[i+1][j][k];
-			//	}	
-			//	if(j==0) {
-			//		this->children[i][j][k]->north = this->children[i][j+1][k];
-			//		if(this->south != NULL)	this->children[i][j][k]->south = this->south->children[i][j+1][k];
-			//	}	
-			//	if(k==0) {
-			//		this->children[i][j][k]->top = this->children[i][j][k+1];
-			//		if(this->bottom != NULL)	this->children[i][j][k]->bottom = this->bottom->children[i][j][k+1];
-			//	}	
-			//	if(i==1) {
-			//		this->children[i][j][k]->west = this->children[i-1][j][k];
-			//		if(this->east != NULL)	this->children[i][j][k]->east = this->east->children[i-1][j][k];
-			//	}	
-			//	if(j==1) {
-			//		this->children[i][j][k]->south = this->children[i][j-1][k];
-			//		if(this->north != NULL)	this->children[i][j][k]->north = this->north->children[i][j-1][k];
-			//	}	
-			//	if(k==1) {
-			//		this->children[i][j][k]->bottom = this->children[i][j][k-1];
-			//		if(this->top != NULL)	this->children[i][j][k]->top = this->top->children[i][j][k-1];
-			//	}	
 				if(i==0) {
 					this->children[i][j][k]->neighbour[XDIR][RIGHT] = this->children[i+1][j][k];
 					if(this->neighbour[XDIR][LEFT] != NULL) 	this->children[i][j][k]->neighbour[XDIR][LEFT] = this->neighbour[XDIR][LEFT]->children[i+1][j][k];
@@ -294,30 +219,6 @@ void Octree::refine() {
         	for(j=0; j<2; j++) {
             		for(i=0; i<2; i++) {
 
-			//	if(i==0) {
-			//		this->children[i][j][k]->east_bc = NONE;
-			//		this->children[i][j][k]->west_bc = this->west_bc;
-			//	}	
-			//	if(j==0) {
-			//		this->children[i][j][k]->north_bc = NONE;
-			//		this->children[i][j][k]->south_bc = this->south_bc;
-			//	}	
-			//	if(k==0) {
-			//		this->children[i][j][k]->top_bc = NONE;
-			//		this->children[i][j][k]->bottom_bc = this->bottom_bc;
-			//	}	
-			//	if(i==1) {
-			//		this->children[i][j][k]->west_bc = NONE;
-			//		this->children[i][j][k]->east_bc = this->east_bc;
-			//	}	
-			//	if(j==1) {
-			//		this->children[i][j][k]->south_bc = NONE;
-			//		this->children[i][j][k]->north_bc = this->north_bc;
-			//	}	
-			//	if(k==1) {
-			//		this->children[i][j][k]->bottom_bc = NONE;
-			//		this->children[i][j][k]->top_bc = this->top_bc;
-			//	}	
 				if(i==0) {
 					this->children[i][j][k]->bc[XDIR][RIGHT] = NONE;
 					this->children[i][j][k]->bc[XDIR][LEFT] = this->bc[XDIR][LEFT];
@@ -400,17 +301,19 @@ void Octree::refine() {
 				}
 			}
 		}	
-	}		
+	}
+
+	//Bilinear interpolation to fill ghost cells of children nodes
+
+
 }
 
-/*check what is happening - destroy is necessary*/
 Octree::~Octree() {
 //	std::cerr << " destructor of octree is working " << std::endl;
     
             delete block_data;
 }
 
-/*copy constructor not working*/
 Octree::Octree(const Octree &obj) {
     
 //	std::cerr << " copy constructor of octree is working " << std::endl;
@@ -441,13 +344,6 @@ Octree::Octree(const Octree &obj) {
 	number = obj.number;
 
 	//neighbors
-//	east = obj.east;
-//	west = obj.west;
-//	north = obj.north;
-//	south = obj.south;
-//	top = obj.top;
-//	bottom = obj.bottom; 
-	
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
 			neighbour[m][n] = obj.neighbour[m][n];
@@ -455,13 +351,6 @@ Octree::Octree(const Octree &obj) {
 	}	
 	
 	//boundary conditions
-//	east_bc = obj.east_bc;	   
-//	west_bc = obj.west_bc;	   
-//	north_bc = obj.north_bc;	   
-//	south_bc = obj.south_bc;	   
-//	top_bc = obj.top_bc;	   
-//	bottom_bc = obj.bottom_bc;	   
-
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
 			bc[m][n] = obj.bc[m][n];
@@ -488,13 +377,6 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 	setToCoarsen = false; 
 	
 	//neighbors
-//	east = NULL;
-//	west = NULL;
-//	north = NULL;
-//	south = NULL;
-//	top = NULL;
-//	bottom = NULL; 
-	
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
 			neighbour[m][n] = NULL;
@@ -502,13 +384,6 @@ Octree::Octree( double x1, double x2, double y1, double y2, double z1, double z2
 	}	
    
 	//boundary conditions
-//	east_bc = NONE;
-//	west_bc = NONE;
-//	north_bc = NONE;
-//	south_bc = NONE;
-//	top_bc = NONE;
-//	bottom_bc = NONE; 
-	
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
 			bc[m][n] = NONE;
@@ -545,13 +420,6 @@ Octree::Octree() {
 	setToCoarsen = false;   
 
 	//neighbors
-//	east = NULL;
-//	west = NULL;
-//	north = NULL;
-//	south = NULL;
-//	top = NULL;
-//	bottom = NULL; 
-	
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
 			neighbour[m][n] = NULL;
@@ -571,14 +439,6 @@ Octree::Octree() {
 	level = 0;
 
 	//boundary conditions
-//	east_bc = NONE;
-//	west_bc = NONE;
-//	north_bc = NONE;
-//	south_bc = NONE;
-//	top_bc = NONE;
-//	bottom_bc = NONE; 
-	
-
 	for(int m=0;m<3;m++) {
 		for(int n=0;n<2;n++) {
 			bc[m][n] = NONE;
