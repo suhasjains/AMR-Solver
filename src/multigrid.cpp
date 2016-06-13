@@ -48,31 +48,92 @@ void prolongate_ghost_val_to(int level, std::string name) {
   				for(int i=0; i<f->Nx; i++) {
          				for(int j=0; j<f->Ny; j++) {
                          			for(int k=0; k<f->Nz; k++) {
-
-							if((*it)->get_block_data()->flag[i][j][k]==EAST_GHOST) {
-								if(*loc_x == 0) {
-									left child;
+									
+										//replace relative location with neighbour == none
+							if(((*it)->get_block_data()->flag[i][j][k]==EAST_GHOST && *loc_x==0)||
+							   ((*it)->get_block_data()->flag[i][j][k]==WEST_GHOST && *loc_x==1)||
+							   ((*it)->get_block_data()->flag[i][j][k]==NORTH_GHOST && *loc_y==0)||
+							   ((*it)->get_block_data()->flag[i][j][k]==SOUTH_GHOST && *loc_y==1)||
+							   ((*it)->get_block_data()->flag[i][j][k]==TOP_GHOST && *loc_z==0)||
+							   ((*it)->get_block_data()->flag[i][j][k]==BOTTOM_GHOST && *loc_z==1)) {
+								if((i-pad)%2==0) {
+									if((j-pad)%2==0) {
+										if((k-pad)%2==0) {
+											(i+pad)/2 - 1
+											(i+pad)/2
+											(j+pad)/2 - 1
+											(j+pad)/2
+											(k+pad)/2 - 1
+											(k+pad)/2
+										}
+										else if((k-pad)%2!=0) {
+											(i+pad)/2 - 1
+											(i+pad)/2
+											(j+pad)/2 - 1
+											(j+pad)/2
+											(k+pad)/2 
+											(k+pad)/2 + 1
+										}
+									}
+									else if((j-pad)%2!=0) {
+										if((k-pad)%2==0) {
+											(i+pad)/2 - 1
+											(i+pad)/2
+											(j+pad)/2 
+											(j+pad)/2 + 1
+											(k+pad)/2 - 1
+											(k+pad)/2
+										}
+										else if((k-pad)%2!=0) {
+											(i+pad)/2 - 1
+											(i+pad)/2
+											(j+pad)/2 
+											(j+pad)/2 + 1
+											(k+pad)/2 
+											(k+pad)/2 + 1
+										}
+									}
 								}
-								else if(*loc_x == 1) {
-									right child;
+								else if((i-pad)%2!=0) {
+									if((j-pad)%2==0) {
+										if((k-pad)%2==0) {
+											(i+pad)/2 
+											(i+pad)/2 + 1
+											(j+pad)/2 - 1
+											(j+pad)/2
+											(k+pad)/2 - 1
+											(k+pad)/2
+										}
+										else if((k-pad)%2!=0) {
+											(i+pad)/2 
+											(i+pad)/2 + 1
+											(j+pad)/2 - 1
+											(j+pad)/2
+											(k+pad)/2 
+											(k+pad)/2 + 1
+										}
+									}
+									else if((j-pad)%2!=0) {
+										if((k-pad)%2==0) {
+											(i+pad)/2 
+											(i+pad)/2 + 1
+											(j+pad)/2 
+											(j+pad)/2 + 1
+											(k+pad)/2 - 1
+											(k+pad)/2
+										}
+										else if((k-pad)%2!=0) {
+											(i+pad)/2 
+											(i+pad)/2 + 1
+											(j+pad)/2 
+											(j+pad)/2 + 1
+											(k+pad)/2 
+											(k+pad)/2 + 1
+										}
+									}
 								}
-								if(*loc_y == 0) {
-									left child;
-								}
-								else if(*loc_y == 1) {
-									right child;
-								}
-								if(*loc_z == 0) {
-									left child;
-								}
-								else if(*loc_z == 1) {
-									right child;
-								}
-								x transverse;
-								y along;
-								z along;
-							}		
-							if((*it)->get_block_data()->flag[i][j][k]==WEST_GHOST) {
+							}
+							if(((*it)->get_block_data()->flag[i][j][k]==WEST_GHOST)&&()) {
 								x transverse;
 								y along;
 								z along;
