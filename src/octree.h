@@ -1,6 +1,7 @@
 #ifndef MYOCTREE_OCTREE_H_
 #define MYOCTREE_OCTREE_H_
 #include <stdio.h>
+#include <stdlib.h>
 #include <list>
 #include <vector>
 #include "block.h"

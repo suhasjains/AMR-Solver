@@ -1,6 +1,8 @@
 #ifndef MULTIGRID_H
 #define MULTIGRID_H
 
+#include"direction.h"
+
 namespace amrsolver {
 
 
