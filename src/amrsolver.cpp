@@ -139,10 +139,12 @@ int main(int argc, char **argv) {
 	amrsolver::gauss_seidel(0, "alpha");
 	//amrsolver::gauss_seidel(0, "beta");
 	amrsolver::prolongate_ghost_val_to(1,"alpha");
-
+	amrsolver::gauss_seidel(1, "alpha");
+	//amrsolver::jacobi(1,"alpha");
 
 	//writing vtk
 	myOctree::create_list_of_leaf_nodes();
+	myOctree::create_list_of_root_nodes();
 	myOctree::write_vtk(myOctree::leaf_nodes);
 	
 	//writing output file

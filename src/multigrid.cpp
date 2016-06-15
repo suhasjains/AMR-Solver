@@ -8,6 +8,7 @@
 using myOctree::Field;
 using myOctree::VecField;
 using myOctree::Octree;
+using myOctree::Block;
 using myOctree::pad;
 using myOctree::level_nodes;
 
@@ -240,7 +241,7 @@ void prolongate_ghost_val_to(int level, std::string name) {
 	myOctree::create_lists_of_level_nodes();
 	
 	if(myOctree::level_nodes[level].empty()) {
-                std::cerr << "No blocks in level " << level << std::endl;
+                std::cerr << "Error! No blocks in level " << level << std::endl;
                 exit(1);
         }
 	
@@ -262,8 +263,9 @@ void prolongate_ghost_val_to(int level, std::string name) {
             	for(int l = 0; l<myOctree::scalar_fields.size() ; l++) {
 
 
-			//field and parent's field
+			//field and block
        			Field *f = (*it)->get_block_data()->scalarfields[l];
+       			Block *b = (*it)->get_block_data();
 
                		if( f->name == name ) {
 
@@ -271,39 +273,41 @@ void prolongate_ghost_val_to(int level, std::string name) {
          				for(int j=0; j<f->Ny; j++) {
                          			for(int k=0; k<f->Nz; k++) {
 								
-							std::cerr << "Working here" << i << j << k << std::endl;
+						//	std::cout << "Working here" << " " << i << " " << j << " " << k << " " << name << std::endl;
+						//	std::cout << *loc_x << *loc_y << *loc_z << " " << (*it)->get_block_data()->flag[i][j][k]  << std::endl;
 
+						//	if((*it)->neighbour[YDIR][RIGHT]!=NULL)	std::cout << "Not null" << std::endl;
 
 							if(*loc_x==1) {
 								if(*loc_y==1) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,f->Nx/2,f->Ny/2,f->Nz/2);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,b->iNy/2,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,f->Nx/2,f->Ny/2,0);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,b->iNy/2,0);
 									}
 								}
 								else if(*loc_y==0) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,f->Nx/2,0,f->Nz/2);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,0,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,f->Nx/2,0,0);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,0,0);
 									}
 								}
 							}
 							if(*loc_x==0) {
 								if(*loc_y==1) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,f->Ny/2,f->Nz/2);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,0,b->iNy/2,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,f->Ny/2,0);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,0,b->iNy/2,0);
 									}
 								}
 								else if(*loc_y==0) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,0,f->Nz/2);
+										calculate_interpolated_ghost_val((*it),l,i,j,k,0,0,b->iNz/2);
 									}
 									else if(*loc_z==0) {
 										calculate_interpolated_ghost_val((*it),l,i,j,k,0,0,0);

@@ -7,8 +7,8 @@ namespace myOctree {
 int pad = 2;
 std::vector<std::string> scalar_fields;
 std::vector<std::string> vector_fields;	
-int nx_block = 50;
-int ny_block = 50;
+int nx_block = 20;
+int ny_block = 20;
 int nz_block = 10;
 int Block::iNx = nx_block;
 int Block::iNy = ny_block;

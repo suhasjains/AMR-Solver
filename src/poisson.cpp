@@ -82,7 +82,7 @@ void gauss_seidel(int level, std::string name) {
 	long int loop = 0;
 
 	//iteration loop
-	//while(loop <250 ) {
+	//while(loop <200 ) {
 	while(global_res > pow(10,-7)) {
 
 		global_res = 0.0;
@@ -121,7 +121,7 @@ void gauss_seidel(int level, std::string name) {
 			}
 		}
 
-		//std::cout << "Residual " << global_res << std::endl; 
+		std::cout << "Residual " << global_res << std::endl; 
 
 		loop++;
 
@@ -206,7 +206,11 @@ double jacobi_for_field(Octree* node, Field* f, double global_res) {
 
 }
 
-/*!Solving grid points marked red in gauss-seidel algorithm.*/
+/*!Solving grid points marked red in gauss-seidel algorithm.
+
+Only relax of 1.4(max) is converging now - Yet to be tested.
+
+*/
 double gauss_seidel_red(Octree* node, Field* f, double global_res) {
 
 	double res, err;
@@ -214,7 +218,7 @@ double gauss_seidel_red(Octree* node, Field* f, double global_res) {
 	double ue, uw, un, us, ut, ub, up;
 	double prev_val, curr_val;
 	double force = 100.0;
-	double relax = 1.5;
+	double relax = 1.4;
 	res = 0.0;
 	
 	Field temp(nx_block+2*pad,ny_block+2*pad,nz_block+2*pad, "temp");
@@ -290,7 +294,7 @@ double gauss_seidel_black(Octree* node, Field* f, double global_res) {
 	double ue, uw, un, us, ut, ub, up;
 	double prev_val, curr_val;
 	double force = 100.0;
-	double relax = 1.5;
+	double relax = 1.4;
 	res = 0.0;
 	
 	Field temp(nx_block+2*pad,ny_block+2*pad,nz_block+2*pad, "temp");
