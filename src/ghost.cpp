@@ -4,12 +4,33 @@
 #include <stdlib.h>
 #include <string>
 
-namespace myOctree {
+using myOctree::Field;
+using myOctree::VecField;
+using myOctree::Octree;
+using myOctree::level_nodes;
+using myOctree::pad;
+using myOctree::nx_block;
+using myOctree::ny_block;
+using myOctree::nz_block;
+using myOctree::scalar_fields;
+using myOctree::vector_fields;
+
+using myOctree::XDIR;
+using myOctree::YDIR;
+using myOctree::ZDIR;
+using myOctree::RIGHT;
+using myOctree::LEFT;
+
+
+using myOctree::NONE;
+
+
+namespace amrsolver {
 
 /*!Exchanges ghost values of the given field at the given level*/	
 void exchange_ghost_val(int level, std::string name) {
 
-	create_lists_of_level_nodes();
+	myOctree::create_lists_of_level_nodes();
 
 	if(level_nodes[level].empty()) {
 		std::cerr << "Error!: No blocks to exchange ghost values in level " << level << std::endl; 

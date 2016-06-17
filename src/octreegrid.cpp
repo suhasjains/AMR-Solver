@@ -238,11 +238,11 @@ void print_neighbour_information(std::list<Octree*>& nodes) {
 void exchange_ghost_values_of_level(int level) {
 
 	for(int l = 0; l<scalar_fields.size() ; l++) {
-		exchange_ghost_val(level, scalar_fields[l]);
+		amrsolver::exchange_ghost_val(level, scalar_fields[l]);
 	}
 	
 	for(int l = 0; l<vector_fields.size() ; l++) {
-		exchange_ghost_val(level, vector_fields[l]);
+		amrsolver::exchange_ghost_val(level, vector_fields[l]);
 	}
 
 }

@@ -25,6 +25,7 @@ using myOctree::NORTH_GHOST;
 using myOctree::SOUTH_GHOST;
 using myOctree::TOP_GHOST;
 using myOctree::BOTTOM_GHOST;
+using myOctree::DOMAIN;
 
 
 
@@ -71,8 +72,11 @@ double Trilinear_interpolate(double x0,double x1, double x2, double y0, double y
 }
 
 
-/*!If this node is a left child, add is 0, else if its a right child, add is 1.*/
-void calculate_interpolated_ghost_val(Octree* node, int l, int i, int j, int k, int addx, int addy, int addz) {
+/*!If this node is a left child, add 0, else if its a right child, add 1.
+ 
+Parameters: octree node, field index, indices i j k, additions addx addy addz.
+ */
+void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int addx, int addy, int addz) {
 	//indices
 	int i0, i1, j0, j1, k0, k1;	
 	
@@ -227,16 +231,171 @@ void calculate_interpolated_ghost_val(Octree* node, int l, int i, int j, int k, 
 	}
 }
 
-/*!Trilinear interpolation of the given field's ghost cells from level-1 to level.*/
-void prolongate_ghost_val_to(int level, std::string name) {
+/*!If this node is a left child, add 0, else if its a right child, add 1.
+ 
+Parameters: octree node, field index, indices i j k, additions addx addy addz.
+ */
+void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int addx, int addy, int addz) {
+	//indices
+	int i0, i1, j0, j1, k0, k1;	
+	
+
+	//grid and parent's grid
+	VecField* mesh = node->get_block_data()->mesh;
+	VecField* meshp = node->get_parent()->get_block_data()->mesh; 
+
+	//field and parent's field
+       	Field *f = node->get_block_data()->scalarfields[l];
+       	Field *fp = node->get_parent()->get_block_data()->scalarfields[l];
+
+	//domain
+	if(node->get_block_data()->flag[i][j][k]==DOMAIN) {
+		//change conditions
+		if((i-pad)%2==0) {
+			if((j-pad)%2==0) {
+				if((k-pad)%2==0) {
+					i0=addx+(i+pad)/2 - 1;
+					i1=addx+(i+pad)/2;
+					j0=addy+(j+pad)/2 - 1;
+					j1=addy+(j+pad)/2;
+					k0=addz+(k+pad)/2 - 1;
+					k1=addz+(k+pad)/2;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+				else if((k-pad)%2!=0) {
+					i0=addx+(i+pad)/2 - 1;
+					i1=addx+(i+pad)/2;
+					j0=addy+(j+pad)/2 - 1;
+					j1=addy+(j+pad)/2;
+					k0=addz+(k+pad)/2 ;
+					k1=addz+(k+pad)/2 + 1;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+			}
+			else if((j-pad)%2!=0) {
+				if((k-pad)%2==0) {
+					i0=addx+(i+pad)/2 - 1;
+					i1=addx+(i+pad)/2;
+					j0=addy+(j+pad)/2;
+					j1=addy+(j+pad)/2 + 1;
+					k0=addz+(k+pad)/2 - 1;
+					k1=addz+(k+pad)/2;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+				else if((k-pad)%2!=0) {
+					i0=addx+(i+pad)/2 - 1;
+					i1=addx+(i+pad)/2;
+					j0=addy+(j+pad)/2;
+					j1=addy+(j+pad)/2 + 1;
+					k0=addz+(k+pad)/2; 
+					k1=addz+(k+pad)/2 + 1;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+			}
+		}
+		else if((i-pad)%2!=0) {
+			if((j-pad)%2==0) {
+				if((k-pad)%2==0) {
+					i0=addx+(i+pad)/2; 
+					i1=addx+(i+pad)/2 + 1;
+					j0=addy+(j+pad)/2 - 1;
+					j1=addy+(j+pad)/2;
+					k0=addz+(k+pad)/2 - 1;
+					k1=addz+(k+pad)/2;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+				else if((k-pad)%2!=0) {
+					i0=addx+(i+pad)/2; 
+					i1=addx+(i+pad)/2 + 1;
+					j0=addy+(j+pad)/2 - 1;
+					j1=addy+(j+pad)/2;
+					k0=addz+(k+pad)/2; 
+					k1=addz+(k+pad)/2 + 1;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+			}
+			else if((j-pad)%2!=0) {
+				if((k-pad)%2==0) {
+					i0=addx+(i+pad)/2; 
+					i1=addx+(i+pad)/2 + 1;
+					j0=addy+(j+pad)/2; 
+					j1=addy+(j+pad)/2 + 1;
+					k0=addz+(k+pad)/2 - 1;
+					k1=addz+(k+pad)/2;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+				else if((k-pad)%2!=0) {
+					i0=addx+(i+pad)/2; 
+					i1=addx+(i+pad)/2 + 1;
+					j0=addy+(j+pad)/2; 
+					j1=addy+(j+pad)/2 + 1;
+					k0=addz+(k+pad)/2; 
+					k1=addz+(k+pad)/2 + 1;
+					f->val[i][j][k] = Trilinear_interpolate(meshp->x[i0][j][k],meshp->x[i1][j][k],mesh->x[i][j][k], \
+										meshp->y[i][j0][k],meshp->y[i][j1][k],mesh->y[i][j][k], \
+										meshp->z[i][j][k0],meshp->z[i][j][k1],mesh->z[i][j][k], \
+										fp->val[i0][j0][k1],fp->val[i0][j1][k1], \
+										fp->val[i1][j0][k1],fp->val[i1][j1][k1], \
+										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
+										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
+				}
+			}
+		}
+	}
+}
+
+
+
+/*!Prolongation of the given field's ghost cells from level-1 to level.*/
+void prolongate_ghost(int level, std::string name) {
 
 	//relative locations wrt siblings
 	int *loc_x, *loc_y, *loc_z;
 	loc_x = new int;
 	loc_y = new int;
 	loc_z = new int;
-
-
 
 	myOctree::create_lists_of_level_nodes();
 	
@@ -256,8 +415,95 @@ void prolongate_ghost_val_to(int level, std::string name) {
         	//get location relative to siblings
             	(*it)->get_relative_location(loc_x,loc_y,loc_z);
 
-            	//std::cerr << *loc_x << " " << *loc_y << " " << *loc_z << std::endl;
+            	//loop over scalar fields
+            	for(int l = 0; l<myOctree::scalar_fields.size() ; l++) {
 
+
+			//field and block
+       			Field *f = (*it)->get_block_data()->scalarfields[l];
+       			Block *b = (*it)->get_block_data();
+
+               		if( f->name == name ) {
+
+  				for(int i=0; i<f->Nx; i++) {
+         				for(int j=0; j<f->Ny; j++) {
+                         			for(int k=0; k<f->Nz; k++) {
+								
+
+							if(*loc_x==1) {
+								if(*loc_y==1) {
+									if(*loc_z==1) {
+										prolongate_ghost_for_child((*it),l,i,j,k,b->iNx/2,b->iNy/2,b->iNz/2);
+									}
+									else if(*loc_z==0) {
+										prolongate_ghost_for_child((*it),l,i,j,k,b->iNx/2,b->iNy/2,0);
+									}
+								}
+								else if(*loc_y==0) {
+									if(*loc_z==1) {
+										prolongate_ghost_for_child((*it),l,i,j,k,b->iNx/2,0,b->iNz/2);
+									}
+									else if(*loc_z==0) {
+										prolongate_ghost_for_child((*it),l,i,j,k,b->iNx/2,0,0);
+									}
+								}
+							}
+							if(*loc_x==0) {
+								if(*loc_y==1) {
+									if(*loc_z==1) {
+										prolongate_ghost_for_child((*it),l,i,j,k,0,b->iNy/2,b->iNz/2);
+									}
+									else if(*loc_z==0) {
+										prolongate_ghost_for_child((*it),l,i,j,k,0,b->iNy/2,0);
+									}
+								}
+								else if(*loc_y==0) {
+									if(*loc_z==1) {
+										prolongate_ghost_for_child((*it),l,i,j,k,0,0,b->iNz/2);
+									}
+									else if(*loc_z==0) {
+										prolongate_ghost_for_child((*it),l,i,j,k,0,0,0);
+									}
+								}
+							}
+						}
+          				}
+                 		}
+       			}
+         	}
+        }
+}
+
+
+/*!Prolongation of the given field's ghost cells from level-1 to level.
+ 
+Parameters: level, field name.
+  */
+void prolongate_domain(int level, std::string name) {
+
+	//relative locations wrt siblings
+	int *loc_x, *loc_y, *loc_z;
+	loc_x = new int;
+	loc_y = new int;
+	loc_z = new int;
+
+	myOctree::create_lists_of_level_nodes();
+	
+	if(myOctree::level_nodes[level].empty()) {
+                std::cerr << "Error! No blocks in level " << level << std::endl;
+                exit(1);
+        }
+	
+	if(level==0) {
+                std::cerr << "Error! Level cannot be zero" << std::endl;
+                exit(1);
+        }
+
+	//loop over nodes
+	for (std::list<Octree*>::iterator it = level_nodes[level].begin(), end = level_nodes[level].end(); it != end; ++it) {
+
+        	//get location relative to siblings
+            	(*it)->get_relative_location(loc_x,loc_y,loc_z);
 
             	//loop over scalar fields
             	for(int l = 0; l<myOctree::scalar_fields.size() ; l++) {
@@ -273,44 +519,39 @@ void prolongate_ghost_val_to(int level, std::string name) {
          				for(int j=0; j<f->Ny; j++) {
                          			for(int k=0; k<f->Nz; k++) {
 								
-						//	std::cout << "Working here" << " " << i << " " << j << " " << k << " " << name << std::endl;
-						//	std::cout << *loc_x << *loc_y << *loc_z << " " << (*it)->get_block_data()->flag[i][j][k]  << std::endl;
-
-						//	if((*it)->neighbour[YDIR][RIGHT]!=NULL)	std::cout << "Not null" << std::endl;
-
 							if(*loc_x==1) {
 								if(*loc_y==1) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,b->iNy/2,b->iNz/2);
+										prolongate_domain_for_child((*it),l,i,j,k,b->iNx/2,b->iNy/2,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,b->iNy/2,0);
+										prolongate_domain_for_child((*it),l,i,j,k,b->iNx/2,b->iNy/2,0);
 									}
 								}
 								else if(*loc_y==0) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,0,b->iNz/2);
+										prolongate_domain_for_child((*it),l,i,j,k,b->iNx/2,0,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,b->iNx/2,0,0);
+										prolongate_domain_for_child((*it),l,i,j,k,b->iNx/2,0,0);
 									}
 								}
 							}
 							if(*loc_x==0) {
 								if(*loc_y==1) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,b->iNy/2,b->iNz/2);
+										prolongate_domain_for_child((*it),l,i,j,k,0,b->iNy/2,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,b->iNy/2,0);
+										prolongate_domain_for_child((*it),l,i,j,k,0,b->iNy/2,0);
 									}
 								}
 								else if(*loc_y==0) {
 									if(*loc_z==1) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,0,b->iNz/2);
+										prolongate_domain_for_child((*it),l,i,j,k,0,0,b->iNz/2);
 									}
 									else if(*loc_z==0) {
-										calculate_interpolated_ghost_val((*it),l,i,j,k,0,0,0);
+										prolongate_domain_for_child((*it),l,i,j,k,0,0,0);
 									}
 								}
 							}
@@ -321,5 +562,25 @@ void prolongate_ghost_val_to(int level, std::string name) {
          	}
         }
 }
+
+void multigrid(std::string name) {
+
+     	gauss_seidel(0, name);
+        prolongate_ghost(1,name);
+       	prolongate_domain(1,name);
+	
+
+	//not a problem with exchange of ghost, its about prolongation
+	//exchange_ghost_val(1,name);
+     	//gauss_seidel(1, name);
+        prolongate_ghost(2,name);
+       	prolongate_domain(2,name);
+     	//gauss_seidel(2, name);
+        //prolongate_ghost(3,name);
+       	//prolongate_domain(3,name);
+     	//gauss_seidel(3, name);
+
+}
+
 
 }

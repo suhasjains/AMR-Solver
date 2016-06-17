@@ -50,20 +50,21 @@ void set_field() {
 
 	myOctree::create_list_of_leaf_nodes();
 
-    	for (std::list<Octree*>::iterator i = myOctree::leaf_nodes.begin(), end = myOctree::leaf_nodes.end(); i != end; ++i) {
+    	for (std::list<Octree*>::iterator it = myOctree::leaf_nodes.begin(), end = myOctree::leaf_nodes.end(); it != end; ++it) {
 
-   		Field* field = (*i)->get_block_data()->scalarfields[0];
-   		VecField* location = (*i)->get_block_data()->mesh;
+   		Field* field = (*it)->get_block_data()->scalarfields[1];
+   		VecField* location = (*it)->get_block_data()->mesh;
 	
 		for(int i=0;i<field->Nx;i++) {
                 	for(int j=0;j<field->Ny;j++) {
                         	for(int k=0;k<field->Nz;k++) {
-                                	
+				
 					double x = location->x[i][j][k];
 					double y = location->y[i][j][k];
 					double z = location->z[i][j][k];
  					
-					((x-1.0)*(x-1.0) + (y-1.0)*(y-1.0) >= 0.5625)?(field->val[i][j][k] = 1.0):(field->val[i][j][k] = 100.0);		
+					if((*it)->get_block_data()->flag[i][j][k]==myOctree::DOMAIN) 
+						field->val[i][j][k] = 1.0;		
 					//if(x*x + y*y >= 3.0)	{field->val[i][j][k] = 100.0; }		
                         	}
                 	}
@@ -135,12 +136,10 @@ int main(int argc, char **argv) {
 	//amrsolver::set_field();
 	
 	//solving
-	//amrsolver::jacobi(0, "beta");
-	amrsolver::gauss_seidel(0, "alpha");
-	//amrsolver::gauss_seidel(0, "beta");
-	amrsolver::prolongate_ghost_val_to(1,"alpha");
-	amrsolver::gauss_seidel(1, "alpha");
-	//amrsolver::jacobi(1,"alpha");
+	amrsolver::multigrid("alpha");
+	
+	//checking flags
+	amrsolver::set_field();
 
 	//writing vtk
 	myOctree::create_list_of_leaf_nodes();

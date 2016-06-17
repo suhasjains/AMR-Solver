@@ -40,7 +40,7 @@ void jacobi(int level, std::string name) {
 		global_res = 0.0;
 		
 		//exchange ghost values
-		myOctree::exchange_ghost_val(level, name);
+		exchange_ghost_val(level, name);
 
 		//loop over all the nodes
 		for (std::list<Octree*>::iterator it = level_nodes[level].begin(), end = level_nodes[level].end(); it != end; ++it) {
@@ -88,7 +88,7 @@ void gauss_seidel(int level, std::string name) {
 		global_res = 0.0;
 		
 		//exchange ghost values
-		myOctree::exchange_ghost_val(level, name);
+		exchange_ghost_val(level, name);
 
 		//loop over all the nodes
 		for (std::list<Octree*>::iterator it = level_nodes[level].begin(), end = level_nodes[level].end(); it != end; ++it) {
@@ -105,7 +105,7 @@ void gauss_seidel(int level, std::string name) {
 		}
 
 		//exchange ghost values
-		myOctree::exchange_ghost_val(level, name);
+		exchange_ghost_val(level, name);
 		
 		//loop over all the nodes
 		for (std::list<Octree*>::iterator it = level_nodes[level].begin(), end = level_nodes[level].end(); it != end; ++it) {
