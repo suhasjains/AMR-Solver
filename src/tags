@@ -143,12 +143,13 @@ YDIR	direction.h	8
 ZDIR	direction.h	9
 adapt_gradient	amrsolver.cpp	/^void adapt_gradient() {$/
 amrsolver	amrsolver.cpp	16
-amrsolver	multigrid.cpp	30
+amrsolver	ghost.cpp	28
+amrsolver	multigrid.cpp	32
 amrsolver	poisson.cpp	20
 amrsolver::Trilinear_interpolate	multigrid.cpp	/^double Trilinear_interpolate(double x0,double x1, /
+amrsolver::exchange_ghost_val	ghost.cpp	/^void exchange_ghost_val(int level, std::string nam/
 amrsolver::jacobi	poisson.cpp	/^void jacobi(int level, std::string name) {$/
 amrsolver::set_initial_field	amrsolver.cpp	/^void set_initial_field() {$/
-calculate_interpolated_ghost_val	multigrid.cpp	/^void calculate_interpolated_ghost_val(Octree* node/
 clean	Makefile	/^clean: 		$/
 coarsen_nodes	adapt.cpp	/^void coarsen_nodes() {$/
 copy	Makefile	/^copy:$/
@@ -165,48 +166,59 @@ gauss_seidel_black	poisson.cpp	/^double gauss_seidel_black(Octree* node, Field* 
 gauss_seidel_red	poisson.cpp	/^double gauss_seidel_red(Octree* node, Field* f, do/
 jacobi_for_field	poisson.cpp	/^double jacobi_for_field(Octree* node, Field* f, do/
 mpi_boundary	boundary.h	21
+multigrid	multigrid.cpp	/^void multigrid(std::string name) {$/
 myOctree	adapt.cpp	6
 myOctree	block.cpp	5
 myOctree	boundary.cpp	6
 myOctree	field.cpp	2
-myOctree	ghost.cpp	7
 myOctree	octree.cpp	5
 myOctree	octreegrid.cpp	10
 myOctree	vecfield.cpp	2
-myOctree	vtk.cpp	5
-myOctree::BOTTOM_GHOST	multigrid.cpp	26
+myOctree	vtk.cpp	6
+myOctree::BOTTOM_GHOST	multigrid.cpp	27
+myOctree::Block	multigrid.cpp	11
 myOctree::Block::Block	block.cpp	/^Block::Block( double x1, double x2, double y1, dou/
 myOctree::Block::iNx	block.cpp	13
 myOctree::Block::iNy	block.cpp	14
 myOctree::Block::iNz	block.cpp	15
-myOctree::EAST_GHOST	multigrid.cpp	21
+myOctree::DOMAIN	multigrid.cpp	28
+myOctree::EAST_GHOST	multigrid.cpp	22
 myOctree::Field	amrsolver.cpp	11
+myOctree::Field	ghost.cpp	7
 myOctree::Field	multigrid.cpp	8
 myOctree::Field	poisson.cpp	9
 myOctree::Field::Field	field.cpp	/^Field::Field( int N_x, int N_y, int N_z, std::stri/
-myOctree::LEFT	multigrid.cpp	19
-myOctree::NORTH_GHOST	multigrid.cpp	23
+myOctree::LEFT	ghost.cpp	22
+myOctree::LEFT	multigrid.cpp	20
+myOctree::NONE	ghost.cpp	25
+myOctree::NORTH_GHOST	multigrid.cpp	24
 myOctree::Octree	amrsolver.cpp	10
+myOctree::Octree	ghost.cpp	9
 myOctree::Octree	multigrid.cpp	10
 myOctree::Octree	output.cpp	7
 myOctree::Octree	poisson.cpp	11
 myOctree::Octree::isLeafNode	octree.cpp	/^bool Octree::isLeafNode() {$/
-myOctree::RIGHT	multigrid.cpp	18
-myOctree::SOUTH_GHOST	multigrid.cpp	24
-myOctree::TOP_GHOST	multigrid.cpp	25
+myOctree::RIGHT	ghost.cpp	21
+myOctree::RIGHT	multigrid.cpp	19
+myOctree::SOUTH_GHOST	multigrid.cpp	25
+myOctree::TOP_GHOST	multigrid.cpp	26
 myOctree::VecField	amrsolver.cpp	12
+myOctree::VecField	ghost.cpp	8
 myOctree::VecField	multigrid.cpp	9
 myOctree::VecField	poisson.cpp	10
 myOctree::VecField::VecField	vecfield.cpp	/^VecField::VecField( int N_x, int N_y, int N_z, std/
-myOctree::WEST_GHOST	multigrid.cpp	22
-myOctree::XDIR	multigrid.cpp	15
-myOctree::YDIR	multigrid.cpp	16
-myOctree::ZDIR	multigrid.cpp	17
+myOctree::WEST_GHOST	multigrid.cpp	23
+myOctree::XDIR	ghost.cpp	18
+myOctree::XDIR	multigrid.cpp	16
+myOctree::YDIR	ghost.cpp	19
+myOctree::YDIR	multigrid.cpp	17
+myOctree::ZDIR	ghost.cpp	20
+myOctree::ZDIR	multigrid.cpp	18
 myOctree::create_list_of_leaf_nodes	octreegrid.cpp	/^void create_list_of_leaf_nodes() {$/
-myOctree::exchange_ghost_val	ghost.cpp	/^void exchange_ghost_val(int level, std::string nam/
 myOctree::get_point	vtk.cpp	/^long int get_point(int i, int j, int k, int Npx, i/
 myOctree::leaf_nodes	octreegrid.cpp	15
-myOctree::level_nodes	multigrid.cpp	12
+myOctree::level_nodes	ghost.cpp	10
+myOctree::level_nodes	multigrid.cpp	13
 myOctree::level_nodes	octreegrid.cpp	17
 myOctree::level_nodes	poisson.cpp	18
 myOctree::max_level	adapt.cpp	8
@@ -214,25 +226,34 @@ myOctree::max_level	octreegrid.cpp	12
 myOctree::nodes	octreegrid.cpp	14
 myOctree::nodes	output.cpp	8
 myOctree::nx_block	block.cpp	10
+myOctree::nx_block	ghost.cpp	12
 myOctree::nx_block	poisson.cpp	13
 myOctree::ny_block	block.cpp	11
+myOctree::ny_block	ghost.cpp	13
 myOctree::ny_block	poisson.cpp	14
 myOctree::nz_block	block.cpp	12
+myOctree::nz_block	ghost.cpp	14
 myOctree::nz_block	poisson.cpp	15
 myOctree::pad	block.cpp	7
-myOctree::pad	multigrid.cpp	11
+myOctree::pad	ghost.cpp	11
+myOctree::pad	multigrid.cpp	12
 myOctree::pad	poisson.cpp	16
 myOctree::refine_nodes	adapt.cpp	/^void refine_nodes() {$/
 myOctree::root_nodes	octreegrid.cpp	16
 myOctree::scalar_fields	block.cpp	8
+myOctree::scalar_fields	ghost.cpp	15
 myOctree::set_FieldBc_FieldBcVal	boundary.cpp	/^void set_FieldBc_FieldBcVal(int number, std::strin/
 myOctree::vector_fields	block.cpp	9
+myOctree::vector_fields	ghost.cpp	16
 neumann	boundary.h	20
 node_boundary_flags	boundary.h	7
 none	boundary.h	18
 position	direction.h	15
 print_neighbour_information	octreegrid.cpp	/^void print_neighbour_information(std::list<Octree*/
-prolongate_ghost_val_to	multigrid.cpp	/^void prolongate_ghost_val_to(int level, std::strin/
+prolongate_domain	multigrid.cpp	/^void prolongate_domain(int level, std::string name/
+prolongate_domain_for_child	multigrid.cpp	/^void prolongate_domain_for_child(Octree* node, int/
+prolongate_ghost	multigrid.cpp	/^void prolongate_ghost(int level, std::string name)/
+prolongate_ghost_for_child	multigrid.cpp	/^void prolongate_ghost_for_child(Octree* node, int /
 read_blocks	input.cpp	/^int read_blocks(ifstream& file) {$/
 read_input_file	input.cpp	/^void read_input_file() {$/
 read_max_level	input.cpp	/^void read_max_level(ifstream& file) {$/
@@ -244,6 +265,8 @@ reassign_neighbours	octreegrid.cpp	/^void reassign_neighbours() {$/
 recheck_siblings_coarsen_flags	adapt.cpp	/^void recheck_siblings_coarsen_flags() {$/
 reset_coarsen_flags	adapt.cpp	/^void reset_coarsen_flags() {$/
 reset_refine_flags	adapt.cpp	/^void reset_refine_flags() {$/
+restrict	multigrid.cpp	/^void restrict(int level, std::string name) {$/
+restrict_from_child	multigrid.cpp	/^void restrict_from_child(Octree* node, Octree* chi/
 set_VecFieldBc_VecFieldBcVal	boundary.cpp	/^void set_VecFieldBc_VecFieldBcVal(int number, std:/
 set_coarsen_flag_based_on_gradient	adapt.cpp	/^void set_coarsen_flag_based_on_gradient() {$/
 set_field	amrsolver.cpp	/^void set_field() {$/
@@ -256,7 +279,7 @@ std::string_to_NodeBc	input.cpp	/^myOctree::NodeBc string_to_NodeBc(string bc) {
 string_to_FieldBc	input.cpp	/^myOctree::FieldBc string_to_FieldBc(string bc) {$/
 val	field.h	20
 write_output_file	output.cpp	/^void write_output_file() {$/
-write_vtk	vtk.cpp	/^void write_vtk(std::list<Octree*>& nodes) {$/
+write_vtk	vtk.cpp	/^void write_vtk(std::list<Octree*>& nodes, std::str/
 x	vecfield.h	25
 y	vecfield.h	26
 z	vecfield.h	27

@@ -96,9 +96,9 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 	   (node->get_block_data()->flag[i][j][k]==SOUTH_GHOST && node->neighbour[YDIR][LEFT]==NULL)||
 	   (node->get_block_data()->flag[i][j][k]==TOP_GHOST && node->neighbour[ZDIR][RIGHT]==NULL)||
 	   (node->get_block_data()->flag[i][j][k]==BOTTOM_GHOST && node->neighbour[ZDIR][LEFT]==NULL)) {
-		if((((i-pad)%2==0)&&((i-pad)!=0))||((i-pad)==(f->Nx-1))) {
-			if((((j-pad)%2==0)&&((j-pad)!=0))||((j-pad)==(f->Ny-1))) {
-				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1))) {
+		if((((i-pad)%2==0)&&((i-pad)!=0))||((i-pad)==(f->Nx-1-2*pad))) {
+			if((((j-pad)%2==0)&&((j-pad)!=0))||((j-pad)==(f->Ny-1-2*pad))) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2 - 1;
@@ -113,7 +113,7 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1)))||((k-pad)==0)) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2 - 1;
@@ -129,8 +129,8 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
 			}
-			else if((((j-pad)%2!=0)&&((j-pad)!=(f->Ny-1)))||((j-pad)==0)) {
-				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1))) {
+			else if((((j-pad)%2!=0)&&((j-pad)!=(f->Ny-1-2*pad)))||((j-pad)==0)) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2;
@@ -145,7 +145,7 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1)))||((k-pad)==0)) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2;
@@ -162,9 +162,9 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 				}
 			}
 		}
-		else if((((i-pad)%2!=0)&&((i-pad)!=(f->Nx-1)))||((i-pad)==0)) {
-			if((((j-pad)%2==0)&&((j-pad)!=0))||((j-pad)==(f->Ny-1))) {
-				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1))) {
+		else if((((i-pad)%2!=0)&&((i-pad)!=(f->Nx-1-2*pad)))||((i-pad)==0)) {
+			if((((j-pad)%2==0)&&((j-pad)!=0))||((j-pad)==(f->Ny-1-2*pad))) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2 - 1;
@@ -179,7 +179,7 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1)))||((k-pad)==0)) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2 - 1;
@@ -195,8 +195,8 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
 			}
-			else if((((j-pad)%2!=0)&&((j-pad)!=(f->Ny-1)))||((j-pad)==0)) {
-				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1))) {
+			else if((((j-pad)%2!=0)&&((j-pad)!=(f->Ny-1-2*pad)))||((j-pad)==0)) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2; 
@@ -211,7 +211,7 @@ void prolongate_ghost_for_child(Octree* node, int l, int i, int j, int k, int ad
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1)))||((k-pad)==0)) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2; 
@@ -251,9 +251,12 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 	//domain
 	if(node->get_block_data()->flag[i][j][k]==DOMAIN) {
 		//change conditions
-		if((i-pad)%2==0) {
-			if((j-pad)%2==0) {
-				if((k-pad)%2==0) {
+//		if((i-pad)%2==0) {
+//			if((j-pad)%2==0) {
+//				if((k-pad)%2==0) {
+		if((((i-pad)%2==0)&&((i-pad)!=0))||((i-pad)==(f->Nx-1-2*pad))) {
+			if((((j-pad)%2==0)&&((j-pad)!=0))||((j-pad)==(f->Ny-1-2*pad))) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2 - 1;
@@ -268,7 +271,8 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((k-pad)%2!=0) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
+//				else if((k-pad)%2!=0) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2 - 1;
@@ -284,8 +288,10 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
 			}
-			else if((j-pad)%2!=0) {
-				if((k-pad)%2==0) {
+//			else if((j-pad)%2!=0) {
+//				if((k-pad)%2==0) {
+			else if((((j-pad)%2!=0)&&((j-pad)!=(f->Ny-1-2*pad)))||((j-pad)==0)) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2;
@@ -300,7 +306,8 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((k-pad)%2!=0) {
+//				else if((k-pad)%2!=0) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
 					i0=addx+(i+pad)/2 - 1;
 					i1=addx+(i+pad)/2;
 					j0=addy+(j+pad)/2;
@@ -317,9 +324,12 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 				}
 			}
 		}
-		else if((i-pad)%2!=0) {
-			if((j-pad)%2==0) {
-				if((k-pad)%2==0) {
+//		else if((i-pad)%2!=0) {
+//			if((j-pad)%2==0) {
+//				if((k-pad)%2==0) {
+		else if((((i-pad)%2!=0)&&((i-pad)!=(f->Nx-1-2*pad)))||((i-pad)==0)) {
+			if((((j-pad)%2==0)&&((j-pad)!=0))||((j-pad)==(f->Ny-1-2*pad))) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2 - 1;
@@ -334,7 +344,8 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((k-pad)%2!=0) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
+//				else if((k-pad)%2!=0) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2 - 1;
@@ -350,8 +361,10 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
 			}
-			else if((j-pad)%2!=0) {
-				if((k-pad)%2==0) {
+//			else if((j-pad)%2!=0) {
+//				if((k-pad)%2==0) {
+			else if((((j-pad)%2!=0)&&((j-pad)!=(f->Ny-1-2*pad)))||((j-pad)==0)) {
+				if((((k-pad)%2==0)&&((k-pad)!=0))||((k-pad)==(f->Nz-1-2*pad))) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2; 
@@ -366,7 +379,8 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 										fp->val[i0][j0][k0],fp->val[i0][j1][k0], \
 										fp->val[i1][j0][k0],fp->val[i1][j1][k0]);
 				}
-				else if((k-pad)%2!=0) {
+//				else if((k-pad)%2!=0) {
+				else if((((k-pad)%2!=0)&&((k-pad)!=(f->Nz-1-2*pad)))||((k-pad)==0)) {
 					i0=addx+(i+pad)/2; 
 					i1=addx+(i+pad)/2 + 1;
 					j0=addy+(j+pad)/2; 
@@ -385,6 +399,43 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
 		}
 	}
 }
+
+/*!If restricting from left child, add 0, else if from a right child add -N(domain cells).
+ 
+Parameters: octree node, field index, indices i j k, additions addx addy addz.
+ */
+void restrict_from_child(Octree* node, Octree* child, int l, int i, int j, int k, int addx, int addy, int addz) {
+	//indices
+	int i0, i1, j0, j1, k0, k1;	
+	
+
+	//grid and child's grid
+	VecField* mesh = node->get_block_data()->mesh;
+	VecField* meshc = child->get_block_data()->mesh; 
+
+	//field and child's field
+       	Field *f = node->get_block_data()->scalarfields[l];
+       	Field *fc = child->get_block_data()->scalarfields[l];
+
+	//domain
+	if(node->get_block_data()->flag[i][j][k]==DOMAIN) {
+		std::cout << node->get_block_data()->flag[i][j][k] << std::endl;
+		i0=addx+2*i-pad;
+		i1=addx+2*i-pad+1;
+		j0=addy+2*j-pad; 
+		j1=addy+2*j-pad+1;
+		k0=addz+2*k-pad;
+		k1=addz+2*k-pad+1;
+		f->val[i][j][k] = Trilinear_interpolate(meshc->x[i0][j][k],meshc->x[i1][j][k],mesh->x[i][j][k], \
+							meshc->y[i][j0][k],meshc->y[i][j1][k],mesh->y[i][j][k], \
+							meshc->z[i][j][k0],meshc->z[i][j][k1],mesh->z[i][j][k], \
+							fc->val[i0][j0][k1],fc->val[i0][j1][k1], \
+							fc->val[i1][j0][k1],fc->val[i1][j1][k1], \
+							fc->val[i0][j0][k0],fc->val[i0][j1][k0], \
+							fc->val[i1][j0][k0],fc->val[i1][j1][k0]);
+	}
+}
+
 
 
 
@@ -475,7 +526,7 @@ void prolongate_ghost(int level, std::string name) {
 }
 
 
-/*!Prolongation of the given field's ghost cells from level-1 to level.
+/*!Prolongation of the given field's domain cells from level-1 to level.
  
 Parameters: level, field name.
   */
@@ -563,22 +614,109 @@ void prolongate_domain(int level, std::string name) {
         }
 }
 
+/*!Restriction of the given field's domain cells from level+1 to level.
+ 
+Parameters: level, field name.
+  */
+void restrict(int level, std::string name) {
+
+	myOctree::create_lists_of_level_nodes();
+	
+	if(myOctree::level_nodes[level].empty()) {
+                std::cerr << "Error! No blocks in level " << level << std::endl;
+                exit(1);
+        }
+	
+
+	//loop over nodes
+	for (std::list<Octree*>::iterator it = level_nodes[level].begin(), end = level_nodes[level].end(); it != end; ++it) {
+
+
+		//skip if its a leaf node
+		if((*it)->isLeafNode()) {	
+			continue;
+		}
+		
+            	//loop over scalar fields
+            	for(int l = 0; l<myOctree::scalar_fields.size() ; l++) {
+
+
+			//field and block
+       			Field *f = (*it)->get_block_data()->scalarfields[l];
+       			Block *b = (*it)->get_block_data();
+
+               		if( f->name == name ) {
+
+			//std::cerr << "hi" << std::endl;
+
+  				for(int i=0; i<f->Nx; i++) {
+         				for(int j=0; j<f->Ny; j++) {
+                         			for(int k=0; k<f->Nz; k++) {
+			
+						std::cout << i << " " << j << " " << k << std::endl;
+					
+							if(i>=f->Nx/2) {
+								if(j>=f->Ny/2) {
+									if(k>=f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(1,1,1),l,i,j,k,-b->iNx,-b->iNy,-b->iNz);
+									}
+									else if(k<f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(1,1,0),l,i,j,k,-b->iNx,-b->iNy,0);
+									}
+								}
+								else if(j<f->Ny/2) {
+									if(k>=f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(1,0,1),l,i,j,k,-b->iNx,0,-b->iNz);
+									}
+									else if(k<f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(1,0,0),l,i,j,k,-b->iNx,0,0);
+									}
+								}
+							}
+							if(i<f->Nx/2) {
+								if(j>=f->Ny/2) {
+									if(k>=f->Nz/2) {
+										//std::cerr << i << " yes" << j << " " << k << std::endl;
+										restrict_from_child((*it),(*it)->get_child_at(0,1,1),l,i,j,k,0,-b->iNy,-b->iNz);
+									}
+									else if(k<f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(0,1,0),l,i,j,k,0,-b->iNy,0);
+									}
+								}
+								else if(j<f->Ny/2) {
+									if(k>=f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(0,0,1),l,i,j,k,0,0,-b->iNz);
+									}
+									else if(k<f->Nz/2) {
+										restrict_from_child((*it),(*it)->get_child_at(0,0,0),l,i,j,k,0,0,0);
+									}
+								}
+							}
+						}
+          				}
+                 		}
+       			}
+         	}
+        }
+}
+
+
+
 void multigrid(std::string name) {
 
      	gauss_seidel(0, name);
-        prolongate_ghost(1,name);
-       	prolongate_domain(1,name);
-	
 
-	//not a problem with exchange of ghost, its about prolongation
-	//exchange_ghost_val(1,name);
-     	//gauss_seidel(1, name);
-        prolongate_ghost(2,name);
-       	prolongate_domain(2,name);
-     	//gauss_seidel(2, name);
-        //prolongate_ghost(3,name);
-       	//prolongate_domain(3,name);
-     	//gauss_seidel(3, name);
+
+	for(int i=1; i<=myOctree::max_level; i++) {
+        	prolongate_ghost(i,name);
+       		prolongate_domain(i,name);
+     		gauss_seidel(i, name);
+	}
+
+	restrict(1,name);
+	gauss_seidel(1,name);		
+	restrict(0,name);
+	gauss_seidel(0,name);	
 
 }
 

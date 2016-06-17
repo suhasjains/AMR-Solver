@@ -3,7 +3,7 @@
 
 namespace myOctree {
 
-void write_vtk(std::list<Octree*>&);
+void write_vtk(std::list<Octree*>&, std::string);
 
 }
 #endif

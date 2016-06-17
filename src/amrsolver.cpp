@@ -142,9 +142,12 @@ int main(int argc, char **argv) {
 	amrsolver::set_field();
 
 	//writing vtk
+	myOctree::create_lists_of_level_nodes();
 	myOctree::create_list_of_leaf_nodes();
-	myOctree::create_list_of_root_nodes();
-	myOctree::write_vtk(myOctree::leaf_nodes);
+	myOctree::write_vtk(myOctree::leaf_nodes,"level-3");
+	myOctree::write_vtk(myOctree::level_nodes[0],"level-0");
+	myOctree::write_vtk(myOctree::level_nodes[1],"level-1");
+	myOctree::write_vtk(myOctree::level_nodes[2],"level-2");
 	
 	//writing output file
 	write_output_file();

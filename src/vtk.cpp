@@ -1,4 +1,5 @@
 #include "octree.h"
+#include "vtk.h"
 #include <stdio.h>
 #include <iostream>
 
@@ -19,7 +20,7 @@ long int get_point(int i, int j, int k, int Npx, int Npy) {
 } 
 
 /*!Writes vtk files for post-processing.*/
-void write_vtk(std::list<Octree*>& nodes) {
+void write_vtk(std::list<Octree*>& nodes, std::string name) {
 
 
 	int Npx = nx_block + 1;
@@ -29,7 +30,9 @@ void write_vtk(std::list<Octree*>& nodes) {
 	std::cerr << "\n" << "Writing VTK" << std::endl;	
 
 	char filename[30];
-        sprintf(filename, "output.vtk");
+	strcpy (filename,name.c_str());
+	strcat (filename,".vtk");
+      //  sprintf(filename, name.c_str());
         FILE *fp = fopen(filename, "w");
 
         fprintf(fp,"# vtk DataFile Version 3.0\n");
