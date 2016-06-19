@@ -713,11 +713,10 @@ void multigrid(std::string name) {
      		gauss_seidel(i, name);
 	}
 
-	restrict(1,name);
-	gauss_seidel(1,name);		
-	restrict(0,name);
-	gauss_seidel(0,name);	
-
+	for(int i=myOctree::max_level-1; i>=0; i--) {
+		restrict(i,name);
+		gauss_seidel(i,name);		
+	}
 }
 
 

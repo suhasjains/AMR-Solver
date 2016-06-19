@@ -58,7 +58,9 @@ class Block {
 	double dx, dy, dz;
 	//@}
 
-	Mask*** flag; /*!<Domain masking*/		
+	Mask*** flag; /*!<Domain masking*/
+
+	void set_domain_masking();	
 
 	Block( double x1, double x2, double y1, double y2, double z1, double z2 ); /*!<Parametrized constructor with initialization fields*/
 		
