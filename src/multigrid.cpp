@@ -3,7 +3,9 @@
 #include "octreegrid.h"
 #include <iostream>
 //#include <cmath>
-#include "multigrid.h"
+#include "direction.h"
+#include "poisson.h"
+#include "adapt.h"
 
 using myOctree::Field;
 using myOctree::VecField;
@@ -404,10 +406,10 @@ void prolongate_domain_for_child(Octree* node, int l, int i, int j, int k, int a
  
 Parameters: octree node, field index, indices i j k, additions addx addy addz.
  */
-void restrict_from_child(Octree* node, Octree* child, int l, int i, int j, int k, int addx, int addy, int addz) {
+double restrict_from_child(Octree* node, Octree* child, int l, int i, int j, int k, int addx, int addy, int addz) {
 	//indices
 	int i0, i1, j0, j1, k0, k1;	
-	
+	double result;	
 
 	//grid and child's grid
 	VecField* mesh = node->get_block_data()->mesh;
@@ -426,7 +428,7 @@ void restrict_from_child(Octree* node, Octree* child, int l, int i, int j, int k
 		j1=addy+2*j-pad+1;
 		k0=addz+2*k-pad;
 		k1=addz+2*k-pad+1;
-		f->val[i][j][k] = Trilinear_interpolate(meshc->x[i0][j][k],meshc->x[i1][j][k],mesh->x[i][j][k], \
+		result = Trilinear_interpolate(meshc->x[i0][j][k],meshc->x[i1][j][k],mesh->x[i][j][k], \
 							meshc->y[i][j0][k],meshc->y[i][j1][k],mesh->y[i][j][k], \
 							meshc->z[i][j][k0],meshc->z[i][j][k1],mesh->z[i][j][k], \
 							fc->val[i0][j0][k1],fc->val[i0][j1][k1], \
@@ -434,8 +436,58 @@ void restrict_from_child(Octree* node, Octree* child, int l, int i, int j, int k
 							fc->val[i0][j0][k0],fc->val[i0][j1][k0], \
 							fc->val[i1][j0][k0],fc->val[i1][j1][k0]);
 	}
+
+	return result;
 }
 
+
+double restrict_at(Octree* node, int l, int i, int j, int k) {
+			
+	//field and block
+       	Field *f = node->get_block_data()->scalarfields[l];
+       	Block *b = node->get_block_data();
+
+	double result;
+
+	if(i>=f->Nx/2) {
+		if(j>=f->Ny/2) {
+			if(k>=f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(1,1,1),l,i,j,k,-b->iNx,-b->iNy,-b->iNz);
+			}
+			else if(k<f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(1,1,0),l,i,j,k,-b->iNx,-b->iNy,0);
+			}
+		}
+		else if(j<f->Ny/2) {
+			if(k>=f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(1,0,1),l,i,j,k,-b->iNx,0,-b->iNz);
+			}
+			else if(k<f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(1,0,0),l,i,j,k,-b->iNx,0,0);
+			}
+		}
+	}
+	if(i<f->Nx/2) {
+		if(j>=f->Ny/2) {
+			if(k>=f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(0,1,1),l,i,j,k,0,-b->iNy,-b->iNz);
+			}
+			else if(k<f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(0,1,0),l,i,j,k,0,-b->iNy,0);
+			}
+		}
+		else if(j<f->Ny/2) {
+			if(k>=f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(0,0,1),l,i,j,k,0,0,-b->iNz);
+			}
+			else if(k<f->Nz/2) {
+				result = restrict_from_child(node,node->get_child_at(0,0,0),l,i,j,k,0,0,0);
+			}
+		}
+	}
+
+	return result;
+}
 
 
 
@@ -640,58 +692,18 @@ void restrict(int level, std::string name) {
             	//loop over scalar fields
             	for(int l = 0; l<myOctree::scalar_fields.size() ; l++) {
 
-
 			//field and block
        			Field *f = (*it)->get_block_data()->scalarfields[l];
-       			Block *b = (*it)->get_block_data();
-
                		if( f->name == name ) {
-
-			//std::cerr << "hi" << std::endl;
 
   				for(int i=0; i<f->Nx; i++) {
          				for(int j=0; j<f->Ny; j++) {
                          			for(int k=0; k<f->Nz; k++) {
 			
-						std::cout << i << " " << j << " " << k << std::endl;
-					
-							if(i>=f->Nx/2) {
-								if(j>=f->Ny/2) {
-									if(k>=f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(1,1,1),l,i,j,k,-b->iNx,-b->iNy,-b->iNz);
-									}
-									else if(k<f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(1,1,0),l,i,j,k,-b->iNx,-b->iNy,0);
-									}
-								}
-								else if(j<f->Ny/2) {
-									if(k>=f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(1,0,1),l,i,j,k,-b->iNx,0,-b->iNz);
-									}
-									else if(k<f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(1,0,0),l,i,j,k,-b->iNx,0,0);
-									}
-								}
-							}
-							if(i<f->Nx/2) {
-								if(j>=f->Ny/2) {
-									if(k>=f->Nz/2) {
-										//std::cerr << i << " yes" << j << " " << k << std::endl;
-										restrict_from_child((*it),(*it)->get_child_at(0,1,1),l,i,j,k,0,-b->iNy,-b->iNz);
-									}
-									else if(k<f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(0,1,0),l,i,j,k,0,-b->iNy,0);
-									}
-								}
-								else if(j<f->Ny/2) {
-									if(k>=f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(0,0,1),l,i,j,k,0,0,-b->iNz);
-									}
-									else if(k<f->Nz/2) {
-										restrict_from_child((*it),(*it)->get_child_at(0,0,0),l,i,j,k,0,0,0);
-									}
-								}
-							}
+					//	std::cout << i << " " << j << " " << k << std::endl;
+				
+							f->val[i][j][k] = restrict_at((*it),l,i,j,k);
+
 						}
           				}
                  		}

@@ -15,7 +15,7 @@ std::list<Octree*> nodes;
 std::list<Octree*> leaf_nodes;
 std::list<Octree*> root_nodes;
 std::list<Octree*> level_nodes[20];
-
+std::list<Octree*> multilevel_nodes[20];
 
 /*!Creates a list of leaf nodes. Clears the old list before creating the new one.*/ 
 void create_list_of_leaf_nodes() {
@@ -54,6 +54,24 @@ void create_lists_of_level_nodes() {
 		level_nodes[level].push_back(*j);
 	}
 
+}
+
+/*!Creates a vector of lists of nodes for multilevel acceleration. Clears the old lists before creating the new one.*/
+void create_lists_of_multilevel_nodes() {
+
+	//clearing all lists
+	for (unsigned level=0; level <= max_level; level++) {
+		multilevel_nodes[level].clear();
+	}
+
+	//pushing nodes to respective lists	
+	for (unsigned level=0; level <= max_level; level++) {
+		for (std::list<Octree*>::iterator j = nodes.begin(), end = nodes.end(); j != end; ++j) {
+                	if(((*j)->get_level()<level && (*j)->isLeafNode())||((*j)->get_level()==level)) { 
+				multilevel_nodes[level].push_back(*j);
+			}
+		}
+	}
 }
 
 /*!Creates an octree node*/
